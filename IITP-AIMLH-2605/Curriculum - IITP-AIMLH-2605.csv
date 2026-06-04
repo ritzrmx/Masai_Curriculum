@@ -1,0 +1,61 @@
+Module,Session Name,Sub Topics / Learning Objectives
+Module 1: Foundations of Data,The AI Landscape & Programming Foundations,AI vs ML vs GenAI; History of AI; Industry use cases; Computer basics; Hardware vs Software; Programming; IDE; CLI
+Module 1: Foundations of Data,Lab Setup & Developer Workflow,VS Code; Colab; API keys; GitHub; CLI; Git workflow
+Module 1: Foundations of Data,Python Basics & Decision Making,Variables; Data types; Operators; Input/Output; If-Else; Boolean logic
+Module 1: Foundations of Data,Data Structues in Python,"Lists, Tuples, Sets, dictionaries - Basic opeartions, Functions "
+Module 1: Foundations of Data,Python Automation & Loops,Loops; Iteration; Break/Continue; Exception handling
+Module 1: Foundations of Data,"Master class: Numbers, Logic & Structure — The Mathematical Language of Data","Number Systems & Boolean Logic : How computers represent truth. Binary numbers, logical operators (AND, OR, NOT), truth tables, De Morgan's laws. Why this underlies every conditional and every data type.
+
+Set Theory & Mathematical Structures : What is a set, subset, union, intersection, complement. How lists, dictionaries, and JSON are just applied set-theoretic structures. Venn diagrams. Mapping and functions in the mathematical sense (domain, codomain, range).
+"
+Module 1: Foundations of Data,File Handling & JSON Processing,File I/O; JSON; Parsing; Nested data
+Module 1: Foundations of Data,NumPy Foundations & Array Operations,Arrays; Vectorization; Broadcasting; Performance
+Module 1: Foundations of Data,Pandas: Data Loading & Selection,DataFrames; CSV; Filtering; Sorting
+Module 1: Foundations of Data,Pandas: Cleaning & Aggregation,Missing values; Duplicates; GroupBy; EDA
+Module 1: Foundations of Data,Excel Analysis & SQL Fundamentals,Excel Basics; Lookup Functions; Pivot Tables SQL SELECT; WHERE; ORDER
+Module 1: Foundations of Data,Master class:From Tables to Relationships - The Mathematics of Data Organisation,"Coordinate Geometry & Visualisation Intuition :  The Cartesian plane. What it means to ""plot"" data. Why a scatter plot is just mapping two variables to (x, y) coordinates. Slope of a line  rise over run,  as the seed of everything in ML.
+
+Basic Descriptive Statistics : Mean, median, mode, range, variance, standard deviation. What each tells you and what it hides. Why the mean lies when data is skewed. Real examples from datasets."
+Module 1: Foundations of Data,SQL Joins & Relational Analysis,JOINs; GROUP BY; HAVING
+Module 1: Foundations of Data,Data Visualization & APIs,Data Visualization; Charts; Plots; Matplotlib; APIs; HTTP; JSON
+Module 2: Classical ML,ML Workflow & Problem Framing,ML pipeline; Features vs Labels; Problem types; Business mapping
+Module 2: Classical ML,Data Preparation & Feature Engineering,Encoding; Scaling; Normalization; Cleaning
+Module 2: Classical ML,"Validation, Leakage & Imbalance",Train/Test split; Cross-validation; Data leakage; Class imbalance; sklearn Pipelines
+Module 2: Classical ML,Regression Models & Regression Metrics,Linear regression; MAE; RMSE; R²; Error analysis 
+Module 2: Classical ML,"Master Class: The Mathematics Behind Learning: Lines, Curves & Errors","Linear Equations & The Equation of a Line:  y = mx + c. What the slope and intercept represent in real data. How Linear Regression is literally finding the best line through points. Residuals - the gap between the line and the point - as ""error.""
+
+Calculus Intuition , Rate of Change & Minimisation : What a derivative means conceptually (how fast is something changing?). Why do we want to minimise errors? The idea of a minimum of a curve — where the slope becomes zero. Gradient descent as ""walking downhill""  no formulas required, only the picture.
+"
+Module 2: Classical ML,Regularization,OLS; Lasso; Ridge; Bias-Variance
+Module 2: Classical ML,Logistic Regression & Classification Basics,Sigmoid; Probabilities; Decision boundaries
+Module 2: Classical ML,Classification Metrics & ROC-AUC,Precision; Recall; F1; Confusion Matrix; ROC curve
+Module 2: Classical ML,Decision Trees & Random Forests,Tree logic; Splits; Gini; Overfitting in tree-based models
+Module 2: Classical ML,Bagging & Ensemble Methods,Bagging; Ensembles; tree vs Ensemble performance; Feature Importance
+Module 2: Classical ML,Clustering; Segmentation,K-Means; Elbow method; Agglomerative clustering; Hierarchical clustering; Dendrogram basics; Use cases
+Module 2: Classical ML,PCA & Dimensionality Reduction,PCA; Variance; Visualization
+Module 2: Classical ML,Model Selection; Comparison,"Model evaluation; Bias-variance; Selection strategies; Hyperparameter tuning (Grid Search, Random Search); Cross-validation;"
+Module 2: Classical ML,Master Class Probability & Counting :The Mathematics of Uncertainty,"Probability Fundamentals :  Sample space, events, P(A), complement rule, addition rule P(A∪B), multiplication rule for independent events. Classical probability with coins, dice, cards. Conditional probability P(A|B)  how knowing one thing changes the probability of another.
+
+Bayes' Theorem from First Principles : Derived step by step from conditional probability. One concrete real-world example worked out by hand (disease test or spam). The idea that prior belief + new evidence = updated belief. Stated as a formula, not a model.
+"
+Module 2: Classical ML,"Validation, Leakage & Imbalance",Train/Test split; Cross-validation; Data leakage; Class imbalance; sklearn Pipelines
+Module 2: Classical ML,End-to-End ML Workflow,Pipeline building; Training; Evaluation; Reporting
+Module 3: GenAI & Agents,LLM Foundations & Token Mechanics,Tokens; Context windows; Temperature; Probabilistic generation
+Module 3: GenAI & Agents,Prompt Engineering & Reasoning Techniques,Zero-shot; Few-shot; Chain-of-thought; Prompt templates
+Module 3: GenAI & Agents,LLM APIs & JSON Handling,API calls; Authentication; Request/response; JSON parsing
+Module 3: GenAI & Agents,Structured Outputs & Validation,JSON schema; Output control; Validation techniques
+Module 3: GenAI & Agents,Master Class: Vectors & Linear Algebra  The Mathematics of Space and Direction,"Vectors from Scratch : What is a scalar vs a vector. Representing vectors as arrows and as coordinate lists. Vector addition, subtraction, scalar multiplication geometrically and algebraically. Magnitude using the Pythagorean theorem. Unit vectors.
+
+Dot Product & Angle Between Vectors  : Formula: a·b = |a||b|cos(θ). Computing it by hand. What the result tells you  positive means the same direction, zero means perpendicular, negative means opposite. Cosine of an angle derived from the dot product formula step by step."
+Module 3: GenAI & Agents,Embeddings & Vector Search,Text embeddings; Similarity; Vector databases
+Module 3: GenAI & Agents,RAG Systems & Context Retrieval,Retrieval pipeline; Context injection; Accuracy improvement
+Module 3: GenAI & Agents,Agents; Reasoning Loops,ReAct framework; Planning; Action loops
+Module 3: GenAI & Agents,Tool Use & Memory,Function calling; Tool integration; Memory handling
+Module 3: GenAI & Agents,"Production Systems, APIs & Guardrails",Logging; Error handling; Monitoring; FastAPI; Endpoints
+Module 3: GenAI & Agents,"Master Class : Calculus Intuition - Change, Slope & Optimisation","The Idea of a Function & Rate of Change  What is a function (input → output). Plotting simple functions (y = x², y = x³). The slope of a straight line as rise/run. Average rate of change between two points. What happens as those two points get closer  the intuition of a derivative without formal limits.
+
+Derivatives  What They Mean Geometrically  The derivative as the slope of a curve at a point. Tangent line vs secant line. Basic derivative rules: d/dx(xⁿ) = nxⁿ⁻¹, constant rule, sum rule  applied to polynomials only. Finding where a function is increasing, decreasing, or flat (derivative = 0). What a minimum and maximum look like.
+
+Optimisation Intuition — What does ""minimise something"" mean mathematically? Finding the minimum of a parabola y = x² by setting dy/dx = 0. The idea of ""walking downhill""  why the slope tells you which direction to move. Chain rule mentioned conceptually  not computed.
+"
+Module 3: GenAI & Agents,Evaluation and Deployment,Testing; Evaluation; Deployment workflows

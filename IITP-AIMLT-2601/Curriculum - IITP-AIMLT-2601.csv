@@ -1,0 +1,54 @@
+Module,Session Name,Sub Topics / Learning Objectives
+Module 1: Foundations of Data,The AI Landscape for Beginners,AI vs ML vs GenAI landscape; History of AI; Current industry use cases; The road ahead
+Module 1: Foundations of Data,Computing & Programming Foundations,Computer basics; Hardware vs Software; Program & Programming; Programming languages; IDE · Terminal/CLI; Files & folders; File types; How code runs
+Module 1: Foundations of Data,Setting Up Your Lab,VS Code installation; Google Colab basics; Managing 'Secrets' and API keys; Creating a GitHub account
+Module 1: Foundations of Data,The Developer Workflow,Command Line (CLI) basics; Git Init; Add; Commit; The 'Notebook' vs 'Script' discipline
+Module 1: Foundations of Data,Python: The Language of AI,Variables; Data types (Int; Float; String; Bool); Basic math in Python; Print and Input functions
+Module 1: Foundations of Data,Python: Decision Making,Conditionals (If-Else); Boolean logic; Logical operators (And; Or; Not); Indentation rules
+Module 1: Foundations of Data,Python: Automation & Loops,For loops; While loops; Iterating over simple lists; Loop control (Break; Continue)
+Module 1: Foundations of Data,Python: Organizing with Functions,Defining functions; Parameters and Arguments; Return values; Code modularity
+Module 1: Foundations of Data,Python: Data Collections,"Data Structures; List, set, tuple, dict overview"
+Module 1: Foundations of Data,Python: Data Collections - II,Lists and Slicing; Dictionaries for key-value data
+Module 1: Foundations of Data,Python: Data Collections and File Handling,Opening files (Open; Close); Using 'With' blocks; Reading TXT files; Writing simple logs
+Module 1: Foundations of Data,NumPy: Numerical Foundations,Why NumPy?; Creating arrays; Basic array math; Shape and Reshape; Performance vs Python lists
+Module 1: Foundations of Data,Data Structures for AI,Multidimensional arrays; Slicing NumPy; Broadcast logic; Generating random data
+Module 1: Foundations of Data,Pandas: The Data Table,Pandas Series vs DataFrames; Loading CSV files; Basic inspection (Head; Tail; Info; Describe)
+Module 1: Foundations of Data,Introduction to JSON,JSON structure; Dictionaries to JSON; Parsing API responses; Nested JSON handling
+Module 1: Foundations of Data,Pandas: Selection & Filtering,Selecting columns; Row indexing; Boolean filtering; Sorting dataframes
+Module 1: Foundations of Data,Pandas: Cleaning & Grouping,Handling missing values; GroupBy operations; Basic aggregations (Sum; Mean; Count); Rename and Drop
+Module 1: Foundations of Data,SQL: Thinking in Tables,Relational vs Non-relational; Primary Keys; Tables and Rows; Database schema basics
+Module 1: Foundations of Data,SQL: Core Querying,SELECT and WHERE; Using DISTINCT; Sorting with ORDER BY; Limit and Aliases
+Module 1: Foundations of Data,SQL: Joining Data,Inner Joins; Left Joins; The Power of the JOIN; SQL mental model vs Pandas merge
+Module 1: Foundations of Data,Matplotlib: Basic Plotting,Line plots; Scatter plots; Bar charts; Labeling and titles; Basic aesthetics
+Module 1: Foundations of Data,Advanced Storytelling with Data,Plotly for interactive charts; Choosing the right chart; Color theory basics; Exporting visuals
+Module 1: Foundations of Data,Python Masterclass: Sneaker Analytics Lab - From Web Scraping to Data Insights,Scraping product data using BeautifulSoup; Extracting and structuring sneaker product details; Cleaning data using NumPy and Pandas; Formatting datasets for application use; Exporting structured data to JSON
+Module 1: Foundations of Data,The EDA Checklist,Standard EDA steps; Identifying outliers; Correlation heatmaps; Building a data story
+Module 1: Foundations of Data,APIs: The Agent's Hands,Requests library; GET vs POST; Handling Status Codes; API Documentation reading
+Module 1: Foundations of Data,API Security & Ethics,API Terms of Service (ToS); Rate limiting; Environment variables for keys; Data privacy basics
+Module 1: Foundations of Data,EDA Workshop,Ingesting raw API data; Cleaning with Pandas; Visualizing insights; Simple Streamlit demo
+Module 2: Classical ML,Data Prep: Handling Messy Data,Imputing missing values; Removing duplicates; Categorical encoding; Scaling and Normalization
+Module 2: Classical ML,Leakage & Imbalance,Data leakage guard; Class imbalance basics; Synthetic data concepts; Cross-validation
+Module 2: Classical ML,The ML Workflow & Habits,Problem framing; Features vs Labels; Training/Validation/Test split; Baselines
+Module 2: Classical ML,Data Cleaning and Exploration,Data Cleaning and Preprocessing; Missing Data Mechanisms and Imputation Strategies; Outliers Detection and Treatment; Encoding Categorical Variables
+Module 2: Classical ML,Statistics for Machine Learning,"Mean, Median, and Mode; Variance and Standard Deviation; Normal Distribution (Gaussian Distribution); Skewness and Non-Normal Distributions"
+Module 2: Classical ML,Regression: Predicting Numbers,Linear Regression intuition; Ordinary Least Squares; Slopes and Intercepts
+Module 2: Classical ML,Regression: Regularization,Lasso and Ridge regression; Tuning alpha; Bias-Variance tradeoff
+Module 2: Classical ML,Regression Metrics,MAE; RMSE; R-Squared; Interpreting error graphs; Quick error analysis
+Module 2: Classical ML,Regression: Model Evaluation & Regularization,Sigmoid function; Binary classification; Probabilities; Decision boundaries; Nodes and Leaves; Information gain; Entropy; Interpreting a tree plot
+Module 2: Classical ML,Classification: Random Forests,Bagging; Wisdom of the crowd; Forest parameters; Feature importance ranking
+Module 2: Classical ML,Classification: Logistic Regression; Classification: Decision Trees,Decision boundaries; Nodes and Leaves; Information gain; Entropy; Interpreting a tree plot
+Module 2: Classical ML,Classification Metrics and Performance Evaluation,Random Forest model; Feature importance; Model robustness; Comparison with decision trees
+Module 2: Classical ML,Model Validation and Data Issues,Cross-validation; Data leakage; Class imbalance; Resampling techniques; Reliable evaluation practices
+Module 2: Classical ML,ROC Curve and Threshold Optimization,ROC curve; AUC score; True positive rate vs false positive rate; Threshold tuning; Model comparison using ROC
+Module 2: Classical ML,Decision Trees,Tree structure; Splitting criteria; Gini impurity; Overfitting in trees; Model interpretation
+Module 2: Classical ML,Ensemble Methods: Random Forest,Random Forest model; Feature importance; Model robustness; Comparison with decision trees
+Module 2: Classical ML,Clustering and Unsupervised Learning,K-Means clustering; Distance metrics; Elbow method; Cluster interpretation; Business use cases
+Module 2: Classical ML,Model Selection and End-to-End Pipeline,Model comparison; Simplicity vs performance; Hyperparameter tuning (Grid Search); Final model selection
+Module 3: GenAI & Agents,Core Concepts of Large Language Models,Overview of LLMs; Tokens and tokenization; Context windows; Temperature; Top-p sampling; Cost & latency basics
+Module 3: GenAI & Agents,Prompt Engineering and Reasoning Strategies,Role prompting; Zero-shot prompting; Few-shot prompting; Chain-of-thought (basic)Prompt evaluation using small test sets
+Module 3: GenAI & Agents,Fundamentals of AI Agents and Tool Usage,Single agent workflow; Tool usage (1–2 tools); JSON schemas; Retries and backoff; Hard stop conditions; Mini build (CSV Analyst / FAQ bot)
+Module 3: GenAI & Agents,Structured Outputs and Tool Integration,Structured outputs (JSON); Output validation; Idempotent tool design
+Module 3: GenAI & Agents,Embeddings and Semantic Retrieval Systems,Embeddings; Document chunking; Retrievers; Vector stores; Semantic search
+Module 3: GenAI & Agents,Retrieval-Augmented Generation (RAG) Basics,RAG Workflow; Connecting Vector Stores to LLMs; Document-based Q&A; Handling context retrieval
+Module 3: GenAI & Agents,Productionizing LLM Applications with FastAPI,FastAPI basics; API wrapping (/chat endpoint); Pydantic schemas; Env & secrets; Logging and request IDs; Deployment (Render / HF Spaces); Live prompt evaluation
+Module 3: GenAI & Agents,Orchestration and Agent Workflow Design,LangGraph basics; Nodes and transitions; Retry handling; Simple agent flow design
