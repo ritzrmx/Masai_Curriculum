@@ -15,11 +15,16 @@ You are building a prompt testing harness to compare different prompting strateg
 ```python
 import openai, os
 
-client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = openai.OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.getenv("OPENROUTER_API_KEY")
+)
+
+MODEL = "meta-llama/llama-3.3-70b-instruct:free"
 
 def ask(messages, temperature=0):
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model=MODEL,
         messages=messages,
         temperature=temperature,
         max_tokens=150
@@ -74,14 +79,14 @@ print("Few-shot:", ask(few_shot))
 Ask the model to reason step-by-step before giving the final answer.
 
 ```python
-cot_system = """Classify the customer message. 
+cot_system = """Classify the customer message.
 Think step by step:
 1. Identify the emotion
 2. Identify what they want
 3. Then give the category: Complaint, Inquiry, or Compliment"""
 
 cot = [
-    {"role": "system", "content": ___},   # use cot_system
+    {"role": "system", "content": ___},   # fill: use cot_system
     {"role": "user",   "content": customer_msg}
 ]
 

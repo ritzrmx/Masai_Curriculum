@@ -19,7 +19,7 @@ pip install fastapi uvicorn openai python-dotenv
 Create a `.env` file in the same folder:
 
 ```
-OPENAI_API_KEY=sk-...
+OPENROUTER_API_KEY=sk-or-...
 ```
 
 ---
@@ -40,17 +40,17 @@ class ChatRequest(BaseModel):
     temperature: float         = Field(default=0.7, ge=0.0, le=2.0)
 
 class ChatResponse(BaseModel):
-    reply:          str
-    request_id:     str
-    model_used:     str
-    tokens_used:    ___    # fill: data type (int)
+    reply:       str
+    request_id:  str
+    model_used:  str
+    tokens_used: ___    # fill: data type (int)
 ```
 
 ---
 
 **Task 2 — Load Secrets Safely**
 
-Fill in the blanks to load the API key from `.env` (never hardcode keys).
+Fill in the blanks to load the API key from `.env` — never hardcode keys in source code.
 
 ```python
 from dotenv import load_dotenv
@@ -60,7 +60,7 @@ load_dotenv()
 api_key = os.getenv("___")    # fill: env variable name
 
 if not api_key:
-    raise RuntimeError("OPENAI_API_KEY not set in environment")
+    raise RuntimeError("OPENROUTER_API_KEY not set in environment")
 ```
 
 ---
@@ -74,9 +74,15 @@ from fastapi import FastAPI
 import openai, uuid, logging
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-logger  = logging.getLogger(__name__)
-client  = openai.OpenAI(api_key=api_key)
-app     = FastAPI(title="LLM Chat API")
+logger = logging.getLogger(__name__)
+
+client = openai.OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=api_key
+)
+
+MODEL = "meta-llama/llama-3.3-70b-instruct:free"
+app   = FastAPI(title="LLM Chat API")
 
 @app.post("/chat", response_model=___)         # fill: response model class
 async def chat(req: ___):                      # fill: request model class
@@ -84,12 +90,12 @@ async def chat(req: ___):                      # fill: request model class
     logger.info(f"[{request_id}] Received: {req.message[:60]}")
 
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model=MODEL,
         messages=[
-            {"role": "system", "content": req.___},       # fill: system field
-            {"role": "user",   "content": req.___}        # fill: message field
+            {"role": "system", "content": req.___},    # fill: system field
+            {"role": "user",   "content": req.___}     # fill: message field
         ],
-        temperature=req.___                               # fill: temperature field
+        temperature=req.___                            # fill: temperature field
     )
 
     reply      = response.choices[0].message.content
@@ -99,10 +105,10 @@ async def chat(req: ___):                      # fill: request model class
     logger.info(f"[{request_id}] Tokens used: {tokens}")
 
     return ChatResponse(
-        reply=___,                                        # fill
-        request_id=___,                                   # fill
-        model_used=___,                                   # fill
-        tokens_used=___                                   # fill
+        reply=___,           # fill
+        request_id=___,      # fill
+        model_used=___,      # fill
+        tokens_used=___      # fill
     )
 ```
 
@@ -110,7 +116,7 @@ async def chat(req: ___):                      # fill: request model class
 
 **Task 4 — Add a Health Check Route**
 
-Add a simple `/health` endpoint that returns `{"status": "ok"}`. This is standard for any production API.
+Add a simple `/health` endpoint that returns `{"status": "ok"}`. Standard for any production API.
 
 ```python
 @app.get("/health")
@@ -141,7 +147,7 @@ curl -X POST http://localhost:8000/chat \
 {
   "reply": "FastAPI is a modern, high-performance web framework...",
   "request_id": "a3f9c1b2",
-  "model_used": "gpt-4o-mini",
+  "model_used": "meta-llama/llama-3.3-70b-instruct:free",
   "tokens_used": 87
 }
 ```
@@ -150,6 +156,6 @@ curl -X POST http://localhost:8000/chat \
 
 ## Key Takeaways
 
-- Pydantic schemas validate inputs at the boundary — bad requests fail fast before reaching the LLM
+- Pydantic schemas validate inputs at the boundary — bad requests fail fast before hitting the LLM
 - `uuid4()` request IDs make logs traceable across distributed services
 - `load_dotenv()` + `os.getenv()` is the standard pattern for secrets — never commit API keys to git

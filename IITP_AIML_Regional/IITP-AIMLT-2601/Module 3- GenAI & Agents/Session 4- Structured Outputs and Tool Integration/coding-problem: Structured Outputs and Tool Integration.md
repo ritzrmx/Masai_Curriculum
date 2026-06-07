@@ -17,7 +17,12 @@ import openai, json, os
 from pydantic import BaseModel, ValidationError
 from typing import List, Optional
 
-client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = openai.OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.getenv("OPENROUTER_API_KEY")
+)
+
+MODEL = "meta-llama/llama-3.3-70b-instruct:free"
 ```
 
 ---
@@ -27,7 +32,7 @@ client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 ```python
 job_text = """
 Senior Data Engineer - FinTech Startup (Remote)
-We are looking for a Senior Data Engineer with 4+ years of experience in Python, 
+We are looking for a Senior Data Engineer with 4+ years of experience in Python,
 Apache Spark, and SQL. Familiarity with AWS (S3, Glue, Redshift) is a must.
 Knowledge of dbt and Airflow is a bonus. Salary: ₹25–40 LPA.
 """
@@ -54,26 +59,32 @@ class JobPosting(BaseModel):
 
 **Task 2 — Prompt the LLM for Structured Output**
 
-Fill in the blanks to extract structured data using `response_format`.
+Fill in the blanks to extract structured data and force a JSON response.
 
 ```python
 def extract_job(text: str) -> JobPosting:
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model=MODEL,
         messages=[
             {
                 "role": "system",
-                "content": "Extract job details from the posting and return valid JSON matching the schema."
+                "content": (
+                    "Extract job details from the posting. "
+                    "Return ONLY a JSON object with keys: "
+                    "title, required_skills (list), experience_years (int), "
+                    "salary_range (string or null), remote (bool). No extra text."
+                )
             },
             {
                 "role": "user",
                 "content": ___    # fill: pass the job_text
             }
         ],
-        response_format={"type": "___"}   # fill: force JSON output
+        response_format={"type": "___"},   # fill: force JSON output
+        temperature=0
     )
 
-    raw_json = response.choices[0].message.___   # fill: get content
+    raw_json = response.choices[0].message.___   # fill: content attribute
     data     = json.loads(raw_json)
     return JobPosting(**___)                      # fill: unpack data dict
 ```
@@ -111,13 +122,13 @@ Remote:     True
 
 **Task 4 — Idempotency Check**
 
-Run `extract_job(job_text)` three times. Do you get the same output each time? Why or why not?  
-Try setting `temperature=0` and run again — does it become consistent?
+Run `extract_job(job_text)` three times. Do you get the same `required_skills` list each time?  
+Now add `temperature=0` (if not set) and run again — does the output stabilise?
 
 ---
 
 ## Key Takeaways
 
-- `response_format={"type": "json_object"}` forces valid JSON — but you still need to validate with Pydantic
+- `response_format={"type": "json_object"}` forces valid JSON — but Pydantic validation is still needed
 - Pydantic catches missing fields and wrong types before they cause downstream bugs
-- `temperature=0` improves idempotency — critical for structured extraction pipelines
+- `temperature=0` improves consistency — critical for structured extraction pipelines

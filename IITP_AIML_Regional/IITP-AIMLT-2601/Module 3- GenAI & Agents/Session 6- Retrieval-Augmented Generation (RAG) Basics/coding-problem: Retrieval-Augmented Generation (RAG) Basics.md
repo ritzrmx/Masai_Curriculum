@@ -12,11 +12,25 @@ You are building a document Q&A bot for a company's internal HR policy. The LLM 
 
 ## Setup
 
+```bash
+pip install openai sentence-transformers numpy
+```
+
 ```python
 import openai, os
 import numpy as np
+from sentence_transformers import SentenceTransformer
 
-client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Local embeddings — no API key needed
+embed_model = SentenceTransformer("all-MiniLM-L6-v2")
+
+# OpenRouter — free LLM for generation
+client = openai.OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.getenv("OPENROUTER_API_KEY")
+)
+
+MODEL = "meta-llama/llama-3.3-70b-instruct:free"
 ```
 
 ---
@@ -37,17 +51,13 @@ documents = [
 
 ## Tasks
 
-**Task 1 — Chunk Embedding**
+**Task 1 — Embed the Knowledge Base**
 
-Embed each document chunk and store in a NumPy matrix.
+Embed all document chunks and store in a NumPy matrix.
 
 ```python
-def get_embedding(text: str) -> list[float]:
-    res = client.embeddings.create(input=text, model="text-embedding-3-small")
-    return res.data[0].embedding
-
-doc_embeddings = np.array([get_embedding(d) for d in ___])   # fill: documents
-print("Embedded chunks:", doc_embeddings.___)                 # fill: shape
+doc_embeddings = embed_model.encode(___)    # fill: documents list
+print("Shape:", doc_embeddings.___)         # fill: shape → (5, 384)
 ```
 
 ---
@@ -58,41 +68,41 @@ Write a function that returns the top-k most relevant document chunks for a quer
 
 ```python
 def retrieve(query: str, top_k: int = 2) -> list[str]:
-    q_vec  = np.array(get_embedding(___))    # fill: query text
-    scores = doc_embeddings @ q_vec          # dot product (vectors are normalised)
+    q_vec  = embed_model.encode(___)                 # fill: query string
+    scores = doc_embeddings @ q_vec                  # dot product similarity
 
-    top_indices = np.argsort(scores)[::-1][:___]   # fill: top_k
-    return [documents[i] for i in ___]             # fill: top_indices
+    top_indices = np.argsort(scores)[::-1][:___]     # fill: top_k
+    return [documents[i] for i in ___]               # fill: top_indices
 ```
 
 ---
 
 **Task 3 — RAG: Augment + Generate**
 
-Combine retrieval with generation. Fill in the prompt template so the LLM uses **only the retrieved context**.
+Combine retrieval with generation. Fill in the prompt so the LLM uses **only the retrieved context**.
 
 ```python
 def rag_answer(question: str) -> str:
-    context_chunks = retrieve(___)                 # fill: question
+    context_chunks = retrieve(___)                   # fill: question
     context        = "\n\n".join(context_chunks)
 
     messages = [
         {
             "role":    "system",
             "content": (
-                "You are an HR assistant. Answer the question using ONLY the context below. "
+                "You are an HR assistant. Answer using ONLY the context below. "
                 "If the answer is not in the context, say 'I don't have that information'.\n\n"
-                f"Context:\n{___}"                 # fill: context variable
+                f"Context:\n{___}"                   # fill: context variable
             )
         },
         {
             "role":    "user",
-            "content": ___                         # fill: question
+            "content": ___                           # fill: question
         }
     ]
 
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model=MODEL,
         messages=messages,
         temperature=0
     )
@@ -103,7 +113,7 @@ def rag_answer(question: str) -> str:
 
 **Task 4 — Test the RAG Bot**
 
-Run these queries. The third one should trigger the "I don't have that information" fallback.
+Run these queries. The third one should trigger the fallback response.
 
 ```python
 questions = [
@@ -123,5 +133,5 @@ for q in questions:
 ## Key Takeaways
 
 - RAG = **Retrieve** relevant chunks → **Augment** the prompt → **Generate** a grounded answer
-- The LLM never needs to memorise the documents — it just reasons over what you provide
-- Grounding the model with `ONLY the context below` prevents hallucination on unknown topics
+- Embeddings (local) handle retrieval; the LLM (OpenRouter) handles generation — two separate steps
+- Grounding the model prevents hallucination — it can only answer from what you provide

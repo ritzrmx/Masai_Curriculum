@@ -15,7 +15,12 @@ You are building a simple FAQ agent that can answer questions about a product us
 ```python
 import openai, json, os
 
-client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = openai.OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.getenv("OPENROUTER_API_KEY")
+)
+
+MODEL = "meta-llama/llama-3.3-70b-instruct:free"
 
 # Simulated FAQ database (no real DB needed)
 FAQ_DB = {
@@ -53,7 +58,7 @@ tools = [
                 "type": "object",
                 "properties": {
                     "query": {
-                        "type": "___",        # fill: data type
+                        "type": "___",        # fill: data type (string)
                         "description": "The user's question to search in the FAQ"
                     }
                 },
@@ -68,7 +73,7 @@ tools = [
 
 **Task 2 — Agent Loop (single turn)**
 
-Send the user message to the LLM. If it calls a tool, execute the tool and send the result back.
+Send the user message to the LLM. If it calls a tool, execute it and send the result back.
 
 ```python
 def run_agent(user_message: str):
@@ -79,7 +84,7 @@ def run_agent(user_message: str):
 
     # Step 1: first LLM call
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model=MODEL,
         messages=___,         # fill: pass messages
         tools=tools,
         tool_choice="auto"
@@ -90,7 +95,7 @@ def run_agent(user_message: str):
     # Step 2: check if LLM wants to call a tool
     if msg.tool_calls:
         tool_call = msg.tool_calls[0]
-        args      = json.loads(tool_call.function.___)   # fill: get arguments string
+        args      = json.loads(tool_call.function.___)   # fill: arguments attribute
         result    = search_faq(args["query"])
 
         print(f"Tool called: {tool_call.function.name}({args})")
@@ -100,12 +105,12 @@ def run_agent(user_message: str):
         messages.append(msg)
         messages.append({
             "role":         "tool",
-            "tool_call_id": tool_call.___,               # fill: tool call id
+            "tool_call_id": tool_call.___,               # fill: id attribute
             "content":      result
         })
 
         final = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model=MODEL,
             messages=messages
         )
         return final.choices[0].message.content

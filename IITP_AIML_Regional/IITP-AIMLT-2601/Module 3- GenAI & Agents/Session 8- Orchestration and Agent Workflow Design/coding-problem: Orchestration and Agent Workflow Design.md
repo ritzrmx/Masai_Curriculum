@@ -26,11 +26,16 @@ from typing import TypedDict
 from langgraph.graph import StateGraph, END
 from openai import OpenAI
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.getenv("OPENROUTER_API_KEY")
+)
+
+MODEL = "meta-llama/llama-3.3-70b-instruct:free"
 
 def llm(prompt: str) -> str:
     res = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model=MODEL,
         messages=[{"role": "user", "content": prompt}],
         temperature=0.5
     )
@@ -48,15 +53,15 @@ The state is the shared data that flows between nodes. Fill in the TypedDict.
 ```python
 class AgentState(TypedDict):
     topic:   str       # input topic
-    summary: ___       # fill: data type — research output
-    review:  ___       # fill: data type — critique output
+    summary: ___       # fill: data type — research output (str)
+    review:  ___       # fill: data type — critique output (str)
 ```
 
 ---
 
 **Task 2 — Define the Nodes**
 
-Each node is a function that receives the state and returns updated state fields.
+Each node receives the current state and returns a dict of updated fields.
 
 ```python
 def research_node(state: AgentState) -> dict:
@@ -78,7 +83,7 @@ def review_node(state: AgentState) -> dict:
 
 **Task 3 — Build the Graph**
 
-Wire the nodes together with transitions. Research runs first, then Review, then END.
+Wire the nodes together: Research → Review → END.
 
 ```python
 workflow = StateGraph(AgentState)
@@ -121,22 +126,22 @@ print(result["___"])        # fill: review key
 
 **Task 5 — Add Retry Handling**
 
-Wrap the `research_node` LLM call in a simple retry loop (max 3 attempts) in case of an API error.
+Wrap the `research_node` LLM call in a simple retry loop (max 3 attempts) to handle transient API errors.
 
 ```python
 import time
 
 def research_node_with_retry(state: AgentState) -> dict:
-    topic = state["topic"]
+    topic  = state["topic"]
     prompt = f"Write a concise 3-sentence summary about: {topic}"
 
-    for attempt in range(___):                          # fill: max attempts
+    for attempt in range(___):                    # fill: max attempts (3)
         try:
             summary = llm(prompt)
             return {"summary": summary}
         except Exception as e:
             print(f"Attempt {attempt+1} failed: {e}")
-            time.sleep(___)                             # fill: wait in seconds (e.g. 2)
+            time.sleep(___)                       # fill: wait seconds (e.g. 2)
 
     return {"summary": "Research failed after retries."}
 ```
@@ -147,4 +152,4 @@ def research_node_with_retry(state: AgentState) -> dict:
 
 - LangGraph uses a **state machine model** — nodes transform state, edges control flow
 - The shared `State` dict is the contract between all nodes — design it first
-- Retry handling at the node level keeps the workflow resilient without cluttering the graph
+- Retry handling at the node level keeps the workflow resilient without cluttering the graph logic
