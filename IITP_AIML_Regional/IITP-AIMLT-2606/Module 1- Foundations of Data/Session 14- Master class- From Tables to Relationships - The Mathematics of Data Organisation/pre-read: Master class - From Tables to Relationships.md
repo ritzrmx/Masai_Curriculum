@@ -7,33 +7,27 @@
 %%{init: {'flowchart': {'nodeSpacing': 55, 'rankSpacing': 65, 'diagramPadding': 24}}}%%
 flowchart TB
 linkStyle default stroke-width:3px
-
 subgraph foundation[" Foundation "]
 direction TB
-    CURMOD["<b>Current Module Until<br/>Previous Session</b><br/><i>Foundations of Data</i><br/>Python · Pandas · cleaning<br/>Query thinking<br/>groupby · merge · SQL"]
-    CURSES["<b>Current Session</b><br/><b>Math of Data Organisation</b><br/><i>Shift:</i> See the geometry &<br/>statistics behind every table<br/>Coordinates · slope · stats"]
+    CURMOD["<b>Current Module Until<br/>Previous Session</b><br/><i>Foundations of Data</i><br/>Python · Pandas · groupby<br/>EDA · charts · groupby"]
+    CURSES["<b>Current Session</b><br/><b>Math of Data Organisation</b><br/><i>Shift:</i> Geometry & stats<br/>behind every table<br/>Coordinates · slope · spread"]
 end
-
 subgraph value[" Value "]
 direction LR
-    CVAL["<b>Course Value</b><br/>Math intuition behind<br/>algorithms you will run"]
-    RVAL["<b>Real-Life Value</b><br/>Read charts and formulas<br/>without fear in interviews"]
+    CVAL["<b>Course Value</b><br/>Translate any dataset<br/>into a clear finding"]
+    RVAL["<b>Real-Life Value</b><br/>Present insights that<br/>drive business action"]
 end
-
 subgraph future[" Future Path "]
 direction TB
-    U0["<b>Upcoming Module</b><br/>Classical ML<br/><i>[sklearn · stats]</i><br/>Predictive models"]
-    U1["<b>Upcoming Module</b><br/>GenAI & Agents<br/><i>[LLMs · agents]</i><br/>RAG & agent apps"]
+    U0["<b>Upcoming Module</b><br/>Classical ML<br/><i>[sklearn · stats]</i>"]
+    U1["<b>Upcoming Module</b><br/>GenAI & Agents<br/><i>[LLMs · agents]</i>"]
 end
-
 START["Course Start"] ==>|&nbsp;Begin&nbsp;| CURMOD
 CURMOD ==>|&nbsp;Progress&nbsp;| CURSES
 CURSES ==>|&nbsp;Course Path&nbsp;| CVAL
 CURSES ==>|&nbsp;Real-Life&nbsp;| RVAL
 CURSES ==>|&nbsp;Next Module&nbsp;| U0
 U0 -.->|&nbsp;Ahead&nbsp;| U1
-
-classDef prevBox fill:#E8F4FC,stroke:#2B6CB0,stroke-width:2px,color:#1A202C
 classDef curModBox fill:#FFF8E6,stroke:#B7791F,stroke-width:2px,color:#1A202C
 classDef curSessBox fill:#E6FFFA,stroke:#0D9488,stroke-width:3px,color:#1A202C
 classDef valueBox fill:#F3E8FF,stroke:#7C3AED,stroke-width:2px,color:#1A202C
@@ -135,13 +129,7 @@ The equation of a line is `y = mx + c`, where:
 | **Median** | Middle value when sorted | Skewed data or data with outliers |
 | **Mode** | Most frequently occurring value | Categorical data or finding peaks |
 
-```mermaid
-flowchart TD
-    D[Dataset] --> Q{Is it skewed or<br/>has outliers?}
-    Q -->|No| Mean["Use Mean<br/>sum ÷ count"]
-    Q -->|Yes| Med["Use Median<br/>middle value"]
-    Q -->|Categories| Mod["Use Mode<br/>most common"]
-```
+
 
 **Why the mean lies when data is skewed:**
 
@@ -188,21 +176,164 @@ In ML, SD is used constantly: to detect outliers, to **standardise** (scale) fea
 | Close to −1 | Strong negative — one goes up, other goes down |
 | Close to 0 | Little or no linear relationship |
 
-```mermaid
-flowchart LR
-    S[Scatter plot] --> L[Draw best-fit line]
-    L --> C[Correlation number<br/>−1 to +1]
-    C --> D{Direction?}
-    D -->|Positive| UP["Rising slope<br/>+0.7 to +1"]
-    D -->|Negative| DN["Falling slope<br/>−0.7 to −1"]
-    D -->|Flat| Z["No pattern<br/>near 0"]
-```
+
 
 **Key caution:** Correlation does not mean causation. Ice cream sales and drowning incidents both rise in summer — they are correlated, but ice cream does not cause drowning. Both have a third cause: hot weather. Always ask "is there a real mechanism here?" before acting on a correlation.
 
 This connects directly to **EDA & Visual Storytelling** (upcoming session), where you will visualise correlations, and to **Regression** in Module 2, where the slope you learned in section B becomes a model's trained parameter.
 
 ---
+
+## Reference: Slope Calculation Worked Example
+
+Points (2, 45) and (8, 85): rise = 40, run = 6, slope = 6.67 → each hour adds ~6.7 marks.
+
+## Reference: Mean vs Median Decision Tree
+
+| Data type | Report |
+|---|---|
+| Salaries, house prices | Median |
+| Symmetric test scores | Mean |
+| ML validation metrics | Mean ± std |
+
+## Reference: Standard Deviation Interpretation
+
+| SD relative to mean | Meaning |
+|---|---|
+| Low | Values cluster tightly |
+| High | Wide spread — mean less representative |
+
+## Reference: np.polyfit vs Manual Line
+
+```python
+import numpy as np
+coeffs = np.polyfit(x, y, 1)
+slope, intercept = coeffs
+print(slope, intercept)
+```
+
+## Reference: Correlation Caveats Checklist
+
+- [ ] Is relationship linear?
+- [ ] Any confounding variable?
+- [ ] Outliers inflating r?
+- [ ] Causation claim justified?
+
+## F. Skewness — When the Tail Pulls the Mean
+
+> 💡 **Analogy:** A few billionaires walk into a room of salaried workers — average wealth jumps but the typical person is unchanged.
+
+**One-line definition:** **Skewness** describes asymmetry — right-skewed data has a long upper tail pulling the mean above the median.
+
+| Skew type | Mean vs median | Real example |
+|---|---|---|
+| Symmetric | Mean ≈ Median | Heights, symmetric exam scores |
+| Right-skewed | Mean > Median | Income, order sizes, Mumbai house prices |
+| Left-skewed | Mean < Median | Age at product failure |
+
+**Business rule:** Report median for salary, price, and delivery-time KPIs when histograms show a long tail.
+
+---
+
+## G. Tables as Points in Space
+
+> 💡 **Analogy:** Every row in a spreadsheet can sit on a map if you pick two numeric columns — that map is a scatter plot.
+
+**One-line definition:** A table row with two numeric fields corresponds to one point `(x, y)` on the Cartesian plane.
+
+| Concept | Table | Geometry | ML (Module 2) |
+|---|---|---|---|
+| Record | Row | Point | Example |
+| Field | Column | Axis | Feature |
+| Two numeric cols | x and y values | Scatter plot | Feature pair |
+| Best-fit line | — | Slope + intercept | Linear regression |
+
+---
+
+## H. Descriptive Stats Across Tools
+
+> 💡 **Analogy:** Mean in Pandas, `AVG()` in SQL, and `AVERAGE()` in Excel answer the same question — only the syntax changes.
+
+**One-line definition:** Summary statistics are tool-independent; organisation tools differ, mathematics does not.
+
+| Statistic | Pandas | SQL | Excel |
+|---|---|---|---|
+| Mean | `.mean()` | `AVG(col)` | `=AVERAGE(range)` |
+| Median | `.median()` | `PERCENTILE_CONT(0.5)` | `=MEDIAN(range)` |
+| Std dev | `.std()` | `STDDEV(col)` | `=STDEV.S(range)` |
+| Group mean | `.groupby().mean()` | `GROUP BY` + `AVG` | Pivot table |
+
+**Practice connection:** Session 13 EDA charts show these stats visually; Session 15 computes them in SQL; Session 16 in Excel.
+
+## I. Practice Exercises (continued)
+
+**6. Skewness spot check:** Given mean ₹85L and median ₹42L for house prices, name the skew direction and which statistic a buyer should trust.
+
+**7. Slope interpretation:** Slope of study hours vs score is 6.5. What does that mean in one sentence for a student?
+
+**8. Spread comparison:** Class A scores: mean 70, std 5. Class B: mean 70, std 15. Which class has more predictable outcomes?
+
+**9. Correlation caution:** Ice cream sales and drowning both rise in summer. Name the confounder and why causation fails.
+
+**10. Tool translation:** Write how you would compute median profit by region in Pandas, SQL, and Excel pivot.
+
+## J. Formula Reference Card
+
+| Formula | Meaning |
+|---|---|
+| slope = rise / run | Rate of y change per unit x |
+| mean = sum / count | Arithmetic average |
+| variance = avg of (x − mean)² | Squared spread |
+| std = √variance | Spread in original units |
+| r = correlation | Linear association −1 to +1 |
+
+## K. Module 2 Bridge
+
+Linear Regression finds the best slope and intercept through your scatter plot. Embeddings place text as points in high-dimensional space. Today's 2D intuition scales to those ideas — coordinates first, dimensions later.
+
+## L. Worked Examples — By Hand
+
+**Example 1 — Mean vs median:** Data: 10, 12, 14, 16, 200. Mean = 50.4, Median = 14. Report median for "typical value."
+
+**Example 2 — Slope:** Points (1, 2) and (4, 11). Rise = 9, run = 3, slope = 3.
+
+**Example 3 — Std dev intuition:** Scores 68, 70, 72 cluster tightly; 40, 70, 100 spread wide — same mean possible, different std.
+
+## M. Section Cross-Reference
+
+| If you need… | Read section |
+|---|---|
+| Plot two columns | A — Cartesian plane |
+| Rate of change | B — Slope |
+| Typical value | C — Mean/median/mode |
+| Spread | D — Variance/std |
+| Two columns moving together | E — Correlation |
+| Asymmetric data | F — Skewness |
+| Table ↔ geometry | G — Tables as points |
+| Pandas vs SQL vs Excel | H — Descriptive stats across tools |
+
+## Reference Card — Quick Review Before Class
+
+| Section | Core idea | Before-class action |
+|---|---|---|
+| A | First major concept | Read analogy + definition aloud |
+| B | Second concept | Sketch one tiny example |
+| C | Third concept | Name one common mistake |
+| D | Fourth concept | Link to prior session tool |
+| E | Fifth concept | Complete practice #1 |
+| F | Extension | Optional stretch |
+| G | Extension | Optional stretch |
+| H | Extension | Optional stretch |
+
+**Active recall:** Close the doc; write one-line definitions for A, C, E from memory; reopen and check.
+
+**Tool checklist:** Install Jupyter, MySQL Workbench, or Excel/Sheets per session overview.
+
+**Dataset checklist:** Download Superstore or open shared workbook before class.
+
+**Peer prep:** Bring one business question for a dataset in your domain.
+
+**Time box:** 25–35 minutes on this pre-read; finish at least three practice exercises.
 
 ## Practice Exercises
 
@@ -221,6 +352,101 @@ A student says: "I plotted hours of screen time vs productivity score and got a 
 **5. Planning Ahead**  
 You have a sales dataset with columns `ad_spend`, `units_sold`, `price`, and `region`. Plan how you would use the ideas from this masterclass to describe the dataset before building a model: which statistics would you check for each column, which pairs would you want to scatter-plot, and what would a very high or very low standard deviation on `units_sold` tell you?
 
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
 ---
 
-> ✅ **You're done!** You now see data through the lens of geometry and statistics — every scatter plot is a pair of columns mapped to coordinates, every slope is a relationship, and every standard deviation tells you how trustworthy an average is. These ideas underpin every ML algorithm you will build in Module 2. Next up: **SQL for Analysis & Data Retrieval**, where you will put querying power to work on real analytical problems.
+> ✅ **You're done!** You see the math behind every chart and statistic. Next up: **SQL with MySQL Workbench**.

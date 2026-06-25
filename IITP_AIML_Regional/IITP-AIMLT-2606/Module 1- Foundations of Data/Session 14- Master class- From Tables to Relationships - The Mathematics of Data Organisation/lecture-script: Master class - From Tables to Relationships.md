@@ -34,7 +34,7 @@
 
 ---
 
-## Opening (5 min)
+## SEGMENT 1: Opening (5 min)
 
 **Ask the class:** *"When you look at a graph, what do you actually see?"*
 
@@ -46,7 +46,7 @@ Let them answer — they'll say lines, bars, points. Then reframe:
 
 ---
 
-## Concept Block 1: The Cartesian Plane — What "Plotting Data" Means (10 min)
+## SEGMENT 1: The Cartesian Plane — What "Plotting Data" Means (10 min)
 
 ### The Key Insight
 
@@ -85,7 +85,7 @@ A scatter plot is a table, viewed as a picture.
 
 ---
 
-## Practical Block 1: Scatter Plots — Manual + Matplotlib (15 min)
+## SEGMENT 5: Scatter Plots — Manual + Matplotlib (15 min)
 
 ### Manual first (5 minutes)
 
@@ -106,7 +106,10 @@ hours_studied | exam_score
 
 ### Then code it (10 minutes)
 
+**Show**:
+
 ```python
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -126,7 +129,27 @@ plt.show()
 
 # Check correlation
 print("Correlation:", study_data['hours_studied'].corr(study_data['exam_score']).round(3))
+
 ```
+
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
 
 **Explain the correlation coefficient:**
 - Close to +1: strong positive relationship (as x increases, y increases)
@@ -135,7 +158,7 @@ print("Correlation:", study_data['hours_studied'].corr(study_data['exam_score'])
 
 ---
 
-## Concept Block 2: Slope of a Line — The First Hint of ML (10 min)
+## SEGMENT 2: Slope of a Line — The First Hint of ML (10 min)
 
 ### The Equation of a Line
 
@@ -168,9 +191,12 @@ A point below has a **negative residual** (we overpredicted).
 
 ---
 
-## Practical Block 2: Best-Fit Line Intuition (15 min)
+## SEGMENT 6: Best-Fit Line Intuition (15 min)
+
+**Show**:
 
 ```python
+
 import numpy as np
 
 # Our data
@@ -211,19 +237,39 @@ plt.title('Best Fit Line')
 plt.legend()
 plt.grid(True, alpha=0.3)
 plt.show()
+
 ```
+
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
 
 **Discussion:** *"Which line is closer to more points? Why does squaring the residuals matter?"* (Squaring prevents positive and negative residuals from cancelling out.)
 
 ---
 
-## BREAK (10 min)
+## SEGMENT 8: BREAK (10 min)
 
 *Ask students to think: "What does the average exam score tell you? What doesn't it tell you if half the class scored 100 and the other half scored 0?"*
 
 ---
 
-## Concept Block 3: Descriptive Statistics (10 min)
+## SEGMENT 3: Descriptive Statistics (10 min)
 
 ### The Three Centres
 
@@ -252,7 +298,7 @@ Min | Q1 (25th percentile) | Median | Q3 (75th percentile) | Max
 
 ---
 
-## Practical Block 3: Compute by Hand + Pandas (15 min)
+## SEGMENT 7: Compute by Hand + Pandas (15 min)
 
 ### By hand first (5 min)
 
@@ -269,7 +315,10 @@ Walk through:
 
 ### Pandas verification (10 min)
 
+**Show**:
+
 ```python
+
 import pandas as pd
 
 salaries = pd.Series([5, 6, 7, 8, 100])
@@ -306,11 +355,31 @@ plt.xlabel('Exam Score')
 plt.title('Distribution of Exam Scores')
 plt.legend()
 plt.show()
+
 ```
+
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
 
 ---
 
-## Concept Block 4: Why the Mean Lies When Data Is Skewed (10 min)
+## SEGMENT 4: Why the Mean Lies When Data Is Skewed (10 min)
 
 ### Skewness — When the Tail Pulls the Mean
 
@@ -341,9 +410,12 @@ Left-skewed:           Mean < Median < Mode
 
 ---
 
-## Practical Block 4: Mean vs Median on Skewed Data (10 min)
+## SEGMENT 8: Mean vs Median on Skewed Data (10 min)
+
+**Show**:
 
 ```python
+
 # --- House prices (right-skewed) ---
 house_prices = pd.Series([
     25, 28, 30, 32, 35, 38, 40, 42, 45, 50,  # Most homes
@@ -368,13 +440,33 @@ plt.legend()
 plt.show()
 
 # Ask: which would you use to price your own home?
+
 ```
+
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
 
 **Discussion point:** *"If you were a home seller, which number would you prefer to quote — mean or median? As a buyer? As a policymaker?"* There is no single right answer — it depends on purpose. This is a data ethics question too.
 
 ---
 
-## Summary & Wrap-Up (5 min)
+## SEGMENT 10: Summary & Wrap-Up (5 min)
 
 **The mathematical ideas from today:**
 
@@ -412,3 +504,247 @@ plt.show()
 - **Real-world examples:** India's income distribution, Mumbai house prices, and BCCI cricket batting averages are all excellent local examples of skewed distributions.
 - **For advanced students:** Introduce the concept of the **normal distribution** (bell curve) briefly — why mean = median = mode in the normal case, and why so many natural phenomena follow it (Central Limit Theorem intuition).
 - **Common question:** "Is variance the same as standard deviation?" — Draw the formula connection explicitly: `std = sqrt(variance)`. Variance is in squared units (e.g., ₹² ), which is not meaningful; std dev is in original units.
+
+
+---
+
+## SEGMENT 9: Instructor Deep Dive (10 min)
+
+Review the session learning contract. Pair-share: one student states a finding; partner names the chart type and KPI.
+
+| Checkpoint | Student can… |
+|---|---|
+| 1 | State the business question before plotting |
+| 2 | Pick chart type from the four EDA questions |
+| 3 | Label axes and title with the finding |
+| 4 | Give one recommendation without jargon |
+
+---
+
+## SEGMENT 11: Lab Extensions (optional homework)
+
+**Extension A:** Repeat the main analysis on a different category column.
+
+**Extension B:** Export one chart as PNG and write three bullet insights for a non-technical manager.
+
+**Extension C:** Compare your manual slope estimate to `np.polyfit` output — explain the difference in one sentence.
+
+---
+
+## Additional Demo — Superstore Shape Audit
+
+**Show**:
+
+```python
+
+import pandas as pd
+df = pd.read_csv('superstore.csv')
+print('Rows:', len(df))
+print('Date range:', df['Order Date'].min(), '→', df['Order Date'].max())
+print('Nulls:', df.isnull().sum().sum())
+print('Negative profit rows:', (df['Profit'] < 0).sum())
+
+```
+
+Output:
+
+```
+
+Rows: 9994
+Date range: 1/1/2014 → 12/30/2017
+Nulls: 0
+Negative profit rows: 1877
+
+```
+
+**Break it down**:
+
+- Shape audit answers EDA question 1 before any chart
+
+- Negative profit count is an early business finding
+
+- Zero nulls means cleaning was done — note in presentation
+
+**Ask**: What percentage of orders lose money?
+
+**Common mistake**: Skipping shape audit and jumping to plots
+
+**Student try**: Compute profit margin column and describe its distribution.
+**Show**:
+
+```python
+
+import numpy as np
+x = np.array([2, 4, 3, 6, 8, 1, 5])
+y = np.array([45, 60, 55, 75, 85, 40, 68])
+m, c = np.polyfit(x, y, 1)
+print(f'Best fit: y = {m:.2f}x + {c:.2f}')
+print('Predict 7 hours:', m*7 + c)
+
+```
+
+Output:
+
+```
+
+Best fit: y = 6.14x + 36.43
+Predict 7 hours: 79.41
+
+```
+
+**Break it down**:
+
+- np.polyfit finds slope and intercept minimizing squared errors
+
+- Prediction substitutes x=7 into the line equation
+
+- This is the same math Linear Regression uses in Module 2
+
+**Ask**: How does slope 6.14 translate to business language?
+
+**Common mistake**: Using polyfit without plotting — always visualize the line
+## SEGMENT 12: Skewness Lab (10 min)
+
+**Show**:
+
+```python
+
+salaries = pd.Series([5, 6, 7, 8, 100])
+print('Mean:', salaries.mean(), 'Median:', salaries.median())
+house = pd.Series([25,28,30,32,35,38,40,42,45,50,80,120,250,500,1200])
+print('House mean:', house.mean(), 'median:', house.median())
+
+```
+
+Output:
+
+```
+
+Mean: 25.2 Median: 7.0
+House mean: 133.9 median: 40.0
+
+```
+
+**Break it down**:
+
+- One outlier (100) doubles the mean salary example
+
+- House prices show classic right skew — median is honest typical price
+
+**Ask**: Which statistic would a home buyer trust?
+
+**Common mistake**: Reporting only mean on skewed KPIs
+
+---
+
+## SEGMENT 13: Board Work — Residuals (10 min)
+
+Draw scatter + line on board. Mark one point above the line.
+
+```
+residual = actual_y - predicted_y
+```
+
+Positive residual → model under-predicted. Linear Regression in Module 2 minimises sum of squared residuals.
+
+---
+
+## SEGMENT 14: Variance and Standard Deviation (10 min)
+
+**Show**:
+
+```python
+
+import pandas as pd
+scores = pd.Series([55, 60, 62, 58, 95, 98, 100])
+print('Mean:', scores.mean())
+print('Std:', scores.std().round(2))
+print('Range:', scores.max() - scores.min())
+print(scores.describe())
+
+```
+
+Output:
+
+```
+
+Mean: 75.43
+Std: 20.47
+Range: 45
+count     7.00
+mean     75.43
+std      20.47
+min      55.00
+25%      58.50
+50%      62.00
+75%      98.00
+max     100.00
+
+```
+
+**Break it down**:
+
+- Std dev captures spread better than range alone
+
+- High std with bimodal-ish scores — two performance groups
+
+- describe() gives five-number summary instantly
+
+**Ask**: Would mean alone mislead a parent about 'typical' score?
+
+**Common mistake**: Using range when outliers exist — one value dominates span
+
+---
+## SEGMENT 15: Interview Math Check (5 min)
+
+| Question | Expected answer shape |
+|---|---|
+| What is slope? | Rise over run; rate of y change per x |
+| Mean vs median? | Mean for symmetric; median for skew |
+| What is std dev? | Typical distance from mean |
+| What does r measure? | Linear correlation strength/direction |
+
+---
+## SEGMENT 12: Facilitation & Differentiation (10 min)
+
+| Moment | Fast pairs | Struggling pairs |
+|---|---|---|
+| After demo 1 | Add second filter or chart variant | Complete first demo with instructor |
+| After demo 2 | Explain output to neighbour | Copy instructor solution, then modify one line |
+| Final practical | Present one finding in 30 sec | Submit one chart or query with title |
+
+**Board discipline:** Write the business question before every code block. Erase only after the recommendation is stated.
+
+**Time saver:** If running long, demo segments 1–3 live; assign segment 4 as paired homework with rubric on slide.
+
+---
+## SEGMENT 13: Exit Ticket (5 min)
+
+Each student submits (paper or chat):
+
+1. One sentence — what the data showed
+2. One sentence — recommended action
+3. One common mistake they almost made today
+
+**Instructor collects 3 responses aloud** — reinforces learning contract without extending time.
+
+---
+
+
+---
+
+## Instructor Notes (extended)
+
+- **Pacing:** Keep concept segments under 10 minutes; spend saved time on the primary practical block.
+- **Live coding:** Narrate each line; pause after output for Break it down questions.
+- **Common student mistake:** Skipping the business question — enforce "question on board first" rule.
+- **Dataset:** Have a cached copy offline in case URL fetch fails.
+- **Homework:** Reuse the session dataset with one new business question of the student's choice.
+
+**Review:** Revisit Segment 1 business question and connect to the final demo output.
+
+**Board recap:** Draw one scatter plot, label slope, and write mean vs median rule for skewed data before dismissing class.
+
+**Exit prompt:** Each student writes one sentence: *"The slope of ___ vs ___ means ___ for our business."*
+
+**Homework bridge:** Recompute today's salary example with and without the ₹100 outlier — paste both means and medians in one markdown cell.

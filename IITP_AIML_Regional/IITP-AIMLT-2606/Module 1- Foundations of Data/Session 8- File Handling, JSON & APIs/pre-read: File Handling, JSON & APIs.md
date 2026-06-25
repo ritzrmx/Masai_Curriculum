@@ -50,11 +50,12 @@ class U0,U1 futureBox
 
 In this pre-read, you'll discover:
 
-- How Python reads and writes files — the mechanics behind every `open()` call
-- What **JSON** is and why it is the universal language of data exchange
-- How to **parse** a JSON string into Python dictionaries and lists
-- How to navigate **nested JSON** — the kind every real API returns
-- How file handling and JSON together power config files, logs, datasets, and API responses
+- How Python **reads and writes files** safely using `open()` and the `with` statement
+- What **JSON** is and why it is the universal language of data exchange on the web
+- How to **parse** JSON strings and files into Python dictionaries and lists
+- How to navigate **nested JSON** — the structure every real API returns
+- How **HTTP APIs** let your program fetch live data from services over the internet
+- How to handle **errors ethically** and protect **API keys** when building real pipelines
 
 ---
 
@@ -116,6 +117,21 @@ with open('data.txt', 'r') as f:
 | `f.readlines()` | List of strings | Iterating lines by index |
 | `for line in f` | One line at a time | Large files, memory efficiency |
 
+**Common file errors you will see:**
+
+| Error | Cause | Fix |
+|---|---|---|
+| `FileNotFoundError` | Path is wrong or file missing | Check path with `Path.exists()` |
+| `PermissionError` | No read/write access | Check folder permissions |
+| Empty output | Opened with `'w'` by mistake | Use `'r'` to read, `'w'` only to overwrite |
+
+**Key facts:**
+
+- Files live on **disk** — they survive after your program ends
+- Variables in memory disappear when the program stops; files do not
+- Always specify the mode explicitly: `'r'`, `'w'`, or `'a'`
+- Text files use string methods; binary files need `'rb'` / `'wb'` (advanced topic)
+
 ---
 
 ## B. Writing Files and File Paths
@@ -159,6 +175,9 @@ from pathlib import Path
 data_path = Path('data') / 'scores.txt'
 print(data_path)           # data/scores.txt
 
+# Create folder if missing
+data_path.parent.mkdir(parents=True, exist_ok=True)
+
 # Check if file exists before opening
 if data_path.exists():
     with open(data_path, 'r') as f:
@@ -168,6 +187,41 @@ else:
 ```
 
 Never hardcode `'C:\\Users\\alice\\...'` — it breaks on every other machine.
+
+**Path operations cheat sheet:**
+
+| Task | Code |
+|---|---|
+| Build a path | `Path('data') / 'file.json'` |
+| Check exists | `path.exists()` |
+| Create directory | `path.mkdir(parents=True, exist_ok=True)` |
+| Get parent folder | `path.parent` |
+| Get filename only | `path.name` |
+| Get suffix | `path.suffix` → `.json` |
+
+```mermaid
+flowchart TD
+    P["Path('data/config.json')"] --> E{exists?}
+    E -->|Yes| R["open + read"]
+    E -->|No| W["mkdir parent + create file"]
+```
+
+**Writing CSV-style text (preview before Pandas):**
+
+```python
+from pathlib import Path
+
+Path('data').mkdir(exist_ok=True)
+rows = [
+    "name,score\n",
+    "Riya,91\n",
+    "Bob,88\n",
+]
+with open(Path('data') / 'scores.csv', 'w') as f:
+    f.writelines(rows)
+```
+
+This is how data leaves your notebook and becomes a file someone else can open in Excel or load with Pandas later.
 
 ---
 
@@ -220,14 +274,26 @@ print(data['skills'][0])   # Python
 student = {"name": "Bob", "score": 91.5, "passed": True}
 json_output = json.dumps(student, indent=2)
 print(json_output)
-# {
-#   "name": "Bob",
-#   "score": 91.5,
-#   "passed": true
-# }
 ```
 
 **Memory trick:** `loads` = Load from **S**tring. `dumps` = Dump to **S**tring.
+
+**Valid JSON rules (Python is more forgiving):**
+
+| Rule | JSON | Python |
+|---|---|---|
+| Keys | Must be double-quoted strings | Can be any hashable type |
+| Booleans | `true`, `false` (lowercase) | `True`, `False` |
+| Null | `null` | `None` |
+| Trailing commas | Not allowed | Allowed in lists/dicts |
+| Comments | Not allowed | `# comment` works |
+
+**Common `json.loads()` errors:**
+
+| Error | Cause |
+|---|---|
+| `JSONDecodeError` | Missing quote, trailing comma, single quotes |
+| `TypeError` | Passed a dict instead of a string to `loads` |
 
 ---
 
@@ -277,6 +343,37 @@ flowchart LR
 ```
 
 JSON gives you structure for free — no custom parsing required.
+
+**Round-trip pattern (save and reload):**
+
+```python
+import json
+from pathlib import Path
+
+catalog = [
+    {"id": 1, "name": "Laptop", "price": 65000},
+    {"id": 2, "name": "Mouse",  "price": 899},
+]
+
+path = Path('data') / 'catalog.json'
+path.parent.mkdir(exist_ok=True)
+
+with open(path, 'w') as f:
+    json.dump(catalog, f, indent=2)
+
+with open(path, 'r') as f:
+    restored = json.load(f)
+
+print(restored[0]["name"])   # Laptop — structure preserved
+```
+
+**`indent=2` vs compact JSON:**
+
+| Option | Output | Use when |
+|---|---|---|
+| `indent=2` | Pretty, multi-line | Config files humans edit |
+| No indent | One long line | APIs, logs, minimal size |
+| `ensure_ascii=False` | Keeps Unicode (Hindi, emoji) | Multilingual data |
 
 ---
 
@@ -361,15 +458,242 @@ flat_users = [
 ]
 
 print(flat_users)
-# [{'id': 1, 'name': 'Alice', 'city': 'Mumbai'}, ...]
-
-# One step further — convert to Pandas DataFrame
-import pandas as pd
-df = pd.DataFrame(flat_users)
-print(df)
 ```
 
 This pattern — fetch JSON from an API, flatten the nested fields, load into a DataFrame — is one of the most frequently repeated patterns in all of data engineering and ML work.
+
+**Navigation cheat sheet:**
+
+```
+response['weather'][0]['main']
+    │        │      │     └── key inside inner dict
+    │        │      └── index into list
+    │        └── key whose value is a list
+    └── top-level dict
+```
+
+---
+
+## F. APIs & HTTP — Talking to Services Over the Web
+
+> 💡 **Analogy:** An **API** is a restaurant menu with a fixed list of dishes. You order by name (endpoint); the kitchen (server) sends back your meal (JSON response). You do not walk into the kitchen — you use the menu.
+
+**One-line definition:** An **API (Application Programming Interface)** lets your program request data or actions from another service over the internet using **HTTP** — the same protocol your browser uses.
+
+```mermaid
+flowchart LR
+    YOU["Your Python\nscript"] -->|HTTP GET| API["Remote server\n(API)"]
+    API -->|JSON response| YOU
+```
+
+**Key HTTP concepts:**
+
+| Concept | Meaning | Example |
+|---|---|---|
+| URL / Endpoint | Address of the resource | `https://api.open-meteo.com/v1/forecast` |
+| Method | What action to perform | `GET` (read), `POST` (send/create) |
+| Status code | Did it work? | `200` OK, `404` Not Found |
+| Params | Query string on GET URL | `?latitude=19.076&longitude=72.877` |
+| Headers | Metadata about the request | `Authorization: Bearer <key>` |
+| Body | Data sent (POST) or received | JSON string |
+
+**GET vs POST:**
+
+| | GET | POST |
+|---|---|---|
+| Purpose | Read/fetch data | Send data to create or process |
+| Data location | URL parameters | Request body (JSON) |
+| Example | Weather forecast | Submit a form, call ChatGPT |
+| Safe to repeat? | Yes (idempotent) | No (may create duplicates) |
+
+**Basic request with the `requests` library:**
+
+```python
+import requests
+
+# GET — parameters in URL
+response = requests.get(
+    "https://api.github.com",
+    timeout=10
+)
+print(response.status_code)   # 200
+print(type(response.json()))  # dict
+```
+
+**Install once:** `pip install requests`
+
+**What happens step by step:**
+
+1. Your code sends an HTTP request to a URL
+2. The remote server processes the request
+3. The server sends back a response with a status code and body
+4. You parse the body — often JSON — into Python objects
+
+**Public APIs good for learning:**
+
+| API | Key required? | Returns |
+|---|---|---|
+| Open-Meteo | No | Weather forecasts |
+| GitHub public | No | Repo metadata |
+| httpbin.org | No | Echo/test requests |
+| OpenWeatherMap | Yes (free tier) | Weather data |
+
+---
+
+## G. Error Handling & Ethics — Building Responsibly
+
+> 💡 **Analogy:** Calling an API is like phoning a help desk. Sometimes they answer (200 OK), sometimes the line is busy (429), sometimes you dial the wrong number (404). A professional caller checks the response before assuming success — and never shouts their password into the phone.
+
+**One-line definition:** **Error handling** means checking whether a file or API call succeeded before using the result; **ethics** means respecting rate limits, protecting secrets, and using data responsibly.
+
+**Status codes students must know:**
+
+| Code | Meaning | What to do |
+|---|---|---|
+| 200 | OK — success | Parse `response.json()` |
+| 401 | Unauthorised — bad/missing key | Check API key and headers |
+| 404 | Not found — wrong URL | Check endpoint documentation |
+| 429 | Rate limited — too many requests | Wait and retry with backoff |
+| 500 | Server error | Retry; report to API provider |
+
+**Always check before parsing:**
+
+```python
+import requests
+
+response = requests.get(url, params=params, timeout=10)
+
+if response.status_code == 200:
+    data = response.json()
+else:
+    print(f"Failed: {response.status_code}")
+```
+
+**API key security — non-negotiable rules:**
+
+| Rule | Bad | Good |
+|---|---|---|
+| Never hardcode keys | `api_key = "sk-secret"` | `os.environ.get("MY_API_KEY")` |
+| Never commit `.env` | Push secrets to GitHub | Add `.env` to `.gitignore` |
+| Revoke if exposed | Hope nobody noticed | Rotate key immediately |
+
+**Using a `.env` file locally:**
+
+```bash
+# .env file (add to .gitignore immediately)
+MY_API_KEY=your_key_here
+```
+
+```python
+# pip install python-dotenv
+from dotenv import load_dotenv
+import os
+
+load_dotenv()   # reads .env into environment
+api_key = os.environ.get("MY_API_KEY")
+```
+
+**Retry pattern for flaky networks:**
+
+```python
+import time
+import requests
+
+def safe_api_call(url, params=None, retries=3):
+    for attempt in range(retries):
+        try:
+            response = requests.get(url, params=params, timeout=10)
+            if response.status_code == 200:
+                return response.json()
+            elif response.status_code == 429:
+                time.sleep(2 ** attempt)  # exponential backoff
+            else:
+                return None
+        except requests.exceptions.Timeout:
+            time.sleep(2)
+    return None
+```
+
+**Ethics checklist:**
+
+| Principle | Practice |
+|---|---|
+| Respect rate limits | Add delays; backoff on 429 |
+| Read Terms of Service | Some APIs forbid commercial use |
+| Never commit keys | Use `.env`; revoke if exposed |
+| Cache in development | Avoid hammering APIs during testing |
+| Handle errors gracefully | Never show raw API errors to end users |
+| Minimise data fetched | Request only the fields you need |
+
+**Teaching line to remember:** *"An API key is a password. Treat it like your bank PIN."*
+
+---
+
+## H. End-to-End Pipeline Preview — Disk → Network → Disk
+
+> 💡 **Analogy:** A pipeline is like a factory assembly line: raw materials arrive (config file), machines process them (API call), and finished products ship out (results JSON). Each station has a clear job — and quality control at every step.
+
+**One-line definition:** An **end-to-end data pipeline** chains file I/O, configuration loading, API fetching, JSON parsing, and result saving into one repeatable workflow.
+
+```mermaid
+flowchart LR
+    C["config.json\n(disk)"] --> L["json.load()"]
+    L --> A["API request\n(network)"]
+    A --> P["Parse nested JSON"]
+    P --> S["results.json\n(disk)"]
+```
+
+**The five pipeline steps you will build in class:**
+
+| Step | Action | Tool |
+|---|---|---|
+| 1 | Load settings from disk | `json.load()` |
+| 2 | Build API URL and params | dict from config |
+| 3 | Fetch live data | `requests.get()` + `safe_api_call()` |
+| 4 | Navigate nested response | keys, indexes, flatten loop |
+| 5 | Save results to disk | `json.dump()` |
+
+**Mini pipeline example (conceptual):**
+
+```python
+import json
+import requests
+from pathlib import Path
+
+# 1. Load config
+with open('data/config.json', 'r') as f:
+    config = json.load(f)
+
+# 2. Call API (Open-Meteo — no key needed)
+city = config["cities"][0]
+lat, lon = 19.076, 72.877  # Mumbai coordinates
+
+response = requests.get(
+    "https://api.open-meteo.com/v1/forecast",
+    params={
+        "latitude": lat,
+        "longitude": lon,
+        "daily": "temperature_2m_max",
+        "forecast_days": config["settings"]["forecast_days"],
+    },
+    timeout=10,
+)
+
+# 3. Parse and save
+if response.status_code == 200:
+    output = {"city": city, "forecast": response.json()["daily"]}
+    Path('data').mkdir(exist_ok=True)
+    with open(config["output_path"], 'w') as f:
+        json.dump(output, f, indent=2)
+```
+
+**What you gain from this pattern:**
+
+- **Reproducibility** — rerun the same pipeline with a new config
+- **Auditability** — saved JSON files show what was fetched and when
+- **Separation** — config (what to fetch) vs code (how to fetch)
+
+**Bridge to upcoming sessions:** Every CSV you `read_csv()` in Pandas and every LLM API call in the GenAI module follows this same skeleton — **load settings → fetch data → parse structure → save or analyse**.
 
 ---
 
@@ -388,14 +712,7 @@ print(data['rainfall'])
 Using section E, explain (a) why the error occurs, (b) how `.get()` would fix it, and (c) rewrite the line to safely return `0` if `'rainfall'` is missing.
 
 **3. Real-Life Application**  
-You receive a JSON file `orders.json` containing a list of orders:  
-```json
-[
-  {"order_id": "O1", "customer": "Alice", "items": [{"product": "Laptop", "qty": 1, "price": 65000}]},
-  {"order_id": "O2", "customer": "Bob",   "items": [{"product": "Chair",  "qty": 2, "price": 6000}]}
-]
-```  
-Write the code to: (a) read the file with `json.load()`, (b) print each customer's name and total order value (qty × price per item), (c) save a summary `[{"order_id": ..., "total": ...}]` to a new file `order_totals.json`.
+Name three real apps or services you use that rely on APIs returning JSON. For each, describe one piece of data the API likely returns (e.g., temperature, username, transaction amount).
 
 **4. Spot the Error**  
 A student writes this code to log results to a file:  
@@ -413,35 +730,4 @@ You are building a configuration system for an ML pipeline. The pipeline needs t
 
 ---
 
-> ✅ **You're done!** You now know how to open, read, and write files safely using the `with` statement, and how to parse, navigate, and write JSON — the format that powers every config file, API response, and dataset export you will encounter. Next: **NumPy Foundations & Array Operations**, where you'll move from processing one value at a time to processing entire arrays of numbers in a single operation — the mathematical engine behind all of data science and ML.
-
-
----
-
-## E. APIs — Talking to Services Over the Web
-
-> 💡 **Analogy:** An **API** is a restaurant menu with a fixed list of dishes. You order by name (endpoint); the kitchen (server) sends back your meal (JSON response).
-
-**One-line definition:** An **API** lets your program request data or actions from another service over the internet using HTTP.
-
-| Method | Typical use |
-|---|---|
-| GET | Read data |
-| POST | Send data to create/update |
-
-```python
-import requests
-r = requests.get("https://api.github.com")
-print(r.status_code)
-print(r.json()["current_user_url"])
-```
-
-**Ethics:** Never commit API keys; respect rate limits and Terms of Service.
-
----
-
-## Practice Exercises (API)
-
-**5. Planning Ahead** — Name one public API you could call for a weather dashboard.
-
-> ✅ **Extended pre-read** now covers files, JSON, and API basics for Session 8.
+> ✅ **You're done!** You now know how to open, read, and write files safely using the `with` statement; how to parse, navigate, and write JSON — the format that powers every config file, API response, and dataset export you will encounter; and how HTTP APIs connect your code to live data on the internet. Next up: **NumPy Foundations & Array Operations**, where you'll move from processing one value at a time to processing entire arrays of numbers in a single operation — the mathematical engine behind all of data science and ML.

@@ -7,33 +7,27 @@
 %%{init: {'flowchart': {'nodeSpacing': 55, 'rankSpacing': 65, 'diagramPadding': 24}}}%%
 flowchart TB
 linkStyle default stroke-width:3px
-
 subgraph foundation[" Foundation "]
 direction TB
-    CURMOD["<b>Current Module Until<br/>Previous Session</b><br/><i>Foundations of Data</i><br/>Python · Pandas · cleaning<br/>Query thinking · groupby<br/>Coordinates · stats math"]
-    CURSES["<b>Current Session</b><br/><b>SQL for Analysis</b><br/><i>Shift:</i> Write SQL like an analyst<br/>Joins · subqueries · HAVING<br/>Real retrieval from databases"]
+    CURMOD["<b>Current Module Until<br/>Previous Session</b><br/><i>Foundations of Data</i><br/>Python · Pandas · groupby<br/>Math · EDA · charts"]
+    CURSES["<b>Current Session</b><br/><b>SQL with MySQL Workbench</b><br/><i>Shift:</i> Query live databases<br/>Joins · windows · CTEs"]
 end
-
 subgraph value[" Value "]
 direction LR
-    CVAL["<b>Course Value</b><br/>Analyst-ready SQL skills<br/>across the stack"]
-    RVAL["<b>Real-Life Value</b><br/>Query any warehouse or<br/>dashboard from day one"]
+    CVAL["<b>Course Value</b><br/>Translate any dataset<br/>into a clear finding"]
+    RVAL["<b>Real-Life Value</b><br/>Present insights that<br/>drive business action"]
 end
-
 subgraph future[" Future Path "]
 direction TB
-    U0["<b>Upcoming Module</b><br/>Classical ML<br/><i>[sklearn · stats]</i><br/>Predictive models"]
-    U1["<b>Upcoming Module</b><br/>GenAI & Agents<br/><i>[LLMs · agents]</i><br/>RAG & agent apps"]
+    U0["<b>Upcoming Module</b><br/>Classical ML<br/><i>[sklearn · stats]</i>"]
+    U1["<b>Upcoming Module</b><br/>GenAI & Agents<br/><i>[LLMs · agents]</i>"]
 end
-
 START["Course Start"] ==>|&nbsp;Begin&nbsp;| CURMOD
 CURMOD ==>|&nbsp;Progress&nbsp;| CURSES
 CURSES ==>|&nbsp;Course Path&nbsp;| CVAL
 CURSES ==>|&nbsp;Real-Life&nbsp;| RVAL
 CURSES ==>|&nbsp;Next Module&nbsp;| U0
 U0 -.->|&nbsp;Ahead&nbsp;| U1
-
-classDef prevBox fill:#E8F4FC,stroke:#2B6CB0,stroke-width:2px,color:#1A202C
 classDef curModBox fill:#FFF8E6,stroke:#B7791F,stroke-width:2px,color:#1A202C
 classDef curSessBox fill:#E6FFFA,stroke:#0D9488,stroke-width:3px,color:#1A202C
 classDef valueBox fill:#F3E8FF,stroke:#7C3AED,stroke-width:2px,color:#1A202C
@@ -170,12 +164,7 @@ A quick test before you write: *"Is my filter about individual rows or about the
 
 **Three places subqueries appear:**
 
-```mermaid
-flowchart TD
-    S[Subquery] --> W["In WHERE<br/>filter by a calculated value"]
-    S --> F["In FROM<br/>treat a result as a temp table"]
-    S --> SE["In SELECT<br/>compute a value per row"]
-```
+
 
 **In WHERE** — find orders above the average amount:
 
@@ -260,6 +249,143 @@ WHERE discount IS NOT NULL      -- find applied discounts
 
 ---
 
+## Reference: JOIN Types Quick Pick
+
+| Need | JOIN |
+|---|---|
+| Only matched rows | INNER |
+| All left + matches | LEFT |
+| Unmatched right keys | LEFT + IS NULL |
+
+## Reference: Subquery Patterns
+
+| Pattern | Example use |
+|---|---|
+| Scalar | `WHERE amount > (SELECT AVG(amount) FROM orders)` |
+| IN | `WHERE id IN (SELECT customer_id FROM ...)` |
+| Derived table | `FROM (SELECT ...) AS sub` |
+
+## Reference: Window Functions
+
+| Function | Purpose |
+|---|---|
+| RANK() | Rank with gaps |
+| ROW_NUMBER() | Unique row index |
+| SUM() OVER | Running total |
+
+## Reference: MySQL Workbench Shortcuts
+
+| Action | Shortcut |
+|---|---|
+| Execute statement | Ctrl+Enter |
+| Execute script | Ctrl+Shift+Enter |
+| Comment line | Ctrl+/ |
+
+## Reference: CTE vs Nested Subquery
+
+Prefer CTE when: 3+ steps, same subquery reused, readability for juniors.
+
+## F. MySQL Workbench — Connection & Query Workflow
+
+> 💡 **Analogy:** Workbench is the IDE for your database — connect once, write SQL, inspect grids, export results.
+
+**One-line definition:** **MySQL Workbench** provides GUI connection management, SQL editing, and result inspection for MySQL servers.
+
+| Step | Action | Tip |
+|---|---|---|
+| 1 | Create connection | Store password in keychain |
+| 2 | Open SQL tab | One statement or full script |
+| 3 | Execute | Highlight partial query + Ctrl+Enter |
+| 4 | Review grid | Sort columns, export CSV |
+| 5 | Save script | `.sql` file for reuse |
+
+**MySQL vs SQLite in class:**
+
+| Aspect | SQLite (demo) | MySQL Workbench |
+|---|---|---|
+| Setup | Python in-memory | Server + connection |
+| SELECT/JOIN | Identical syntax | Identical syntax |
+| Window functions | Supported | Supported |
+| Use case | Teaching, local | Production, teams |
+
+---
+
+## G. Window Functions — Rows That Keep Their Identity
+
+> 💡 **Analogy:** A running balance on a bank statement updates on every line without hiding individual transactions — that is a window calculation.
+
+**One-line definition:** **Window functions** aggregate over a window of rows while returning one value per input row.
+
+```sql
+SELECT customer_id, order_date, amount,
+       SUM(amount) OVER (
+         PARTITION BY customer_id
+         ORDER BY order_date
+       ) AS running_total
+FROM orders;
+```
+
+| Function | Purpose | Example |
+|---|---|---|
+| `RANK()` | Rank with gaps | Top products |
+| `ROW_NUMBER()` | Unique sequence | Dedup picks |
+| `SUM() OVER` | Running total | Customer lifetime spend |
+| `AVG() OVER` | Moving average | 7-day order trend |
+
+---
+
+## H. CTEs — Name Your Intermediate Steps
+
+> 💡 **Analogy:** A recipe with titled steps beats one long paragraph — `WITH` clauses title each step of a query.
+
+**One-line definition:** A **CTE** (`WITH ... AS`) names a subquery for readable multi-step SQL.
+
+```sql
+WITH completed AS (
+  SELECT * FROM orders WHERE status = 'completed'
+),
+by_customer AS (
+  SELECT customer_id, SUM(amount) AS total
+  FROM completed
+  GROUP BY customer_id
+)
+SELECT c.name, b.total
+FROM by_customer b
+JOIN customers c ON b.customer_id = c.customer_id
+ORDER BY b.total DESC
+LIMIT 10;
+```
+
+| Pattern | When to use |
+|---|---|
+| Scalar subquery | Single value compare |
+| IN subquery | Membership filter |
+| Derived table | One-off aggregation |
+| CTE | 3+ steps or repeated logic |
+
+## Reference Card — Quick Review Before Class
+
+| Section | Core idea | Before-class action |
+|---|---|---|
+| A | First major concept | Read analogy + definition aloud |
+| B | Second concept | Sketch one tiny example |
+| C | Third concept | Name one common mistake |
+| D | Fourth concept | Link to prior session tool |
+| E | Fifth concept | Complete practice #1 |
+| F | Extension | Optional stretch |
+| G | Extension | Optional stretch |
+| H | Extension | Optional stretch |
+
+**Active recall:** Close the doc; write one-line definitions for A, C, E from memory; reopen and check.
+
+**Tool checklist:** Install Jupyter, MySQL Workbench, or Excel/Sheets per session overview.
+
+**Dataset checklist:** Download Superstore or open shared workbook before class.
+
+**Peer prep:** Bring one business question for a dataset in your domain.
+
+**Time box:** 25–35 minutes on this pre-read; finish at least three practice exercises.
+
 ## Practice Exercises
 
 **1. Pattern Recognition**  
@@ -279,6 +405,47 @@ A LEFT JOIN of `orders` onto `customers` returns `NULL` values in the `name` and
 **5. Planning Ahead**  
 You have three tables: `orders(order_id, customer_id, amount, date)`, `customers(customer_id, name, city)`, `products(product_id, order_id, category)`. Plan — in plain steps — a query that answers: "Which cities generated the most revenue in Q1 2024, from orders containing the Electronics category, showing only cities above ₹2 lakh total?" Name every clause you would use and in what order.
 
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
+
+**Study note:** Review sections A–H; complete at least three practice exercises before class.
+
 ---
 
-> ✅ **You're done!** You now have the full analyst SQL toolkit — joins, subqueries, `HAVING`, and reusable patterns that answer real business questions. These skills will carry directly into **EDA & Visual Storytelling**, where you will use SQL and Pandas together to explore data and then turn your findings into clear, compelling visuals.
+> ✅ **You're done!** You can write analyst-grade SQL with JOINs, subqueries, windows, and CTEs in MySQL Workbench. Next up: **Data Analysis with Spreadsheets**.

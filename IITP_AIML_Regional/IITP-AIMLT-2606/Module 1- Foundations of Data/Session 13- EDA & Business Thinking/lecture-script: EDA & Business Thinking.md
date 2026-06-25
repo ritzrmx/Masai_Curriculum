@@ -32,7 +32,7 @@
 
 ---
 
-## Opening (5 min)
+## SEGMENT 1: Opening (5 min)
 
 **Hook:** Show two versions of the same chart on screen:
 - Version A: A plain default matplotlib bar chart, no labels, no title, default blue
@@ -52,7 +52,7 @@
 
 ---
 
-## Concept Block 1: The EDA Framework — 4 Questions (10 min)
+## SEGMENT 1: The EDA Framework — 4 Questions (10 min)
 
 ### The Four EDA Questions (write on board)
 
@@ -85,11 +85,14 @@ Always write the question first: *"Which product category has the highest profit
 
 ---
 
-## Practical Block 1: Dataset Audit + Distributions (15 min)
+## SEGMENT 5: Dataset Audit + Distributions (15 min)
 
 ### Dataset — Superstore Sales (use a realistic subset)
 
+**Show**:
+
 ```python
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -110,9 +113,32 @@ print("\nColumn types:")
 print(df.dtypes)
 print("\nNull counts:")
 print(df.isnull().sum())
+
 ```
 
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
+
+**Show**:
+
 ```python
+
 # --- Question 1: Shape audit ---
 print("=== SHAPE ===")
 print(f"Rows: {len(df):,}")
@@ -124,7 +150,27 @@ print(f"Unique products: {df['Product ID'].nunique():,}")
 # --- Question 2: Numeric distributions ---
 print("\n=== DISTRIBUTIONS ===")
 print(df[['Sales', 'Profit', 'Discount', 'Quantity']].describe().round(2))
+
 ```
+
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
 
 **Live walk-through:** Look at the `describe()` output together. Call out:
 - Is `Profit` min negative? → Yes — some items sold at a loss. This is a finding.
@@ -133,7 +179,7 @@ print(df[['Sales', 'Profit', 'Discount', 'Quantity']].describe().round(2))
 
 ---
 
-## Concept Block 2: Chart Types — Match the Chart to the Question (10 min)
+## SEGMENT 2: Chart Types — Match the Chart to the Question (10 min)
 
 ### The Decision Framework
 
@@ -155,9 +201,12 @@ print(df[['Sales', 'Profit', 'Discount', 'Quantity']].describe().round(2))
 
 ---
 
-## Practical Block 2: Histograms, Boxplots, Bar Charts (15 min)
+## SEGMENT 6: Histograms, Boxplots, Bar Charts (15 min)
+
+**Show**:
 
 ```python
+
 fig, axes = plt.subplots(2, 2, figsize=(12, 9))
 
 # --- 1. Histogram: Sales distribution ---
@@ -199,19 +248,39 @@ axes[1, 1].set_xlabel('Avg Profit ($)')
 plt.suptitle('Superstore EDA — Overview', fontsize=14, y=1.02)
 plt.tight_layout()
 plt.show()
+
 ```
+
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
 
 **After displaying:** Walk through each panel. Point to the loss-making sub-categories. *"If you were the VP of Sales, which one sub-category would you investigate immediately?"*
 
 ---
 
-## BREAK (10 min)
+## SEGMENT 8: BREAK (10 min)
 
 *Ask students to look at the box plot for Furniture profit — there are negative outliers. Where do they come from? They will investigate after the break.*
 
 ---
 
-## Concept Block 3: Relationships — Correlation, Scatter, Heatmap (10 min)
+## SEGMENT 3: Relationships — Correlation, Scatter, Heatmap (10 min)
 
 ### Correlation — What It Measures
 
@@ -234,9 +303,12 @@ A correlation matrix computes r for every pair of numeric columns — displayed 
 
 ---
 
-## Practical Block 3: Scatter, Correlation, Heatmap (15 min)
+## SEGMENT 7: Scatter, Correlation, Heatmap (15 min)
+
+**Show**:
 
 ```python
+
 import numpy as np
 
 # --- Q: Does higher discount always mean lower profit? ---
@@ -251,9 +323,32 @@ plt.ylabel('Profit ($)')
 plt.title('Discount vs Profit — Coloured by Sales Volume\nHigher discount = more losses')
 print("Correlation (Discount vs Profit):", df['Discount'].corr(df['Profit']).round(3))
 plt.show()
+
 ```
 
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
+
+**Show**:
+
 ```python
+
 # --- Correlation matrix of numeric columns ---
 numeric_cols = ['Sales', 'Profit', 'Discount', 'Quantity']
 corr_matrix = df[numeric_cols].corr()
@@ -270,9 +365,32 @@ plt.show()
 print("Interpretation:")
 print("Sales vs Profit:", corr_matrix.loc['Sales','Profit'].round(3), "(positive but weak)")
 print("Discount vs Profit:", corr_matrix.loc['Discount','Profit'].round(3), "(negative!)")
+
 ```
 
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
+
+**Show**:
+
 ```python
+
 # --- Group-level analysis: Profit margin by segment and category ---
 pivot = df.pivot_table(
     values='Profit',
@@ -286,11 +404,31 @@ sns.heatmap(pivot, annot=True, fmt='.1f', cmap='RdYlGn', center=0)
 plt.title('Average Profit by Segment × Category')
 plt.tight_layout()
 plt.show()
+
 ```
+
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
 
 ---
 
-## Concept Block 4: Storytelling with Data (10 min)
+## SEGMENT 4: Storytelling with Data (10 min)
 
 ### What Makes a Chart "Tell a Story"?
 
@@ -320,7 +458,7 @@ Every chart you build should be able to complete this pipeline. If it can't, the
 
 ---
 
-## Practical Block 4: The 4-Chart Story Notebook (10 min)
+## SEGMENT 8: The 4-Chart Story Notebook (10 min)
 
 **Task:** Build the final notebook. Assign to pairs. One person narrates the finding, one writes the code.
 
@@ -329,7 +467,10 @@ Every chart you build should be able to complete this pipeline. If it can't, the
 
 **Chart 1:** Profit trend over time (line chart — is profit declining year over year?)
 
+**Show**:
+
 ```python
+
 df['Order Date'] = pd.to_datetime(df['Order Date'])
 df['Year'] = df['Order Date'].dt.year
 yearly = df.groupby('Year')[['Sales','Profit']].sum()
@@ -344,7 +485,27 @@ ax.set_ylabel('Total Profit ($)')
 ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'${x/1000:.0f}K'))
 plt.tight_layout()
 plt.show()
+
 ```
+
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
 
 **Charts 2-4:** Sub-category loss-makers, discount vs profit scatter (already built), and a "fix" recommendation chart showing profit if Furniture discounts were capped.
 
@@ -352,7 +513,7 @@ plt.show()
 
 ---
 
-## Summary & Wrap-Up (5 min)
+## SEGMENT 10: Summary & Wrap-Up (5 min)
 
 **The EDA framework:**
 1. Shape → Distribution → Relationship → Change over time
@@ -391,3 +552,207 @@ plt.show()
 - **Seaborn import:** Requires installation — `pip install seaborn`. Confirm this before the session. Seaborn is importable in most Jupyter environments.
 - **Pacing:** Practical 4 is intentionally open-ended. If time is short, reduce to 2 charts in the "story" section and treat it as a take-home project.
 - **Common student mistake:** Building 20 charts with no narrative. Teach the principle: "One insight per chart. One chart per page of your story. If your chart doesn't have an insight, either the chart is wrong or the data doesn't have the answer you expected — that's also a valid finding."
+
+
+---
+
+## SEGMENT 9: Instructor Deep Dive (10 min)
+
+Review the session learning contract. Pair-share: one student states a finding; partner names the chart type and KPI.
+
+| Checkpoint | Student can… |
+|---|---|
+| 1 | State the business question before plotting |
+| 2 | Pick chart type from the four EDA questions |
+| 3 | Label axes and title with the finding |
+| 4 | Give one recommendation without jargon |
+
+---
+
+## SEGMENT 11: Lab Extensions (optional homework)
+
+**Extension A:** Repeat the main analysis on a different category column.
+
+**Extension B:** Export one chart as PNG and write three bullet insights for a non-technical manager.
+
+**Extension C:** Compare your manual slope estimate to `np.polyfit` output — explain the difference in one sentence.
+
+---
+
+## Additional Demo — Superstore Shape Audit
+
+**Show**:
+
+```python
+
+import pandas as pd
+df = pd.read_csv('superstore.csv')
+print('Rows:', len(df))
+print('Date range:', df['Order Date'].min(), '→', df['Order Date'].max())
+print('Nulls:', df.isnull().sum().sum())
+print('Negative profit rows:', (df['Profit'] < 0).sum())
+
+```
+
+Output:
+
+```
+
+Rows: 9994
+Date range: 1/1/2014 → 12/30/2017
+Nulls: 0
+Negative profit rows: 1877
+
+```
+
+**Break it down**:
+
+- Shape audit answers EDA question 1 before any chart
+
+- Negative profit count is an early business finding
+
+- Zero nulls means cleaning was done — note in presentation
+
+**Ask**: What percentage of orders lose money?
+
+**Common mistake**: Skipping shape audit and jumping to plots
+
+**Student try**: Compute profit margin column and describe its distribution.
+**Show**:
+
+```python
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 9))
+axes[0,0].hist(df['Sales'], bins=50, color='steelblue')
+axes[0,1].boxplot([df[df.Category==c].Profit for c in df.Category.unique()], labels=df.Category.unique())
+region_sales = df.groupby('Region')['Sales'].sum()
+axes[1,0].bar(region_sales.index, region_sales.values)
+df.groupby('Sub-Category')['Profit'].mean().sort_values().plot(kind='barh', ax=axes[1,1])
+plt.suptitle('Superstore EDA — Four Questions')
+plt.tight_layout()
+plt.show()
+
+```
+
+Output:
+
+```
+
+(2×2 panel figure displayed)
+
+```
+
+**Break it down**:
+
+- Panel 1 DISTRIBUTION — Sales histogram
+
+- Panel 2 DISTRIBUTION — Profit box by category
+
+- Panel 3 CHANGE/COMPARE — Sales by region
+
+- Panel 4 RELATIONSHIP — Avg profit by sub-category
+
+**Ask**: Which panel would you show the VP first?
+
+**Common mistake**: Four panels with no narrative order — audience gets lost
+
+**Student try**: Add a red reference line at Profit=0 on the box plot.
+## SEGMENT 12: Correlation Deep Dive (10 min)
+
+**Show**:
+
+```python
+
+numeric = ['Sales','Profit','Discount','Quantity']
+print(df[numeric].corr().round(2))
+sns.heatmap(df[numeric].corr(), annot=True, cmap='RdBu_r', center=0)
+plt.title('Superstore Numeric Correlations')
+plt.show()
+
+```
+
+Output:
+
+```
+
+           Sales  Profit  Discount  Quantity
+Sales        1.00    0.48     -0.03      0.23
+Profit       0.48    1.00     -0.22      0.07
+Discount    -0.03   -0.22      1.00     -0.02
+Quantity     0.23    0.07     -0.02      1.00
+
+```
+
+**Break it down**:
+
+- Sales–Profit moderate positive link
+
+- Discount–Profit negative — key business finding
+
+- Heatmap shows all pairwise linear relationships at once
+
+**Ask**: Which pair would you investigate first for a pricing policy?
+
+**Common mistake**: Claiming causation from correlation alone
+
+**Student try**: Filter to Furniture only and recompute the discount–profit correlation.
+
+---
+
+## SEGMENT 13: Story Notebook Review (10 min)
+
+**Pair activity:** Partner A presents Chart 1 (profit trend); Partner B asks one clarifying question.
+
+| Chart | Must include |
+|---|---|
+| 1 | Title with finding + year range |
+| 2 | Category or region comparison |
+| 3 | Scatter with labelled axes |
+| 4 | Recommendation bullet below figure |
+
+**Instructor circulate:** Check every notebook has four EDA questions answered in markdown cells above each chart.
+
+---
+
+## SEGMENT 14: Business Recommendation Writing (10 min)
+
+**Template for each chart:**
+
+```
+FINDING: [number + direction]
+CHART: [type + segment]
+RECOMMENDATION: [action verb + owner]
+```
+
+Example: *FINDING: Furniture avg profit −₹120 per order. CHART: Horizontal bar by sub-category. RECOMMENDATION: Cap Furniture discounts at 20% — Sales VP review by Friday.*
+
+| Weak recommendation | Strong recommendation |
+|---|---|
+| "Look into Furniture" | "Cap discounts at 20% for Furniture sub-categories" |
+| "Data is interesting" | "West region drove 60% of Q3 profit decline" |
+
+---
+## SEGMENT 12: Facilitation & Differentiation (10 min)
+
+| Moment | Fast pairs | Struggling pairs |
+|---|---|---|
+| After demo 1 | Add second filter or chart variant | Complete first demo with instructor |
+| After demo 2 | Explain output to neighbour | Copy instructor solution, then modify one line |
+| Final practical | Present one finding in 30 sec | Submit one chart or query with title |
+
+**Board discipline:** Write the business question before every code block. Erase only after the recommendation is stated.
+
+**Time saver:** If running long, demo segments 1–3 live; assign segment 4 as paired homework with rubric on slide.
+
+---
+## SEGMENT 13: Exit Ticket (5 min)
+
+Each student submits (paper or chat):
+
+1. One sentence — what the data showed
+2. One sentence — recommended action
+3. One common mistake they almost made today
+
+**Instructor collects 3 responses aloud** — reinforces learning contract without extending time.
+
+---

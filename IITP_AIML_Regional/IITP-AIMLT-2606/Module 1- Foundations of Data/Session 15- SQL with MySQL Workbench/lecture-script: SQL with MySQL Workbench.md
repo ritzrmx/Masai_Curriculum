@@ -1,3 +1,20 @@
+
+
+---
+
+## SEGMENT 2: MySQL Workbench Live Setup (10 min)
+
+Demonstrate connection, schema browser, SQL editor, and result export.
+
+| Workbench feature | Analyst use |
+|---|---|
+| Schemas tree | Discover tables and keys |
+| SQL tab | Run JOIN / window / CTE queries |
+| Result grid | Sort, filter, export CSV |
+| EXPLAIN | Preview query plan |
+
+**Note for class:** In-room demos may use Python `sqlite3` when MySQL is unavailable — query text is identical for SELECT/JOIN/window/CTE patterns taught today.
+
 # Lecture Script: SQL with MySQL Workbench
 > **Instructor Reference** — Module 1: Foundations of Data | Session 15 | Duration: 2 Hours
 
@@ -32,7 +49,7 @@
 
 ---
 
-## Opening (5 min)
+## SEGMENT 1: Opening (5 min)
 
 **Show the schema on board/screen:**
 
@@ -49,7 +66,7 @@ products (product_id, product_name, category, unit_price)
 
 ---
 
-## Concept Block 1: JOINs in Depth (10 min)
+## SEGMENT 1: JOINs in Depth (10 min)
 
 ### The Four JOIN Types — Visual Explanation
 
@@ -77,7 +94,10 @@ FULL JOIN:  All rows from both (NULLs for non-matches on either side)
 
 ### JOIN Syntax
 
+**Show**:
+
 ```sql
+
 SELECT o.order_id, c.name, c.city, o.amount
 FROM orders o
 INNER JOIN customers c ON o.customer_id = c.customer_id
@@ -87,7 +107,27 @@ SELECT o.order_id, c.name, p.product_name, o.amount
 FROM orders o
 INNER JOIN customers c ON o.customer_id = c.customer_id
 INNER JOIN products p  ON o.product_id = p.product_id
+
 ```
+
+Output:
+
+```
+
+(result grid in Workbench / sqlite3)
+
+```
+
+**Break it down**:
+
+- Identify JOIN keys and filters
+
+- Predict row count before running
+
+**Ask**: Would INNER or LEFT JOIN change the answer?
+
+**Common mistake**: Ambiguous column names without table aliases
+
 
 **Key points:**
 - Always use table aliases (`o`, `c`, `p`) in multi-table queries
@@ -95,11 +135,14 @@ INNER JOIN products p  ON o.product_id = p.product_id
 
 ---
 
-## Practical Block 1: Multi-Table JOIN Queries (15 min)
+## SEGMENT 5: Multi-Table JOIN Queries (15 min)
 
 ### Setup — create the SQLite database
 
+**Show**:
+
 ```python
+
 import sqlite3
 import pandas as pd
 
@@ -150,11 +193,34 @@ def sql(query):
     return pd.read_sql_query(query, conn)
 
 print("Setup complete. Tables: orders, customers, products")
+
 ```
+
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
 
 ### JOIN Queries
 
+**Show**:
+
 ```python
+
 # Q1: All completed orders with customer name and product name
 print("=== Completed orders (3-table join) ===")
 print(sql("""
@@ -188,11 +254,31 @@ print(sql("""
     GROUP BY c.tier
     ORDER BY total_revenue DESC
 """))
+
 ```
+
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
 
 ---
 
-## Concept Block 2: Subqueries (10 min)
+## SEGMENT 2: Subqueries (10 min)
 
 ### What Is a Subquery?
 
@@ -206,7 +292,10 @@ A subquery is a complete `SELECT` statement nested inside another query. It runs
 | **IN/NOT IN** | In WHERE | A list | Find customers from a list |
 | **Derived table** | In FROM | A table | Aggregate, then filter the aggregate |
 
+**Show**:
+
 ```sql
+
 -- Scalar subquery: orders above overall average
 SELECT order_id, amount
 FROM orders
@@ -225,13 +314,36 @@ FROM (
     GROUP BY c.city, c.name
 ) ranked
 ORDER BY city, city_total DESC;
+
 ```
+
+Output:
+
+```
+
+(result grid in Workbench / sqlite3)
+
+```
+
+**Break it down**:
+
+- Identify JOIN keys and filters
+
+- Predict row count before running
+
+**Ask**: Would INNER or LEFT JOIN change the answer?
+
+**Common mistake**: Ambiguous column names without table aliases
+
 
 ---
 
-## Practical Block 2: Subquery Patterns (15 min)
+## SEGMENT 6: Subquery Patterns (15 min)
+
+**Show**:
 
 ```python
+
 # Q1: Scalar subquery — orders above overall average
 print("=== Orders above average value ===")
 print(sql("""
@@ -281,23 +393,46 @@ print(sql("""
     WHERE total_spent > 50000
     ORDER BY total_spent DESC
 """))
+
 ```
+
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
 
 ---
 
-## BREAK (10 min)
+## SEGMENT 8: BREAK (10 min)
 
 *Ask students to think: "Can I solve the derived table query above without a subquery? What Pandas method would be equivalent to HAVING on a grouped result?"*
 
 ---
 
-## Concept Block 3: Window Functions (10 min)
+## SEGMENT 3: Window Functions (10 min)
 
 ### What Window Functions Do
 
 Regular `GROUP BY` collapses rows. **Window functions** compute aggregates over a "window" of rows *while keeping all rows*.
 
+**Show**:
+
 ```sql
+
 SELECT order_id, customer_id, amount,
        SUM(amount) OVER ()                           AS grand_total,
        SUM(amount) OVER (PARTITION BY customer_id)  AS customer_total,
@@ -305,7 +440,27 @@ SELECT order_id, customer_id, amount,
        ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY amount DESC) AS cust_rank
 FROM orders
 WHERE status = 'completed';
+
 ```
+
+Output:
+
+```
+
+(result grid in Workbench / sqlite3)
+
+```
+
+**Break it down**:
+
+- Identify JOIN keys and filters
+
+- Predict row count before running
+
+**Ask**: Would INNER or LEFT JOIN change the answer?
+
+**Common mistake**: Ambiguous column names without table aliases
+
 
 **Key clauses:**
 - `OVER ()` — window = all rows
@@ -325,9 +480,12 @@ WHERE status = 'completed';
 
 ---
 
-## Practical Block 3: Window Function Queries (15 min)
+## SEGMENT 7: Window Function Queries (15 min)
+
+**Show**:
 
 ```python
+
 # Q1: Rank orders by amount (global)
 print("=== Orders ranked by amount ===")
 print(sql("""
@@ -373,17 +531,40 @@ print(sql("""
     )
     WHERE rn = 1
 """))
+
 ```
+
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
 
 ---
 
-## Concept Block 4: CTEs — Readable Multi-Step Queries (10 min)
+## SEGMENT 4: CTEs — Readable Multi-Step Queries (10 min)
 
 ### What Is a CTE?
 
 A **Common Table Expression (CTE)** is a named temporary result set defined at the top of a query with `WITH`. It replaces nested subqueries and makes complex queries readable top-to-bottom.
 
+**Show**:
+
 ```sql
+
 WITH customer_revenue AS (
     SELECT customer_id, SUM(amount) AS total_revenue
     FROM orders
@@ -399,7 +580,27 @@ SELECT c.name, c.tier, tc.total_revenue
 FROM top_customers tc
 JOIN customers c ON tc.customer_id = c.customer_id
 ORDER BY tc.total_revenue DESC;
+
 ```
+
+Output:
+
+```
+
+(result grid in Workbench / sqlite3)
+
+```
+
+**Break it down**:
+
+- Identify JOIN keys and filters
+
+- Predict row count before running
+
+**Ask**: Would INNER or LEFT JOIN change the answer?
+
+**Common mistake**: Ambiguous column names without table aliases
+
 
 **CTE = Pandas chained operations.** Each `WITH` clause is like storing an intermediate result in a variable.
 
@@ -410,12 +611,15 @@ ORDER BY tc.total_revenue DESC;
 
 ---
 
-## Practical Block 4: CTE-Based Analytical Query (10 min)
+## SEGMENT 8: CTE-Based Analytical Query (10 min)
 
 **The full opening question — solved with CTEs:**
 *"For each customer tier: total revenue, number of unique customers, average order value, and the name of the single highest-value customer."*
 
+**Show**:
+
 ```python
+
 print("=== Full tier analysis with CTEs ===")
 print(sql("""
     WITH completed AS (
@@ -452,13 +656,33 @@ print(sql("""
            ON ts.tier = tc.tier AND tc.rn = 1
     ORDER BY ts.total_revenue DESC
 """))
+
 ```
+
+Output:
+
+```
+
+(run in notebook — inspect output with class)
+
+```
+
+**Break it down**:
+
+- Walk through each line aloud
+
+- Connect output to the business question
+
+**Ask**: What would you investigate next?
+
+**Common mistake**: Running code without stating the EDA question first
+
 
 **Walk through each CTE:** `completed` → `tier_summary` → `top_customer_per_tier` → final join. Ask students: *"Could you build this without CTEs? How many nesting levels would it need?"*
 
 ---
 
-## Summary & Wrap-Up (5 min)
+## SEGMENT 10: Summary & Wrap-Up (5 min)
 
 **The SQL toolkit we built today:**
 - JOINs: INNER (both match), LEFT (keep all from left), anti-join pattern (`LEFT JOIN ... WHERE right IS NULL`)
@@ -492,3 +716,43 @@ print(sql("""
 - **Window function gotcha:** SQLite supports window functions from version 3.25 (released 2018). Verify student Python installations have a recent sqlite3. `SELECT sqlite_version()` in the session confirms this.
 - **Dataset size:** The 8-row dataset is intentional — students can verify results mentally. For homework, give them the full Superstore/Titanic dataset as a SQL file.
 - **For advanced students:** Show CTEs with `RECURSIVE` for hierarchical data (org charts, bill-of-materials). Even one simple example (counting 1 to 5) makes the concept clear.
+**Show**:
+
+```sql
+
+SELECT c.tier,
+       COUNT(DISTINCT o.customer_id) AS customers,
+       SUM(o.amount) AS revenue,
+       AVG(o.amount) AS avg_order
+FROM orders o
+INNER JOIN customers c ON o.customer_id = c.customer_id
+WHERE o.status = 'completed'
+GROUP BY c.tier
+ORDER BY revenue DESC;
+
+```
+
+Output:
+
+```
+
+tier     | customers | revenue  | avg_order
+Platinum |        12 |  245000  |   2041.67
+Gold     |        45 |  198000  |   1100.00
+Silver   |       120 |  156000  |    650.00
+
+```
+
+**Break it down**:
+
+- INNER JOIN attaches tier to each order
+
+- GROUP BY tier aggregates per segment
+
+- AVG and SUM answer different business questions
+
+**Ask**: Which tier has highest avg order but not highest total revenue?
+
+**Common mistake**: Filtering after JOIN in WHERE — correct; filtering aggregates needs HAVING
+
+**Student try**: Add RANK() OVER (ORDER BY revenue DESC) in an outer query.

@@ -1,4 +1,31 @@
-# Lecture Script: NumPy — Numerical Foundation
+#!/usr/bin/env python3
+"""Generate expanded lecture-script and pre-read files for Sessions 9-12."""
+
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parent / "IITP-AIMLT-2606/Module 1- Foundations of Data"
+
+# ---------------------------------------------------------------------------
+# Shared helpers
+# ---------------------------------------------------------------------------
+
+def expected(title: str, output: str) -> str:
+    return f"\n**Expected output:**\n```\n{output.strip()}\n```\n"
+
+def troubleshoot(items: list[tuple[str, str]]) -> str:
+    lines = ["\n### Troubleshooting\n"]
+    for err, fix in items:
+        lines.append(f"**Error:** `{err}`\n→ **Fix:** {fix}\n")
+    return "\n".join(lines)
+
+def extension(title: str, body: str) -> str:
+    return f"\n### Extension — {title}\n\n{body.strip()}\n"
+
+# ---------------------------------------------------------------------------
+# SESSION 9 — NumPy
+# ---------------------------------------------------------------------------
+
+S9_LECTURE = r'''# Lecture Script: NumPy — Numerical Foundation
 > **Instructor Reference** — Module 1: Foundations of Data | Session 9 | Duration: 2 Hours
 
 ---
@@ -772,3 +799,44 @@ Tiers: ['Standard' 'High' 'High' 'Standard' 'Standard' 'High' 'Standard' 'High']
 ```
 
 **Teaching note:** Parallel arrays (salary + department) preview how Pandas keeps columns aligned by index — one row, one employee, all fields move together.
+'''
+
+# Due to script size limits, remaining sessions loaded from companion module
+from expand_sessions_9_12_part2 import (  # noqa: E402
+    S9_PREREAD, S10_LECTURE, S10_PREREAD,
+    S11_LECTURE, S11_PREREAD, S12_LECTURE, S12_PREREAD,
+)
+
+FILES = [
+    ("Session 9- NumPy- Numerical Foundation/lecture-script: NumPy - Numerical Foundation.md", S9_LECTURE),
+    ("Session 9- NumPy- Numerical Foundation/pre-read: NumPy - Numerical Foundation.md", S9_PREREAD),
+    ("Session 10- Pandas- Loading, Inspection & Filtering/lecture-script: Pandas - Loading, Inspection & Filtering.md", S10_LECTURE),
+    ("Session 10- Pandas- Loading, Inspection & Filtering/pre-read: Pandas - Loading, Inspection & Filtering.md", S10_PREREAD),
+    ("Session 11- Pandas- Aggregation, Groupby & Merging/lecture-script: Pandas - Aggregation, Groupby & Merging.md", S11_LECTURE),
+    ("Session 11- Pandas- Aggregation, Groupby & Merging/pre-read: Pandas - Aggregation, Groupby & Merging.md", S11_PREREAD),
+    ("Session 12- Data Visualization/lecture-script: Data Visualization.md", S12_LECTURE),
+    ("Session 12- Data Visualization/pre-read: Data Visualization.md", S12_PREREAD),
+]
+
+def main():
+    results = []
+    for rel, content in FILES:
+        path = BASE / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content.strip() + "\n", encoding="utf-8")
+        lines = content.strip().count("\n") + 1
+        kind = "lecture" if "lecture-script" in rel else "pre-read"
+        min_lines = 750 if kind == "lecture" else 450
+        ok = "OK" if lines >= min_lines else "SHORT"
+        results.append((rel, lines, min_lines, ok))
+    print(f"{'File':<70} {'Lines':>6} {'Min':>6} {'Status':>6}")
+    print("-" * 92)
+    for rel, lines, min_lines, ok in results:
+        print(f"{Path(rel).name:<70} {lines:>6} {min_lines:>6} {ok:>6}")
+    short = [r for r in results if r[3] == "SHORT"]
+    if short:
+        raise SystemExit(f"FAIL: {len(short)} file(s) below minimum line count")
+    print("\nAll 8 files written and verified.")
+
+if __name__ == "__main__":
+    main()
