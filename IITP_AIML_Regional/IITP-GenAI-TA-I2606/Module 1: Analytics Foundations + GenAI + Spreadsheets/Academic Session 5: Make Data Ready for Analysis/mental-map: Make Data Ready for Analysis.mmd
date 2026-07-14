@@ -1,0 +1,52 @@
+flowchart LR
+
+START["<b>Module 1</b><br/><i>Analytics Foundations</i>"]
+
+subgraph foundation[" WHERE WE ARE "]
+direction TB
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 1 — Analytics Foundations,<br/>GenAI &amp; Spreadsheets</i><br/>&nbsp;<br/><b>Covered so far:</b><br/>S1 · Data types · averages · outliers<br/>S2 · Workflow · metrics vs KPIs<br/>S3 · GenAI · prompting · checking<br/>S4 · Loading · the 5 issues · duplicates · sort &amp; filter"]
+    CURSES["<b>CURRENT SESSION 5</b><br/><b>Make Data Ready for Analysis</b><br/>&nbsp;<br/><i>The shift:</i> from <b>finding</b> what is broken<br/><i>to</i> <b>fixing it — and proving it is fixed</b><br/>&nbsp;<br/>consistent types · standardise text, numbers, dates<br/>validation checks · the analysis-ready dataset"]
+end
+
+subgraph outcome[" OUTCOME OF THIS SESSION "]
+direction TB
+    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Turn a merely 'not-broken' file into an <b>analysis-ready</b> one:<br/>every column one type, every entry standardised,<br/>and a <b>validation row that PROVES it</b> — not a hope that it is"]
+end
+
+subgraph value[" WHY IT MATTERS "]
+direction TB
+    CVAL["<b>Course Value</b><br/>Session 6 formulas and Session 7 pivots<br/>simply will not work on unstandardised data<br/>This is the gate to everything after it"]
+    RVAL["<b>Real-Life Value</b><br/>Hand over a dataset a colleague can trust<br/>without re-checking every column themselves"]
+end
+
+subgraph future[" WHAT COMES NEXT "]
+direction TB
+    U0["<b>Next Session (S6)</b><br/>Formulas for Analysis<br/><i>finally: compute something</i>"]
+    U1["<b>Then (S7)</b><br/>Pivot Tables and Quick Insights<br/><i>closes Module 1</i>"]
+    U2["<b>Upcoming Modules</b><br/>SQL · Tableau · Python + GenAI<br/><i>clean data is the entry ticket</i>"]
+end
+
+START ==>|" you are here "| CURMOD
+CURMOD ==>|" progress "| CURSES
+CURSES ==>|" you get "| OUT
+OUT ==>|" course "| CVAL
+OUT ==>|" real life "| RVAL
+CURSES ==>|" next up "| U0
+U0 -.->|" then "| U1
+U1 -.->|" ahead "| U2
+
+classDef startBox fill:#F7FAFC,stroke:#4A5568,stroke-width:2px,color:#1A202C
+classDef curModBox fill:#FFF8E6,stroke:#B7791F,stroke-width:2px,color:#1A202C
+classDef curSessBox fill:#E6FFFA,stroke:#0D9488,stroke-width:3px,color:#1A202C
+classDef outBox fill:#FEF2F2,stroke:#DC2626,stroke-width:3px,color:#1A202C
+classDef valueBox fill:#F3E8FF,stroke:#7C3AED,stroke-width:2px,color:#1A202C
+classDef futureBox fill:#ECFDF5,stroke:#047857,stroke-width:2px,color:#1A202C
+
+class START startBox
+class CURMOD curModBox
+class CURSES curSessBox
+class OUT outBox
+class CVAL,RVAL valueBox
+class U0,U1,U2 futureBox
+
+linkStyle default stroke-width:2px

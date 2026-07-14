@@ -1,0 +1,52 @@
+flowchart LR
+
+START["<b>Module 1</b><br/><i>Analytics Foundations</i>"]
+
+subgraph foundation[" WHERE WE ARE "]
+direction TB
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 1 — Analytics Foundations,<br/>GenAI &amp; Spreadsheets</i><br/>&nbsp;<br/><b>Covered so far:</b><br/>S1 · Data types · mean · median · outliers<br/>S2 · Workflow · decomposition · metrics vs KPIs<br/>S3 · GenAI · prompting · checking outputs"]
+    CURSES["<b>CURRENT SESSION 4</b><br/><b>Clean Up the Data</b><br/>&nbsp;<br/><i>The shift:</i> from talking about data<br/><i>to</i> <b>touching it — and finding it filthy</b><br/>&nbsp;<br/>load a dataset · spot missing values, duplicates<br/>and broken formats · sort · filter · de-duplicate"]
+end
+
+subgraph outcome[" OUTCOME OF THIS SESSION "]
+direction TB
+    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Open a messy real-world export, run a <b>5-point audit</b><br/>to find what is broken, remove duplicates without<br/>destroying real rows, and <b>say why every row you deleted</b><br/>deserved to go"]
+end
+
+subgraph value[" WHY IT MATTERS "]
+direction TB
+    CVAL["<b>Course Value</b><br/>Everything downstream — SQL, Tableau, pandas —<br/>assumes clean data. Garbage in, garbage out,<br/>no matter how good the tool"]
+    RVAL["<b>Real-Life Value</b><br/>Analysts spend most of their working life here<br/>The dirty secret of the job: cleaning IS the job"]
+end
+
+subgraph future[" WHAT COMES NEXT "]
+direction TB
+    U0["<b>Next Session (S5)</b><br/>Make Data Ready for Analysis<br/><i>from 'not broken' to 'actually usable'</i>"]
+    U1["<b>Later in Module 1</b><br/>Formulas for Analysis<br/>Pivot Tables and Quick Insights"]
+    U2["<b>Upcoming Modules</b><br/>SQL · Tableau · Python + GenAI<br/><i>same cleaning problems, bigger data</i>"]
+end
+
+START ==>|" you are here "| CURMOD
+CURMOD ==>|" progress "| CURSES
+CURSES ==>|" you get "| OUT
+OUT ==>|" course "| CVAL
+OUT ==>|" real life "| RVAL
+CURSES ==>|" next up "| U0
+U0 -.->|" then "| U1
+U1 -.->|" ahead "| U2
+
+classDef startBox fill:#F7FAFC,stroke:#4A5568,stroke-width:2px,color:#1A202C
+classDef curModBox fill:#FFF8E6,stroke:#B7791F,stroke-width:2px,color:#1A202C
+classDef curSessBox fill:#E6FFFA,stroke:#0D9488,stroke-width:3px,color:#1A202C
+classDef outBox fill:#FEF2F2,stroke:#DC2626,stroke-width:3px,color:#1A202C
+classDef valueBox fill:#F3E8FF,stroke:#7C3AED,stroke-width:2px,color:#1A202C
+classDef futureBox fill:#ECFDF5,stroke:#047857,stroke-width:2px,color:#1A202C
+
+class START startBox
+class CURMOD curModBox
+class CURSES curSessBox
+class OUT outBox
+class CVAL,RVAL valueBox
+class U0,U1,U2 futureBox
+
+linkStyle default stroke-width:2px

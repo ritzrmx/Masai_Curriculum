@@ -1,0 +1,52 @@
+flowchart LR
+
+START["<b>Module 1</b><br/><i>Analytics Foundations</i>"]
+
+subgraph foundation[" WHERE WE ARE "]
+direction TB
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 1 — Analytics Foundations,<br/>GenAI &amp; Spreadsheets</i><br/>&nbsp;<br/><b>Covered so far:</b><br/>S1 · Averages · outliers &nbsp;·&nbsp; S2 · Workflow · KPIs<br/>S3 · GenAI · prompting · checking<br/>S4 · Finding what is broken &nbsp;·&nbsp; S5 · Fixing · validation<br/>S6 · Formulas · SUMIF · calculated columns"]
+    CURSES["<b>CURRENT SESSION 7 — closes Module 1</b><br/><b>Pivot Tables and Quick Insights</b><br/>&nbsp;<br/><i>The shift:</i> from <b>one formula per question</b><br/><i>to</i> <b>every answer at once, in four clicks</b><br/>&nbsp;<br/>build a pivot · rows · columns · values<br/>compare categories · turn a table into an insight"]
+end
+
+subgraph outcome[" OUTCOME OF THIS SESSION "]
+direction TB
+    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Build a pivot in four clicks, cross-tabulate two dimensions,<br/>and <b>write the one sentence a manager can act on</b> —<br/>closing the loop back to the workflow from Session 2"]
+end
+
+subgraph value[" WHY IT MATTERS "]
+direction TB
+    CVAL["<b>Course Value</b><br/>A pivot IS a GROUP BY with a mouse<br/>Module 2 SQL and Module 4 pandas<br/>are this exact idea, typed instead of clicked"]
+    RVAL["<b>Real-Life Value</b><br/>The most-used analysis tool on earth<br/>Most business decisions still get made<br/>from a pivot table someone built in 5 minutes"]
+end
+
+subgraph future[" WHAT COMES NEXT "]
+direction TB
+    U0["<b>Next Session (S8)</b><br/>Statistics: Spread, Variability, Outliers<br/><i>opens Module 2</i>"]
+    U1["<b>Then (S9–S16)</b><br/>SQL for Data Analysis<br/><i>SELECT · WHERE · GROUP BY · JOIN</i>"]
+    U2["<b>Upcoming Modules</b><br/>Tableau · Python + GenAI<br/><i>same ideas, bigger canvas</i>"]
+end
+
+START ==>|" you are here "| CURMOD
+CURMOD ==>|" progress "| CURSES
+CURSES ==>|" you get "| OUT
+OUT ==>|" course "| CVAL
+OUT ==>|" real life "| RVAL
+CURSES ==>|" next up "| U0
+U0 -.->|" then "| U1
+U1 -.->|" ahead "| U2
+
+classDef startBox fill:#F7FAFC,stroke:#4A5568,stroke-width:2px,color:#1A202C
+classDef curModBox fill:#FFF8E6,stroke:#B7791F,stroke-width:2px,color:#1A202C
+classDef curSessBox fill:#E6FFFA,stroke:#0D9488,stroke-width:3px,color:#1A202C
+classDef outBox fill:#FEF2F2,stroke:#DC2626,stroke-width:3px,color:#1A202C
+classDef valueBox fill:#F3E8FF,stroke:#7C3AED,stroke-width:2px,color:#1A202C
+classDef futureBox fill:#ECFDF5,stroke:#047857,stroke-width:2px,color:#1A202C
+
+class START startBox
+class CURMOD curModBox
+class CURSES curSessBox
+class OUT outBox
+class CVAL,RVAL valueBox
+class U0,U1,U2 futureBox
+
+linkStyle default stroke-width:2px

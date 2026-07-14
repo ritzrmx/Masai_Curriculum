@@ -1,0 +1,52 @@
+flowchart LR
+
+START["<b>Module 1</b><br/><i>Analytics Foundations</i>"]
+
+subgraph foundation[" WHERE WE ARE "]
+direction TB
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 1 — Analytics Foundations,<br/>GenAI &amp; Spreadsheets</i><br/>&nbsp;<br/><b>Covered so far:</b><br/>S1 · Data types · mean · median · mode<br/>outliers · range"]
+    CURSES["<b>CURRENT SESSION 2</b><br/><b>Analytics Workflow, Metrics &amp; KPIs</b><br/>&nbsp;<br/><i>The shift:</i> from summarising a column<br/><i>to</i> <b>knowing which column is worth summarising</b><br/>&nbsp;<br/>problem → data → analysis → insight<br/>metric vs KPI · making a question measurable"]
+end
+
+subgraph outcome[" OUTCOME OF THIS SESSION "]
+direction TB
+    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Take a vague ask like <i>“sales are down, fix it”</i><br/>and turn it into <b>a workflow</b>, <b>sharp sub-questions</b>,<br/>and <b>one KPI with a target</b> you can actually measure"]
+end
+
+subgraph value[" WHY IT MATTERS "]
+direction TB
+    CVAL["<b>Course Value</b><br/>Every SQL query, dashboard and report<br/>you build later starts from a KPI defined here"]
+    RVAL["<b>Real-Life Value</b><br/>Stop being handed vague requests<br/>Walk into any review with a number<br/>that has a definition and a target"]
+end
+
+subgraph future[" WHAT COMES NEXT "]
+direction TB
+    U0["<b>Next Session (S3)</b><br/>GenAI for Analytics: Prompt, Check, Improve<br/><i>use AI on the workflow you just learned</i>"]
+    U1["<b>Later in Module 1</b><br/>Spreadsheets · Cleaning · Formulas<br/>Pivot tables"]
+    U2["<b>Upcoming Modules</b><br/>SQL · Tableau · Python + GenAI<br/><i>where these KPIs get built for real</i>"]
+end
+
+START ==>|" you are here "| CURMOD
+CURMOD ==>|" progress "| CURSES
+CURSES ==>|" you get "| OUT
+OUT ==>|" course "| CVAL
+OUT ==>|" real life "| RVAL
+CURSES ==>|" next up "| U0
+U0 -.->|" then "| U1
+U1 -.->|" ahead "| U2
+
+classDef startBox fill:#F7FAFC,stroke:#4A5568,stroke-width:2px,color:#1A202C
+classDef curModBox fill:#FFF8E6,stroke:#B7791F,stroke-width:2px,color:#1A202C
+classDef curSessBox fill:#E6FFFA,stroke:#0D9488,stroke-width:3px,color:#1A202C
+classDef outBox fill:#FEF2F2,stroke:#DC2626,stroke-width:3px,color:#1A202C
+classDef valueBox fill:#F3E8FF,stroke:#7C3AED,stroke-width:2px,color:#1A202C
+classDef futureBox fill:#ECFDF5,stroke:#047857,stroke-width:2px,color:#1A202C
+
+class START startBox
+class CURMOD curModBox
+class CURSES curSessBox
+class OUT outBox
+class CVAL,RVAL valueBox
+class U0,U1,U2 futureBox
+
+linkStyle default stroke-width:2px

@@ -1,0 +1,52 @@
+flowchart LR
+
+START["<b>Module 1</b><br/><i>Analytics Foundations</i>"]
+
+subgraph foundation[" WHERE WE ARE "]
+direction TB
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 1 — Analytics Foundations,<br/>GenAI &amp; Spreadsheets</i><br/>&nbsp;<br/><b>Covered so far:</b><br/>S1 · Data types · mean · median · mode · outliers<br/>S2 · Workflow · decomposition · metrics vs KPIs"]
+    CURSES["<b>CURRENT SESSION 3</b><br/><b>GenAI for Analytics: Prompt, Check, Improve</b><br/>&nbsp;<br/><i>The shift:</i> from doing every step yourself<br/><i>to</i> <b>directing an assistant — and checking its work</b><br/>&nbsp;<br/>where GenAI fits in the workflow · prompt patterns<br/>structured outputs · spotting a confident lie"]
+end
+
+subgraph outcome[" OUTCOME OF THIS SESSION "]
+direction TB
+    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Write a prompt that returns a <b>usable table, not an essay</b>,<br/>and run a <b>validation check</b> that catches GenAI<br/>inventing a number that was never in your data"]
+end
+
+subgraph value[" WHY IT MATTERS "]
+direction TB
+    CVAL["<b>Course Value</b><br/>You will use GenAI in every module after this —<br/>for SQL, for dashboards, for Python<br/>This session is the safety training"]
+    RVAL["<b>Real-Life Value</b><br/>Ship AI-assisted work you can defend<br/>Never be the analyst who pasted<br/>a hallucinated number into a board deck"]
+end
+
+subgraph future[" WHAT COMES NEXT "]
+direction TB
+    U0["<b>Next Session (S4)</b><br/>Clean Up the Data<br/><i>hands on a spreadsheet at last</i>"]
+    U1["<b>Later in Module 1</b><br/>Make data ready · Formulas<br/>Pivot tables"]
+    U2["<b>Upcoming Modules</b><br/>SQL · Tableau · Python + GenAI<br/><i>GenAI writes the SQL — you check it</i>"]
+end
+
+START ==>|" you are here "| CURMOD
+CURMOD ==>|" progress "| CURSES
+CURSES ==>|" you get "| OUT
+OUT ==>|" course "| CVAL
+OUT ==>|" real life "| RVAL
+CURSES ==>|" next up "| U0
+U0 -.->|" then "| U1
+U1 -.->|" ahead "| U2
+
+classDef startBox fill:#F7FAFC,stroke:#4A5568,stroke-width:2px,color:#1A202C
+classDef curModBox fill:#FFF8E6,stroke:#B7791F,stroke-width:2px,color:#1A202C
+classDef curSessBox fill:#E6FFFA,stroke:#0D9488,stroke-width:3px,color:#1A202C
+classDef outBox fill:#FEF2F2,stroke:#DC2626,stroke-width:3px,color:#1A202C
+classDef valueBox fill:#F3E8FF,stroke:#7C3AED,stroke-width:2px,color:#1A202C
+classDef futureBox fill:#ECFDF5,stroke:#047857,stroke-width:2px,color:#1A202C
+
+class START startBox
+class CURMOD curModBox
+class CURSES curSessBox
+class OUT outBox
+class CVAL,RVAL valueBox
+class U0,U1,U2 futureBox
+
+linkStyle default stroke-width:2px
