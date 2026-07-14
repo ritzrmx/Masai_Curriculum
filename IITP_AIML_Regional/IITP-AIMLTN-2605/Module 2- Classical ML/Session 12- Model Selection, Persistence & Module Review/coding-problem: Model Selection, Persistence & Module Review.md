@@ -5,52 +5,46 @@
 
 ## Dataset
 
-A synthetic loan-approval dataset: 400 applicants, 8 features, and a yes-or-no target (`1` = approved).
+A self-contained synthetic binary classification dataset (no internet, fully reproducible):
 
 ```python
+import pandas as pd
 from sklearn.datasets import make_classification
-from sklearn.model_selection import train_test_split
 
 X, y = make_classification(
-    n_samples=400, n_features=8, n_informative=4,
+    n_samples=300, n_features=6, n_informative=4,
     n_redundant=0, random_state=42
 )
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=42, stratify=y
-)
+X = pd.DataFrame(X, columns=[f"feature_{i}" for i in range(1, 7)])
+y = pd.Series(y, name="target")
 ```
-
-The test set is now locked away. It does **not** participate in any decision until the very last step.
 
 ---
 
 ## Tasks
 
 **Task 1 — Basic**
-Build a `Pipeline` with two steps: a `StandardScaler` named `"scaler"`, then a `LogisticRegression(max_iter=1000, random_state=42)` named `"model"`.
+Split the data (`test_size=0.25`, `random_state=42`, `stratify=y`). Train a `LogisticRegression(random_state=42)` and a `DecisionTreeClassifier(max_depth=3, random_state=42)` on the training set.
 
 **Task 2 — Basic**
-Wrap that pipeline in a `GridSearchCV` that searches `C` over `[0.01, 0.1, 1, 10, 100]`, with `cv=5` and `scoring="accuracy"`. Fit it on the **training data only** and print `best_params_` and `best_score_`.
+Compare both models on the test set using **Accuracy** and **F1**. Print the results as a small table (rounded to 4 decimals).
 
 **Task 3 — Mid**
-Two parts:
-- (a) Take `best_estimator_` and score it **once** on the untouched test set. Print the test accuracy.
-- (b) `joblib.dump` the **whole pipeline** to `loan_pipeline.joblib`, load it back with `joblib.load`, and print its prediction for the first row of `X_test`.
-
-> ⚠️ Watch the grid key. It is `"model__C"` — the step name, **two** underscores, then the hyperparameter.
+Pick the model with the higher F1 score as the "winner." Save it with `joblib.dump`, reload it with `joblib.load`, and print whether the reloaded model's predictions on the test set are **identical** to the original model's predictions.
 
 ---
 
 ## Expected Output
 
 ```
-Best params: {'model__C': 10}
-Best CV accuracy: 0.7x
-Test accuracy: 0.7x
+Model comparison:
+                    Accuracy      F1
+Model
+LogisticRegression    0.7733  0.7733
+DecisionTree          0.7867  0.8049
 
-Reloaded pipeline — prediction for first test applicant: 1
-Reloaded predictions match original: True
+Winner: DecisionTree
+Reloaded predictions identical: True
 ```
 
 ---
@@ -59,54 +53,56 @@ Reloaded predictions match original: True
 <summary>Solution</summary>
 
 ```python
+import pandas as pd
+import numpy as np
 import joblib
 from sklearn.datasets import make_classification
-from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score, f1_score
 
-# ---- Data: split first, test set locked away -----------------------------
+# Dataset
 X, y = make_classification(
-    n_samples=400, n_features=8, n_informative=4,
+    n_samples=300, n_features=6, n_informative=4,
     n_redundant=0, random_state=42
 )
+X = pd.DataFrame(X, columns=[f"feature_{i}" for i in range(1, 7)])
+y = pd.Series(y, name="target")
+
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.25, random_state=42, stratify=y
 )
 
-# ---- Task 1: the Pipeline ------------------------------------------------
-# The scaler lives INSIDE the pipeline, so cross-validation refits it
-# separately in every fold. No leakage.
-pipe = Pipeline([
-    ("scaler", StandardScaler()),
-    ("model",  LogisticRegression(max_iter=1000, random_state=42)),
-])
+# Task 1: train two models
+log_reg = LogisticRegression(random_state=42)
+log_reg.fit(X_train, y_train)
+tree = DecisionTreeClassifier(max_depth=3, random_state=42)
+tree.fit(X_train, y_train)
 
-# ---- Task 2: tune on the TRAINING data only ------------------------------
-param_grid = {"model__C": [0.01, 0.1, 1, 10, 100]}   # note: model__C
-search = GridSearchCV(pipe, param_grid, cv=5, scoring="accuracy")
-search.fit(X_train, y_train)
+# Task 2: compare accuracy + F1
+log_preds = log_reg.predict(X_test)
+tree_preds = tree.predict(X_test)
 
-print("Best params:", search.best_params_)
-print("Best CV accuracy:", round(search.best_score_, 3))
+results = pd.DataFrame({
+    "Model": ["LogisticRegression", "DecisionTree"],
+    "Accuracy": [accuracy_score(y_test, log_preds), accuracy_score(y_test, tree_preds)],
+    "F1": [f1_score(y_test, log_preds), f1_score(y_test, tree_preds)],
+}).set_index("Model").round(4)
+print("Model comparison:")
+print(results)
 
-# ---- Task 3a: score ONCE on the untouched test set -----------------------
-best_pipeline = search.best_estimator_          # scaler + tuned model together
-test_acc = accuracy_score(y_test, best_pipeline.predict(X_test))
-print("Test accuracy:", round(test_acc, 3))
+# Task 3: persist winner, reload, confirm identical predictions
+winner_name = results["F1"].idxmax()
+print(f"\nWinner: {winner_name}")
+winner_model = log_reg if winner_name == "LogisticRegression" else tree
 
-# ---- Task 3b: persist the WHOLE pipeline, then reload it -----------------
-joblib.dump(best_pipeline, "loan_pipeline.joblib")
-reloaded = joblib.load("loan_pipeline.joblib")
+joblib.dump(winner_model, "/tmp/winner_model.joblib")
+reloaded = joblib.load("/tmp/winner_model.joblib")
 
-print("\nReloaded pipeline — prediction for first test applicant:",
-      reloaded.predict(X_test[:1])[0])
-print("Reloaded predictions match original:",
-      (reloaded.predict(X_test) == best_pipeline.predict(X_test)).all())
+original_preds = winner_model.predict(X_test)
+reloaded_preds = reloaded.predict(X_test)
+print("Reloaded predictions identical:", np.array_equal(original_preds, reloaded_preds))
 ```
-
-**Why we saved `best_estimator_` and not `best_estimator_.named_steps["model"]`:** saving only the `LogisticRegression` would throw away the scaler. The reloaded model would then receive raw, unscaled data — and it would return confident, wrong predictions **without raising a single error**.
 
 </details>

@@ -5,28 +5,17 @@
 
 ## Dataset
 
-A food-delivery company has logged 24 orders. For each, they recorded the rider's
-**distance** and the restaurant's **prep time**, and whether the order arrived **late**
-(`1`) or **on time** (`0`).
+A small study-habits dataset — hours studied and practice tests taken, and whether the student passed:
 
 ```python
 import pandas as pd
 
 data = {
-    "distance_km":   [1.2, 2.0, 1.5, 3.0, 2.4, 4.1, 3.6, 2.8, 5.0, 4.5,
-                      6.2, 5.5, 7.0, 6.6, 4.8, 8.5, 9.0, 7.2, 10.1, 8.8,
-                      9.6, 7.9, 8.1, 10.5],
-    "prep_time_min": [10, 12, 8, 15, 11, 30, 9, 14, 34, 13,
-                      18, 33, 16, 31, 12, 32, 28, 35, 30, 15,
-                      38, 27, 33, 36],
-    "late":          [0, 0, 0, 0, 0, 1, 0, 0, 1, 0,
-                      0, 1, 1, 1, 0, 1, 1, 1, 1, 0,
-                      1, 1, 1, 1],
+    "study_hours":    [1, 2, 2, 3, 4, 4, 5, 6, 6, 7, 8, 9],
+    "practice_tests": [0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4],
+    "passed":         [0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1]
 }
 df = pd.DataFrame(data)
-
-X = df[["distance_km", "prep_time_min"]]
-y = df["late"]
 ```
 
 ---
@@ -34,36 +23,30 @@ y = df["late"]
 ## Tasks
 
 **Task 1 — Basic**
-Split the data with `test_size=0.25`, `random_state=42` and `stratify=y`. Then build a pipeline of `StandardScaler` + `LogisticRegression(random_state=42)`, fit it on the training set, and print the **test accuracy** rounded to 2 decimals.
+Split into train/test sets (`test_size=0.25`, `random_state=42`, `stratify=y`) using `study_hours` and `practice_tests` as features and `passed` as the target. Print the train and test set sizes.
 
 **Task 2 — Basic**
-For the **first 3 orders in the test set**, print the model's **probability of being late** (from `predict_proba`) next to its hard `predict` label. Note which of the three the model was least confident about.
+Fit a `LogisticRegression` on the training set. Print its **predictions** and **predicted probabilities of passing** on the test set, rounded to 3 decimals, plus its **accuracy**.
 
 **Task 3 — Mid**
-Two parts, both on the same training set:
-**(a)** Fit a `DecisionTreeClassifier(max_depth=2, random_state=42)`. Print its test accuracy, then use `feature_importances_` to print **which single feature the tree relied on most**.
-**(b)** Fit a scaled `KNeighborsClassifier(n_neighbors=1)` and print **both its train and its test accuracy**. Explain in a comment why the train accuracy is what it is.
+Fit a `DecisionTreeClassifier` (`max_depth=2`, `random_state=42`) on the same split. Print its **predictions**, **accuracy**, and its **feature importances**.
 
 ---
 
 ## Expected Output
 
 ```
-Logistic Regression test accuracy: 0.83
+Train size: 9 Test size: 3
 
-First 3 test orders:
-  order 0: P(late) = 0.93  ->  predict = 1
-  order 1: P(late) = 0.32  ->  predict = 0
-  order 2: P(late) = 0.16  ->  predict = 0
+Logistic Regression predictions: [0, 1, 1]
+Logistic Regression P(pass): [0.283, 0.974, 0.997]
+Logistic Regression accuracy: 1.0
 
-Decision Tree test accuracy: 0.83
-Tree split on: prep_time_min
+Decision Tree predictions: [0, 1, 1]
+Decision Tree accuracy: 1.0
 
-KNN k=1 train accuracy: 1.00
-KNN k=1 test  accuracy: 0.83
+Decision Tree feature importances: {'study_hours': 1.0, 'practice_tests': 0.0}
 ```
-
-Order 1 is the least confident call — at 0.32 it is far closer to the 0.5 threshold than the other two.
 
 ---
 
@@ -73,62 +56,48 @@ Order 1 is the least confident call — at 0.32 it is far closer to the 0.5 thre
 ```python
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LogisticRegression
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
 
 data = {
-    "distance_km":   [1.2, 2.0, 1.5, 3.0, 2.4, 4.1, 3.6, 2.8, 5.0, 4.5,
-                      6.2, 5.5, 7.0, 6.6, 4.8, 8.5, 9.0, 7.2, 10.1, 8.8,
-                      9.6, 7.9, 8.1, 10.5],
-    "prep_time_min": [10, 12, 8, 15, 11, 30, 9, 14, 34, 13,
-                      18, 33, 16, 31, 12, 32, 28, 35, 30, 15,
-                      38, 27, 33, 36],
-    "late":          [0, 0, 0, 0, 0, 1, 0, 0, 1, 0,
-                      0, 1, 1, 1, 0, 1, 1, 1, 1, 0,
-                      1, 1, 1, 1],
+    "study_hours":    [1, 2, 2, 3, 4, 4, 5, 6, 6, 7, 8, 9],
+    "practice_tests": [0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4],
+    "passed":         [0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1]
 }
 df = pd.DataFrame(data)
 
-X = df[["distance_km", "prep_time_min"]]
-y = df["late"]
+X = df[["study_hours", "practice_tests"]]
+y = df["passed"]
 
+# Task 1
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.25, random_state=42, stratify=y
 )
+print("Train size:", len(X_train), "Test size:", len(X_test))
 
-# --- Task 1: Logistic Regression baseline ---
-logreg = make_pipeline(StandardScaler(), LogisticRegression(random_state=42))
+# Task 2
+logreg = LogisticRegression()
 logreg.fit(X_train, y_train)
-print(f"Logistic Regression test accuracy: {logreg.score(X_test, y_test):.2f}")
+log_preds = logreg.predict(X_test)
+log_proba = logreg.predict_proba(X_test)[:, 1]
+log_acc = accuracy_score(y_test, log_preds)
 
-# --- Task 2: predict vs predict_proba ---
-probs = logreg.predict_proba(X_test)[:3]   # column 1 = P(late)
-preds = logreg.predict(X_test)[:3]
-print("\nFirst 3 test orders:")
-for i in range(3):
-    print(f"  order {i}: P(late) = {probs[i][1]:.2f}  ->  predict = {preds[i]}")
+print("\nLogistic Regression predictions:", log_preds.tolist())
+print("Logistic Regression P(pass):", log_proba.round(3).tolist())
+print("Logistic Regression accuracy:", round(log_acc, 4))
 
-# --- Task 3a: Decision Tree + which feature it leaned on ---
+# Task 3
 tree = DecisionTreeClassifier(max_depth=2, random_state=42)
 tree.fit(X_train, y_train)
-print(f"\nDecision Tree test accuracy: {tree.score(X_test, y_test):.2f}")
-importances = pd.Series(tree.feature_importances_, index=X.columns)
-print(f"Tree split on: {importances.idxmax()}")
+tree_preds = tree.predict(X_test)
+tree_acc = accuracy_score(y_test, tree_preds)
 
-# --- Task 3b: KNN with k=1 ---
-knn1 = make_pipeline(StandardScaler(), KNeighborsClassifier(n_neighbors=1))
-knn1.fit(X_train, y_train)
-print(f"\nKNN k=1 train accuracy: {knn1.score(X_train, y_train):.2f}")
-print(f"KNN k=1 test  accuracy: {knn1.score(X_test, y_test):.2f}")
+print("\nDecision Tree predictions:", tree_preds.tolist())
+print("Decision Tree accuracy:", round(tree_acc, 4))
 
-# Why is train accuracy exactly 1.00?
-# With k=1, the single nearest neighbour of any training point IS that point itself
-# (distance zero), so it always votes for its own label. The model has memorised the
-# training set, not learnt a pattern. A perfect training score here is a warning sign,
-# not an achievement — only the TEST score tells you anything.
+importances = {col: float(val) for col, val in zip(X.columns, tree.feature_importances_.round(3))}
+print("\nDecision Tree feature importances:", importances)
 ```
 
 </details>

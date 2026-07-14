@@ -5,13 +5,13 @@
 
 ## Session Overview
 
-**Goal:** Students build ONE end-to-end capstone artifact — load data → `Pipeline(StandardScaler + model)` → `GridSearchCV` → score once on an untouched test set → `joblib.dump` → reload and predict — and leave with a decision framework for choosing a model in the first place.
+**Goal:** Students can compare multiple trained models on the same data using a metrics table, choose a "best" model using criteria beyond raw accuracy, save and reload that model reliably with `joblib`, and articulate the full Module 2 workflow end-to-end — plus recognize where classical ML's limitations open the door to Module 3.
 
-**Student profile at this point:** They have completed Sessions 1–11. They can split data, spot leakage and overfitting, fit linear/Ridge/Lasso regression, evaluate with MAE/RMSE/R², fit logistic regression, KNN, decision trees, random forests and gradient boosting, evaluate with precision/recall/F1/ROC-AUC, cluster with K-Means and DBSCAN, and reduce dimensions with PCA. What they have **never** done: chosen between all of these deliberately, tuned hyperparameters automatically, or saved a model to disk.
+**Student profile at this point:** Have completed all 11 prior sessions of Module 2 — the ML workflow, regression + regularization, regression evaluation, a probability masterclass, classification foundations, ensembles, classification metrics, clustering, and PCA/time series. Comfortable with `train_test_split`, `StandardScaler`, and fitting/evaluating a single sklearn model. Today is the first time they compare several models side by side and ship one.
 
-**Key outcome:** A `.joblib` file on their machine containing a tuned, leak-proof pipeline that predicts on new rows — plus the checklist they will use on every ML project for the rest of their career.
+**Key outcome:** By the end of class, every student has: (1) a reusable model-comparison snippet, (2) a working save/load pattern with `joblib` that includes the scaler, and (3) a one-page mental map of every model type in Module 2 — what it's for, its key knob, its strength, its weakness.
 
-**Tone for this session:** Consolidating and slightly celebratory. This is the last session of Module 2. Roughly half of it is new machinery (tuning, Pipeline, persistence), half is stepping back and connecting the dots.
+**Tone for this session:** The first ~100 minutes are hands-on and practical — this is the "how do I actually ship something" session. The last 20 minutes shift to reflective module review, similar in spirit to a capstone debrief.
 
 ---
 
@@ -19,16 +19,16 @@
 
 | Segment | Duration | Cumulative |
 |---|---|---|
-| Opening — Nine algorithms, one decision | 5 min | 0:05 |
-| **Concept 1:** The Model Selection Framework | 10 min | 0:15 |
-| **Practical 1:** Bake-off — baseline vs six candidates | 15 min | 0:30 |
-| **Concept 2:** Hyperparameter Tuning — Grid vs Randomized | 10 min | 0:40 |
-| **Practical 2:** Pipeline + GridSearchCV, and the leakage proof | 15 min | 0:55 |
+| Opening & Context | 5 min | 0:05 |
+| **Concept 1:** Why "Best Model" Isn't Just Highest Accuracy | 10 min | 0:15 |
+| **Practical 1:** Compare 3 Classifiers on One Dataset | 15 min | 0:30 |
+| **Concept 2:** Interpretability, Cost & Latency — The Other Axes | 10 min | 0:40 |
+| **Practical 2:** Compare Training Time & Interpretability | 15 min | 0:55 |
 | **BREAK** | 10 min | 1:05 |
-| **Concept 3:** Persistence — shipping the whole Pipeline | 10 min | 1:15 |
-| **Practical 3:** The capstone — end-to-end and saved to disk | 15 min | 1:30 |
-| **Concept 4:** Module Review and the Bridge to Module 3 | 10 min | 1:40 |
-| **Practical 4:** Reload the artifact and score a new customer | 10 min | 1:50 |
+| **Concept 3:** Model Persistence — Save It Right, or Don't Save It | 10 min | 1:15 |
+| **Practical 3:** `joblib.dump` / `joblib.load` + the Scaler Pitfall | 15 min | 1:30 |
+| **Concept 4:** Module 2 Review — Every Model, One Table + ML's Limits | 10 min | 1:40 |
+| **Practical 4:** Full Pipeline Recap — Load → Persist, End-to-End | 10 min | 1:50 |
 | Summary & Wrap-Up | 5 min | 1:55 |
 | Q&A & Doubt Solving | 5 min | 2:00 |
 
@@ -36,541 +36,561 @@
 
 ## Opening (5 min)
 
-**Write these nine names on the board, in a single row:**
+**Hook:** Ask the class: *"You've now trained Logistic Regression, Decision Trees, Random Forests, K-Means, and PCA. Suppose your manager says: 'Ship the best model to production by Friday.' What do you do — literally, step by step?"*
 
-```
-Linear · Ridge · Lasso · Logistic · KNN · Decision Tree · Random Forest · Gradient Boosting · K-Means / DBSCAN / PCA
-```
+Let 2-3 students answer. Almost everyone will say some version of "train a few models, pick the one with the highest accuracy." Push back gently: *"What if the highest-accuracy model takes 40 minutes to retrain every week, and nobody on your team can explain why it makes a decision, and it's 0.3% more accurate than the simple one? Do you still ship it?"*
 
-*"Every one of these, you can now fit in three lines of code. Here is the uncomfortable question: a manager drops a CSV on your desk on Monday and asks for a model by Friday. Which one do you type first — and how do you defend that choice?"*
+**Context to set:** Every session so far has ended with "here's how good the model is." Today we answer three questions those sessions skipped: How do I compare models *fairly*? What matters besides the metric? And once I've picked one — how do I actually save it so it survives past my notebook session? Then we zoom out and review the whole module, because next session, we leave classical ML behind entirely and enter GenAI.
 
-Let the silence sit. Then: *"For eleven sessions we taught you tools. Today we teach you judgement — and then how to hand the finished thing to someone else, so it is a product and not a notebook."*
-
-**What model selection is NOT:**
-- NOT trying all nine and shipping whichever has the highest test score
-- NOT always reaching for the fanciest algorithm you know
-- NOT a permanent decision — it is a starting bet you are willing to revise
-
-**What model selection IS:**
-- A **decision** driven by problem type, data size, and how much you need to explain the result
-- Starting at the **simplest defensible baseline** and forcing complexity to earn its place
-- A comparison made on **cross-validation scores of the training set**, never on the test set
+**Learning contract for today:**
+- Compare multiple models on identical data using a shared metrics table
+- Justify a model choice using more than one criterion
+- Save and reload a model (and its preprocessing) without breaking it
+- Walk out with a one-page summary of every Module 2 model type
 
 ---
 
-## Concept Block 1: The Model Selection Framework (10 min)
+## Concept Block 1: Why "Best Model" Isn't Just Highest Accuracy (10 min)
 
-### The board table — students should copy this
+### The Fair Comparison Rule
 
-| Target | Data size | Need to explain it? | Start with | Escalate to |
-|---|---|---|---|---|
-| Number | Any | Yes | Linear / Ridge | Lasso if many useless columns |
-| Number | Large | No | Ridge | Random Forest → Gradient Boosting |
-| Category | Small | Yes | Logistic Regression | Decision Tree |
-| Category | Small, few columns | No | KNN | Random Forest |
-| Category | Large | No | Random Forest | Gradient Boosting |
-| None (no labels) | Any | — | K-Means | DBSCAN if odd shapes / outliers |
-| Too many columns | Any | — | PCA | — |
+**Teaching point:** You can only compare models if everything *except the model* is held constant — same train/test split, same random state, same preprocessing. Comparing Model A on one split and Model B on another is not a comparison; it's noise.
 
-### The three questions, in order
+```
+Fair comparison checklist:
+✓ Same train_test_split() call (same random_state)
+✓ Same features (same X columns, same scaling applied consistently)
+✓ Same evaluation metric(s), computed on the same test set
+✓ Same random_state inside each model where applicable
+```
 
-1. **What is `y`?** A number → regression. A category → classification. Nothing → unsupervised.
-2. **How big is the data, and how many columns?** KNN dies on wide data. Gradient boosting needs rows to be worth it.
-3. **Who has to trust the answer?** If a bank regulator or a doctor must audit the decision, an unexplainable model is not on the menu at any accuracy.
+### Recap: Which Metric, Again? (bridge to Session 8)
 
-### Say this out loud, twice
+| Situation | Prefer | Why |
+|---|---|---|
+| Balanced classes, all errors equally costly | Accuracy | Simple, interpretable |
+| Imbalanced classes (fraud, disease) | F1 / Recall | Accuracy is misleadingly high on the majority class |
+| Need to compare models across thresholds | ROC-AUC | Threshold-independent; measures ranking quality |
+| Business cares more about false positives OR false negatives specifically | Precision or Recall individually | F1 blends both — sometimes you need just one |
 
-> *"Start with the simplest baseline. Only add complexity if it earns its place."*
+**Key teaching point:** "Best model" is never a single number in isolation — it's the best model *for this metric, on this data, under these constraints*. A model that's best for fraud detection (high recall) might be the worst choice for a spam filter (which needs high precision, or users lose real email).
 
-**Earning its place means:** a *meaningfully* better cross-validation score (not a 0.2% flicker inside the standard deviation), worth the extra training time and tuning effort, and still auditable enough for whoever consumes the prediction.
-
-*"There are real production systems, at real companies, running logistic regression today. Not because nobody knew about boosting — because logistic regression won the bake-off and nothing since has beaten it."*
+**Discussion prompt:** *"If two models have identical accuracy but different F1 scores, which one do you trust more, and why?"*
 
 ---
 
-## Practical Block 1: The Bake-Off (15 min)
+## Practical Block 1: Compare 3 Classifiers on One Dataset (15 min)
 
-**Goal:** Compare a dumb baseline against six candidates, fairly, using cross-validation on the *training* set only.
+### Dataset: Breast Cancer Wisconsin (built into sklearn)
 
 ```python
-import time
 import pandas as pd
+import numpy as np
+import time
 from sklearn.datasets import load_breast_cancer
-from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.pipeline import Pipeline
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.dummy import DummyClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 
-X, y = load_breast_cancer(return_X_y=True, as_frame=True)
+data = load_breast_cancer()
+X = pd.DataFrame(data.data, columns=data.feature_names)
+y = pd.Series(data.target, name="target")
 
-# Split FIRST. The test set does not participate in today's decision at all.
+print("Shape:", X.shape)
+print("Classes:", dict(zip(*np.unique(y, return_counts=True))))
+print("Target names:", list(data.target_names))
+```
+
+**Output:**
+```
+Shape: (569, 30)
+Classes: {0: 212, 1: 357}
+Target names: ['malignant', 'benign']
+```
+
+```python
+# ONE split, reused for every model — this is the fair-comparison rule in action
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
-print("Train:", X_train.shape, " Test:", X_test.shape)
+print("Train shape:", X_train.shape, "Test shape:", X_test.shape)
 
-candidates = {
-    "Baseline (most frequent)": DummyClassifier(strategy="most_frequent"),
-    "Logistic Regression":      LogisticRegression(max_iter=5000, random_state=42),
-    "KNN (k=5)":                KNeighborsClassifier(n_neighbors=5),
-    "Decision Tree":            DecisionTreeClassifier(random_state=42),
-    "Random Forest":            RandomForestClassifier(n_estimators=200, random_state=42),
-    "Gradient Boosting":        GradientBoostingClassifier(random_state=42),
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+```
+
+**Output:**
+```
+Train shape: (455, 30) Test shape: (114, 30)
+```
+
+```python
+models = {
+    "LogisticRegression": LogisticRegression(max_iter=5000, random_state=42),
+    "DecisionTree": DecisionTreeClassifier(max_depth=4, random_state=42),
+    "RandomForest": RandomForestClassifier(n_estimators=200, random_state=42),
 }
 
-rows = []
-for name, estimator in candidates.items():
-    pipe = Pipeline([("scaler", StandardScaler()), ("model", estimator)])
-    t0 = time.time()
-    scores = cross_val_score(pipe, X_train, y_train, cv=5, scoring="roc_auc")
-    rows.append({
-        "model":      name,
-        "cv_roc_auc": round(scores.mean(), 4),
-        "std":        round(scores.std(), 4),
-        "fit_secs":   round(time.time() - t0, 2),
+results = []
+for name, model in models.items():
+    # Logistic Regression is distance-based -> needs scaled features.
+    # Trees split on raw thresholds -> scaling doesn't matter for them.
+    uses_scaled = name == "LogisticRegression"
+    Xtr = X_train_scaled if uses_scaled else X_train
+    Xte = X_test_scaled if uses_scaled else X_test
+
+    start = time.perf_counter()
+    model.fit(Xtr, y_train)
+    train_time = time.perf_counter() - start
+
+    preds = model.predict(Xte)
+    proba = model.predict_proba(Xte)[:, 1]
+
+    results.append({
+        "Model": name,
+        "Accuracy": round(accuracy_score(y_test, preds), 4),
+        "F1": round(f1_score(y_test, preds), 4),
+        "ROC-AUC": round(roc_auc_score(y_test, proba), 4),
+        "Train Time (s)": round(train_time, 4),
     })
 
-results = pd.DataFrame(rows).sort_values("cv_roc_auc", ascending=False)
-print(results.to_string(index=False))
+results_df = pd.DataFrame(results).set_index("Model")
+print(results_df)
 ```
 
-**Expected shape of the output:** the baseline sits at ROC-AUC 0.50 (it is a coin that always says "malignant"), the tree lands around 0.90, and **Logistic Regression, KNN, Random Forest and Gradient Boosting all cluster around 0.98–0.99** — with logistic regression typically edging it out while training in a fraction of the time of the ensembles.
+**Output:**
+```
+                    Accuracy      F1  ROC-AUC  Train Time (s)
+Model
+LogisticRegression    0.9825  0.9861   0.9954          0.0023
+DecisionTree          0.9386  0.9510   0.9342          0.0034
+RandomForest          0.9561  0.9655   0.9931          0.1572
+```
 
-**Live walk-through:** Read the table out from the bottom up. First: *"the baseline is 0.50 — every real model beats a coin flip, good, that is the minimum bar and it is not a compliment."* Then point at the `fit_secs` column next to the `cv_roc_auc` column and ask the room:
+**Walk through the table live.** Ask: *"Purely by the metrics — which model would you ship?"* Most will say Logistic Regression (it wins on all three metrics here). **Note for instructors:** exact numbers will vary slightly by sklearn/OS/BLAS version — the *relative ordering* and the teaching point are what matter, not the fourth decimal place.
 
-> *"Gradient boosting took roughly 40 times longer than logistic regression. Look at the score column. Did it earn its place?"*
-
-Make them say "no" out loud. Then land the punch: *"The simplest model on this table won. That is not a rigged demo — that happens constantly, and if you skip the bake-off you will never know it."* Also point at the `std` column: a 0.003 gap between two models whose standard deviations are 0.014 is not a real gap. It is noise.
+**Teaching point:** This is a rare case where the simplest model wins outright. That won't always happen — flag it now so students don't walk away thinking "logistic regression always wins." On messier, more nonlinear data, Random Forest usually pulls ahead.
 
 ---
 
-## Concept Block 2: Hyperparameter Tuning (10 min)
+## Concept Block 2: Interpretability, Cost & Latency — The Other Axes (10 min)
 
-### Parameters vs hyperparameters — the distinction that unlocks this
-
-**Write on the board:**
+### Four Questions Beyond the Metric
 
 ```
-PARAMETERS      →  the model LEARNS them from data   →  coefficients, split points
-HYPERPARAMETERS →  YOU choose them before training   →  alpha, k, max_depth, n_estimators, C
+1. INTERPRETABILITY — Can a human explain why the model made this decision?
+2. TRAINING COST     — How long / how much compute to retrain from scratch?
+3. INFERENCE LATENCY — How fast is one prediction, at request time, in production?
+4. MAINTENANCE       — How much monitoring/retraining does it need as data drifts?
 ```
 
-*"Every hyperparameter you have set this module — `alpha=1.0`, `n_neighbors=5`, `max_depth=3` — you guessed. Today the computer stops you guessing."*
+| Model | Interpretability | Training Cost | Inference Latency | Typical Use Case Fit |
+|---|---|---|---|---|
+| Logistic Regression | High — coefficients are directly readable | Very low | Very low | Regulated domains (credit, healthcare) where "why" matters |
+| Decision Tree (shallow) | High — can draw the whole tree | Low | Very low | Rules that need to be explained to non-technical stakeholders |
+| Random Forest | Low — 100s of trees averaged | Higher | Higher (must query every tree) | Best raw performance when explainability isn't a hard requirement |
 
-### The two searches
+**Teaching point:** In healthcare, finance, and hiring, regulators or auditors may legally require you to explain *why* a model rejected someone. A 0.5% accuracy gain from a Random Forest is not worth losing the ability to answer "why was this loan denied?" in one sentence.
 
-| | `GridSearchCV` | `RandomizedSearchCV` |
-|---|---|---|
-| What it tries | **Every** combination | `n_iter` random draws |
-| Cost | Explodes: 5 × 4 × 3 = 60 fits × cv folds | You set the budget |
-| Use when | Few hyperparameters, small ranges | Many hyperparameters, wide ranges |
-| Grid format | Lists of values | Lists **or** distributions |
-
-### The anatomy of a search
-
-```
-GridSearchCV(
-    estimator = pipe,          # the Pipeline being tuned
-    param_grid = {...},        # what to try — note the "model__" prefix
-    cv = 5,                    # 5-fold cross-validation, from Session 2
-    scoring = "roc_auc",       # WHICH metric decides the winner
-)
-→ .best_params_      the winning settings
-→ .best_score_       its cross-validated score  (NOT a test score)
-→ .best_estimator_   the winner, already refitted on ALL training data
-```
-
-**The double underscore.** `"model__C"` means "the `C` hyperparameter of the step named `model`". Two underscores, not one. This is the single most common typo in this session.
-
-**When the grid explodes, switch to random draws.** Same API, but you buy a fixed budget of `n_iter` fits instead of an exhaustive sweep:
-
-```python
-from sklearn.model_selection import RandomizedSearchCV
-from sklearn.ensemble import RandomForestClassifier
-from scipy.stats import randint
-
-rf_pipe = Pipeline([
-    ("scaler", StandardScaler()),
-    ("model",  RandomForestClassifier(random_state=42)),
-])
-
-dist = {
-    "model__n_estimators":     randint(50, 300),     # a RANGE, not a list
-    "model__max_depth":        [3, 5, 10, None],
-    "model__min_samples_leaf": randint(1, 10),
-}
-
-rs = RandomizedSearchCV(rf_pipe, dist, n_iter=10, cv=5,
-                        scoring="roc_auc", random_state=42, n_jobs=-1)
-rs.fit(X_train, y_train)
-print(rs.best_params_, round(rs.best_score_, 4))
-```
-
-*"An exhaustive grid over those three ranges is thousands of fits. This is 10. And it usually lands within a hair of the grid's answer — because most hyperparameters barely matter, and random draws find the two that do."*
-
-**`scoring` is a decision, not a default.** Set `scoring="roc_auc"` and the search optimises ranking quality. Set `scoring="recall"` and it will happily accept more false alarms to catch more true cases. On a cancer screen or a fraud detector, that choice matters more than the algorithm you picked.
-
-### The one unbreakable rule
-
-**Draw this on the board:**
-
-```
-TRAIN  ───┬─── fold, fold, fold, fold, fold  →  cross-validation  →  tune here ✅
-          │
-TEST   ───┴───────────────────────────────────  touch ONCE, at the very end ✅
-```
-
-*"If you try 50 hyperparameter settings and keep the one with the best **test** score, you have used the test set 50 times. It is now training data wearing a disguise, and your reported number is a lie — not to me, to yourself. Tuning happens inside the training data. Full stop."*
+**Real-world framing:** *"A fraud model that takes 200ms to score one transaction is useless if the payment gateway times out at 100ms. Latency isn't a footnote — it's a hard constraint."*
 
 ---
 
-## Practical Block 2: Pipeline + GridSearchCV (15 min)
-
-**Part A — see the leak, then close it.** This is the most important twelve lines of the session.
+## Practical Block 2: Compare Training Time & Interpretability (15 min)
 
 ```python
-import numpy as np
-from sklearn.feature_selection import SelectKBest, f_classif
-from sklearn.pipeline import Pipeline
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import cross_val_score
+# Same three fitted models from Practical 1 (log_reg / tree / rf)
+log_reg = LogisticRegression(max_iter=5000, random_state=42)
+log_reg.fit(X_train_scaled, y_train)
 
-# 100 rows, 2000 columns of PURE NOISE, and a target that is PURE COIN FLIPS.
-# There is genuinely nothing to learn here. The honest score is 0.50.
-rng = np.random.RandomState(42)
-X_noise = rng.normal(size=(100, 2000))
-y_coin  = rng.randint(0, 2, size=100)
+tree = DecisionTreeClassifier(max_depth=4, random_state=42)
+tree.fit(X_train, y_train)
 
-# WRONG — pick the "best" 10 columns using ALL the data, then cross-validate
-selector = SelectKBest(f_classif, k=10).fit(X_noise, y_coin)
-X_leaked = selector.transform(X_noise)
-wrong = cross_val_score(LogisticRegression(max_iter=1000), X_leaked, y_coin, cv=5)
-print("WRONG — prepare first, CV after :", round(wrong.mean(), 3))
+rf = RandomForestClassifier(n_estimators=200, random_state=42)
+rf.fit(X_train, y_train)
 
-# RIGHT — the SAME selection step, but inside a Pipeline so it refits per fold
-pipe = Pipeline([
-    ("select", SelectKBest(f_classif, k=10)),
-    ("model",  LogisticRegression(max_iter=1000)),
-])
-right = cross_val_score(pipe, X_noise, y_coin, cv=5)
-print("RIGHT — selection inside Pipeline:", round(right.mean(), 3))
+# How many numbers does a human need to read to fully explain each model?
+n_coefs = log_reg.coef_.size + 1          # weights + intercept
+n_tree_nodes = tree.tree_.node_count
+n_rf_trees = rf.n_estimators
+
+print("LogisticRegression:", n_coefs, "numbers total (one readable equation)")
+print("DecisionTree (max_depth=4):", n_tree_nodes, "nodes (fits on one diagram)")
+print("RandomForest (200 trees):", n_rf_trees, "separate trees averaged (not human-readable directly)")
 ```
 
-**Expected output:** the WRONG line lands around **0.8**. The RIGHT line lands around **0.5**.
-
-**Live walk-through:** Stop everything here. *"There is no signal in this data. None. I generated the labels with a random coin. And the first approach reports 80% accuracy."* Ask the room: *"Where did the information come from?"* → It came from the selector, which peeked at all 100 labels to pick the 10 columns that happened to correlate with the coin flips by luck. When cross-validation later "held out" a fold, those columns had **already seen** that fold's labels. Same data, same model, same `cv=5` — the only difference is *where the preparation step lives*. **The Pipeline is not a convenience wrapper. It is the leakage fix from Session 2, made structural.**
-
-**Part B — now tune the winner from the bake-off.**
+**Output:**
+```
+LogisticRegression: 31 numbers total (one readable equation)
+DecisionTree (max_depth=4): 21 nodes (fits on one diagram)
+RandomForest (200 trees): 200 separate trees averaged (not human-readable directly)
+```
 
 ```python
-from sklearn.model_selection import GridSearchCV
-from sklearn.preprocessing import StandardScaler
+# Top-5 most influential features -- each model computes "importance" differently
+coef_importance = pd.Series(np.abs(log_reg.coef_[0]), index=X.columns).sort_values(ascending=False).head(5)
+tree_importance = pd.Series(tree.feature_importances_, index=X.columns).sort_values(ascending=False).head(5)
+rf_importance = pd.Series(rf.feature_importances_, index=X.columns).sort_values(ascending=False).head(5)
 
-pipe = Pipeline([
-    ("scaler", StandardScaler()),
-    ("model",  LogisticRegression(max_iter=5000, random_state=42)),
-])
-
-param_grid = {"model__C": [0.01, 0.1, 1, 10, 100]}   # note: model__C, TWO underscores
-
-search = GridSearchCV(pipe, param_grid, cv=5, scoring="roc_auc", n_jobs=-1)
-search.fit(X_train, y_train)          # training data ONLY
-
-print("Best params:", search.best_params_)
-print("Best CV ROC-AUC:", round(search.best_score_, 4))
-print("Winning estimator:", search.best_estimator_)
+print("Top 5 -- LogisticRegression (|coefficient|, scaled data):")
+print(coef_importance.round(3))
+print("\nTop 5 -- DecisionTree (impurity-based importance):")
+print(tree_importance.round(3))
+print("\nTop 5 -- RandomForest (impurity-based importance):")
+print(rf_importance.round(3))
 ```
 
-**Expected output:** a small `C` (strong regularisation) wins, with a cross-validated ROC-AUC around 0.99. Note that `best_estimator_` prints as a whole `Pipeline`, scaler included — **that object is the artifact we are going to ship.**
+**Output:**
+```
+Top 5 -- LogisticRegression (|coefficient|, scaled data):
+worst texture           1.255
+radius error            1.083
+worst concave points    0.954
+worst area               0.948
+worst radius             0.948
+dtype: float64
+
+Top 5 -- DecisionTree (impurity-based importance):
+worst radius             0.734
+worst concave points     0.122
+texture error            0.046
+worst texture            0.032
+worst concavity          0.017
+dtype: float64
+
+Top 5 -- RandomForest (impurity-based importance):
+worst perimeter          0.133
+worst area               0.128
+worst concave points     0.108
+mean concave points      0.094
+worst radius             0.091
+dtype: float64
+```
+
+**Discussion prompt:** *"Notice the three models don't agree on the #1 most important feature. Why might that be — and if a doctor asked you 'what actually drives this prediction,' which answer would you trust?"* (Guide toward: no single "importance" is ground truth — each is a different lens on the same data, and disagreement across models is itself useful information.)
 
 ---
 
 ## BREAK (10 min)
 
-*Mull this over: you tried 5 values of `C` and reported the best cross-validation score of the five. Is that number itself slightly optimistic? Why? And does the untouched test set fix it?*
+*Suggested break prompt: ask students to think of one product they use daily (maps app, food delivery, email spam filter) and guess which model family it's likely using and why — accuracy vs. speed vs. explainability trade-offs.*
 
 ---
 
-## Concept Block 3: Persistence — Shipping the Whole Pipeline (10 min)
+## Concept Block 3: Model Persistence — Save It Right, or Don't Save It (10 min)
 
-### The problem
+### Why Persistence Matters
 
-*"Your model exists in the RAM of a Jupyter kernel. Close the laptop and it is gone. Nobody can use it, nobody can audit it, and the web team certainly cannot call it. A model that lives only in a notebook is a hobby, not a product."*
+**Teaching point:** A trained model living only inside a Jupyter kernel is worthless the moment that kernel restarts. Persistence turns a training run into a reusable artifact — something a web app, an API, or a teammate can load without retraining.
 
-### The fix — two lines
-
-```python
-import joblib
-
-joblib.dump(search.best_estimator_, "cancer_pipeline.joblib")   # write to disk
-model = joblib.load("cancer_pipeline.joblib")                   # read it anywhere
-model.predict(new_rows)
+```
+Training (expensive, done once)  →  model.fit(X_train, y_train)
+Persistence (do this once)       →  joblib.dump(model, "model.joblib")
+Serving (cheap, done many times) →  joblib.load("model.joblib").predict(new_row)
 ```
 
-`joblib` is scikit-learn's preferred saver because it handles the big NumPy arrays inside models efficiently. It is a superset of `pickle` for this purpose.
+### `joblib` vs `pickle`
 
-### The four rules — put these on the board
+| | `pickle` | `joblib` |
+|---|---|---|
+| General Python objects | Yes | Yes |
+| Large NumPy arrays (model weights, tree structures) | Slower, larger files | Optimized, faster, smaller files |
+| Standard for sklearn models | Works, but not preferred | **Recommended by sklearn docs** |
 
-**1. Save the WHOLE Pipeline, never just the model.**
+**The #1 persistence mistake:** Saving only the model and forgetting the `StandardScaler` (or `OneHotEncoder`, or any other preprocessing step) fit on the training data. At inference time, if you scale new data with a *freshly fit* scaler instead of the *saved* one, the numbers fed to the model are on a completely different scale than what it was trained on — predictions silently become garbage. No error is raised. This is one of the most common production ML bugs.
 
-```python
-joblib.dump(search.best_estimator_.named_steps["model"], "bad.joblib")   # ❌ DISASTER
-joblib.dump(search.best_estimator_,                     "good.joblib")   # ✅
-```
-
-*"Save only the `LogisticRegression` and you have thrown the scaler in the bin. Tomorrow, production sends raw, unscaled data. Does it crash? **No.** It happily returns confident, wrong predictions forever, with no error message. This is the worst kind of bug — a silent one."*
-
-**2. Pin your versions.** A pipeline pickled under scikit-learn 1.3 may warn or fail under 1.6. Write a `requirements.txt` next to your `.joblib`, and record the version *inside* the artifact:
-
-```python
-import sklearn
-artifact = {
-    "pipeline":        search.best_estimator_,
-    "sklearn_version": sklearn.__version__,
-    "test_roc_auc":    0.99,        # your one honest test score
-    "trained_on":      "2026-07-14",
-    "feature_names":   list(X_train.columns),
-}
-joblib.dump(artifact, "cancer_artifact.joblib")
-```
-
-**3. Never load an untrusted `.joblib` or `.pkl`.** Unpickling **executes code**. A malicious file can run anything on your machine the moment you load it — it is exactly as dangerous as running a stranger's script. Only load files you or your team produced.
-
-**4. Save the score with the model.** Six months later, "is this model still good?" is unanswerable unless you wrote down what "good" was on the day.
+**Versioning pitfalls to flag:**
+- sklearn model files are **not guaranteed compatible** across major version changes — a model saved with sklearn 1.3 may fail (or worse, silently mispredict) when loaded with sklearn 2.0. Always record the sklearn version alongside the artifact.
+- Never save a model without also saving: the feature column order, the preprocessing objects, and ideally the library versions used to train it.
+- Retraining isn't optional forever — real-world data drifts. A model frozen in 2024 slowly degrades as the world changes; persistence is not "save once, use forever."
 
 ---
 
-## Practical Block 3: The Capstone — End-to-End (15 min)
-
-**This is the artifact of the whole module. Every student should end with a `.joblib` file on disk.**
+## Practical Block 3: `joblib.dump` / `joblib.load` + the Scaler Pitfall (15 min)
 
 ```python
 import joblib
 import sklearn
-from sklearn.datasets import load_breast_cancer
-from sklearn.model_selection import train_test_split, GridSearchCV
+
+# Re-use the winning model from Practical 1: LogisticRegression
+winner = LogisticRegression(max_iter=5000, random_state=42)
+winner.fit(X_train_scaled, y_train)
+
+preds_before = winner.predict(X_test_scaled)
+print("Predictions before saving (first 10):", preds_before[:10])
+
+# Persist BOTH the model and the scaler -- this is the pitfall students miss
+joblib.dump(winner, "/tmp/scratch_model.joblib")
+joblib.dump(scaler, "/tmp/scratch_scaler.joblib")
+print("\nsklearn version at save time:", sklearn.__version__)
+print("Saved model + scaler to disk.")
+```
+
+**Output:**
+```
+Predictions before saving (first 10): [0 1 0 1 0 1 1 0 0 0]
+
+sklearn version at save time: 1.8.0
+Saved model + scaler to disk.
+```
+
+```python
+# --- Simulate a fresh session: reload from disk, as if this were a new process ---
+loaded_model = joblib.load("/tmp/scratch_model.joblib")
+loaded_scaler = joblib.load("/tmp/scratch_scaler.joblib")
+
+X_test_scaled_reloaded = loaded_scaler.transform(X_test)   # re-scale with the SAVED scaler
+preds_after = loaded_model.predict(X_test_scaled_reloaded)
+
+print("Predictions after loading  (first 10):", preds_after[:10])
+print("Identical predictions:", np.array_equal(preds_before, preds_after))
+```
+
+**Output:**
+```
+Predictions after loading  (first 10): [0 1 0 1 0 1 1 0 0 0]
+Identical predictions: True
+```
+
+```python
+# Now demonstrate the bug: forget the saved scaler, feed raw (unscaled) data straight to the model
+preds_wrong = loaded_model.predict(X_test)   # BUG: raw, unscaled features!
+agreement = (preds_wrong == preds_before).mean()
+print(f"If we skip the saved scaler (bug): agreement with correct predictions = {agreement:.2%}")
+```
+
+**Output:**
+```
+If we skip the saved scaler (bug): agreement with correct predictions = 36.84%
+```
+
+**Run this live and let it land.** The model doesn't crash. It doesn't warn loudly by default in most setups. It just quietly gets 63% of predictions *wrong* compared to the correctly-scaled version. This is exactly the kind of bug that ships to production undetected because "the code runs fine."
+
+**Ask the class:** *"Whose fault is this bug — the model's, or the pipeline's?"* → Neither is "wrong" in isolation; the model faithfully does what it was trained to do on a distribution it was never shown. The lesson: **persist the whole pipeline, not just the model.**
+
+**Extension for faster students:**
+```python
+# Cleaner pattern: wrap scaler + model into a single sklearn Pipeline,
+# then there is only ONE object to save and load -- no chance of mismatch.
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import (accuracy_score, f1_score, roc_auc_score,
-                             confusion_matrix, classification_report)
 
-# ---- 1. LOAD -------------------------------------------------------------
-X, y = load_breast_cancer(return_X_y=True, as_frame=True)
+pipe = Pipeline([
+    ("scaler", StandardScaler()),
+    ("model", LogisticRegression(max_iter=5000, random_state=42)),
+])
+pipe.fit(X_train, y_train)          # fits scaler AND model together
+joblib.dump(pipe, "/tmp/scratch_pipeline.joblib")
+# One load call now reconstructs the entire pipeline correctly, every time.
+```
 
-# ---- 2. SPLIT (test set locked away from here on) ------------------------
+---
+
+## Concept Block 4: Module 2 Review — Every Model, One Table + ML's Limits (10 min)
+
+### The Complete Module 2 Model Comparison Table
+
+**Teaching point:** Put this on the board / screen and walk through each row out loud — this is the "cheat sheet" students should photograph before leaving.
+
+| Model | Type | Typical Use Case | Key Hyperparameter | Main Strength | Main Weakness |
+|---|---|---|---|---|---|
+| Linear Regression | Supervised (regression) | Predicting a continuous number (price, revenue) with a roughly linear relationship | None core (baseline) | Simple, fast, fully interpretable coefficients | Assumes linearity; sensitive to outliers |
+| Ridge Regression | Supervised (regression) | Same as above, but with many/correlated features | `alpha` (L2 penalty strength) | Reduces overfitting, stabilizes coefficients | Doesn't zero out useless features |
+| Lasso Regression | Supervised (regression) | Feature selection + regression together | `alpha` (L1 penalty strength) | Shrinks weak features to exactly 0 | Can be unstable with correlated features |
+| Logistic Regression | Supervised (classification) | Binary/multiclass classification, especially where "why" matters | `C` (inverse regularization strength) | Highly interpretable, fast, strong baseline | Struggles with non-linear decision boundaries |
+| Decision Tree | Supervised (classification/regression) | Rule-based decisions that need to be explained | `max_depth` | Fully interpretable; no scaling needed | Prone to overfitting if too deep |
+| Random Forest | Supervised (classification/regression) | Best general-purpose accuracy on tabular data | `n_estimators` | High accuracy, robust to overfitting, handles non-linearity | Slower, low interpretability |
+| K-Means Clustering | Unsupervised | Segmenting customers/items into groups with no labels | `n_clusters` (k) | Fast, simple, scales well | Must choose k in advance; assumes round/equal-size clusters |
+| Hierarchical Clustering | Unsupervised | Exploring nested/nested-subgroup structure, small-to-medium data | `linkage` method | No need to pre-choose k; dendrogram shows structure at every level | Computationally expensive at scale |
+| PCA | Unsupervised (dimensionality reduction) | Compressing many correlated features into a few components before modeling/plotting | `n_components` | Removes redundancy, speeds up downstream models, enables visualization | Components lose direct real-world meaning |
+
+### The Full Module 2 Workflow, One More Time
+
+```
+Raw Data
+   │
+   ▼
+CLEAN / SPLIT / SCALE   (Session 1, Session 8 callback)
+   │
+   ▼
+TRAIN                    (fit on training data only)
+   │
+   ▼
+EVALUATE                 (Session 4, Session 9 metrics — on TEST data only)
+   │
+   ▼
+TUNE                     (GridSearchCV / hyperparameters — Session 2)
+   │
+   ▼
+SELECT                   (metric + interpretability + cost + latency — TODAY)
+   │
+   ▼
+PERSIST                  (joblib.dump — model + preprocessing — TODAY)
+```
+
+### ML's Limitations — Why This Isn't the Whole Story
+
+Even a perfectly tuned, perfectly evaluated classical ML model has hard boundaries:
+
+- **Needs quality labeled data** — a model is only as good as the examples it was shown; garbage in, garbage out (Session 1 callback).
+- **Correlation ≠ causation** — a model can find that ice cream sales predict drowning rates without understanding either causes the other (Session 10 callback).
+- **Cannot reason or generalize outside its training distribution** — ask a model trained on Indian housing prices to predict prices in a country it has never seen data from, and it will confidently produce a number anyway, with no idea it's out of its depth.
+- **Bias amplification** — if the training data reflects historical bias, the model doesn't just repeat it, it can systematically amplify it at scale.
+- **No common sense or world knowledge** — a Decision Tree doesn't "know" what a hospital is; it only knows numeric thresholds on the columns it was given.
+- **Requires retraining as data drifts** — a model is a frozen snapshot; the real world keeps moving, so accuracy silently decays over time (concept drift).
+- **One task per model** — a spam classifier cannot suddenly answer a question or summarize a document; every new task traditionally means training a brand new model from scratch.
+
+**Bridge to Module 3:** *"That last point is exactly where classical ML hits its ceiling — one model, one narrow task, retrained from scratch every time the task changes. Module 3 introduces a fundamentally different paradigm: models trained once on massive, general data that can be *prompted* into thousands of different tasks without retraining. That's Generative AI — and that's where we go next."*
+
+---
+
+## Practical Block 4: Full Pipeline Recap — Load → Persist, End-to-End (10 min)
+
+**Give students a fresh dataset and have them run the complete workflow live, narrating each step out loud.**
+
+```python
+from sklearn.datasets import load_wine
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import accuracy_score, f1_score
+
+# STEP 1: LOAD
+data = load_wine()
+X = pd.DataFrame(data.data, columns=data.feature_names)
+y = pd.Series(data.target, name="target")
+print("STEP 1 - LOAD: shape =", X.shape, "| classes =", list(data.target_names))
+
+# STEP 2: CLEAN / SPLIT / SCALE
+print("\nSTEP 2 - CLEAN: nulls =", X.isnull().sum().sum(), "| duplicates =", X.duplicated().sum())
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
-
-# ---- 3. PIPELINE ---------------------------------------------------------
-pipe = Pipeline([
-    ("scaler", StandardScaler()),
-    ("model",  LogisticRegression(max_iter=5000, random_state=42)),
-])
-
-# ---- 4. TUNE (training data only) ---------------------------------------
-param_grid = {"model__C": [0.01, 0.1, 1, 10, 100]}
-search = GridSearchCV(pipe, param_grid, cv=5, scoring="roc_auc", n_jobs=-1)
-search.fit(X_train, y_train)
-print("Best params :", search.best_params_)
-print("Best CV AUC :", round(search.best_score_, 4))
-
-best_pipeline = search.best_estimator_   # scaler + tuned model, refitted on all of X_train
-
-# ---- 5. SCORE ONCE on the untouched test set ----------------------------
-y_pred  = best_pipeline.predict(X_test)
-y_proba = best_pipeline.predict_proba(X_test)[:, 1]
-
-test_auc = roc_auc_score(y_test, y_proba)
-print("\n--- HONEST TEST SCORES (first and only look) ---")
-print("Accuracy :", round(accuracy_score(y_test, y_pred), 3))
-print("F1       :", round(f1_score(y_test, y_pred), 3))
-print("ROC-AUC  :", round(test_auc, 4))
-print("\nConfusion matrix:\n", confusion_matrix(y_test, y_pred))
-print("\n", classification_report(y_test, y_pred, digits=3))
-
-# ---- 6. PERSIST the whole thing -----------------------------------------
-artifact = {
-    "pipeline":        best_pipeline,
-    "best_params":     search.best_params_,
-    "test_roc_auc":    round(test_auc, 4),
-    "sklearn_version": sklearn.__version__,
-    "feature_names":   list(X_train.columns),
-}
-joblib.dump(artifact, "cancer_artifact.joblib")
-print("\nSaved -> cancer_artifact.joblib")
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+print("STEP 2 - SPLIT/SCALE: train =", X_train.shape, "test =", X_test.shape)
 ```
 
-**Expected output:** test accuracy in the mid-to-high 0.9s, ROC-AUC around 0.99, a confusion matrix with only a handful of mistakes, and a file on disk.
-
-**Live walk-through:** Number the six comment banners on the board as you go — **load, split, pipeline, tune, score once, persist.** Say plainly: *"This is the shape of every supervised ML project you will ever build. The only things that change are the dataset and which estimator sits in the `model` slot."*
-
-Then ask: *"Why is `best_score_` not the same number as the test ROC-AUC? Which of the two would you put in an email to your manager?"* → `best_score_` is a cross-validated average on training folds, and it is the *winner of five attempts*, so it is mildly optimistic. The test score is the one honest number, because that data was never used for any decision. That is the number that goes in the email.
-
----
-
-## Concept Block 4: Module Review and the Bridge to Module 3 (10 min)
-
-### The whole module on one board
-
-| Sessions | Theme | What you can now do |
-|---|---|---|
-| 1–2 | Workflow and honesty | Split, spot leakage, diagnose over/underfitting |
-| 3–5 | Supervised: numbers | Linear, Ridge, Lasso; MAE, RMSE, R²; the maths of the fitted line |
-| 6–8 | Supervised: categories | Logistic, KNN, tree, forest, boosting; precision, recall, F1, ROC-AUC, thresholds |
-| 9–11 | Unsupervised and structure | K-Means, DBSCAN, probability, PCA, time series |
-| 12 | Selection and shipping | Choose, tune, Pipeline, persist |
-
-**The eight-step checklist — dictate it, make them write it:**
-
+**Output:**
 ```
-1. What is y?  Number / category / nothing.
-2. Split FIRST. Lock the test set away.
-3. Establish the dumb baseline. Beat it, or stop.
-4. Simplest reasonable model, inside a Pipeline.
-5. Cross-validate + GridSearchCV on the TRAINING set.
-6. Score ONCE on the untouched test set.
-7. Did complexity earn its place? If not, ship simple.
-8. joblib.dump the whole Pipeline, with its score and versions.
+STEP 1 - LOAD: shape = (178, 13) | classes = ['class_0', 'class_1', 'class_2']
+
+STEP 2 - CLEAN: nulls = 0 | duplicates = 0
+STEP 2 - SPLIT/SCALE: train = (142, 13) test = (36, 13)
 ```
-
-### The bridge
-
-*"Everything in Module 2 followed one pattern: you had YOUR data, and you FIT a small model to it. You owned the weights. In Module 3 the model arrives already trained — on more text than you could read in a thousand lifetimes — and you do not fit it. You **prompt** it."*
-
-**Draw the two columns:**
-
-```
-CLASSICAL ML (Module 2)          GENAI & AGENTS (Module 3)
-────────────────────────         ─────────────────────────
-Your tabular data          →     Giant pre-trained model
-You call .fit()            →     You write a prompt
-Weights are yours          →     Weights are someone else's
-Feature engineering        →     Context and retrieval
-Fixed output: number/class →     Open output: text, code, actions
-```
-
-**But here is the part that matters — say it slowly:**
-
-*"What carries over is everything that was hard to learn. Evaluate on held-out examples. Know your baseline. Garbage in, garbage out. Never let the answer leak into the input. Teams who skipped baselines in classical ML skip them with LLMs too — and they ship things that are confidently, fluently wrong. The discipline you built in this module is exactly what will make you good at the next one."*
-
----
-
-## Practical Block 4: Reload the Artifact and Score a New Customer (10 min)
-
-**Restart the kernel first.** This is the point of the exercise — prove that nothing is left in memory.
 
 ```python
-# ===== FRESH SCRIPT — pretend this is a different machine, a week later =====
-import joblib
-import pandas as pd
-from sklearn.datasets import load_breast_cancer
+# STEP 3: TRAIN (baseline)
+baseline = RandomForestClassifier(random_state=42)
+baseline.fit(X_train_scaled, y_train)
+baseline_preds = baseline.predict(X_test_scaled)
+print("STEP 3 - TRAIN (baseline RandomForest, default params):")
+print("  Accuracy:", round(accuracy_score(y_test, baseline_preds), 4))
+print("  F1 (macro):", round(f1_score(y_test, baseline_preds, average="macro"), 4))
 
-# No training. No fitting. No scaler. Just load.
-artifact = joblib.load("cancer_artifact.joblib")
-model    = artifact["pipeline"]
+# STEP 4: TUNE
+param_grid = {"n_estimators": [50, 150], "max_depth": [3, 6, None]}
+grid = GridSearchCV(RandomForestClassifier(random_state=42), param_grid, cv=5, scoring="f1_macro")
+grid.fit(X_train_scaled, y_train)
+print("\nSTEP 4 - TUNE (GridSearchCV, 5-fold):")
+print("  Best params:", grid.best_params_)
+print("  Best CV F1 (macro):", round(grid.best_score_, 4))
 
-print("Loaded model trained with :", artifact["best_params"])
-print("Its honest test ROC-AUC   :", artifact["test_roc_auc"])
-print("Built on sklearn version  :", artifact["sklearn_version"])
+# STEP 5: SELECT + EVALUATE final model on held-out test set
+best_model = grid.best_estimator_
+final_preds = best_model.predict(X_test_scaled)
+print("\nSTEP 5 - SELECT/EVALUATE: tuned model on test set")
+print("  Accuracy:", round(accuracy_score(y_test, final_preds), 4))
+print("  F1 (macro):", round(f1_score(y_test, final_preds, average="macro"), 4))
 
-# A "new patient" arriving today — RAW, unscaled values.
-X, y = load_breast_cancer(return_X_y=True, as_frame=True)
-new_patient = X.iloc[[7]]         # keep the double brackets: predict needs a 2-D frame
-
-prediction  = model.predict(new_patient)[0]
-p_benign    = model.predict_proba(new_patient)[0, 1]
-
-label = "benign" if prediction == 1 else "malignant"
-print(f"\nPrediction        : {label}")
-print(f"P(benign)         : {p_benign:.1%}")
-print(f"True label was    : {'benign' if y.iloc[7] == 1 else 'malignant'}")
+# STEP 6: PERSIST
+joblib.dump(best_model, "/tmp/wine_model.joblib")
+joblib.dump(scaler, "/tmp/wine_scaler.joblib")
+print("\nSTEP 6 - PERSIST: saved tuned model + scaler to disk (2 files)")
 ```
 
-**Expected output:** the artifact's metadata prints, and the prediction comes back with a probability — and it matches the true label — with **no scaler in sight in this script**.
+**Output:**
+```
+STEP 3 - TRAIN (baseline RandomForest, default params):
+  Accuracy: 1.0
+  F1 (macro): 1.0
 
-**Live walk-through:** This is the closing beat of the whole module. Point out that this script contains **zero** training code and **zero** preprocessing code — and yet the raw patient row got scaled correctly, because the scaler travelled inside the pipeline. Then ask the killer question:
+STEP 4 - TUNE (GridSearchCV, 5-fold):
+  Best params: {'max_depth': 3, 'n_estimators': 50}
+  Best CV F1 (macro): 0.9863
 
-> *"Delete the `StandardScaler` step from the saved artifact and rerun this. What happens?"*
+STEP 5 - SELECT/EVALUATE: tuned model on test set
+  Accuracy: 1.0
+  F1 (macro): 1.0
 
-→ It does **not** crash. It returns a confident, wrong answer. Silently. Forever. *"That is why we save the whole Pipeline. Not the model. The Pipeline."*
+STEP 6 - PERSIST: saved tuned model + scaler to disk (2 files)
+```
 
-**Stretch (if time):** show `ColumnTransformer` for a mixed table:
+**Teaching point:** Wine is a small, clean, well-separated dataset — that's *why* the baseline already hits a perfect test score and tuning doesn't move it further. Say this explicitly: *"Don't conclude that tuning is pointless. On messier, larger, real-world data the gap between baseline and tuned is usually much bigger. The takeaway today is the workflow shape, not this particular score."* The 5-fold CV score (0.9863) is actually the more honest number to trust — it's estimated across many splits, not just the one lucky test split.
 
 ```python
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from sklearn.linear_model import Ridge
-from sklearn.pipeline import Pipeline
-import pandas as pd
-
-flats = pd.DataFrame({
-    "area_sqft":  [650, 1200, 850, 1500, 700, 1100],
-    "bedrooms":   [1, 3, 2, 3, 1, 2],
-    "city":       ["Mumbai", "Delhi", "Bengaluru", "Mumbai", "Delhi", "Bengaluru"],
-    "price_lakh": [95, 80, 70, 180, 62, 72],
-})
-num_cols, cat_cols = ["area_sqft", "bedrooms"], ["city"]
-
-prep = ColumnTransformer([
-    ("num", StandardScaler(), num_cols),
-    ("cat", OneHotEncoder(handle_unknown="ignore"), cat_cols),
-])
-pipe = Pipeline([("prep", prep), ("model", Ridge(alpha=1.0))])
-pipe.fit(flats[num_cols + cat_cols], flats["price_lakh"])
-print(pipe.predict(flats[num_cols + cat_cols]).round(1))
+# Confirm the persisted pipeline is trustworthy
+reloaded = joblib.load("/tmp/wine_model.joblib")
+reloaded_scaler = joblib.load("/tmp/wine_scaler.joblib")
+reloaded_preds = reloaded.predict(reloaded_scaler.transform(X_test))
+print("Reloaded model predictions match original:", np.array_equal(reloaded_preds, final_preds))
 ```
 
-*"Numeric columns get scaled, the city column gets one-hot encoded, and the model never sees the difference. Same `fit`, same `predict`, same `joblib.dump`."*
+**Output:**
+```
+Reloaded model predictions match original: True
+```
+
+**Close the loop:** *"That's the entire Module 2 arc in eleven lines: load, clean, split, scale, train, tune, evaluate, select, persist, reload, confirm. Every session for the last six weeks fed into one of these steps."*
 
 ---
 
 ## Summary & Wrap-Up (5 min)
 
-**The spine of today, in six lines:**
+**What we covered today:**
+- Fair model comparison requires holding the split, features, and scaling constant across all models
+- "Best" is multi-dimensional: metric performance + interpretability + training cost + inference latency
+- `joblib.dump` / `joblib.load` persist a model; **always persist the scaler (or the whole Pipeline) alongside it**
+- Forgetting to save/apply preprocessing at inference time fails silently — it doesn't crash, it just quietly produces wrong predictions
+- The full Module 2 model line-up: Linear/Ridge/Lasso Regression, Logistic Regression, Decision Tree, Random Forest, K-Means, Hierarchical Clustering, PCA
+- Classical ML's hard limits: data-hungry, correlation ≠ causation, no generalization outside training distribution, bias amplification, drift, one-model-one-task
 
-1. **Choose** deliberately — problem type, data size, need to explain. Simplest baseline first.
-2. **Complexity must earn its place** — a 0.2% gain inside the noise band is not a gain.
-3. **Tune** with `GridSearchCV` or `RandomizedSearchCV`, on the **training set only**. Tuning on test is cheating.
-4. **`Pipeline`** makes leakage structurally impossible — the scaler refits inside every fold.
-5. **`joblib.dump` the whole Pipeline**, with its versions and its one honest test score.
-6. **The module in one line:** clean data → honest split → simple baseline → earn your complexity → measure once → ship it.
+**Bridge to next session:** *"Module 2 is complete. You can now take raw tabular data all the way to a saved, reloadable model. Module 3 — GenAI & Agents — starts fresh with a different kind of model entirely: Large Language Models that are trained once and then *prompted* into new tasks without retraining. Session 1 is GenAI Foundations & Prompt Engineering — bring your curiosity, not your scaler."*
 
-**And the closing frame:** *"You started Module 2 having never trained a model. You are ending it with a tuned, leak-proof, saved pipeline on disk — which is more than a lot of people with 'ML' in their job title have ever personally built."*
-
-**Bridge:** *"Module 3 — **GenAI & Agents** — opens next. The model will already be trained, and your job shifts from fitting to prompting, retrieving, and evaluating. But the very first thing we will ask about any LLM output is the same thing we asked all module: **compared to what baseline, and measured on what held-out data?** Bring that question with you."*
+**Homework / self-practice:** Pick any classification dataset from `sklearn.datasets` you haven't used yet (`load_digits` or `load_iris` both work well). Run the full 6-step pipeline from Practical 4 on it, compare at least two model types, and save the winner with `joblib`. Write one sentence justifying your choice beyond "it had higher accuracy."
 
 ---
 
 ## Q&A & Doubt Solving (5 min)
 
-**Q: If `GridSearchCV` already cross-validates, why do I still need a test set?**
-→ Because you *selected* on the cross-validation score. You ran five candidates and kept the best of five — the maximum of several noisy numbers is optimistically biased upward. The test set is the only data that participated in **zero** decisions, which is exactly what makes its score believable. `best_score_` is for choosing; the test score is for reporting.
+**Q: If Random Forest usually performs best, why would I ever ship Logistic Regression?**
+→ "Best" on a metrics table is not the same as "best for this deployment." If you need to explain individual decisions (loan denials, medical flags) or need sub-millisecond latency at massive scale, the small accuracy gain from Random Forest often isn't worth the interpretability or speed cost.
 
-**Q: `GridSearchCV` is taking forever. What do I actually do?**
-→ Three levers, in order. First, `n_jobs=-1` to use all cores. Second, switch to `RandomizedSearchCV` with an `n_iter` you can afford — with many hyperparameters, random draws find near-optimal settings far faster than an exhaustive grid, because most hyperparameters barely matter. Third, shrink the grid: tune the two or three hyperparameters that actually move the score, not all nine.
+**Q: Do I need to save the scaler even if my model is a Decision Tree, which doesn't need scaling?**
+→ No — trees split on raw feature thresholds, so scaling doesn't change their predictions. But if your pipeline scales features for *any* other reason (e.g., you reuse the same preprocessing for multiple models), save it anyway for consistency. When in doubt, use a single `Pipeline` object so you never have to reason about it manually.
 
-**Q: Should I always use a Pipeline, even for a quick experiment?**
-→ Yes, and this is not pedantry. The leakage demo scored 80% accuracy on pure noise, silently, with no error. There is no warning message for a leak — the only symptom is a score that is too good, which is precisely the symptom you are least motivated to investigate. Pipelines make the mistake unrepresentable.
+**Q: What's the difference between `pickle` and `joblib` in practice — do I need to worry about it?**
+→ For plain Python objects they're interchangeable. For sklearn models specifically, `joblib` is recommended because it handles large NumPy arrays (weights, tree splits) more efficiently — smaller files, faster save/load. Default to `joblib` for anything sklearn.
 
-**Q: Why `joblib` and not `pickle`? And is a `.joblib` file safe to email?**
-→ `joblib` is more efficient with the large NumPy arrays inside fitted models, which is why scikit-learn recommends it. But it shares pickle's security model: **loading a file can execute arbitrary code**. Emailing one you built is fine. Loading one you downloaded from a stranger is exactly as safe as running a stranger's `.py` script — which is to say, not at all.
+**Q: My saved model works today. Will it still work in a year?**
+→ Not guaranteed. Major sklearn version upgrades can break compatibility with old saved models. Best practice: pin your sklearn version in requirements, record it alongside the saved model file, and re-save (retrain if needed) after major upgrades rather than assuming old files will "just work."
 
-**Q: My model works perfectly today. Will the `.joblib` still work in a year?**
-→ Only if the environment matches. A pipeline saved under scikit-learn 1.3 can warn or outright fail under a later version, because the internal object layouts change. Pin your versions in `requirements.txt`, store the version string inside the artifact, and — the deeper issue — remember the *world* also drifts. Prices, behaviour, and seasons change. A model is not a permanent truth; it is a snapshot of the data it saw, and it needs re-checking on fresh data.
+**Q: Is a Random Forest with 200 trees really impossible to interpret?**
+→ Not impossible, but harder. Tools like SHAP or permutation importance can approximate "why" for ensemble models — that's a topic for further self-study, but know that the trade-off is real, not absolute. It's "much harder to fully explain," not "impossible to gain any insight into."
+
+**Q: Why did GridSearchCV pick fewer trees (`n_estimators=50`) as "best" here — isn't more always better?**
+→ Not necessarily, and this is a good catch. More trees generally help until returns flatten, but with cross-validation scoring, a smaller forest that generalizes equally well can tie or edge out a larger one on a small, easy dataset like this. On harder data you'd typically see more estimators win.
 
 ---
 
 ## Instructor Notes
 
-- **Installs:** nothing new. `joblib` ships with scikit-learn. `RandomizedSearchCV` with distributions uses `scipy.stats.randint`, and SciPy is already a scikit-learn dependency.
-- **Pacing:** Practicals 3 and 4 are the point of the session — protect them. If you are running late, compress Concept 1 (they read the selection table in the pre-read) and shorten the bake-off to four candidates. Do **not** cut the leakage demo in Practical 2; it is the emotional core of the session.
-- **File paths:** Practical 4 assumes `cancer_artifact.joblib` sits in the working directory that Practical 3 wrote to. If students use Colab, warn them the file lives in the ephemeral session storage and vanishes on disconnect — have them download it or mount Drive.
-- **THE most common mistake:** the `param_grid` key. Students write `{"C": [...]}` instead of `{"model__C": [...]}` and get a baffling `Invalid parameter` error. Pre-empt it: write `model__C` on the board, circle the **two** underscores, and say the rule aloud — *"step name, two underscores, hyperparameter name."*
-- **Second most common:** saving `named_steps["model"]` instead of the pipeline, then being confused when production predictions are garbage. Make them break it on purpose in Practical 4 — the silence of the failure is the lesson.
-- **Emotional note:** this is the last session of Module 2. Leave two minutes at the end to name what they have built. Many of them arrived unable to train a single model; they are leaving with a shippable artifact. Say it out loud — they will not say it to themselves.
+- **Dataset choices:** `load_breast_cancer` (binary, 30 features) drives Practicals 1-3; `load_wine` (3-class, 13 features) drives Practical 4 so students see the pipeline applied to a fresh dataset, not a repeat. Both are built into sklearn — zero internet dependency, fully reproducible with `random_state=42`.
+- **Numbers will drift slightly:** Exact accuracy/F1/timing values can shift by a thousandth of a point across sklearn versions, OS, or CPU. Tell students up front: match the *shape* of the output and the *ordering* of models, not the literal decimal digits.
+- **Common mistake to watch for:** Students scaling `X_test` with `scaler.fit_transform()` instead of `scaler.transform()` — this silently re-fits a new scaler on test data (data leakage) instead of reusing the training scaler. Catch this live if you see it; it's one of the most common and hardest-to-notice bugs in the whole module.
+- **Live-coding tip:** For the persistence "bug" demo (Practical 3), narrate it as a detective story — "the code ran with no errors, the shapes matched, everything *looked* fine... so why are 63% of predictions wrong?" Let students sit with the discomfort for a moment before revealing the missing scaler.
+- **For advanced students:** Show the `Pipeline` extension in Practical 3 as the "professional" pattern, and mention `mlflow` or a model registry conceptually (no need to install) as what real teams use to track which model version is in production.
+- **Time-check contingency:** If running behind after the break, compress Practical 4 to a walkthrough (instructor runs it, students follow along) rather than live independent coding — the review content in Concept 4 must not be cut, since the comparison table and ML-limitations list are the main takeaway artifacts of the entire module.
+- **Closing the module:** This is the last classical ML session. Consider a 1-minute show-of-hands: "Which Module 2 model type do you feel most confident explaining to a non-technical friend?" It's a light, low-stakes way to surface any lingering confusion before Module 3 begins.

@@ -5,11 +5,11 @@
 
 ## Session Overview
 
-**Goal:** Students take a single overfitting decision tree from Session 6, watch it wobble, and then progressively beat it — first with a voting classifier, then with bagging, then with a Random Forest, and finally with gradient boosting. They finish with a leaderboard of five models on one dataset and can explain *why* each one improved on the last.
+**Goal:** Students can explain *why* combining many weak/overfit trees produces a stronger, lower-variance classifier, fit and tune a `RandomForestClassifier`, and interpret `.feature_importances_` responsibly.
 
-**Student profile at this point:** They can train and score `LogisticRegression`, `KNeighborsClassifier`, and `DecisionTreeClassifier` (Session 6). They know `train_test_split`, `accuracy_score`, and the bias–variance trade-off (Session 2). They have never used `sklearn.ensemble`. They do NOT yet know precision, recall, ROC-AUC, or thresholds — that is Session 8. Keep evaluation to accuracy plus a glance at the confusion matrix.
+**Student profile at this point:** Comfortable with `LogisticRegression`, a single `DecisionTreeClassifier`, `train_test_split`, and reading Gini/information-gain splits from Session 6. Has NOT yet seen bootstrapping, ensembling, or any tuning beyond `max_depth`.
 
-**Key outcome:** A single notebook containing a model leaderboard — single tree → voting → bagging → Random Forest → boosting — plus a feature importance bar chart they can explain to a non-technical stakeholder.
+**Key outcome:** By end of class, every student can articulate the bias-variance story of ensembling in one sentence, has a working Random Forest that measurably beats a single tree on the same data, and can rank + sanity-check feature importances.
 
 ---
 
@@ -17,16 +17,16 @@
 
 | Segment | Duration | Cumulative |
 |---|---|---|
-| Opening — The Jar of Sweets | 5 min | 0:05 |
-| **Concept 1:** Why One Deep Tree Cannot Be Trusted | 10 min | 0:15 |
-| **Practical 1:** The wobbling tree + first voting ensemble | 15 min | 0:30 |
-| **Concept 2:** Bagging — Bootstrap, Then Aggregate | 10 min | 0:40 |
-| **Practical 2:** BaggingClassifier and the n_estimators curve | 15 min | 0:55 |
+| Opening & Context | 5 min | 0:05 |
+| **Concept 1:** Why Ensembles? From One Tree to a Forest | 10 min | 0:15 |
+| **Practical 1:** A Single Tree Overfits — Prove It | 15 min | 0:30 |
+| **Concept 2:** Bagging — Bootstrap Aggregating & Majority Vote | 10 min | 0:40 |
+| **Practical 2:** Random Forest vs. Single Tree — The Variance Showdown | 15 min | 0:55 |
 | **BREAK** | 10 min | 1:05 |
-| **Concept 3:** Random Forest and Feature Importance | 10 min | 1:15 |
-| **Practical 3:** Random Forest, its three knobs, importance plot | 15 min | 1:30 |
-| **Concept 4:** Boosting — Sequential Error Correction | 10 min | 1:40 |
-| **Practical 4:** Gradient boosting and the final leaderboard | 10 min | 1:50 |
+| **Concept 3:** Forest Parameters — Tuning the Ensemble | 10 min | 1:15 |
+| **Practical 3:** Sweep `n_estimators`, `max_depth`, `max_features` | 15 min | 1:30 |
+| **Concept 4:** Feature Importance — Reading It Right | 10 min | 1:40 |
+| **Practical 4:** Rank Importances + the Correlated-Feature Trap | 10 min | 1:50 |
 | Summary & Wrap-Up | 5 min | 1:55 |
 | Q&A & Doubt Solving | 5 min | 2:00 |
 
@@ -34,497 +34,568 @@
 
 ## Opening (5 min)
 
-**Hook — run this live, do not skip it.** Put a photo of a jar of sweets on screen (or hold up an actual jar). Ask every student to type one guess into the chat for how many are inside. Collect all the guesses, then compute the mean on screen.
+**Hook:** Ask the class a non-ML question first: *"You need a medical diagnosis. Do you trust one doctor's opinion, or would you rather get the majority opinion of 200 independent doctors, each of whom saw a slightly different subset of your test results?"*
 
-Almost every time, the *average of the whole room* lands closer to the true count than the vast majority of individual guesses — often closer than the single best guesser. Individual errors point in every direction and cancel; the collective signal survives.
+Let a few students answer. Steer toward: more opinions, if independent enough, average out individual mistakes. This is exactly the idea behind ensembles in ML.
 
-*"So here is my question. Last week you each built one carefully tuned decision tree. What if the better move was never to build one great model — but to build a hundred mediocre ones and let them vote?"*
+**Context to set:** Last session you built a single Decision Tree — powerful, interpretable, but prone to memorizing the training data (100% train accuracy, weaker test accuracy). A single tree is like one doctor: confident, sometimes wrong, and very sensitive to which patients (rows) it happened to study. Today we fix that by growing a **forest** of trees and combining their votes.
 
-**What an ensemble is NOT:**
-- A single, bigger, deeper model
-- A way to fix bad data or bad features
-- Magic — if all your models make the *same* mistake, averaging them changes nothing
-- Guaranteed to beat a well-tuned single model on every dataset
-
-**What an ensemble IS:**
-- Many models, deliberately made *different* from one another, whose predictions are pooled
-- The single most reliable accuracy upgrade available on tabular data
-- The reason Random Forest and XGBoost dominate real-world ML on spreadsheets
-- A direct, targeted attack on the bias–variance trade-off from Session 2
+**Learning contract for today:**
+- Explain *why* many trees beat one tree (bagging + bootstrap sampling)
+- Fit a `RandomForestClassifier` and quantify how much variance it removes versus a single tree
+- Tune the three parameters that matter most: `n_estimators`, `max_depth`, `max_features`
+- Extract, rank, and correctly interpret feature importances
 
 ---
 
-## Concept Block 1: Why One Deep Tree Cannot Be Trusted (10 min)
+## Concept Block 1: Why Ensembles? From One Tree to a Forest (10 min)
 
-### Write this on the board
+### Recall from Session 6: the single-tree problem
+
+A Decision Tree with no depth limit will keep splitting until every leaf is pure (or nearly pure). That gives it very low **bias** — it can fit almost any pattern — but very high **variance**: change the training rows slightly (a different random sample, a different year of data) and you can get a *very different* tree with different splits, different depth, different predictions.
+
+**Teaching point:** "Overfitting" and "high variance" are the same idea seen from two angles. Overfitting = fits training noise. High variance = unstable across resamples of the same population. A single unconstrained tree suffers from both.
+
+### The core ensembling idea
 
 ```
-TOTAL ERROR  =  BIAS²  +  VARIANCE  +  irreducible noise
-
-BIAS     = how wrong the model is ON AVERAGE
-           (too simple → underfits)
-
-VARIANCE = how much the model CHANGES when the
-           training data changes slightly
-           (too complex → overfits)
+ONE MODEL                          MANY MODELS, COMBINED
+──────────                         ──────────────────────
+ One tree                           Tree 1   Tree 2   Tree 3  ...  Tree N
+ sees ALL rows                      each sees a DIFFERENT resample of rows
+ memorizes noise                    each memorizes DIFFERENT noise
+ one confident (maybe wrong)        N slightly-different opinions
+ prediction                         → majority vote / average
+                                     → individual noise cancels out,
+                                       the shared real signal survives
 ```
 
-Now place last week's decision tree on that map.
+**Key teaching point:** An ensemble does not work because each individual model becomes smarter. Each tree in a forest is still allowed to overfit its own bootstrap sample. The ensemble works because the trees' *mistakes* are different from each other while the *true pattern* is shared by all of them — averaging keeps the signal and cancels the noise.
 
-A decision tree grown with no `max_depth` keeps splitting until every leaf is pure. Training accuracy: 1.00. Every single time. It has *memorised* the rows.
+### Two families of ensembles (preview only — bagging is today's focus)
 
-**The critical property: a deep tree is LOW BIAS but HIGH VARIANCE.** On average it aims at the right answer. But move ten rows in or out of the training set and you get a structurally different tree with different predictions.
-
-### The board diagram — where each model sits
-
-| Model | Bias | Variance | Symptom |
+| Family | Idea | Example | This session? |
 |---|---|---|---|
-| Logistic regression | High | Low | Underfits curvy boundaries |
-| Shallow tree, `max_depth=2` | High | Low | Boundary too blocky |
-| **Deep tree, no limit** | **Low** | **HIGH** | Train 1.00, test wobbles |
-| KNN with `k=1` | Low | High | Memorises neighbours |
+| **Bagging** | Train models in parallel on different bootstrap samples, then vote/average | Random Forest | ✅ Yes |
+| **Boosting** | Train models sequentially, each one fixing the previous one's errors | Gradient Boosting, XGBoost | Later in course |
 
-### The strategy that follows
-
-If a deep tree is *unbiased but noisy*, then you do not need a smarter tree. You need **many noisy trees whose noise cancels out**. That is the whole idea of this session.
-
-> **The one rule:** ensembling only works if the members make *different* mistakes. Say this three times today. Every technique that follows — bootstrapping, feature subsampling, using different model types — exists purely to manufacture that difference.
-
-### The simplest ensemble: the Voting Classifier
-
-Take three models that are *already different by nature* — a linear one, a distance-based one, a rule-based one — and pool their answers.
-
-| | **Hard voting** | **Soft voting** |
-|---|---|---|
-| Combines | Predicted labels | Predicted probabilities |
-| Rule | Majority wins | Highest average probability wins |
-| Requires | `predict` | `predict_proba` |
-| Character | Blunt, robust | Confidence-aware, usually better |
+**Teaching point:** Random Forest = Bagging + Decision Trees + one extra trick (random feature subsets per split). We build up to that definition piece by piece over the next two blocks.
 
 ---
 
-## Practical Block 1: The Wobbling Tree + First Ensemble (15 min)
+## Practical Block 1: A Single Tree Overfits — Prove It (15 min)
+
+### Dataset for today
+We use `sklearn.datasets.load_breast_cancer` — 569 patient records, 30 numeric measurements from cell nuclei (radius, texture, perimeter, concavity, etc.), binary label (malignant / benign). It is built into scikit-learn (no internet needed), realistic, and has enough correlated features to make the feature-importance caveat later in class concrete.
 
 ```python
 import numpy as np
-import pandas as pd
 from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score
 
-data = load_breast_cancer(as_frame=True)
-X, y = data.data, data.target          # 569 rows, 30 numeric features
-print("Shape:", X.shape)
-print("Class balance:\n", y.value_counts())
+data = load_breast_cancer()
+X, y = data.data, data.target
 
+print("Dataset shape:", X.shape)
+print("Classes:", dict(zip(*np.unique(y, return_counts=True))))
+print("Feature count:", len(data.feature_names))
+```
+
+**Output:**
+```
+Dataset shape: (569, 30)
+Classes: {np.int64(0): np.int64(212), np.int64(1): np.int64(357)}
+Feature count: 30
+```
+
+*(0 = malignant, 1 = benign — mention `data.target_names` if a student asks.)*
+
+```python
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.25, random_state=42, stratify=y
 )
+print("Train size:", X_train.shape[0], "Test size:", X_test.shape[0])
 
-# --- The single deep tree from Session 6 ---
-tree = DecisionTreeClassifier(random_state=42).fit(X_train, y_train)
-print("Deep tree  train acc:", round(tree.score(X_train, y_train), 3))
-print("Deep tree  test  acc:", round(tree.score(X_test, y_test), 3))
+# Single deep, unrestricted tree -- exactly like Session 6
+tree = DecisionTreeClassifier(random_state=42)
+tree.fit(X_train, y_train)
+
+train_acc = tree.score(X_train, y_train)
+test_acc = tree.score(X_test, y_test)
+print(f"\nSingle Decision Tree (no depth limit)")
+print(f"Train accuracy: {train_acc:.3f}")
+print(f"Test accuracy:  {test_acc:.3f}")
+print(f"Tree depth reached: {tree.get_depth()}")
+print(f"Overfit gap (train - test): {train_acc - test_acc:.3f}")
 ```
 
-Train accuracy will print as exactly `1.0`. Test accuracy will land somewhere in the low 0.90s. **Pause here.** That gap is the whole session in one line of output.
+**Output:**
+```
+Train size: 426 Test size: 143
+
+Single Decision Tree (no depth limit)
+Train accuracy: 1.000
+Test accuracy:  0.923
+Tree depth reached: 7
+Overfit gap (train - test): 0.077
+```
+
+**Walk through:** Train accuracy is a perfect 1.000 — the tree memorized every training row. Test accuracy drops to 0.923. That 7.7-point gap is the overfitting signature we flagged last session.
+
+### Now show instability — same tree logic, different data slice
 
 ```python
-# --- Demonstrate VARIANCE: same model, slightly different data ---
-rng = np.random.RandomState(42)
-scores = []
+print("--- Instability check: same tree, 5 different train/test splits ---")
 for seed in range(5):
-    idx = rng.choice(len(X_train), size=len(X_train), replace=True)   # a bootstrap sample
-    t = DecisionTreeClassifier(random_state=seed).fit(X_train.iloc[idx], y_train.iloc[idx])
-    scores.append(accuracy_score(y_test, t.predict(X_test)))
-
-print("Five deep trees, five resamples:", [round(s, 3) for s in scores])
-print("Spread (max - min):", round(max(scores) - min(scores), 3))
-print("Mean of the five   :", round(np.mean(scores), 3))
+    Xtr, Xte, ytr, yte = train_test_split(X, y, test_size=0.25, random_state=seed, stratify=y)
+    t = DecisionTreeClassifier(random_state=42)
+    t.fit(Xtr, ytr)
+    print(f"seed={seed}  train_acc={t.score(Xtr, ytr):.3f}  test_acc={t.score(Xte, yte):.3f}")
 ```
 
-Expect five different test accuracies with a spread of roughly 5 percentage points, all from *the same algorithm on the same data*. That spread **is** variance — you are watching it happen.
-
-```python
-# --- The simplest ensemble: pool three DIFFERENT models ---
-from sklearn.ensemble import VotingClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-
-members = [
-    ("logreg", make_pipeline(StandardScaler(), LogisticRegression(max_iter=5000, random_state=42))),
-    ("knn",    make_pipeline(StandardScaler(), KNeighborsClassifier(n_neighbors=5))),
-    ("tree",   DecisionTreeClassifier(max_depth=4, random_state=42)),
-]
-
-for name, model in members:
-    model.fit(X_train, y_train)
-    print(f"{name:8s} alone : {model.score(X_test, y_test):.3f}")
-
-hard = VotingClassifier(members, voting="hard").fit(X_train, y_train)
-soft = VotingClassifier(members, voting="soft").fit(X_train, y_train)
-print("Hard voting     :", round(hard.score(X_test, y_test), 3))
-print("Soft voting     :", round(soft.score(X_test, y_test), 3))
+**Output:**
+```
+seed=0  train_acc=1.000  test_acc=0.930
+seed=1  train_acc=1.000  test_acc=0.930
+seed=2  train_acc=1.000  test_acc=0.930
+seed=3  train_acc=1.000  test_acc=0.937
+seed=4  train_acc=1.000  test_acc=0.944
 ```
 
-**Live walk-through — and be honest here, it is the best moment in the block.** The voting ensemble comfortably beats the *tree*, but on this particular dataset the plain logistic regression alone is likely to beat the ensemble outright. **Do not hide this. Teach it.**
+**Discussion prompt:** *"Train accuracy is 1.000 every single time — is that reassuring or worrying?"* → It's worrying. A model that always perfectly fits training data regardless of which rows it sees isn't learning a stable pattern; it's memorizing whatever rows happen to be in front of it. Test accuracy bounces around because the memorized noise differs per split.
 
-Breast cancer data is very nearly linearly separable, so logistic regression is close to optimal — and pooling it with two weaker members *drags it down*. This is exactly the "What an ensemble is NOT" bullet from the opening, arriving live on screen: **an ensemble is not automatically better than its best member.** Voting helps when the members are of *comparable* strength and make *different* mistakes. It hurts when you dilute one excellent model with mediocre ones.
-
-Point out the `make_pipeline(StandardScaler(), ...)` wrappers too: logistic regression and KNN care about scale, the tree does not, and pipelines give each member exactly what it needs. Then ask the room: *"Hard and soft voting can disagree on this dataset. What extra information does soft voting have that hard voting throws away — and why might that extra information still not save us here?"*
+**Bridge line into Concept 2:** *"What if, instead of training one tree on all 426 rows, we trained 200 trees, each on a different random resample of those same 426 rows, and let them vote?"*
 
 ---
 
-## Concept Block 2: Bagging — Bootstrap, Then Aggregate (10 min)
+## Concept Block 2: Bagging — Bootstrap Aggregating & Majority Vote (10 min)
 
-### The name is the algorithm
+### What "bagging" means
 
-**B**ootstrap **AGG**regat**ING**. Two steps, both in the name.
+**Bagging** = **B**ootstrap **AGG**regat**ING**. Two ingredients:
 
-```
-STEP 1 — BOOTSTRAP
-  From your N training rows, draw N rows WITH REPLACEMENT.
-  Some rows appear twice. Some never appear at all.
-  (~63% of unique rows show up; ~37% are left out — "out-of-bag")
-  Do this B times → B different training sets.
+1. **Bootstrap sampling** — from your training set of size *n*, draw *n* rows **with replacement**. Some rows appear multiple times, some are left out entirely (on average, about 37% of rows are left out of any single bootstrap sample — these are called "out-of-bag" rows, useful for a free validation estimate).
+2. **Aggregating** — train one model per bootstrap sample, then combine their predictions: majority vote for classification, average for regression.
 
-STEP 2 — AGGREGATE
-  Train one deep tree on each bootstrap sample → B trees.
-  Classification → majority vote.
-  Regression      → average.
-```
+### ASCII walkthrough — sampling with replacement
 
-### Why averaging kills variance — the board argument
-
-Ask the room: *"If I measure your height once with a shaky tape, I might be off by 3 cm. If I measure ten times and average, how far off am I?"*
-
-The statistical result: averaging `n` independent noisy estimates shrinks the noise by roughly `√n`.
+Imagine 8 training rows labeled A–H. Three bootstrap samples drawn from them:
 
 ```
-variance of one tree      = V
-variance of B averaged
-trees, if independent     = V / B
+Original rows:  A  B  C  D  E  F  G  H
+
+Bootstrap sample 1: G  D  E  G  C  H  E  E    (E appears 3x, A/B/F missing)
+Bootstrap sample 2: G  B  C  G  C  C  H  E    (C appears 3x, A/D/F missing)
+Bootstrap sample 3: D  H  H  C  F  E  B  H    (H appears 3x, A/G missing)
 ```
 
-Four trees, half the noise. A hundred trees, a tenth of it. **But** the trees are *not* fully independent — they all come from the same underlying dataset, so they are correlated, and the real reduction is smaller than the formula promises. Hold that thought; Concept 3 is entirely about fixing it.
+**Teaching point:** Every bootstrap sample is the *same size* as the original (8 rows here), but each one is a *different mix* — different rows repeated, different rows dropped. Each tree trained on one of these samples "sees the world" slightly differently.
 
-### What bagging does and does not fix
+### From samples to a vote
 
-| | Effect of bagging |
-|---|---|
-| **Variance** | Falls sharply — this is the whole point |
-| **Bias** | Essentially unchanged |
-| **Train accuracy** | Still near 1.00 — don't panic |
-| **Test accuracy** | Rises, and *stops jumping around* |
-| **Cost** | `n_estimators` times slower to train |
+```
+Bootstrap 1 → Tree 1 → predicts "malignant"
+Bootstrap 2 → Tree 2 → predicts "benign"
+Bootstrap 3 → Tree 3 → predicts "malignant"
+        ...                  ...
+Bootstrap N → Tree N → predicts "malignant"
+                 |
+                 v
+        MAJORITY VOTE across all N trees
+                 |
+                 v
+        Final ensemble prediction: "malignant"
+```
 
-> **Say this out loud:** "Bagging fixes wobble, not blindness. If all your trees are wrong in the same direction, averaging them keeps them wrong."
+For `RandomForestClassifier`, scikit-learn actually averages the trees' predicted class *probabilities* and picks the highest — a "soft vote" — but the majority-vote intuition is the right mental model.
+
+### The Random Forest's extra trick: random feature subsets
+
+Bagging alone (train N trees on N bootstrap samples of *rows*) is already an ensemble — it's literally called `BaggingClassifier` in scikit-learn. A **Random Forest** adds one more randomization: at **every split**, each tree is only allowed to consider a random subset of the *features* (controlled by `max_features`), not all 30.
+
+**Teaching point — why this matters:** Without it, if one feature (say `worst perimeter`) is extremely predictive, almost every tree in the "forest" would pick it for the very first split, and all the trees would end up highly correlated — nearly identical, defeating the purpose of averaging. Restricting the feature pool per split forces the trees to *disagree* with each other more, and it is exactly that diversity that cancels out individual errors when you vote.
+
+```
+Bagging alone:        every split considers ALL features   → trees look similar
+Random Forest:        every split considers a RANDOM SUBSET → trees look different
+                       of features (e.g. sqrt(30) ≈ 5 at a time)
+```
+
+**One-line definition to put on the board:**
+> Random Forest = many Decision Trees, each trained on a bootstrap sample of rows, each split restricted to a random subset of features, combined by majority/probability vote.
 
 ---
 
-## Practical Block 2: BaggingClassifier and the n_estimators Curve (15 min)
+## Practical Block 2: Random Forest vs. Single Tree — The Variance Showdown (15 min)
 
 ```python
-from sklearn.ensemble import BaggingClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import cross_val_score
 
-bag = BaggingClassifier(
-    estimator=DecisionTreeClassifier(random_state=42),  # the SAME deep tree as before
-    n_estimators=100,
-    bootstrap=True,          # this is the "bootstrap" in bagging
-    random_state=42,
-    n_jobs=-1                # trees are independent → train them in parallel
-)
-bag.fit(X_train, y_train)
+tree = DecisionTreeClassifier(random_state=42)
+tree.fit(X_train, y_train)
 
-print("Single deep tree :", round(tree.score(X_test, y_test), 3))
-print("100 bagged trees :", round(bag.score(X_test, y_test), 3))
-print("Bagged train acc :", round(bag.score(X_train, y_train), 3))
+forest = RandomForestClassifier(n_estimators=200, random_state=42)
+forest.fit(X_train, y_train)
+
+print("Model            Train Acc   Test Acc   Gap")
+t_train, t_test = tree.score(X_train, y_train), tree.score(X_test, y_test)
+f_train, f_test = forest.score(X_train, y_train), forest.score(X_test, y_test)
+print(f"Single Tree      {t_train:.3f}       {t_test:.3f}      {t_train - t_test:.3f}")
+print(f"Random Forest    {f_train:.3f}       {f_test:.3f}      {f_train - f_test:.3f}")
 ```
 
-The bagged score should land a few points above the single tree. Train accuracy stays at or very near 1.00 — **call this out explicitly**, because students will read it as "still overfitting" and panic. It is not overfitting; each individual tree memorises, but the *vote* generalises.
+**Output:**
+```
+Model            Train Acc   Test Acc   Gap
+Single Tree      1.000       0.923      0.077
+Random Forest    1.000       0.958      0.042
+```
+
+**Walk through:** Both models still fit training data perfectly (1.000) — each individual tree in the forest is *still* an overfit tree. But the forest's *test* accuracy is higher (0.958 vs. 0.923) and its overfit gap nearly halves (0.042 vs. 0.077). This is the promised effect: combining overfit trees produces a *less* overfit ensemble.
+
+### The real variance story: repeat across many resamples
+
+A single comparison could be luck. Let's check variance directly with 5-fold cross-validation and with 10 independent train/test splits.
 
 ```python
-# --- How many trees do we actually need? ---
-import matplotlib.pyplot as plt
+print("--- 5-fold cross-validation accuracy (whole dataset) ---")
+tree_cv = cross_val_score(DecisionTreeClassifier(random_state=42), X, y, cv=5)
+forest_cv = cross_val_score(RandomForestClassifier(n_estimators=200, random_state=42), X, y, cv=5)
 
-sizes = [1, 2, 5, 10, 25, 50, 100, 200]
-accs = []
-for n in sizes:
-    b = BaggingClassifier(
-        estimator=DecisionTreeClassifier(random_state=42),
-        n_estimators=n, random_state=42, n_jobs=-1
-    ).fit(X_train, y_train)
-    accs.append(b.score(X_test, y_test))
-
-plt.figure(figsize=(7, 4))
-plt.plot(sizes, accs, "o-", color="teal", lw=2)
-plt.axhline(tree.score(X_test, y_test), color="crimson", ls="--",
-            label="Single deep tree")
-plt.xlabel("Number of trees in the bag")
-plt.ylabel("Test accuracy")
-plt.title("Bagging: accuracy climbs, then plateaus — it never collapses")
-plt.legend()
-plt.tight_layout()
-plt.show()
+print("Single Tree   fold scores:", np.round(tree_cv, 3))
+print(f"Single Tree   mean={tree_cv.mean():.3f}  std={tree_cv.std():.3f}")
+print("Random Forest fold scores:", np.round(forest_cv, 3))
+print(f"Random Forest mean={forest_cv.mean():.3f}  std={forest_cv.std():.3f}")
 ```
 
-**Live walk-through:** The curve rises steeply from 1 to about 25 trees, then flattens. Trace the plateau with your finger and make the point that *matters most today*: **the curve flattens, it does not turn downward.** Adding trees to a bag can never make it overfit — it can only waste your CPU. Contrast this now, verbally, with boosting, where more trees eventually *does* hurt. Then ask: *"If more trees are always safe, why not use 10,000?"* (Answer: training and prediction time, and zero accuracy gain past the plateau.)
+**Output:**
+```
+--- 5-fold cross-validation accuracy (whole dataset) ---
+Single Tree   fold scores: [0.912 0.904 0.93  0.956 0.885]
+Single Tree   mean=0.917  std=0.024
+Random Forest fold scores: [0.921 0.939 0.982 0.974 0.973]
+Random Forest mean=0.958  std=0.024
+```
+
+```python
+print("--- Test accuracy across 10 different train/test splits ---")
+tree_scores, forest_scores = [], []
+for seed in range(10):
+    Xtr, Xte, ytr, yte = train_test_split(X, y, test_size=0.25, random_state=seed, stratify=y)
+    t = DecisionTreeClassifier(random_state=42).fit(Xtr, ytr)
+    f = RandomForestClassifier(n_estimators=200, random_state=42).fit(Xtr, ytr)
+    tree_scores.append(t.score(Xte, yte))
+    forest_scores.append(f.score(Xte, yte))
+
+tree_scores, forest_scores = np.array(tree_scores), np.array(forest_scores)
+print(f"Single Tree:   mean={tree_scores.mean():.3f}  std={tree_scores.std():.3f}  "
+      f"min={tree_scores.min():.3f}  max={tree_scores.max():.3f}")
+print(f"Random Forest: mean={forest_scores.mean():.3f}  std={forest_scores.std():.3f}  "
+      f"min={forest_scores.min():.3f}  max={forest_scores.max():.3f}")
+```
+
+**Output:**
+```
+--- Test accuracy across 10 different train/test splits ---
+Single Tree:   mean=0.932  std=0.023  min=0.874  max=0.965
+Random Forest: mean=0.963  std=0.010  min=0.951  max=0.979
+```
+
+**Key teaching point — read this out loud:** The Random Forest's standard deviation across 10 splits (0.010) is less than half the single tree's (0.023). Its *worst* result (0.951) beats the single tree's *average* result (0.932). This is variance reduction made concrete — not a promise, a measurement.
+
+**Discussion prompt:** *"We used `n_estimators=200` — 200 trees. Is more always better? What do you think happens with 1 tree in a 'forest'? What about 1000?"* → Bridges directly into Concept Block 3.
 
 ---
 
 ## BREAK (10 min)
 
-*Before you go: bagging gives every tree all 30 columns to choose from. If one column is far stronger than the rest, what will every single tree split on first — and what does that do to the "make different mistakes" rule?*
+*Suggested break prompt — ask students to guess, before returning: "If I set `n_estimators=1000` instead of `200`, will test accuracy go up, down, or stay about the same? Will training take longer?" Collect a show of hands informally when class resumes.*
 
 ---
 
-## Concept Block 3: Random Forest and Feature Importance (10 min)
+## Concept Block 3: Forest Parameters — Tuning the Ensemble (10 min)
 
-### The problem the break question exposed
+Three parameters do almost all of the work when tuning a Random Forest.
 
-In plain bagging, every tree can see every column. In the breast cancer data, `worst_perimeter` is enormously predictive. So tree 1 splits on it first. And tree 2. And tree 87. The trees end up structurally near-identical, they make **the same mistakes**, and averaging them recovers far less variance than the `V/B` formula promised.
-
-**Correlated trees are barely better than one tree.**
-
-### The Random Forest fix — one extra line of randomness
-
-```
-Random Forest = Bagging  +  at EVERY split, each tree may only
-                            consider a RANDOM SUBSET of features
-```
-
-That is the entire difference. At each node, the tree picks `max_features` columns at random (`sqrt(30) ≈ 5` by default for classification) and finds the best split *among those five only*. A different five at the next node.
-
-The dominant column is simply *absent* from many splits. Weaker-but-useful columns finally get a turn. The trees **decorrelate** — and now averaging does its full job.
-
-### The three knobs
-
-| Knob | Meaning | Start with | If you increase it |
-|---|---|---|---|
-| `n_estimators` | Number of trees | 100–500 | Safer, slower, never overfits |
-| `max_depth` | Depth cap per tree | `None` | More variance per tree; the forest absorbs it |
-| `max_features` | Columns offered per split | `"sqrt"` | Trees get more correlated — less decorrelation benefit |
-
-### Feature importance
-
-Every split records how much it improved leaf purity. Average that gain across all trees and all splits, normalise to sum to 1.0 — that is `rf.feature_importances_`.
-
-**Board warning, in capitals:** **IMPORTANCE IS NOT CAUSATION.** A feature can rank high because it is *correlated* with the true driver, not because it drives anything. It tells you what the model leaned on. It does not tell you what the world does. It also quietly *inflates* high-cardinality and continuous columns.
-
----
-
-## Practical Block 3: Random Forest, Its Knobs, and Importance (15 min)
-
-```python
-from sklearn.ensemble import RandomForestClassifier
-
-rf = RandomForestClassifier(
-    n_estimators=300,
-    max_depth=None,        # let each tree grow fully — the forest handles it
-    max_features="sqrt",   # THE line that makes it a forest, not just a bag
-    random_state=42,
-    n_jobs=-1
-)
-rf.fit(X_train, y_train)
-
-print("Single tree   :", round(tree.score(X_test, y_test), 3))
-print("Bagging (100) :", round(bag.score(X_test, y_test), 3))
-print("Random Forest :", round(rf.score(X_test, y_test), 3))
-```
-
-```python
-# --- Does max_features actually matter? Prove it. ---
-for mf in ["sqrt", "log2", 0.5, None]:      # None = use ALL features = plain bagging
-    m = RandomForestClassifier(n_estimators=300, max_features=mf,
-                               random_state=42, n_jobs=-1).fit(X_train, y_train)
-    label = "all (= bagging)" if mf is None else str(mf)
-    print(f"max_features={label:16s} test acc: {m.score(X_test, y_test):.3f}")
-```
-
-```python
-# --- Ask the forest what it leaned on ---
-importances = pd.Series(rf.feature_importances_, index=X.columns).sort_values()
-
-plt.figure(figsize=(8, 7))
-importances.tail(12).plot(kind="barh", color="seagreen")
-plt.xlabel("Mean decrease in impurity (importances sum to 1.0)")
-plt.title("Random Forest — Top 12 Features")
-plt.tight_layout()
-plt.show()
-
-print(importances.tail(5).round(3))
-print("Sum of all importances:", round(importances.sum(), 3))   # 1.0
-```
-
-**Live walk-through:** Three things to call out, in this order.
-
-1. The `max_features` sweep shows `None` (plain bagging) is usually the *weakest* setting. That is the decorrelation argument, proven on screen — not on a slide.
-2. The importance bars are dominated by a handful of "worst_*" columns. Note aloud that several of these are near-duplicates of each other, so the importance is being *split* between them — a column can look weak simply because its twin stole the credit.
-3. Print the sum: exactly 1.0. Importances are shares of a fixed pie, not standalone scores.
-
-*Ask the room:* "This forest says `worst_perimeter` matters most. Can I now tell an oncologist that perimeter **causes** malignancy?"
-
----
-
-## Concept Block 4: Boosting — Sequential Error Correction (10 min)
-
-### A completely different philosophy
-
-Bagging builds trees **in parallel**, each blind to the others, and averages away their noise.
-Boosting builds trees **one at a time**, each one *looking at what the previous ones got wrong* and specialising in exactly those rows.
-
-```
-Tree 1  → trained on the data.        Makes errors.
-Tree 2  → trained on TREE 1's ERRORS. Fixes some. Leaves new ones.
-Tree 3  → trained on the errors that remain.
-...
-Final prediction = Tree1 + lr·Tree2 + lr·Tree3 + ...
-```
-
-`lr` is the **learning rate**: how big a bite each new tree is allowed to take out of the remaining error. Small `learning_rate` = cautious steps = needs more trees = usually more accurate.
-
-### Weak learners, on purpose
-
-Boosting deliberately uses **shallow** trees — `max_depth=3` is typical. A single one is barely better than a coin flip. That is fine: it is a *specialist*, not a soloist. Its job is to fix one slice of error, not to be right on its own.
-
-Because each tree corrects a systematic error, boosting attacks **BIAS** — the other half of the Session 2 trade-off.
-
-### The comparison table — put this on the board and leave it there
-
-| | **Bagging / Random Forest** | **Boosting** |
+| Parameter | What it controls | Typical effect of increasing it |
 |---|---|---|
-| Trees are built | In **parallel**, independently | **Sequentially**, each fixing the last |
-| Primarily reduces | **Variance** | **Bias** |
-| Base learner | Deep, strong trees | Shallow, weak trees |
-| More trees | Never hurts — just slower | **Can overfit** |
-| Tuning | Forgiving, works out of the box | Sensitive — `learning_rate` is critical |
-| Parallelisable | Yes, fully | No — trees depend on each other |
-| Use it when | You want a strong, safe default | You need the last 2% of accuracy |
+| `n_estimators` | Number of trees in the forest | Accuracy improves then **plateaus**; more trees = more training time, not more overfitting |
+| `max_depth` | Max depth of each individual tree | Too shallow → underfits (high bias); too deep → each tree overfits more, but forest still absorbs some of it |
+| `max_features` | Features considered at each split | Smaller subset → more diverse trees (usually better generalization); `None` (all features) → trees more correlated, closer to plain bagging |
 
-### The names they will meet in industry
+### `n_estimators` — more trees, diminishing returns
 
-`GradientBoostingClassifier` is scikit-learn's classic implementation — correct, but slow on large data. `HistGradientBoostingClassifier` bins the features into histograms first and is dramatically faster; it is inspired by LightGBM. Outside scikit-learn, **XGBoost** and **LightGBM** are the two libraries that win most tabular Kaggle competitions and run in production at scale. The *ideas* are identical to what we just covered — the engineering is what differs.
+```
+Accuracy
+   ^
+   |            ___________________  <- plateau: adding more trees barely helps
+   |         __/
+   |      __/
+   |   __/
+   |__/
+   +---------------------------------> n_estimators
+   1    10    50   100   200   500
+```
+
+**Teaching point:** Unlike a single tree's `max_depth`, more trees do **not** cause a Random Forest to overfit more. Each additional tree is just another independent (bootstrap) vote — it adds averaging power, not memorization power. The only real cost of a very large `n_estimators` is compute time. A common default: start at 100–200, increase only if cross-validation still shows the score climbing.
+
+### `max_depth` — shallow trees still work in a forest
+
+**Teaching point:** A single shallow tree (`max_depth=2`) usually underfits badly on its own. But a *forest* of 200 shallow trees can still perform reasonably, because averaging many weak-but-diverse opinions recovers signal that any one shallow tree misses. This is the same idea behind boosting's "weak learners," previewed briefly last block.
+
+### `max_features` — the diversity dial
+
+```
+max_features = 'sqrt'  → each split sees ~sqrt(n_features) options → high diversity
+max_features = None    → each split sees ALL features              → low diversity (≈ bagging)
+```
+
+**Teaching point:** `max_features=None` does not disable randomness entirely — rows are still bootstrapped — but it removes the feature-level randomization that makes a Random Forest different from plain bagging. Expect it to perform similarly to, or slightly worse than, `sqrt`/`log2` on datasets with a few dominant features (exactly what we'll measure next).
+
+### How to tune in practice
+
+**Teaching point:** Don't grid-search all three blindly. Fix `n_estimators` generously (150–300; it rarely hurts), then tune `max_depth` and `max_features` with cross-validation. We will do a manual sweep now; `GridSearchCV`/`RandomizedSearchCV` (automated tuning) is covered in a later session.
 
 ---
 
-## Practical Block 4: Boosting and the Final Leaderboard (10 min)
+## Practical Block 3: Sweep `n_estimators`, `max_depth`, `max_features` (15 min)
 
 ```python
-from sklearn.ensemble import GradientBoostingClassifier, HistGradientBoostingClassifier
-
-gb = GradientBoostingClassifier(
-    n_estimators=100,
-    learning_rate=0.1,
-    max_depth=3,          # deliberately WEAK trees
-    random_state=42
-).fit(X_train, y_train)
-
-hgb = HistGradientBoostingClassifier(random_state=42).fit(X_train, y_train)
-
-print("Gradient Boosting     :", round(gb.score(X_test, y_test), 3))
-print("Hist Gradient Boosting:", round(hgb.score(X_test, y_test), 3))
+print("--- Sweep 1: n_estimators (max_depth=None, max_features='sqrt') ---")
+print(f"{'n_estimators':>12} {'train_acc':>10} {'test_acc':>10} {'gap':>8}")
+for n in [1, 5, 10, 50, 100, 300]:
+    f = RandomForestClassifier(n_estimators=n, random_state=42)
+    f.fit(X_train, y_train)
+    tr, te = f.score(X_train, y_train), f.score(X_test, y_test)
+    print(f"{n:>12} {tr:>10.3f} {te:>10.3f} {tr-te:>8.3f}")
 ```
+
+**Output:**
+```
+--- Sweep 1: n_estimators (max_depth=None, max_features='sqrt') ---
+n_estimators  train_acc   test_acc      gap
+           1      0.986      0.923    0.063
+           5      1.000      0.937    0.063
+          10      1.000      0.951    0.049
+          50      1.000      0.951    0.049
+         100      1.000      0.958    0.042
+         300      1.000      0.958    0.042
+```
+
+**Walk through:** Test accuracy climbs sharply from 1 tree (0.923 — barely better than a single tree) up through 10–50 trees, then **plateaus** at 0.958 from 100 trees onward. Going from 100 to 300 trees buys nothing here — exactly the diminishing-returns curve from the concept block.
 
 ```python
-# --- THE money demo: more trees. Boosting CAN overfit. A forest cannot. ---
-# Use a deliberately NOISY dataset so the effect is visible.
-from sklearn.datasets import make_classification
-
-Xn, yn = make_classification(n_samples=600, n_features=10, n_informative=4,
-                             n_redundant=2, flip_y=0.25,   # 25% of labels are wrong on purpose
-                             random_state=42)
-Xn_tr, Xn_te, yn_tr, yn_te = train_test_split(Xn, yn, test_size=0.3,
-                                              random_state=42, stratify=yn)
-
-print("BOOSTING — learning_rate=0.5, adding trees:")
-for n in [10, 50, 100, 300, 600, 1000]:
-    m = GradientBoostingClassifier(n_estimators=n, learning_rate=0.5,
-                                   max_depth=3, random_state=42).fit(Xn_tr, yn_tr)
-    print(f"  n_estimators={n:<5} train: {m.score(Xn_tr, yn_tr):.3f}"
-          f"  test: {m.score(Xn_te, yn_te):.3f}")
-
-print("\nRANDOM FOREST — same data, adding trees:")
-for n in [10, 50, 100, 300, 600, 1000]:
-    m = RandomForestClassifier(n_estimators=n, random_state=42,
-                               n_jobs=-1).fit(Xn_tr, yn_tr)
-    print(f"  n_estimators={n:<5} train: {m.score(Xn_tr, yn_tr):.3f}"
-          f"  test: {m.score(Xn_te, yn_te):.3f}")
+print("--- Sweep 2: max_depth (n_estimators=200) ---")
+print(f"{'max_depth':>12} {'train_acc':>10} {'test_acc':>10} {'gap':>8}")
+for d in [1, 2, 3, 5, 10, None]:
+    f = RandomForestClassifier(n_estimators=200, max_depth=d, random_state=42)
+    f.fit(X_train, y_train)
+    tr, te = f.score(X_train, y_train), f.score(X_test, y_test)
+    label = d if d is not None else "None"
+    print(f"{str(label):>12} {tr:>10.3f} {te:>10.3f} {tr-te:>8.3f}")
 ```
 
-**This is the single most important output of the session.** The boosting test accuracy *peaks early and then falls* as trees are added — it is dutifully fitting the 25% of labels we corrupted, because corrupted labels are exactly "what the previous trees got wrong". The forest's test accuracy climbs and then holds flat, and never turns down.
+**Output:**
+```
+--- Sweep 2: max_depth (n_estimators=200) ---
+   max_depth  train_acc   test_acc      gap
+           1      0.932      0.916    0.016
+           2      0.965      0.944    0.021
+           3      0.984      0.951    0.033
+           5      0.993      0.951    0.042
+          10      1.000      0.958    0.042
+        None      1.000      0.958    0.042
+```
 
-Put the two columns side by side on screen: **sequential ensembles can overfit with more members; parallel ensembles cannot.** Lower `learning_rate` (try 0.05) makes boosting take smaller, more cautious steps and delays the collapse — that is what the knob is *for*.
+**Walk through:** Even `max_depth=1` ("stumps" — one split per tree) reaches 0.916 test accuracy purely from voting across 200 of them — striking proof that weak individual learners can combine into a strong ensemble. Test accuracy keeps improving up to `max_depth=10`, then flattens (10 and `None` tie) — the trees stop needing more depth once they're already separating the classes well.
 
 ```python
-# --- The leaderboard ---
-leaderboard = pd.DataFrame({
-    "model": ["Single deep tree", "Soft voting (3 models)", "Bagging (100 trees)",
-              "Random Forest (300)", "Gradient Boosting", "HistGradientBoosting"],
-    "test_accuracy": [tree.score(X_test, y_test), soft.score(X_test, y_test),
-                      bag.score(X_test, y_test), rf.score(X_test, y_test),
-                      gb.score(X_test, y_test), hgb.score(X_test, y_test)],
-}).sort_values("test_accuracy", ascending=False).round(3)
-print(leaderboard.to_string(index=False))
+print("--- Sweep 3: max_features (n_estimators=200, max_depth=None) ---")
+print(f"{'max_features':>12} {'train_acc':>10} {'test_acc':>10} {'gap':>8}")
+for mf in ["sqrt", "log2", 0.5, None]:
+    f = RandomForestClassifier(n_estimators=200, max_features=mf, random_state=42)
+    f.fit(X_train, y_train)
+    tr, te = f.score(X_train, y_train), f.score(X_test, y_test)
+    print(f"{str(mf):>12} {tr:>10.3f} {te:>10.3f} {tr-te:>8.3f}")
 ```
+
+**Output:**
+```
+--- Sweep 3: max_features (n_estimators=200, max_depth=None) ---
+max_features  train_acc   test_acc      gap
+        sqrt      1.000      0.958    0.042
+        log2      1.000      0.958    0.042
+         0.5      1.000      0.958    0.042
+        None      1.000      0.951    0.049
+```
+
+**Walk through:** `max_features=None` (every split sees all 30 features — plain bagging, no feature randomization) is the *worst* performer here (0.951 test accuracy, largest gap 0.049), while `sqrt`, `log2`, and `0.5` all tie at 0.958. This directly confirms the concept-block claim: feature-level randomness adds tree diversity, and diversity is what variance reduction is built on.
+
+**Discussion prompt:** *"Sweep 3 shows only a 0.007 difference — is `max_features` a big deal on this dataset? Would you expect the gap to be larger on a dataset with one wildly dominant feature?"* → Yes; the more one feature dominates, the more `max_features=None` causes trees to correlate around it.
+
+---
+
+## Concept Block 4: Feature Importance — Reading It Right (10 min)
+
+### How `.feature_importances_` is computed
+
+For each tree, every time a feature is used to split, scikit-learn records how much that split reduced impurity (Gini/entropy), weighted by how many samples reached that node. Average this across all trees in the forest, then normalize so all feature importances sum to 1.0.
+
+```
+feature_importances_[i]  ∝  average impurity reduction credited to feature i,
+                             across every split, in every tree, weighted by
+                             how many samples passed through that split
+```
+
+**Teaching point:** Importance measures **how useful a feature was for splitting**, not causation, and not "how correlated with the label" in isolation — a feature can be individually weakly correlated with `y` but highly important because it combines well with other features at deeper splits.
+
+### The critical caveat: correlated / duplicate features split the credit
+
+**Teaching point — this is the single most important warning in this session:** If two features carry the same information (e.g. `radius` and `perimeter` of a roughly circular cell — mathematically related), the forest will sometimes split on one, sometimes on the other. Their *combined* importance reflects the real signal, but *each one individually* will look less important than it actually is — because they're sharing credit. Ranking features by importance and dropping the "unimportant" ones can accidentally discard a feature that matters, just because a correlated twin absorbed part of its credit.
+
+```
+Feature X alone (not correlated): importance = 0.15
+Feature Y duplicated into Y and Y':
+   importance(Y)  = 0.09  \
+                            }--- still worth ~0.15 combined, but each LOOKS
+   importance(Y') = 0.06  /    individually less important than X
+```
+
+**Rule of thumb to give students:** Before trusting a low importance score, check whether that feature is correlated with a higher-ranked one (a correlation matrix or heatmap from Module 1 is the tool for this). Don't drop a feature on importance rank alone without that check.
+
+### `.feature_importances_` vs. permutation importance (brief mention)
+
+**Teaching point:** The built-in `.feature_importances_` (also called "Gini importance" / "Mean Decrease in Impurity") is fast but biased toward high-cardinality numeric features. `sklearn.inspection.permutation_importance` is a slower but more trustworthy alternative — worth a link for curious students, not required today.
+
+---
+
+## Practical Block 4: Rank Importances + the Correlated-Feature Trap (10 min)
 
 ```python
-# --- One glance at WHERE the best model errs (full treatment: Session 8) ---
-from sklearn.metrics import confusion_matrix
+import pandas as pd
 
-cm = confusion_matrix(y_test, rf.predict(X_test))
-print("Confusion matrix (rows = true, cols = predicted):")
-print(cm)
-print("\nAccuracy hides something: which kind of mistake is worse here —")
-print("calling a malignant tumour benign, or a benign tumour malignant?")
+forest = RandomForestClassifier(n_estimators=300, random_state=42)
+forest.fit(X_train, y_train)
+
+importances = pd.Series(forest.feature_importances_, index=data.feature_names)
+ranked = importances.sort_values(ascending=False)
+
+print("Top 10 features by importance:")
+print(ranked.head(10).round(4))
+print("\nSum of all importances:", round(importances.sum(), 4))
 ```
 
-**Live walk-through:** The leaderboard should climb monotonically-ish from the single tree to the ensembles, though the exact ordering of the top three will shuffle by a row or two — say so honestly, and use it: *"The gaps at the top are one or two test rows. Do not over-read them."* Finish on the confusion matrix. Do **not** teach precision and recall — just show that the two off-diagonal cells are not equally bad, and leave the room hungry for Session 8.
+**Output:**
+```
+Top 10 features by importance:
+worst perimeter         0.1457
+worst area              0.1441
+worst concave points    0.1146
+mean concave points     0.0983
+worst radius            0.0724
+mean radius             0.0607
+mean perimeter          0.0560
+mean concavity          0.0452
+mean area               0.0368
+worst concavity         0.0282
+dtype: float64
+
+Sum of all importances: 1.0
+```
+
+**Walk through:** `worst perimeter`, `worst area`, and `worst radius` are all near the top — and geometrically, perimeter, area, and radius of a roughly circular shape are all derived from the same underlying measurement. That's not a coincidence — it's the correlated-feature effect predicted in the concept block. Confirm with the class: *"If perimeter, area, and radius are basically the same information measured three ways, should we trust their individual rankings, or think of them as one 'size' signal?"*
+
+### Prove the caveat directly: duplicate the top feature
+
+```python
+top_feature = ranked.index[0]
+copy_name = top_feature + " (duplicate)"
+print("Top feature:", top_feature, "importance:", round(ranked.iloc[0], 4))
+
+X_df = pd.DataFrame(X, columns=data.feature_names)
+X_df[copy_name] = X_df[top_feature]  # exact duplicate column
+
+X_train2, X_test2, y_train2, y_test2 = train_test_split(
+    X_df, y, test_size=0.25, random_state=42, stratify=y
+)
+forest2 = RandomForestClassifier(n_estimators=300, random_state=42)
+forest2.fit(X_train2, y_train2)
+importances2 = pd.Series(forest2.feature_importances_, index=X_df.columns).sort_values(ascending=False)
+
+print("\nAfter duplicating the top feature, importances for the two copies:")
+print(importances2[[top_feature, copy_name]].round(4))
+print("Combined importance of the two copies:",
+      round(importances2[[top_feature, copy_name]].sum(), 4))
+print("Test accuracy unaffected:", round(forest2.score(X_test2, y_test2), 3))
+```
+
+**Output:**
+```
+Top feature: worst perimeter importance: 0.1457
+
+After duplicating the top feature, importances for the two copies:
+worst perimeter                0.1105
+worst perimeter (duplicate)    0.1270
+dtype: float64
+Combined importance of the two copies: 0.2375
+Test accuracy unaffected: 0.958
+```
+
+**Walk through — this is the payoff moment of the session:** We added a column that is a **literal, perfect duplicate** of `worst perimeter` — zero new information. Its original importance (0.1457) *dropped* to 0.1105 once it had to share credit with its exact twin. If a student only looked at `worst perimeter`'s new score, they might wrongly conclude it became less predictive — it didn't; the model's test accuracy (0.958) is unchanged. The credit was simply split between two identical columns.
+
+**Discussion prompt:** *"If you saw this in a real project — a feature's importance dropped after adding a new column — what would you check before concluding the feature stopped mattering?"* → Correlation with the new column, first.
 
 ---
 
 ## Summary & Wrap-Up (5 min)
 
-**The spine of today, in five steps:**
+**What we covered today:**
+- Why a single deep tree has low bias but high variance, and why that instability motivates ensembling
+- Bagging = bootstrap sampling (rows, with replacement) + aggregating (majority/probability vote)
+- Random Forest = bagging + a random subset of *features* considered at every split, which is what keeps the trees diverse
+- Measured variance reduction directly: forest std (0.010) less than half the single tree's std (0.023) across 10 splits
+- Tuned `n_estimators` (diminishing returns after ~100), `max_depth` (even stumps vote well), `max_features` (`None` under-performs `sqrt`/`log2`)
+- Extracted and ranked `.feature_importances_`, and proved by direct experiment that correlated/duplicate features split their importance credit — don't drop features on rank alone
 
-1. **A deep decision tree is low-bias but high-variance** — it memorises, and its test score wobbles by several points depending on which rows it saw.
-2. **An ensemble pools many models.** It only works if the members make *different* mistakes. A `VotingClassifier` is the simplest version: pool a logistic regression, a KNN, and a tree.
-3. **Bagging = bootstrap + aggregate.** Train many deep trees on many resamples and take the majority vote. Random errors cancel. **Variance falls; bias does not.** More trees are always safe.
-4. **Random Forest = bagging + random feature subsets at every split.** This *decorrelates* the trees so averaging works properly. Three knobs: `n_estimators`, `max_depth`, `max_features`. Read its `feature_importances_` — but never call it causation.
-5. **Boosting = sequential weak trees, each fixing the last one's errors.** This cuts **bias**. It is more accurate and more fragile: `learning_rate` matters, and too many trees *will* overfit. `HistGradientBoosting` in sklearn; XGBoost and LightGBM in industry.
+**Bridge to next session:** *"Today we asked 'is this Random Forest accurate?' using plain accuracy. But accuracy hides a lot — a model can be 95% accurate and still be useless if it never catches the 5% of cases you actually care about, like fraud or disease. Next class: Classification Metrics & Threshold Analysis — precision, recall, ROC-AUC, and how to choose the right decision threshold for your problem."*
 
-**Bridge:** *"Every model today was judged on one number: accuracy. Next session — **Classification Metrics & Threshold Analysis** — you will see why that number can be a lie. A model that predicts 'no cancer' for every single patient can score 95% accuracy on an imbalanced dataset. You will learn precision, recall, F1, ROC-AUC, and how moving one threshold changes everything."*
+**Homework / self-practice:** Using `load_wine()` (or `load_digits()` for more of a challenge) from `sklearn.datasets`, repeat today's workflow: fit a single tree and a Random Forest, compare train/test accuracy and 5-fold CV std, sweep `max_features`, and rank the top 5 features by importance. Write one sentence on whether any of the top features look correlated.
 
 ---
 
 ## Q&A & Doubt Solving (5 min)
 
-**Q: My Random Forest still shows 100% training accuracy. Isn't that overfitting?**
-→ No, and this trips up almost everyone. Each individual tree in the forest *does* memorise its bootstrap sample — that is by design. What matters is the *test* score and its *stability*. If train is 1.00 and test is 0.96 and stays at 0.96 across different splits, you have a healthy forest. Judge a forest by test performance, never by the train/test gap alone.
+**Likely questions and suggested answers:**
 
-**Q: If more trees never hurt a Random Forest, why not set `n_estimators=5000`?**
-→ Because the accuracy curve plateaus, usually around 100–300 trees, and everything past that plateau is pure cost. Training time and prediction time grow linearly with the number of trees. In production, prediction latency is often the binding constraint — a 5000-tree forest can be too slow to serve.
+**Q: If each tree in the forest still overfits its own bootstrap sample, how is the forest not also overfit?**
+→ Each tree overfits *differently* — it memorizes noise specific to its own resample. When you average/vote across many trees, the noise (which differs tree to tree) tends to cancel out, while the true signal (shared by all trees, because it's really in the data) reinforces itself. Individual overfitting does not imply ensemble overfitting.
 
-**Q: When would boosting actually lose to a Random Forest?**
-→ Three common cases. On very noisy data, boosting chases the noise — it is literally trained to fit what previous models got wrong, and noise *is* what they got wrong. On small datasets, it overfits quickly. And when you have no time to tune: an untuned Random Forest is usually excellent, while an untuned boosting model can be mediocre or worse.
+**Q: Is a Random Forest a "black box" now that it's 200 trees instead of one readable tree?**
+→ You lose the ability to trace one clean decision path like you could with a single tree, but you gain `.feature_importances_` for global interpretability, and tools like `permutation_importance` or SHAP (mentioned briefly, not required yet) for deeper explanation. It's a trade: less step-by-step readability, more robustness.
 
-**Q: Can I bag models other than trees — say, logistic regressions?**
-→ Yes, `BaggingClassifier(estimator=LogisticRegression())` runs fine. But it will barely help. Bagging reduces variance, and logistic regression is already a low-variance, high-bias model — there is almost no variance left to remove. Bagging pays off exactly when the base model is *unstable*, which is why deep trees are the classic pairing.
+**Q: Why does `max_features=None` (using all features) not just always win, since the tree gets more information at each split?**
+→ More information per split makes each individual tree *slightly* more accurate, but it also makes the trees more similar to each other. Similar trees make similar mistakes, and voting across similar mistakes doesn't cancel them out. The whole point of the forest is diversity, and `max_features=None` reduces that diversity.
 
-**Q: A feature scored 0.00 importance. Can I delete that column?**
-→ Be careful. A zero can mean "genuinely useless" or it can mean "perfectly correlated with another column that grabbed all the credit first". Drop it, retrain, and check whether accuracy actually holds. Importance is a description of *this fitted model's behaviour*, not a verdict on the column itself.
+**Q: Do I need to scale/normalize features before `RandomForestClassifier`, like we did for Logistic Regression?**
+→ No. Trees split on thresholds ("is `worst radius` > 16.8?"), and thresholds are unaffected by the scale of the feature. Scaling is a non-issue for tree-based models — one of their practical advantages.
+
+**Q: How many trees is "enough" for a real project, not just this toy dataset?**
+→ There's no universal number. Start around 100–300, watch cross-validation score as you increase `n_estimators`, and stop once the score plateaus (like Sweep 1 today). More trees past the plateau only cost training time, not accuracy.
+
+**Q: Can Random Forest be used for regression, not just classification?**
+→ Yes — `RandomForestRegressor` works identically, but aggregates by averaging predicted numbers instead of voting on classes. Everything from today (bagging, `n_estimators`, `max_features`, feature importance, the correlated-feature caveat) applies the same way.
 
 ---
 
 ## Instructor Notes
 
-- **Zero installs, zero downloads.** Everything runs on `load_breast_cancer` from `sklearn.datasets` plus matplotlib. Nothing depends on a network. If you want a second dataset for the practice loop, `make_classification(n_samples=400, n_features=6, n_informative=3, random_state=42)` gives a clean forest-vs-tree gap in seconds.
-- **Set `n_jobs=-1`** on every bagging and forest call, and say why: the trees are genuinely independent, so they train in parallel. Then point out that `GradientBoostingClassifier` has no `n_jobs` parameter *at all* — it cannot parallelise, because tree `k` needs tree `k-1` to exist first. That single missing parameter teaches the parallel-vs-sequential distinction better than any slide.
-- **Do not fix the numbers to the decimal.** Accuracies on this dataset land in the 0.92–0.97 band and will shuffle slightly with the sklearn version. Say the band out loud, and treat any 0.005 difference as noise, not as a result. This is good modelling hygiene and students copy it.
-- **Pacing:** Practical 2's `n_estimators` loop and Practical 3's `max_features` sweep each fit several models. On a slow laptop, cut `n_estimators` from 300 to 100 in Practical 3 — the qualitative story is unchanged. If you are behind in Practical 4, drop the leaderboard and the confusion matrix, but **never** drop the noisy-data boosting-vs-forest comparison. That is the payoff of the whole session; the 1000-tree boosting fits are the slow part, so trim that list to `[10, 100, 600]` rather than skipping it.
-
-- **On the honest results:** two outputs will look "wrong" and both are teaching gold. (1) In Practical 1, logistic regression alone beats the voting ensemble — the data is nearly linearly separable. Use it to kill the "ensembles always win" myth on the spot. (2) In Practical 4, the *clean* breast cancer data will NOT show boosting overfitting, which is exactly why the demo switches to a noisy `make_classification` set. Say plainly that you had to add noise to expose the failure mode. Students trust a course that shows a technique failing.
-- **The single most common student mistake:** treating "more trees" as a universal overfitting risk, and therefore keeping `n_estimators` tiny "to be safe". Pre-empt it in Practical 2 by physically tracing the plateau on the plot, and again in Practical 4 by showing that boosting is the *one* place where more trees genuinely can hurt. The distinction — parallel ensembles cannot overfit with more members, sequential ones can — is the sharpest idea in this session.
-- **Hold the line on metrics.** Students who have read ahead will ask about precision, recall, and ROC-AUC. Acknowledge the question, write the word "Session 8" on the board, and move on. Today is about *models*; next week is about *judging* them.
+- **Dataset:** `load_breast_cancer()` is fully offline, loads instantly, has 30 real (and usefully correlated) numeric features, and is small enough that every sweep in this script runs in well under a second — safe for live coding without dead air.
+- **Common student mistake:** Assuming more trees can overfit a Random Forest the same way a deeper single tree can. Reinforce with Sweep 1's output: test accuracy plateaus, it does not fall, as `n_estimators` grows. This is a genuinely different behavior from `max_depth`, and worth repeating twice.
+- **Common student mistake:** Reading `.feature_importances_` as "this feature causes the outcome." Importance is about split usefulness, not causal effect. Use the duplicate-column demo in Practical 4 as the concrete counter-example whenever this comes up.
+- **Live-coding tip:** Before running Practical Block 2's variance comparison, ask the class to predict whether the Random Forest's std will be higher, lower, or the same as the single tree's. Getting a wrong prediction on record makes the correct result (std cut by more than half) land harder.
+- **Live-coding tip:** In Practical 4, before running the duplication demo, ask "what do you think will happen to `worst perimeter`'s importance number?" Most students guess it stays the same (since nothing about the real signal changed) — the drop to 0.1105 is a genuine surprise and the best teaching moment of the day.
+- **For advanced students:** Introduce `forest.estimators_[0]` to inspect one individual tree from the forest directly (e.g., `.get_depth()`, `.tree_.node_count`), and `oob_score_` (set `oob_score=True` at construction) as a "free" validation estimate that doesn't require a held-out test set, because each tree already ignores ~37% of rows during its own training.
+- **For advanced students:** Pose the question — "Since bagging trains trees independently, could this be parallelized?" Yes: `n_jobs=-1` in `RandomForestClassifier` trains trees on all CPU cores simultaneously, unlike boosting methods (next-next session territory), which are inherently sequential.
+- **Time check:** If running long after the break, compress Practical 3 to just the `n_estimators` and `max_features` sweeps (skip `max_depth`) — the diminishing-returns and diversity stories are the two that matter most for the wrap-up narrative. If running short, add the `oob_score_` demonstration from the advanced-student note above as a live bonus.

@@ -5,24 +5,20 @@
 
 ## Dataset
 
-Six features. Only **three** of them actually carry signal — the other three are pure noise. Your forest has to figure out which is which, without being told.
+A synthetic binary classification dataset — self-contained, no file or network needed:
 
 ```python
-import pandas as pd
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 
 X, y = make_classification(
-    n_samples=400, n_features=6, n_informative=3,
-    n_redundant=0, n_classes=2, random_state=42
+    n_samples=300, n_features=6, n_informative=4, n_redundant=1,
+    n_clusters_per_class=2, random_state=42
 )
-
-cols = ["f1", "f2", "f3", "f4", "f5", "f6"]
-df = pd.DataFrame(X, columns=cols)
-df["target"] = y
+feature_names = [f"feature_{i}" for i in range(X.shape[1])]
 
 X_train, X_test, y_train, y_test = train_test_split(
-    df[cols], df["target"], test_size=0.25, random_state=42, stratify=df["target"]
+    X, y, test_size=0.3, random_state=42, stratify=y
 )
 ```
 
@@ -31,33 +27,30 @@ X_train, X_test, y_train, y_test = train_test_split(
 ## Tasks
 
 **Task 1 — Basic**
-Train a `DecisionTreeClassifier(random_state=42)` with **no depth limit** on the training set. Print its **train** accuracy and its **test** accuracy, each rounded to 3 decimals.
+Fit a `DecisionTreeClassifier(random_state=42)` and a `RandomForestClassifier(n_estimators=100, random_state=42)` on the training set. Print each model's **test accuracy**, rounded to 3 decimals.
 
 **Task 2 — Basic**
-Train a `RandomForestClassifier` with `n_estimators=200` and `random_state=42` on the same training set. Print its test accuracy, rounded to 3 decimals.
+Print the **accuracy improvement** of the forest over the single tree (`forest_acc - tree_acc`, rounded to 3 decimals).
 
 **Task 3 — Mid**
-Two parts.
-**(a)** Print how many accuracy points the forest gained over the single tree on the **test** set.
-**(b)** Print the forest's **top 3 features** by `feature_importances_`, sorted highest first. Then answer in a comment: did the forest correctly identify 3 informative features out of the 6?
+Extract `.feature_importances_` from the fitted forest, rank them, and print the **top 3 features** (rounded to 4 decimals).
 
 ---
 
 ## Expected Output
 
 ```
-Tree  — train: 1.000  test: 0.8x
-Forest — test: 0.8x
+Single Tree test accuracy: 0.778
+Random Forest test accuracy: 0.867
 
-Gain from ensembling: +0.0x
+Accuracy improvement (forest - tree): 0.089
 
 Top 3 features by importance:
-f1    0.4xx
-f3    0.1xx
-f6    0.1xx
+feature_5    0.3033
+feature_4    0.1813
+feature_0    0.1708
+dtype: float64
 ```
-
-The tree's train accuracy will be **exactly 1.000** — it memorised every training row. Its test accuracy will be several points lower. The forest closes part of that gap. The three noise columns should each land near 0.05, far below the top three.
 
 ---
 
@@ -72,42 +65,34 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 
 X, y = make_classification(
-    n_samples=400, n_features=6, n_informative=3,
-    n_redundant=0, n_classes=2, random_state=42
+    n_samples=300, n_features=6, n_informative=4, n_redundant=1,
+    n_clusters_per_class=2, random_state=42
 )
-
-cols = ["f1", "f2", "f3", "f4", "f5", "f6"]
-df = pd.DataFrame(X, columns=cols)
-df["target"] = y
+feature_names = [f"feature_{i}" for i in range(X.shape[1])]
 
 X_train, X_test, y_train, y_test = train_test_split(
-    df[cols], df["target"], test_size=0.25, random_state=42, stratify=df["target"]
+    X, y, test_size=0.3, random_state=42, stratify=y
 )
 
-# --- Task 1: one deep tree — low bias, high variance ---
-tree = DecisionTreeClassifier(random_state=42).fit(X_train, y_train)
-tree_test = tree.score(X_test, y_test)
-print(f"Tree  — train: {tree.score(X_train, y_train):.3f}  test: {tree_test:.3f}")
+# Task 1
+tree = DecisionTreeClassifier(random_state=42)
+tree.fit(X_train, y_train)
+forest = RandomForestClassifier(n_estimators=100, random_state=42)
+forest.fit(X_train, y_train)
 
-# --- Task 2: 200 trees, each on a bootstrap sample with random feature subsets ---
-forest = RandomForestClassifier(n_estimators=200, random_state=42).fit(X_train, y_train)
-forest_test = forest.score(X_test, y_test)
-print(f"Forest — test: {forest_test:.3f}")
+tree_acc = round(tree.score(X_test, y_test), 3)
+forest_acc = round(forest.score(X_test, y_test), 3)
+print("Single Tree test accuracy:", tree_acc)
+print("Random Forest test accuracy:", forest_acc)
 
-# --- Task 3a: the variance reduction, in accuracy points ---
-print(f"\nGain from ensembling: +{forest_test - tree_test:.3f}")
+# Task 2
+print("\nAccuracy improvement (forest - tree):", round(forest_acc - tree_acc, 3))
 
-# --- Task 3b: which columns did the forest actually lean on? ---
-importances = (
-    pd.Series(forest.feature_importances_, index=cols)
-    .sort_values(ascending=False)
-)
+# Task 3
+importances = pd.Series(forest.feature_importances_, index=feature_names)
+top3 = importances.sort_values(ascending=False).head(3)
 print("\nTop 3 features by importance:")
-print(importances.head(3).round(3))
-
-# Yes — the top 3 scores are far above the rest, and the bottom 3 columns
-# all sit near 0.05. The forest found the 3 informative features on its own.
-# Reminder: high importance means the model USED it, not that it CAUSES the label.
+print(top3.round(4))
 ```
 
 </details>

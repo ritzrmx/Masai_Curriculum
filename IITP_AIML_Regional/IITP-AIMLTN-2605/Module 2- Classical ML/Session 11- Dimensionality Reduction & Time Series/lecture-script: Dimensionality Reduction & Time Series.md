@@ -5,11 +5,11 @@
 
 ## Session Overview
 
-**Goal:** Students compress a 64-column dataset down to a handful of principal components (and *see* their classes separate in 2-D), then take a raw daily sales series, engineer lag and rolling features from it, split it chronologically, and build a model that beats the persistence baseline.
+**Goal:** Students can compress a high-dimensional numeric dataset into 2 principal components for visualization using PCA, and can identify trend and seasonality in a time series while understanding why it must be split chronologically, never randomly.
 
-**Student profile at this point:** They have trained regression (S3–S4), classification (S6–S8), ensembles (S7), and K-Means clustering (S9). They know `train_test_split`, cross-validation, `StandardScaler`, pipelines, and leakage (S2). They have **never** met PCA, and they have never modelled anything time-ordered. Every dataset they have seen so far had interchangeable rows.
+**Student profile at this point:** Comfortable with `train_test_split`, `StandardScaler`, and `fit`/`predict` from earlier sessions. Have built regression and classification models, ensembles, evaluated with classification metrics, run K-Means/hierarchical clustering, and just finished a masterclass on probability and Bayes. This is the first time they touch dimensionality reduction or sequential/time-indexed data.
 
-**Key outcome:** One notebook with two halves — a PCA scree/cumulative plot plus a 2-D class-coloured scatter of `load_digits`, and a lag-featured sales model whose MAE is compared honestly against a naive baseline under a chronological split.
+**Key outcome:** By end of class, every student can (1) scale a dataset, fit `PCA(n_components=2)`, read `explained_variance_ratio_`, and decide how many components to keep; and (2) build and read a trend + seasonality decomposition, and correctly split a time series by time order instead of shuffling it.
 
 ---
 
@@ -17,16 +17,16 @@
 
 | Segment | Duration | Cumulative |
 |---|---|---|
-| Opening — The 500-Column Trap | 5 min | 0:05 |
-| **Concept 1:** The Curse of Dimensionality | 10 min | 0:15 |
-| **Practical 1:** Watch distance die; watch KNN die | 15 min | 0:30 |
-| **Concept 2:** PCA — Best Camera Angle on Your Data | 10 min | 0:40 |
-| **Practical 2:** PCA on digits — scree, 2-D map, speed-up | 15 min | 0:55 |
+| Opening & Context | 5 min | 0:05 |
+| **Concept 1:** Curse of Dimensionality & What "Variance" Means | 10 min | 0:15 |
+| **Practical 1:** Load, Scale, and First PCA Fit | 15 min | 0:30 |
+| **Concept 2:** Reading PCA Output — Ratio, Loadings, Cumulative Variance | 10 min | 0:40 |
+| **Practical 2:** 2D Scatter, Cumulative Variance & Choosing k | 15 min | 0:55 |
 | **BREAK** | 10 min | 1:05 |
-| **Concept 3:** Time Series — The Rows Are Not Independent | 10 min | 1:15 |
-| **Practical 3:** Build the series, shuffle it, get caught | 15 min | 1:30 |
-| **Concept 4:** Lag Features and the Baseline You Must Beat | 10 min | 1:40 |
-| **Practical 4:** Lags, rolling windows, beat persistence | 10 min | 1:50 |
+| **Concept 3:** Time Series Building Blocks — Trend & Seasonality | 10 min | 1:15 |
+| **Practical 3:** Build & Decompose a Synthetic Time Series | 15 min | 1:30 |
+| **Concept 4:** Why Time Order Matters for Splitting | 10 min | 1:40 |
+| **Practical 4:** Correct vs Wrong Split + Baseline Forecast | 10 min | 1:50 |
 | Summary & Wrap-Up | 5 min | 1:55 |
 | Q&A & Doubt Solving | 5 min | 2:00 |
 
@@ -34,519 +34,604 @@
 
 ## Opening (5 min)
 
-**Hook — do this live, no slides.** Write two lines on the board:
+**Hook:** Load the Wine dataset and show its shape on screen:
 
 ```
-Breast-cancer data, 30 real features   → KNN accuracy ≈ 0.96
-Same data + 500 columns of pure noise  → KNN accuracy ≈ 0.88
+Shape: (178, 13)
 ```
 
-Then say: *"I did not delete a single real feature. Every one of the 30 good columns is still there. I only ADDED information — random, meaningless numbers. And the model got dramatically worse. How can adding columns make a model worse?"*
+Ask the class: *"Thirteen numeric features per wine sample. If I want to see, in ONE plot, whether the three wine cultivars form separable groups — how many scatter plots would I need to check every pair of features?"* Let them compute `13 choose 2 = 78`. Nobody wants to look at 78 scatter plots, and even then, a pair of features is only 2 out of 13 — the interesting structure might be spread across all of them at once.
 
-Let them argue for sixty seconds. Someone will say "the noise confused it." Push back: KNN does not have weights to confuse. Something more fundamental has broken.
+**Second hook:** Show a simple monthly sales series climbing steadily with visible seasonal bumps. Ask: *"If I want to test whether my forecasting model works, can I just do `train_test_split(shuffle=True)` like we did all module?"* Let a few students guess. Hold the answer — we come back to this in the second half.
 
-**What dimensionality reduction is NOT:**
-- Dropping columns you personally find boring
-- A magic accuracy booster you bolt on to every model
-- Something you do *after* fitting, to tidy up the output
+**Context to set:** Today has two halves that are more connected than they look. Both are about **structure hiding in numbers**: PCA finds the hidden directions where a dataset spreads out the most; time series decomposition finds the hidden trend and cycle inside a sequence of values. Both matter constantly in real ML work — PCA before clustering or visualization, time awareness before any forecasting or monitoring system.
 
-**What dimensionality reduction IS:**
-- A rescue operation for the *distance* that KNN and K-Means are built on
-- A way to draw a picture of data that has more than 3 columns
-- A trade: you buy speed and clarity, and you pay for them with interpretability
-
-*"And in the second half we will meet a dataset where the rows are not allowed to be shuffled — where `train_test_split` as you know it is a bug."*
+**Learning contract for today:**
+- Explain why PCA compresses correlated features into fewer components without losing much information
+- Fit `PCA` in scikit-learn, read `explained_variance_ratio_`, and decide how many components to keep
+- Build a synthetic time series and separate it into trend, seasonality, and noise
+- Explain — and demonstrate — why time series must be split by time order, never shuffled
 
 ---
 
-## Concept Block 1: The Curse of Dimensionality (10 min)
+## Concept Block 1: Curse of Dimensionality & What "Variance" Means (10 min)
 
-### Board content
+### The Curse of Dimensionality
+
+As the number of features grows, three things get worse at once:
+
+| Problem | What happens |
+|---|---|
+| **Visualization** | Humans can plot 2D or 3D. Beyond that, we're guessing. |
+| **Sparsity** | Points spread thinly across a huge feature space — "nearest neighbor" becomes less meaningful. |
+| **Redundancy** | Many features move together (correlated) — e.g. `total_phenols` and `flavanoids` in a wine dataset both measure related chemistry. Highly correlated features carry duplicate information. |
+
+**Teaching point:** More features is not automatically more information. Correlated features often encode the *same* underlying signal multiple times. Dimensionality reduction tries to find a smaller number of new axes that keep the signal and drop the redundancy.
+
+### Variance = Spread = Information
+
+In PCA, **variance is our proxy for "how much information a direction carries."** A feature (or a direction in feature space) with high variance separates observations from each other; a feature with near-zero variance says almost the same thing about every row and isn't doing much work for us.
 
 ```
-1 feature   → 10 tiles to search
-2 features  → 100 tiles
-3 features  → 1,000 tiles
-d features  → 10^d
-
-Data does not grow to fill this space. It just gets LONELIER.
+Low variance direction:  •  •  •  •  •   (barely spreads → little info)
+High variance direction: •      •      •      •   (spreads a lot → informative)
 ```
 
-The volume of the space explodes exponentially with each column. Your row count does not. So the points spread thinner and thinner, and every point ends up roughly the same distance from every other point.
+**PCA's central idea:** Instead of keeping or dropping original columns, *rotate* the coordinate system to find new axes — called **principal components** — such that the first axis (PC1) captures the maximum possible variance, the second axis (PC2) captures the maximum variance *left over* after removing PC1, and so on. Each principal component is a weighted combination of ALL original features, not a single existing column.
 
-### Why this specifically kills what they already built
+```
+Original correlated cloud (2 features):     After PCA rotation:
 
-| Model (session) | What it relies on | What breaks in high dimensions |
-|---|---|---|
-| KNN (S6) | "Who is nearest to me?" | Nearest and farthest neighbours are equally far |
-| K-Means (S9) | Distance to a centroid | All centroids look equally close; clusters are arbitrary |
-| Linear/Logistic (S3, S6) | Weighted sums, not distances | Survives better, but overfits — more columns than it needs |
-| Tree ensembles (S7) | Threshold splits per feature | Most robust, but slow and wasteful with junk columns |
+        y                                        PC2
+        |    ● ●●                                 |
+        |  ●●●●●●●                     ──────●●●●●●●●●●●●────── PC1
+        | ●●●●●●●                                 |
+        |●●●                                      |
+        └────────── x               PC1 = direction of max spread
+                                     PC2 = perpendicular, max remaining spread
+```
 
-**Say this out loud:** *"Distance is a comparison. In 500 dimensions, everything is far from everything, so the comparison carries no signal. KNN's 'nearest neighbour' is a coin flip wearing a lab coat."*
-
-**Three responses to too many columns:** *feature selection* (drop original columns — keeps names), *feature extraction* (build a few new columns that summarise the old — this is PCA, and it loses the names), or *regularisation* (Session 3 — only helps linear models). Today is the middle one.
+**Critical prerequisite — scaling:** PCA is driven purely by variance, and variance is sensitive to units. A feature measured in the hundreds (e.g. `proline`, ranging 278–1680 in the Wine dataset) will dominate a feature measured in single digits (e.g. `hue`, ranging 0.48–1.71) purely because of scale, not because it's more informative. **Always `StandardScaler` before PCA.** This is the same scaling instinct from earlier sessions — just applied for a new reason.
 
 ---
 
-## Practical Block 1: Watch Distance Die (15 min)
+## Practical Block 1: Load, Scale, and First PCA Fit (15 min)
+
+### Dataset
+
+We use `sklearn.datasets.load_wine()` — 178 wine samples, 13 numeric chemistry features (alcohol, acidity, phenols, color intensity, proline, etc.), 3 cultivar classes. It's fully self-contained (no internet needed) and has exactly the "too many features, wildly different scales" problem we just described.
 
 ```python
 import numpy as np
-from scipy.spatial.distance import pdist
+import pandas as pd
+from sklearn.datasets import load_wine
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
-np.random.seed(42)
+wine = load_wine(as_frame=True)
+X = wine.data
+y = wine.target
+target_names = wine.target_names
 
-print(f"{'dims':>6} | {'min dist':>9} | {'max dist':>9} | {'contrast':>9}")
-print("-" * 45)
-for d in [2, 5, 20, 100, 500]:
-    X = np.random.rand(300, d)          # 300 random points in d dimensions
-    dists = pdist(X)                    # every pairwise distance
-    contrast = (dists.max() - dists.min()) / dists.min()
-    print(f"{d:>6} | {dists.min():>9.3f} | {dists.max():>9.3f} | {contrast:>9.2f}")
+print("Shape:", X.shape)
+print("\nClass counts:")
+print(pd.Series(y).value_counts().sort_index())
 ```
 
-**Expected output shape:** `contrast` starts in the hundreds at 2 dimensions and collapses towards ~0.2 by 500 dimensions. The min distance climbs, the max distance climbs, and the *gap between them* — the only thing KNN can actually use — vanishes.
+**Output:**
+```
+Shape: (178, 13)
 
-**Live walk-through:** Point at the `contrast` column and read it downwards. *"In 2-D, the farthest point is hundreds of times farther away than the nearest one. In 500-D, the farthest point is only 20% farther than the nearest. If your nearest neighbour is essentially as far away as your worst enemy — what exactly is KNN voting on?"*
+Class counts:
+target
+0    59
+1    71
+2    48
+Name: count, dtype: int64
+```
 
-Now prove the consequence on real data:
+### Show the scale problem directly
 
 ```python
-from sklearn.datasets import load_breast_cancer
-from sklearn.model_selection import cross_val_score
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-
-X, y = load_breast_cancer(return_X_y=True)
-knn = make_pipeline(StandardScaler(), KNeighborsClassifier(n_neighbors=5))
-
-print(f"Real features only ({X.shape[1]} cols): "
-      f"{cross_val_score(knn, X, y, cv=5).mean():.3f}")
-
-rng = np.random.RandomState(42)
-for n_junk in [50, 200, 500]:
-    X_junk = np.hstack([X, rng.normal(size=(X.shape[0], n_junk))])
-    score = cross_val_score(knn, X_junk, y, cv=5).mean()
-    print(f"+ {n_junk:>3} junk cols ({X_junk.shape[1]:>3} cols): {score:.3f}")
+print("Feature scales (min/max wildly different):")
+print(X.describe().loc[['min', 'max']].T)
 ```
 
-**Expected output:** accuracy starts around 0.96 with the 30 real features and slides down through the high-0.80s as the noise columns pile up — losing roughly 8 accuracy points to columns that contain literally nothing.
+**Output (excerpt):**
+```
+                                 min      max
+alcohol                        11.03    14.83
+malic_acid                      0.74     5.80
+ash                              1.36     3.23
+alcalinity_of_ash               10.60    30.00
+magnesium                       70.00   162.00
+total_phenols                    0.98     3.88
+flavanoids                       0.34     5.08
+nonflavanoid_phenols             0.13     0.66
+proanthocyanins                  0.41     3.58
+color_intensity                  1.28    13.00
+hue                              0.48     1.71
+od280/od315_of_diluted_wines     1.27     4.00
+proline                        278.00  1680.00
+```
 
-**Ask the room:** *"The 30 real columns never left. Why can't KNN just ignore the noise?"* → Because KNN has no concept of "ignoring" a column. Every column contributes equally to the distance. 500 junk columns simply drown out 30 good ones in the sum.
+**Ask the class:** *"If I ran PCA on this right now, without scaling, which feature do you think would dominate PC1?"* → `proline`, purely because its numbers are hundreds of times larger, not because it's more chemically informative.
+
+### Scale, then fit PCA
+
+```python
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+print("Scaled mean (first 5, ~0):", np.round(X_scaled.mean(axis=0)[:5], 4))
+print("Scaled std  (first 5, ~1):", np.round(X_scaled.std(axis=0)[:5], 4))
+
+pca2 = PCA(n_components=2, random_state=42)
+X_pca2 = pca2.fit_transform(X_scaled)
+
+print("\nX_pca2 shape:", X_pca2.shape)
+print("Explained variance ratio (2 comps):", np.round(pca2.explained_variance_ratio_, 4))
+print("Total variance captured by 2 comps:", round(pca2.explained_variance_ratio_.sum(), 4))
+```
+
+**Output:**
+```
+Scaled mean (first 5, ~0): [ 0.  0. -0. -0. -0.]
+Scaled std  (first 5, ~1): [1. 1. 1. 1. 1.]
+
+X_pca2 shape: (178, 2)
+Explained variance ratio (2 comps): [0.362  0.1921]
+Total variance captured by 2 comps: 0.5541
+```
+
+**Walk through this together:** We went from 13 columns to 2, and those 2 new columns still capture 55.41% of the total variance in the original 13-dimensional space. PC1 alone captures 36.2%, PC2 an additional 19.21%.
+
+**Discussion prompt:** *"Is 55% 'good enough'? What would you want to know before answering that?"* → depends on what we're using it for — quick visual EDA can tolerate losing 45% of variance; feeding into a downstream model usually wants more.
 
 ---
 
-## Concept Block 2: PCA — The Best Camera Angle (10 min)
+## Concept Block 2: Reading PCA Output — Ratio, Loadings, Cumulative Variance (10 min)
 
-### The shadow demo (do it physically)
+### `explained_variance_ratio_` — what the number actually means
 
-Hold up any 3-D object — a water bottle, a chalk duster. Switch on your phone torch behind it and cast a shadow on the whiteboard.
+Each entry is *"the fraction of total dataset variance captured by this one component,"* and the components are always ordered from most to least informative. They also sum to 1.0 across **all** components (no variance is ever lost if you keep all of them — PCA is just a rotation).
 
-- Point the torch down the bottle's long axis → the shadow is a boring circle. Useless.
-- Turn it side-on → the shadow shows the neck, the body, the cap. Instantly recognisable.
+### Components are not original features — they're recipes
 
-*"Same object. Same 2-D shadow. But one angle preserved the shape and the other destroyed it. **PCA is the algorithm that finds the good angle** — automatically, in 64 dimensions, where you cannot use your eyes."*
-
-### Board content
+`pca.components_` gives the "recipe" (loadings) for each principal component: how much of each original (scaled) feature is mixed in. A student-friendly framing:
 
 ```
-PC1 = the direction along which the data spreads out the MOST
-PC2 = next-most-spread direction, at 90° to PC1
-PC3 = next-most-spread, at 90° to both
-...
-
-VARIANCE = INFORMATION.
-A direction where all points look identical tells you nothing → drop it first.
+PC1 ≈ 0.14·alcohol − 0.24·malic_acid + 0.00·ash − 0.24·alcalinity_of_ash + ...
 ```
 
-### The non-negotiable prerequisite
+**Teaching point:** You cannot say "PC1 is the alcohol axis." PC1 is a *blend* of all 13 features, weighted by how much each contributes to the direction of maximum spread. This is the main interpretability trade-off of PCA — you gain a clean 2D plot, you lose the ability to say "this axis is simply feature X."
 
-| Column | Unit | Spread |
-|---|---|---|
-| `monthly_spend` | ₹ | ~40,000 |
-| `age` | years | ~15 |
-| `visits` | count | ~5 |
+### Cumulative variance — deciding how many components to keep
 
-Without scaling, PCA looks at these and declares `monthly_spend` to be *the* dominant direction — not because it matters, but because rupees are bigger numbers than years. **`StandardScaler()` before `PCA()`. Always.** Write it on the board and underline it twice.
+Fit PCA with **no** `n_components` limit to see every component's contribution, then look at the running total:
 
-### And the price
-
-`PC1` is not a column you can name. It is `0.41 × f1 + 0.29 × f2 − 0.18 × f3 + ...` across every original feature. You can no longer tell a doctor "the tumour radius was the deciding factor." You can only say "PC1 was high," which means nothing to anyone.
-
-| Use PCA for | Do NOT use PCA for |
+| Concept | Formula |
 |---|---|
-| Plotting >3-D data in 2-D | Any model whose reasoning must be explained |
-| Speeding up training on wide data | Data with only 5–10 columns — no gain |
-| Denoising (dropping low-variance directions) | Before you have standardised |
+| Individual ratio | `explained_variance_ratio_[i]` |
+| Cumulative ratio | `np.cumsum(explained_variance_ratio_)` |
+| Rule of thumb | keep enough components to cross 90–95% cumulative variance |
 
-**Name-drop only:** t-SNE and UMAP also squash data to 2-D and handle curved structure better. They are for *pictures only* — you do not feed their output into a model.
+```
+Variance kept
+   1.0 ┤                                  ●───●───●───●
+       │                          ●───●
+   0.9 ┤                  ●───●                          ← typical cutoff line
+       │              ●
+   0.7 ┤          ●
+       │      ●
+   0.4 ┤  ●
+       │●
+   0.0 └──────────────────────────────────────────────────
+        1   2   3   4   5   6   7   8   9  10  11  12  13
+                      number of components kept
+```
+
+**Teaching point:** This "elbow"-style curve is the PCA equivalent of the elbow plot they saw in K-Means. Early components add a lot of variance quickly; later ones add very little. The bend is where you usually stop.
 
 ---
 
-## Practical Block 2: PCA on `load_digits` (15 min)
+## Practical Block 2: 2D Scatter, Cumulative Variance & Choosing k (15 min)
+
+### Visualize the 2D projection, colored by class
 
 ```python
 import matplotlib.pyplot as plt
-from sklearn.datasets import load_digits
-from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler
 
-digits = load_digits()
-X, y = digits.data, digits.target
-print("Original shape:", X.shape)      # (1797, 64) — an 8x8 image flattened
-
-X_scaled = StandardScaler().fit_transform(X)   # NEVER skip this line
-
-pca_full = PCA(random_state=42).fit(X_scaled)
-evr = pca_full.explained_variance_ratio_
-cum = evr.cumsum()
-
-print("Variance held by first 5 PCs:", evr[:5].round(3))
-for t in [0.80, 0.90, 0.95]:
-    k = (cum < t).sum() + 1
-    print(f"Components needed for {int(t*100)}% of the variance: {k}")
-```
-
-**Expected output:** PC1 holds roughly 12% of the variance, and it takes somewhere around 20 components to reach 80% and around 30 to reach 90% — down from 64. No single component dominates, which is itself worth pointing out.
-
-### The scree + cumulative plot
-
-```python
-fig, ax = plt.subplots(1, 2, figsize=(12, 4))
-
-ax[0].bar(range(1, 21), evr[:20], color="steelblue")
-ax[0].set(title="Scree plot — variance per component",
-          xlabel="Principal component", ylabel="Explained variance ratio")
-
-ax[1].plot(range(1, 65), cum, marker=".", color="coral")
-ax[1].axhline(0.90, color="red", ls="--", label="90% threshold")
-ax[1].set(title="Cumulative explained variance",
-          xlabel="Number of components kept", ylabel="Cumulative variance")
-ax[1].legend()
-
-plt.tight_layout(); plt.show()
-```
-
-The scree plot shows a steep drop then a long flat tail — that flattening is the "elbow". The cumulative plot is the one you actually make decisions from.
-
-### PCA for visualisation — the payoff
-
-```python
-X_2d = PCA(n_components=2, random_state=42).fit_transform(X_scaled)
-
-plt.figure(figsize=(7, 6))
-sc = plt.scatter(X_2d[:, 0], X_2d[:, 1], c=y, cmap="tab10", s=12, alpha=0.7)
-plt.colorbar(sc, label="True digit")
-plt.xlabel("PC1"); plt.ylabel("PC2")
-plt.title("64 dimensions squashed into 2 — do the digits separate?")
+plt.figure(figsize=(6, 5))
+scatter = plt.scatter(X_pca2[:, 0], X_pca2[:, 1], c=y, cmap='viridis', edgecolor='k', alpha=0.8)
+plt.xlabel(f"PC1 ({pca2.explained_variance_ratio_[0]*100:.1f}% variance)")
+plt.ylabel(f"PC2 ({pca2.explained_variance_ratio_[1]*100:.1f}% variance)")
+plt.title("Wine dataset — 13 features compressed to 2 principal components")
+plt.legend(handles=scatter.legend_elements()[0], labels=list(target_names))
 plt.show()
 ```
 
-**Live walk-through:** These two components hold only about a fifth of the total variance — and yet distinct digit blobs are clearly visible. Ask: *"Which digits overlap?"* (3, 5 and 8 typically smear into each other; 0 and 6 sit well apart.) *"That overlap is exactly where your classifier will make its mistakes — and you found it before training anything."*
-
-### PCA for speed
+Confirm the visual separation numerically by checking each class's average position:
 
 ```python
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
-
-Xtr, Xte, ytr, yte = train_test_split(
-    X_scaled, y, test_size=0.25, random_state=42, stratify=y)
-
-full = LogisticRegression(max_iter=2000, random_state=42).fit(Xtr, ytr)
-print(f"All 64 features  → accuracy {full.score(Xte, yte):.3f}")
-
-pca = PCA(n_components=0.90, random_state=42).fit(Xtr)   # keep 90% of variance
-Xtr_p, Xte_p = pca.transform(Xtr), pca.transform(Xte)
-small = LogisticRegression(max_iter=2000, random_state=42).fit(Xtr_p, ytr)
-print(f"{pca.n_components_} PCA comps → accuracy {small.score(Xte_p, yte):.3f}")
+df_pca = pd.DataFrame(X_pca2, columns=['PC1', 'PC2'])
+df_pca['class'] = [target_names[i] for i in y]
+print(df_pca.groupby('class')[['PC1', 'PC2']].mean().round(2))
 ```
 
-**Call out:** `n_components=0.90` is a float, not an int — sklearn reads it as "keep however many components I need for 90% of the variance." Accuracy drops a little; the feature count drops by half. *"Was that trade worth it here? Probably not — 64 columns is small. On 5,000 columns it absolutely is. PCA is a tool for wide data, not for every dataset."*
+**Output:**
+```
+          PC1   PC2
+class
+class_0  2.28  0.97
+class_1 -0.04 -1.64
+class_2 -2.75  1.24
+```
 
-> ⚠️ **Fit the PCA on the training set only, then `transform` the test set.** Calling `fit_transform` on the full data before splitting is leakage — the test rows helped choose the axes. (For today's visualisation-only plot we fit on everything, which is fine because we are not scoring anything.)
+**Describe what the plot shows:** three visibly separated clouds along PC1 — `class_0` sits furthest right (PC1 ≈ 2.28), `class_2` furthest left (PC1 ≈ -2.75), and `class_1` in the middle but pulled downward on PC2 (-1.64). Even though PC1+PC2 only capture 55% of total variance, the dominant chemical differences between cultivars happen to align with those first two directions — that's why the plot still shows clean separation.
+
+**Teaching point (important limit):** PCA is **unsupervised** — it never looks at `y` while fitting. The fact that classes separate nicely here is a (common but not guaranteed) side effect of class differences being the dominant source of variance in this dataset. On a noisier dataset, PC1/PC2 might capture variance that has nothing to do with the label you care about.
+
+### Cumulative variance — how many components would you actually keep?
+
+```python
+pca_full = PCA(random_state=42)
+pca_full.fit(X_scaled)
+cum_var = np.cumsum(pca_full.explained_variance_ratio_)
+
+print("Explained variance ratio per component:")
+print(np.round(pca_full.explained_variance_ratio_, 4))
+print("\nCumulative explained variance:")
+print(np.round(cum_var, 4))
+
+n_for_90 = np.argmax(cum_var >= 0.90) + 1
+n_for_95 = np.argmax(cum_var >= 0.95) + 1
+print(f"\nComponents needed for >=90% variance: {n_for_90}")
+print(f"Components needed for >=95% variance: {n_for_95}")
+```
+
+**Output:**
+```
+Explained variance ratio per component:
+[0.362  0.1921 0.1112 0.0707 0.0656 0.0494 0.0424 0.0268 0.0222 0.0193
+ 0.0174 0.013  0.008 ]
+
+Cumulative explained variance:
+[0.362  0.5541 0.6653 0.736  0.8016 0.851  0.8934 0.9202 0.9424 0.9617
+ 0.9791 0.992  1.    ]
+
+Components needed for >=90% variance: 8
+Components needed for >=95% variance: 10
+```
+
+**Discussion prompt:** *"We needed 8 of the 13 original components to hit 90% variance — is PCA still 'worth it' here?"* → For visualization, 2 components was clearly worth it. For feeding a downstream model, going from 13 to 8 features is a much smaller win — sometimes PCA isn't worth the interpretability cost if the dataset doesn't have much redundancy to begin with.
 
 ---
 
 ## BREAK (10 min)
 
-*Mull this over: you have 1,000 days of shop sales. You shuffle the rows and take a random 20% as your test set. Your R² comes out at 0.96. What, exactly, have you just proved?*
+*Suggested break prompt — ask students to think of one real sequence of numbers they've personally seen that goes up-and-down repeatedly over time (their monthly phone bill, a city's temperature, app downloads, cricket team's win rate per season). They'll share one after the break — this primes the "trend vs seasonality" framing.*
 
 ---
 
-## Concept Block 3: Time Series — The Rows Are Not Independent (10 min)
+## Concept Block 3: Time Series Building Blocks — Trend & Seasonality (10 min)
 
-### The one assumption that just broke
+### What makes a time series different from a normal dataset
 
-Everything in Sessions 1–10 assumed rows were **interchangeable**. Row 4 tells you nothing about row 5. That is why shuffling was harmless.
+Every row we've worked with this module (Titanic-style tables, wine samples) is **independent** — shuffling the rows changes nothing about what the data means. A **time series** is a sequence of values where **order carries information** — each point is related to its neighbors in time, and shuffling destroys the very thing we're trying to model.
 
-A time series violates this at its core: today's sales depend on yesterday's. **The order IS the data.**
+### The Decomposition Idea
 
-### The cardinal sin — write it on the board and box it
+A time series can (approximately) be broken into three additive pieces:
 
 ```
-      ┌──────────────────────────────────────────────┐
-      │  NEVER: train_test_split(X, y, shuffle=True) │
-      │         on time-ordered data                 │
-      └──────────────────────────────────────────────┘
+  Observed Series  =  Trend  +  Seasonality  +  Noise/Residual
 
-Shuffle → future rows land in TRAIN → model learns from tomorrow
-        → test score is beautiful → deployment is a disaster
+     ╱╲  ╱╲  ╱╲                                    small random
+   ╱╲  ╲╱  ╲╱  ╲╱╲        ___________              wiggle left
+  ╱                  ≈   ╱          + repeating  + over after
+                        ╱  (long-run  wave pattern   removing
+                        direction)   (fixed period)  trend+season
 ```
 
-This is leakage (Session 2) in its purest, most seductive form. It does not look like a bug. It looks like a great model.
-
-### The correct split
-
-| | Ordinary data | Time series |
+| Component | Meaning | Example |
 |---|---|---|
-| Split | `train_test_split(shuffle=True)` | Slice by date: `df.iloc[:split]`, `df.iloc[split:]` |
-| Cross-validation | `KFold` | `TimeSeriesSplit` |
-| Test set is | a random sample | always the **most recent** stretch |
+| **Trend** | The long-run direction, ignoring short-term ups/downs | Sales steadily growing 3–4% a month over 4 years |
+| **Seasonality** | A pattern that repeats at a **fixed period** | Ice cream sales spike every summer, every year |
+| **Residual / Noise** | Whatever is left after removing trend and seasonality | Day-to-day randomness, one-off events |
 
-`TimeSeriesSplit(n_splits=5)` walks forward through time. Fold 1 trains on days 0–180 and tests on 181–360. Fold 2 trains on 0–360 and tests on 361–540. Training data only ever grows, and it always sits *before* the test window.
+**Teaching point:** "Seasonality" doesn't have to mean literal seasons — it means *any* fixed, repeating period: hourly patterns in web traffic (busy at 9am, quiet at 3am), weekly patterns in restaurant bookings (busy Friday, quiet Monday), or yearly patterns in retail sales. The key is that the period is **fixed and known** (e.g. 12 months, 7 days, 24 hours).
 
-### The anatomy of a series
-
-```
-observed  =  trend  +  seasonality  +  noise
-
-trend        the slow drift            sales grow 4% a year
-seasonality  a fixed-length cycle      every Saturday; every monsoon
-cyclical     a wave with no fixed length   multi-year booms
-noise        whatever is left
-```
-
-**Stationarity, intuitively:** *the rules of the game are not changing.* Mean and variance stay put over time. A growing sales series is **not** stationary — its 2024 average is nowhere near its 2021 average. The standard fix is **differencing**: model the *change* (`df['sales'].diff()`) instead of the level. The level climbs forever; the day-to-day change hovers around a constant.
+**A simple way to estimate trend:** a **rolling mean** (moving average) smooths out short-term noise and seasonal bumps, leaving the long-run direction behind. A simple way to estimate seasonality: after removing the trend, average what's left, grouped by the position in the cycle (e.g. average the "January leftovers" across every year in the data).
 
 ---
 
-## Practical Block 3: Build the Series, Then Get Caught Cheating (15 min)
+## Practical Block 3: Build & Decompose a Synthetic Time Series (15 min)
+
+### Build a synthetic monthly series: trend + yearly seasonality + noise
+
+We build this ourselves with `pd.date_range` and `numpy` — fully self-contained, no external data needed.
 
 ```python
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 
-np.random.seed(42)
+rng = np.random.default_rng(42)
 
-dates = pd.date_range("2021-01-01", periods=1095, freq="D")   # 3 years, daily
-t = np.arange(len(dates))
+n_months = 48  # 4 years of monthly data
+dates = pd.date_range(start="2022-01-01", periods=n_months, freq="MS")
+t = np.arange(n_months)
 
-trend       = 500 + 0.4 * t                       # slow growth
-seasonality =  80 * np.sin(2 * np.pi * t / 365.25)  # yearly wave
-weekly      =  25 * np.sin(2 * np.pi * t / 7)       # weekly wave
-noise       = np.random.normal(0, 20, len(dates))
+trend = 200 + 3.5 * t                          # steady upward trend
+seasonality = 40 * np.sin(2 * np.pi * t / 12)  # repeats every 12 months
+noise = rng.normal(0, 8, n_months)              # random noise
 
-df = pd.DataFrame(
-    {"sales": (trend + seasonality + weekly + noise).round(2)},
-    index=dates)
-df.index.name = "date"
+sales = trend + seasonality + noise
+ts = pd.Series(sales, index=dates, name="sales")
 
-print(df.head())
-df["sales"].plot(figsize=(12, 4), lw=0.8,
-                 title="Daily sales — trend + yearly season + weekly season + noise")
-plt.ylabel("Sales (₹ thousand)")
-plt.show()
+print(ts.head(6).round(2))
+print("\nDescribe:")
+print(ts.describe().round(2))
 ```
 
-### Decomposition by hand — no extra library needed
+**Output:**
+```
+2022-01-01    202.44
+2022-02-01    215.18
+2022-03-01    247.64
+2022-04-01    258.02
+2022-05-01    233.03
+2022-06-01    227.08
+Freq: MS, Name: sales, dtype: float64
+
+Describe:
+count     48.00
+mean     282.89
+std       53.01
+min      184.68
+25%      240.37
+50%      282.91
+75%      326.29
+max      381.70
+Name: sales, dtype: float64
+```
+
+### Estimate trend with a rolling mean, then detrend
 
 ```python
-d = df.copy()
-d["trend"]     = d["sales"].rolling(30, center=True).mean()   # smooth away the wiggles
-d["detrended"] = d["sales"] - d["trend"]
-d["seasonal"]  = d.groupby(d.index.dayofweek)["detrended"].transform("mean")
-d["residual"]  = d["detrended"] - d["seasonal"]
+trend_est = ts.rolling(window=12, center=True).mean()
+print("Rolling trend (first 15):")
+print(trend_est.head(15).round(2))
 
-fig, ax = plt.subplots(4, 1, figsize=(12, 8), sharex=True)
-for i, col in enumerate(["sales", "trend", "seasonal", "residual"]):
-    ax[i].plot(d.index, d[col], lw=0.8)
-    ax[i].set_ylabel(col)
-ax[0].set_title("Decomposition: observed = trend + seasonal + residual")
-plt.tight_layout(); plt.show()
-
-print("Average weekday effect (0 = Monday):")
-print(d.groupby(d.index.dayofweek)["detrended"].mean().round(2))
+detrended = ts - trend_est
+print("\nDetrended (first 15):")
+print(detrended.head(15).round(2))
 ```
 
-**Expected output:** the weekday-effect table shows clearly negative values midweek and clearly positive ones at the weekend — we have *rediscovered* the weekly sine wave we planted, using nothing but a rolling mean and a groupby.
+**Output:**
+```
+Rolling trend (first 15):
+2022-01-01       NaN
+2022-02-01       NaN
+2022-03-01       NaN
+2022-04-01       NaN
+2022-05-01       NaN
+2022-06-01       NaN
+2022-07-01    218.12
+2022-08-01    221.46
+2022-09-01    226.40
+2022-10-01    229.71
+2022-11-01    232.01
+2022-12-01    237.06
+2023-01-01    240.79
+2023-02-01    244.79
+2023-03-01    248.47
+Freq: MS, Name: sales, dtype: float64
 
-### Now the trap
+Detrended (first 15):
+2022-01-01      NaN
+2022-02-01      NaN
+2022-03-01      NaN
+2022-04-01      NaN
+2022-05-01      NaN
+2022-06-01      NaN
+2022-07-01     3.91
+2022-08-01   -19.49
+2022-09-01   -33.18
+2022-10-01   -45.04
+2022-11-01   -24.62
+2022-12-01   -12.34
+2023-01-01     1.74
+2023-02-01    29.73
+2023-03-01    38.91
+Freq: MS, Name: sales, dtype: float64
+```
+
+**Explain the NaNs:** a `center=True` window of 12 needs 6 months on either side, so the first and last 6 months of the series have no trend estimate. This is a real trade-off of rolling-mean decomposition — you lose the edges.
+
+### Extract seasonality by averaging the detrended residual per calendar month
 
 ```python
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_absolute_error, r2_score
-from sklearn.model_selection import train_test_split
+seasonal_by_month = detrended.groupby(detrended.index.month).mean()
+print("Seasonal component by month:")
+print(seasonal_by_month.round(2))
 
-X = pd.DataFrame({"t": t,
-                  "dayofweek": df.index.dayofweek,
-                  "month": df.index.month}, index=df.index)
-y = df["sales"]
-
-# ---------- THE WRONG WAY ----------
-Xtr, Xte, ytr, yte = train_test_split(X, y, test_size=0.2, shuffle=True, random_state=42)
-bad = RandomForestRegressor(n_estimators=100, random_state=42).fit(Xtr, ytr)
-p_bad = bad.predict(Xte)
-print(f"SHUFFLED split  → MAE {mean_absolute_error(yte, p_bad):.2f}   R² {r2_score(yte, p_bad):.3f}")
-
-# ---------- THE RIGHT WAY ----------
-split = int(len(df) * 0.8)
-good = RandomForestRegressor(n_estimators=100, random_state=42).fit(X.iloc[:split], y.iloc[:split])
-p_good = good.predict(X.iloc[split:])
-print(f"CHRONO   split  → MAE {mean_absolute_error(y.iloc[split:], p_good):.2f}   "
-      f"R² {r2_score(y.iloc[split:], p_good):.3f}")
+residual = ts - trend_est - ts.index.month.map(seasonal_by_month).values
+print("\nResidual stats (should hover near 0):")
+print(residual.describe().round(2))
 ```
 
-**Expected output:** the shuffled split reports an R² up around 0.96 and looks superb. The chronological split reports a **negative** R² — worse than just predicting the average. Same data, same model, same seed.
+**Output:**
+```
+Seasonal component by month:
+1     -0.66
+2     20.62
+3     35.78
+4     41.06
+5     39.11
+6     20.44
+7      6.08
+8    -20.81
+9    -35.34
+10   -44.70
+11   -25.77
+12   -14.30
+Name: sales, dtype: float64
 
-**Live walk-through — spend real time here.** *"The shuffled model was tested on 15 March using rows from 14 March and 16 March that it had already memorised. It never had to forecast anything. The moment we force it to face a genuinely unseen future, it collapses."*
+Residual stats (should hover near 0):
+count    37.00
+mean     -0.00
+std       4.44
+min     -10.42
+25%      -2.98
+50%       1.32
+75%       2.29
+max      10.73
+dtype: float64
+```
 
-Then push further: *"Why does the tree fail so badly on the honest split?"* → Because a Random Forest predicts by averaging training values. It **cannot extrapolate** past the largest value it has ever seen. The sales trend keeps climbing into the test period, and the forest is stuck predicting the past. This is a second, deeper lesson: on a trending series, tree models need the trend removed or a lag feature to lean on.
+**Walk through it:** the seasonal component peaks around April (+41.06) and bottoms out around October (-44.70) — matching the `sin` wave we injected. After removing trend AND seasonality, what's left (`residual`) has mean ≈ 0 and a small spread (std ≈ 4.4) — that's the noise we added with `rng.normal(0, 8, ...)`, shrunk by averaging.
+
+**Note for the class:** production libraries like `statsmodels.tsa.seasonal_decompose()` automate exactly this (rolling mean + per-period averaging). We built it by hand so the mechanics are transparent — once you understand this, the library call is just a shortcut.
 
 ---
 
-## Concept Block 4: Lag Features and the Baseline You Must Beat (10 min)
+## Concept Block 4: Why Time Order Matters for Splitting (10 min)
 
-### Turning a series into a table
+### The leakage problem, revisited
 
-A raw series has no `X`. You build one, by pasting the past in as columns.
-
-| Feature | Code | Meaning |
-|---|---|---|
-| `lag_1` | `df['sales'].shift(1)` | Yesterday |
-| `lag_7` | `df['sales'].shift(7)` | Same weekday last week |
-| `roll7_mean` | `df['sales'].shift(1).rolling(7).mean()` | Average of the last 7 days |
-| `roll7_std` | `df['sales'].shift(1).rolling(7).std()` | How jumpy the last 7 days were |
-| `dayofweek` | `df.index.dayofweek` | Calendar context |
-
-Once those exist, `X` = the lag columns and `y` = `sales`, and every model from Sessions 3 and 7 works unchanged. **This is the single most useful practical skill in the session.**
-
-> ⚠️ **`.shift(1)` BEFORE `.rolling()`.** A bare `df['sales'].rolling(7).mean()` includes *today's* value — the very thing you are predicting. Leakage, dressed up as a helpful feature.
-
-The first few rows will be `NaN` (there is no "yesterday" for day one). `.dropna()` and move on.
-
-### The persistence baseline
+Back in Module 1 we discussed data leakage — information from outside the training data sneaking in and making validation scores look better than they really are. Time series has its own dedicated version of this problem.
 
 ```
-Prediction: tomorrow = today.
-In code:    y_pred = X_test['lag_1']
+CORRECT — chronological split:              WRONG — random shuffle split:
+
+|-------- TRAIN --------|--- TEST ---|      TRAIN: ▓ ░ ▓ ▓ ░ ▓ ░ ░ ▓ ░ ▓ ░
+Jan22 ............... Dec24 | Jan25...Dec25   TEST:  ░ ▓ ░ ░ ▓ ░ ▓ ▓ ░ ▓ ░ ▓
+     (only past)         (only future)       (both scattered across all 4 years)
 ```
 
-Score it first, before you train anything. *That number is the bar.* An MAE of 18 means nothing on its own — it only means something once you know the do-nothing baseline scores 24. Many published forecasting models, in the real world, quietly fail to clear this bar.
+**Teaching point:** If you shuffle a time series before splitting, your "test" set ends up containing months from years the model already trained on. The model isn't being asked to *forecast the unseen future* anymore — it's just interpolating between points it has effectively already seen (an earlier and later month from the same year, same season). Validation metrics will look artificially good and will **not** reflect real forecasting performance.
 
-**Where to go next (name-drop only):** **ARIMA** models the series directly using its own lags and differences. **Prophet** (from Meta) fits trend + seasonality + holidays with almost no configuration. Both are excellent, both are for another day — and neither will save you if you split your data wrong.
+**The correct approach:** split by time order — all of the earliest data in `train`, all of the most recent data in `test`. In production settings, teams often go further with **walk-forward validation** (retrain repeatedly, always testing on the next unseen chunk) — a concept worth naming here even though we'll only do a single chronological split today.
+
+**Bridge back:** *"This is the exact same leakage principle from Module 1 — information from the 'future' (relative to a prediction point) must never touch training. Time series just makes the rule concrete and easy to violate accidentally with a single `shuffle=True`."*
 
 ---
 
-## Practical Block 4: Lags, Rolling Windows, Beat the Baseline (10 min)
+## Practical Block 4: Correct vs Wrong Split + Baseline Forecast (10 min)
+
+### Show the wrong way first
 
 ```python
-from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_absolute_error
-from sklearn.model_selection import TimeSeriesSplit, cross_val_score
+shuffled = ts.sample(frac=1.0, random_state=42)
+wrong_train_idx = shuffled.index[:36]
+wrong_test_idx = shuffled.index[36:]
 
-feat = df[["sales"]].copy()
-
-# --- lag features ---
-for lag in [1, 2, 3, 7, 14]:
-    feat[f"lag_{lag}"] = feat["sales"].shift(lag)
-
-# --- rolling features (shift FIRST, then roll) ---
-feat["roll7_mean"] = feat["sales"].shift(1).rolling(7).mean()
-feat["roll7_std"]  = feat["sales"].shift(1).rolling(7).std()
-
-# --- calendar features ---
-feat["dayofweek"] = feat.index.dayofweek
-feat["month"]     = feat.index.month
-
-feat = feat.dropna()          # first 14 rows have no history
-print(feat.shape)
-
-X = feat.drop(columns="sales")
-y = feat["sales"]
-
-split = int(len(feat) * 0.8)                       # CHRONOLOGICAL — never shuffle
-X_train, X_test = X.iloc[:split], X.iloc[split:]
-y_train, y_test = y.iloc[:split], y.iloc[split:]
-print("train ends:", X_train.index[-1].date(), "| test starts:", X_test.index[0].date())
+print("Random-split TRAIN years present:", sorted(set(wrong_train_idx.year)))
+print("Random-split TEST years present :", sorted(set(wrong_test_idx.year)))
+print("Test years already seen in training:",
+      set(wrong_test_idx.year) <= set(wrong_train_idx.year))
 ```
+
+**Output:**
+```
+Random-split TRAIN years present: [2022, 2023, 2024, 2025]
+Random-split TEST years present : [2022, 2023, 2024, 2025]
+Test years already seen in training: True
+```
+
+**Point at this directly:** every single year appears in both train AND test. The model has already "met" data from every season it's being tested on.
+
+### Now the correct way — split by time, then build a simple baseline forecast
 
 ```python
-# --- STEP 1: the baseline. Always first. ---
-naive = X_test["lag_1"]                            # "tomorrow = today"
-print(f"Naive persistence  MAE: {mean_absolute_error(y_test, naive):.2f}")
+split_point = 36  # first 36 months train, last 12 months test
+train, test = ts.iloc[:split_point], ts.iloc[split_point:]
 
-# --- STEP 2: now try to beat it ---
-lr = LinearRegression().fit(X_train, y_train)
-print(f"LinearRegression   MAE: {mean_absolute_error(y_test, lr.predict(X_test)):.2f}")
+print("Train range:", train.index.min().date(), "to", train.index.max().date())
+print("Test range :", test.index.min().date(), "to", test.index.max().date())
 
-rf = RandomForestRegressor(n_estimators=200, random_state=42).fit(X_train, y_train)
-print(f"RandomForest       MAE: {mean_absolute_error(y_test, rf.predict(X_test)):.2f}")
+# Baseline forecast: fit a trend line on TRAIN only, add back the seasonal
+# pattern learned from TRAIN only (never touch test data while "fitting")
+train_t = np.arange(split_point)
+slope, intercept = np.polyfit(train_t, train.values, 1)
+print("\nTrend fit on TRAIN only -> slope:", round(slope, 3), "intercept:", round(intercept, 3))
+
+test_t = np.arange(split_point, n_months)
+trend_forecast = slope * test_t + intercept
+seasonal_forecast = test.index.month.map(seasonal_by_month).values
+forecast = trend_forecast + seasonal_forecast
+
+mae = np.mean(np.abs(test.values - forecast))
+print("\nTest actual   (first 6):", np.round(test.values[:6], 2))
+print("Forecast      (first 6):", np.round(forecast[:6], 2))
+print("MAE on chronological test set:", round(mae, 2))
 ```
 
-**Expected output:** the naive baseline lands in the mid-20s. Linear Regression comfortably beats it (high teens). The Random Forest also beats the baseline but — surprisingly — loses to plain Linear Regression, because it still cannot extrapolate the upward trend beyond its training range.
+**Output:**
+```
+Train range: 2022-01-01 to 2024-12-01
+Test range : 2025-01-01 to 2025-12-01
 
-### Proper cross-validation for a series
+Trend fit on TRAIN only -> slope: 2.946 intercept: 210.281
 
-```python
-tscv = TimeSeriesSplit(n_splits=5)
-
-for i, (tr, te) in enumerate(tscv.split(X)):
-    print(f"fold {i}: train rows 0–{tr[-1]:>4} ({len(tr):>4}) | "
-          f"test rows {te[0]:>4}–{te[-1]:>4} ({len(te)})")
-
-scores = -cross_val_score(LinearRegression(), X, y, cv=tscv,
-                          scoring="neg_mean_absolute_error")
-print("MAE per fold:", scores.round(2))
-print(f"Mean MAE: {scores.mean():.2f}")
+Test actual   (first 6): [325.09 342.78 361.05 381.7  380.59 367.85]
+Forecast      (first 6): [315.69 339.91 358.02 366.24 367.24 351.52]
+MAE on chronological test set: 11.68
 ```
 
-**Live walk-through:** Print the fold boundaries and read them aloud. *"Look — the training window only ever grows, and the test window is always strictly after it. No fold ever peeks at the future. That is the whole idea."* Note that the first fold usually has the worst MAE — it has the least history to learn from, which is exactly what you would expect and exactly what a random `KFold` would have hidden from you.
-
-**Closing question:** *"The Random Forest lost to a straight line. When would you actually want the forest?"* → When the relationship between lags and target is non-linear, and when the series is not dominated by a simple trend. The lesson is not "trees are bad" — it is "always run the baseline, and always let the honest split decide."
+**Discussion prompt:** *"An MAE of 11.68 on values averaging ~283 — is that a good forecast?"* → roughly a 4% average error, which is a reasonable baseline for a hand-built trend+seasonal model. The point isn't the exact number — it's that this MAE is **trustworthy** because the test months genuinely came after every training month, unlike the shuffled version.
 
 ---
 
 ## Summary & Wrap-Up (5 min)
 
-1. **The curse of dimensionality** — as columns grow, all distances converge, and distance-based models (KNN, K-Means) quietly stop working.
-2. **PCA** finds the directions of maximum variance and keeps the first few. It **demands standardised features**, and it **costs you interpretability** — `PC1` is a blend, not a column you can name.
-3. **`explained_variance_ratio_` + the cumulative plot** tell you how many components to keep. Two components for a picture; ~90–95% of variance for speed.
-4. **In a time series, the rows are not independent.** `shuffle=True` leaks the future into the past and produces a beautiful, worthless score. Split chronologically; cross-validate with `TimeSeriesSplit`.
-5. **Lag and rolling features** turn a series into an ordinary supervised table (`.shift()` then `.rolling()`), and **the persistence baseline** — tomorrow = today — is the bar every model must clear.
+**What we covered today:**
+- The curse of dimensionality: too many correlated features make visualization and distance-based reasoning unreliable
+- Variance = information; PCA rotates the feature space to find directions (principal components) of maximum variance
+- Always `StandardScaler` before PCA — unscaled large-magnitude features dominate for the wrong reasons
+- `explained_variance_ratio_` and its cumulative sum tell you how many components to keep (90–95% is a common target)
+- A 2D PCA scatter plot is a fast, honest way to check whether classes/clusters separate in a high-dimensional dataset
+- Time series = Trend + Seasonality + Noise; rolling mean isolates trend, averaging the detrended residual by period isolates seasonality
+- Time series must be split **chronologically**, never shuffled — shuffling leaks future information into training and produces misleadingly optimistic validation
 
-**Bridge:** *"You now have a shelf full of models and a lot of ways to prepare data for them. Next session — **Model Selection, Persistence & Module Review** — you'll learn how to systematically choose between them with GridSearchCV, and then how to `joblib.dump` the winner so it survives outside your notebook. That is the last step before a model becomes a product."*
+**Bridge to next session:** *"Next class is the final session of Module 2 — Model Selection, Persistence & Module Review. We'll take everything built this module — regression, classification, ensembles, clustering, and today's PCA — and formalize how to properly select the best model, then learn to save and reload trained models with `joblib` so they survive beyond a single notebook session."*
+
+**Homework / self-practice:**
+1. Run the same PCA workflow on `sklearn.datasets.load_breast_cancer()`. Report the cumulative variance table and how many components are needed to reach 95%.
+2. Build your own synthetic time series (pick a different trend slope, seasonal period, and noise level), decompose it into trend + seasonality, then perform a correct chronological train/test split and compute the baseline forecast MAE.
 
 ---
 
 ## Q&A & Doubt Solving (5 min)
 
-**Q: If PCA loses interpretability, why not just drop the columns with low variance and keep the names?**
-→ You can, and that is called feature selection — it is a legitimate alternative. But low-variance columns are not necessarily useless columns, and PCA captures information that lives *across* columns (two features that always move together are one direction, not two). PCA finds structure that column-by-column selection cannot see.
+**Likely questions and suggested answers:**
 
-**Q: How many components should I keep?**
-→ There is no universal answer. Two if you are drawing a picture. Enough for 90–95% of the variance if you want speed with minimal loss. Or find the "elbow" on the scree plot where the bars flatten. In practice, treat `n_components` as a hyperparameter and tune it — which is exactly what next session's GridSearchCV is for.
+**Q: Do we lose interpretability when we use PCA?**
+→ Yes — a principal component is a weighted blend of every original feature, not one recognizable column. You can inspect `pca.components_` to see the weights, but explaining "PC1" to a non-technical stakeholder is much harder than explaining "customer age."
 
-**Q: My time-series model gets a great score. How do I know it isn't leaking?**
-→ Three checks. (1) Did anything in your feature pipeline see the whole dataset before splitting — a scaler, a rolling mean without `.shift(1)`? (2) Is your test set strictly the *last* chunk by date? (3) Does it beat the persistence baseline by a *believable* margin? A model that beats "tomorrow = today" by 60% on real, noisy data is almost always leaking.
+**Q: Should I always scale before PCA?**
+→ Almost always, unless every feature is already naturally on the same scale and unit (e.g. all percentages 0–100). When in doubt, scale — an unscaled PCA is usually dominated by whichever feature happens to have the largest numeric range.
 
-**Q: Can I use PCA and then KNN together?**
-→ Yes — that is one of PCA's best uses. `make_pipeline(StandardScaler(), PCA(n_components=0.95), KNeighborsClassifier())`. The PCA step restores meaning to the distances KNN depends on. Just remember the pipeline fits PCA on the training fold only, which is precisely why you use a pipeline.
+**Q: How do I decide exactly how many components to keep?**
+→ There's no universal number. Common approaches: target a cumulative variance threshold (90–95%), look for the "elbow" in the scree plot where returns drop off sharply, or simply keep however many a downstream model needs (2 for a plot, more for a model).
 
-**Q: What about time series where I have several shops, each with its own sales column?**
-→ Build lag features *per shop* (a `groupby('shop_id')` before the `.shift()`), then stack them into one long table with `shop_id` as a feature. The chronological-split rule still applies, and the split date must be the same for every shop.
+**Q: Can I feed PCA output straight into a classifier?**
+→ Yes — PCA is often used exactly this way as a preprocessing step to reduce noise/redundancy before a supervised model. Just remember PCA itself never looks at the label; it only reduces the feature space.
+
+**Q: What's actually different between "trend" and "seasonality" if both cause the values to go up and down?**
+→ Trend is the smooth, long-run direction once you ignore short cycles — it doesn't repeat. Seasonality repeats at a **fixed, known period** (every 12 months, every 7 days). If you can name the period, it's seasonality; if it's a slow, one-directional drift, it's trend.
+
+**Q: Why exactly does shuffling ruin a time series split — the math still runs fine?**
+→ The code runs fine, that's the trap. The problem is what the numbers *mean*: a forecasting model is supposed to predict values it hasn't seen yet, using only the past. A shuffled split lets training data sit chronologically *after* some test points, so the "test" score reflects interpolation between known points, not genuine forecasting — it will not match real-world performance when deployed.
 
 ---
 
 ## Instructor Notes
 
-- **No downloads, no extra installs.** `load_digits` and `load_breast_cancer` ship with sklearn; the sales series is generated inline with `np.random.seed(42)`. `scipy.spatial.distance.pdist` (Practical 1) comes with scipy, which sklearn already depends on. **Do not** use `statsmodels.seasonal_decompose` — it is often not installed. The hand-rolled `rolling().mean()` decomposition in Practical 3 avoids the dependency entirely and teaches more.
-- **Pacing:** Practical 3's shuffle-vs-chronological demo is the emotional centre of the session. If you are running behind, cut the scree plot's cosmetics or trim Practical 4's `TimeSeriesSplit` loop — but never cut the leakage demo.
-- **The physical shadow demo in Concept 2 is worth the 60 seconds.** Students who see the bottle's shadow change never forget what a principal component is.
-- **Expect a fight about the Random Forest losing to Linear Regression** in Practical 4. Lean into it. "Trees cannot extrapolate" is one of the most useful facts in applied ML and this is a rare chance to show it, not just assert it.
-- **The single most common student mistake:** forgetting `StandardScaler` before `PCA`. It fails *silently* — you still get components, they are just wrong, dominated by whichever column happens to have the largest units. Pre-empt it by running PCA once *without* scaling on a dataset with mixed units and showing them a first component that explains 99% of the variance and means nothing at all.
-- **Runner-up mistake:** `df['sales'].rolling(7).mean()` with no `.shift(1)`. It looks correct, produces a fantastic score, and is pure leakage. Make them say the rule out loud: *shift first, then roll.*
+- **Dataset choices:** `load_wine()` was chosen over `load_breast_cancer()` for the PCA half because 3 classes give a visibly richer scatter plot than 2, and 13 features (vs 30) keep printed output readable on a projector. The synthetic time series is fully generated with `numpy`/`pandas` — no internet access needed, and the trend/seasonal/noise parameters are visible in the code so students can tweak and re-run instantly.
+- **Common student mistake (PCA):** fitting `PCA` before `StandardScaler`, or fitting the scaler on the whole dataset instead of train-only in a real pipeline. For today's EDA-style use this is fine (no leakage risk since there's no train/test split for the PCA half), but flag it explicitly: *"If this were feeding a model with train/test, you'd fit the scaler and PCA on train only, then `.transform()` test."*
+- **Common student mistake (time series):** calling `.rolling(window=12)` without `center=True` and being confused why the trend line looks "shifted" relative to the data. Show both settings side by side if time allows.
+- **Live-coding tip:** Deliberately skip `StandardScaler` once on the wine data, rerun PCA, and show `explained_variance_ratio_` change dramatically (PC1 will look almost entirely driven by `proline`). This lands the scaling lesson far better than just stating it.
+- **For advanced students:** Have them inspect `pca.components_[0]` sorted by absolute weight to see which original features contribute most to PC1 — a light bridge into "loadings" without a full linear algebra detour. For time series, challenge them to implement `statsmodels.tsa.seasonal_decompose`-style output purely with `pandas`/`numpy` (which is exactly what Practical Block 3 already does) and compare against `statsmodels` if it happens to be installed on their machine.
+- **Time check contingency:** If running behind after the break, compress Practical Block 4 to just the "wrong vs correct split" comparison and assign the baseline-forecast MAE calculation as part of the homework.

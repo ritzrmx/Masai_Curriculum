@@ -5,11 +5,11 @@
 
 ## Session Overview
 
-**Goal:** Students build a fraud classifier on deliberately imbalanced data, watch it score 96% accuracy while missing more than half the frauds, and then fix it — not by retraining, but by reading the confusion matrix, choosing the right metric, and moving the decision threshold to a value justified by a real business cost.
+**Goal:** Students can explain why accuracy is misleading on imbalanced data, build and read a confusion matrix, compute precision/recall/F1 by hand and with `sklearn`, and use `predict_proba()` with threshold tuning and ROC/AUC to choose the right operating point for a classifier.
 
-**Student profile at this point:** They can train classifiers (Session 6), build ensembles (Session 7), and call `.predict()` and `.predict_proba()`. They have used `accuracy_score` and believe it. They have never seen a confusion matrix, a threshold sweep, or an ROC curve.
+**Student profile at this point:** Have built Logistic Regression, Decision Tree, and Random Forest classifiers across Sessions 6–7. Have only ever evaluated them with `.score()` (accuracy). Comfortable with `train_test_split`, `fit`/`predict`, and basic Pandas.
 
-**Key outcome:** A notebook that takes one trained model and produces: a confusion matrix, a classification report, a threshold sweep table, ROC and precision–recall curves, and a single chosen operating threshold with a rupee figure justifying it.
+**Key outcome:** By end of class, every student can look at a confusion matrix and immediately say "this model is 90% accurate but useless" — and knows exactly which metric and which threshold to reach for instead.
 
 ---
 
@@ -17,16 +17,16 @@
 
 | Segment | Duration | Cumulative |
 |---|---|---|
-| Opening — The 95% Model That Catches Nothing | 5 min | 0:05 |
-| **Concept 1:** The Accuracy Paradox and the Confusion Matrix | 10 min | 0:15 |
-| **Practical 1:** Build the imbalanced data, expose the lie | 15 min | 0:30 |
-| **Concept 2:** Precision, Recall, F1, Specificity | 10 min | 0:40 |
-| **Practical 2:** classification_report and naming the errors | 15 min | 0:55 |
+| Opening & Context | 5 min | 0:05 |
+| **Concept 1:** Why Accuracy Lies | 10 min | 0:15 |
+| **Practical 1:** The Imbalance Trap | 15 min | 0:30 |
+| **Concept 2:** The Confusion Matrix | 10 min | 0:40 |
+| **Practical 2:** Building & Reading the Confusion Matrix | 15 min | 0:55 |
 | **BREAK** | 10 min | 1:05 |
-| **Concept 3:** The Threshold Is a Dial, Not a Law | 10 min | 1:15 |
-| **Practical 3:** Sweep the threshold, walk the tradeoff | 15 min | 1:30 |
-| **Concept 4:** ROC-AUC vs the Precision–Recall Curve | 10 min | 1:40 |
-| **Practical 4:** Curves, AUC, and a threshold chosen by cost | 10 min | 1:50 |
+| **Concept 3:** Precision, Recall & F1-Score | 10 min | 1:15 |
+| **Practical 3:** Computing Precision, Recall, F1 | 15 min | 1:30 |
+| **Concept 4:** Threshold Tuning, ROC Curve & AUC | 10 min | 1:40 |
+| **Practical 4:** Threshold Sweep & ROC/AUC | 10 min | 1:50 |
 | Summary & Wrap-Up | 5 min | 1:55 |
 | Q&A & Doubt Solving | 5 min | 2:00 |
 
@@ -34,538 +34,506 @@
 
 ## Opening (5 min)
 
-**Hook — write this on the board before anyone opens a laptop:**
+**Hook:** Write this on the board without context:
 
 ```
-I have built a fraud detection model.
-It is 95% accurate.
-It is one line of code:
-
-    def predict(transaction):
-        return "not fraud"
+Model A accuracy: 89.4%
+Model B accuracy: 90.2%
 ```
 
-Let it sit in silence for a few seconds. Then ask the room:
+Ask: *"Which model would you deploy?"* Most hands go up for Model B — it's higher. Then reveal: **Model A never even looks at the data — it just predicts "not fraud" for every single transaction.** Model B is a real, trained Logistic Regression. It only beats the "do-nothing" model by 0.8 percentage points, and — as we'll see in twenty minutes — it catches almost none of the actual fraud.
 
-*"Out of 10,000 transactions, 500 are fraud. My model says 'not fraud' every single time. How many does it get right? 9,500. That's 95% accuracy — better than most models any of you trained last week. Would you deploy it?"*
+**Context to set:** Back in Session 2 we discussed class imbalance and why it breaks naive train/test assumptions. Today we go one level deeper: even after you've handled imbalance in your *data*, you can still be completely misled by the *metric* you choose to judge your model. Accuracy treats every mistake as equally bad. In the real world, mistakes are not equal — missing a cancer diagnosis is not the same mistake as a false alarm. Today we build the vocabulary and tools to measure that difference.
 
-Someone will say "obviously not." Push them: *"Then tell me the number that proves it's bad. Because accuracy says it's good."* They will not have one. That is the session.
-
-**What model evaluation is NOT:**
-- Printing `accuracy_score` and moving on
-- Assuming `.predict()` is telling you what the model actually thinks
-- Treating 0.5 as a sacred, mathematically derived cut-off
-- Believing one number can summarise every kind of mistake
-
-**What model evaluation IS:**
-- Knowing exactly *which* of your two errors the model is making
-- Deciding, before you look at any metric, which error costs your business more
-- Treating the threshold as a dial you are paid to tune, not a default you inherit
-- Being able to say "we chose 0.14, and it saves us ₹1,07,500 on this test set"
+**Learning contract for today:**
+- Explain why a 90%-accurate model can be worthless
+- Read a confusion matrix and derive precision, recall, and F1 from it
+- Choose a classification threshold deliberately, using ROC/AUC, instead of defaulting to 0.5
 
 ---
 
-## Concept Block 1: The Accuracy Paradox and the Confusion Matrix (10 min)
+## Concept Block 1: Why Accuracy Lies (10 min)
 
-### Why accuracy breaks (board)
+### The Base Rate Problem
+
+When one class dominates the dataset, a model can score high accuracy by simply ignoring the minority class entirely.
 
 ```
-accuracy = (TP + TN) / (TP + TN + FP + FN)
+Fraud detection dataset:  ~90% legitimate, ~10% fraud
+A model that ALWAYS predicts "legitimate" scores ~90% accuracy
+...and catches ZERO fraud cases.
 ```
 
-On balanced data this is fine. On **imbalanced** data — where the class you care about is rare — TN is enormous and it drowns everything else. The model gets rewarded for correctly ignoring the boring class.
+**Teaching point:** Accuracy answers *"how often is the model right overall?"* It does not answer *"is the model right about the cases I actually care about?"* In imbalanced problems, those are very different questions.
 
-**The rule to write on the board:** *Accuracy is only meaningful when the classes are roughly balanced. The moment they are not, accuracy is a distraction.*
+### Where This Shows Up in the Real World
 
-### The confusion matrix — the four boxes
+| Domain | Majority class | Minority class (the one that matters) | Accuracy of "predict majority always" |
+|---|---|---|---|
+| Fraud detection | Legitimate transaction | Fraud | ~90–99% |
+| Disease screening | Healthy | Disease present | ~90–99% |
+| Spam filtering | Not spam | Spam | ~80–95% |
+| Manufacturing defect detection | Good part | Defective part | ~95–99.9% |
+| Churn prediction | Stays | Churns | ~70–90% |
 
-Choose your **positive class** first. It is always the rare, interesting, expensive thing: fraud, disease, churn, defect. Everything else is negative.
+**Key teaching point:** In every one of these domains, the class you care about most is the *minority* class. This is not a coincidence — rare, costly events are exactly what businesses build models to catch. An evaluation metric that rewards ignoring the minority class is actively dangerous in production.
 
-|  | **Predicted: Negative** | **Predicted: Positive** |
-|---|---|---|
-| **Actual: Negative** | TN — correctly ignored | **FP — false alarm** |
-| **Actual: Positive** | **FN — missed it** | TP — caught it |
-
-Draw this 2×2 grid on the board and leave it there for the entire session. You will point at it thirty times.
-
-### Make them name the errors
-
-This is the single most important five minutes of the session. Give the room a scenario and make them say the errors *in English*, not initials:
-
-> *"You're building a model that flags UPI transactions as fraud. What is a false positive? What is a false negative? Say it as a sentence about a real person."*
-
-Force the full sentences out of them:
-- **FP:** "We froze Ravi's card while he was paying for his mother's medicine."
-- **FN:** "₹40,000 left Ravi's account, and we did nothing."
-
-If students cannot articulate their two errors in plain words, they cannot choose a metric. Everything after this depends on it.
-
-**Note the lazy model in matrix form:** TP = 0, FP = 0, FN = 500, TN = 9,500. Every error is stacked in one box. Accuracy hid it. The matrix cannot.
+**Bridge back to Session 2:** Recall the imbalance discussion — we talked about *resampling* and *stratification* as data-side fixes. Today's tools are *metric-side* fixes: even with the same imbalanced data, choosing the right metric changes what "good" means.
 
 ---
 
-## Practical Block 1: Build the Imbalanced Data, Expose the Lie (15 min)
+## Practical Block 1: The Imbalance Trap (15 min)
+
+### Dataset
+A synthetic fraud-style dataset with a deliberate 90/10 class imbalance, built with `make_classification`.
 
 ```python
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
+from sklearn.dummy import DummyClassifier
+from sklearn.metrics import accuracy_score
 
-# --- A deliberately imbalanced "fraud" dataset: 95% legit, 5% fraud ---
+# Imbalanced dataset: 90% class 0 (legit), 10% class 1 (fraud)
 X, y = make_classification(
-    n_samples=5000,
-    n_features=10,
-    n_informative=5,
-    n_redundant=2,
-    weights=[0.95, 0.05],   # <-- this is the whole point
-    class_sep=1.5,
-    flip_y=0.01,
-    random_state=42
+    n_samples=2000, n_features=6, n_informative=4, n_redundant=1,
+    weights=[0.9, 0.1], flip_y=0.02, random_state=42
 )
 
+print("Class distribution:")
+print(pd.Series(y).value_counts())
+print("Class balance %:")
+print((pd.Series(y).value_counts(normalize=True) * 100).round(2))
+```
+
+**Output:**
+```
+Class distribution:
+0    1786
+1     214
+Name: count, dtype: int64
+Class balance %:
+0    89.3
+1    10.7
+Name: proportion, dtype: float64
+```
+
+```python
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, stratify=y, random_state=42
+    X, y, test_size=0.25, stratify=y, random_state=42
 )
-
-print("Test set class counts:", np.bincount(y_test))
-print("Fraud rate in test set:", round(y_test.mean(), 3))
+print("Test set class distribution:")
+print(pd.Series(y_test).value_counts())
 ```
 
-Expect roughly 1,419 legitimate and 81 fraudulent transactions in the test set — about 5.4% fraud.
-
-```python
-# --- The lazy model: always predict "not fraud" ---
-lazy_pred = np.zeros_like(y_test)
-print("Lazy model accuracy:", round(accuracy_score(y_test, lazy_pred), 4))
+**Output:**
+```
+Test set class distribution:
+0    447
+1     53
+Name: count, dtype: int64
 ```
 
-This should print roughly **0.946**. Stop here. Let it land.
+**Teaching point:** Note `stratify=y` — this keeps the same 90/10 ratio in train and test. Ask the class: *"What would happen to our test set if we forgot `stratify`?"* (Answer: on a small test set, random chance could give you an even more skewed — or occasionally more balanced — split, making results unreliable.)
 
 ```python
-# --- A real model, trained properly ---
+# "Always predict majority class" baseline
+dummy = DummyClassifier(strategy="most_frequent")
+dummy.fit(X_train, y_train)
+dummy_preds = dummy.predict(X_test)
+print("Dummy (always predict 0) accuracy:", round(accuracy_score(y_test, dummy_preds), 4))
+print("Unique predictions from dummy:", np.unique(dummy_preds))
+
+# Real model
 model = LogisticRegression(max_iter=1000, random_state=42)
 model.fit(X_train, y_train)
-y_pred = model.predict(X_test)
+print("LogisticRegression .score() accuracy:", round(model.score(X_test, y_test), 4))
+```
 
-print("Trained model accuracy:", round(accuracy_score(y_test, y_pred), 4))
+**Output:**
+```
+Dummy (always predict 0) accuracy: 0.894
+Unique predictions from dummy: [0]
+LogisticRegression .score() accuracy: 0.902
+```
 
-cm = confusion_matrix(y_test, y_pred)
-print("\nConfusion matrix:\n", cm)
+**Walk through this live.** The dummy classifier — which never even looks at a feature — scores 89.4%. Our real, trained Logistic Regression scores 90.2%. **That's only a 0.8-point improvement for an entire trained model.** Ask the class: *"Based on accuracy alone, would you say this model learned anything useful?"* Hold the tension here — we'll answer it precisely in Practical Block 2 with the confusion matrix.
+
+**Discussion prompt:** *"If your manager only ever asks 'what's the accuracy?', how would you push back?"* Let a few students answer before moving on.
+
+---
+
+## Concept Block 2: The Confusion Matrix (10 min)
+
+### The 2×2 Matrix
+
+Every binary classifier's predictions can be sorted into exactly four buckets. Draw this on the board:
+
+```
+                         PREDICTED
+                    Negative      Positive
+              +--------------+--------------+
+   A   Neg    |      TN      |      FP      |
+   C          |  (correct)   | (false alarm)|
+   T          +--------------+--------------+
+   U   Pos    |      FN      |      TP      |
+   A          |   (missed)   |  (correct)   |
+   L          +--------------+--------------+
+```
+
+**Concrete framing — disease screening:**
+
+| | Predicted Healthy | Predicted Disease |
+|---|---|---|
+| **Actually Healthy** | **TN** — correctly cleared | **FP** — false alarm, unnecessary follow-up test |
+| **Actually Has Disease** | **FN** — disease missed, patient sent home untreated | **TP** — disease correctly caught |
+
+**The four outcomes, defined precisely:**
+- **True Positive (TP):** Model predicted positive, and it *was* positive. A correct catch.
+- **True Negative (TN):** Model predicted negative, and it *was* negative. A correct clearance.
+- **False Positive (FP):** Model predicted positive, but it was *actually negative*. A false alarm (Type I error).
+- **False Negative (FN):** Model predicted negative, but it was *actually positive*. A miss (Type II error).
+
+**Teaching point:** FP and FN are not equally costly in most real problems.
+- In **disease screening**, a **False Negative** (missed disease) can be fatal — recall matters most.
+- In **spam filtering**, a **False Positive** (a real email marked spam and never seen) is worse than letting one spam email through — precision matters most.
+- The confusion matrix is what lets you *see* and *choose* this tradeoff instead of guessing.
+
+`sklearn.metrics.confusion_matrix(y_true, y_pred)` builds this matrix for you; `ConfusionMatrixDisplay` plots it as a heatmap with the four cells labeled and colored — worth showing once live so students recognize it in a notebook.
+
+---
+
+## Practical Block 2: Building & Reading the Confusion Matrix (15 min)
+
+### Step 1 — build one by hand on a tiny example first
+
+```python
+import numpy as np
+from sklearn.metrics import confusion_matrix
+
+# Tiny hand example: 10 patients, disease screening
+# 1 = disease present, 0 = disease absent
+y_true = np.array([1, 0, 1, 1, 0, 0, 1, 0, 0, 1])
+y_pred = np.array([1, 0, 0, 1, 0, 1, 1, 0, 0, 0])
+
+cm = confusion_matrix(y_true, y_pred)
+print("Confusion matrix (rows=actual, cols=predicted):")
+print(cm)
 
 tn, fp, fn, tp = cm.ravel()
-print(f"\nTN (correctly ignored): {tn}")
-print(f"FP (false alarms):      {fp}")
-print(f"FN (frauds MISSED):     {fn}   <-- the expensive box")
-print(f"TP (frauds caught):     {tp}")
+print(f"TN={tn}  FP={fp}")
+print(f"FN={fn}  TP={tp}")
 ```
 
-The trained model lands around **0.966 accuracy** — only about two points above the lazy model. But the matrix shows it catches roughly 36 of the 81 frauds and misses about 45.
+**Output:**
+```
+Confusion matrix (rows=actual, cols=predicted):
+[[4 1]
+ [2 3]]
+TN=4  FP=1
+FN=2  TP=3
+```
+
+**Before running the code**, have the class count TP/TN/FP/FN by hand, comparing each pair of `(y_true[i], y_pred[i])` one at a time. This builds the muscle memory that `confusion_matrix()` is just automating a count they can already do.
+
+### Step 2 — apply it to the fraud model from Practical 1
 
 ```python
-ConfusionMatrixDisplay(cm, display_labels=["Legit", "Fraud"]).plot(cmap="Blues")
-plt.title("Logistic Regression @ default threshold 0.5")
-plt.show()
+preds = model.predict(X_test)
+cm = confusion_matrix(y_test, preds)
+print("Confusion matrix (fraud model, rows=actual, cols=predicted):")
+print(cm)
+
+tn, fp, fn, tp = cm.ravel()
+print(f"TN={tn}  FP={fp}")
+print(f"FN={fn}  TP={tp}")
+print(f"\nTotal legit (0): {tn+fp}, Total fraud (1): {fn+tp}")
+print(f"Fraud caught: {tp}/{fn+tp}")
+print(f"Fraud missed: {fn}/{fn+tp}")
 ```
 
-**Live walk-through:** Put the two accuracy numbers side by side on the board — lazy ≈ 0.946, trained ≈ 0.966. Say: *"We did all that work for two percentage points."* Then point at the FN cell. *"But look — this model misses more than half the frauds. Accuracy told you it was excellent. The matrix is telling you it is barely functional."* Ask the room: **"Which single number in this matrix would you take to your manager?"** Steer them towards FN. That question sets up Concept 2.
-
----
-
-## Concept Block 2: Precision, Recall, F1, Specificity (10 min)
-
-### The two questions (board)
-
+**Output:**
 ```
-precision = TP / (TP + FP)   "Of what I FLAGGED, how much was right?"
-                             --> punished by FALSE ALARMS
+Confusion matrix (fraud model, rows=actual, cols=predicted):
+[[446   1]
+ [ 48   5]]
+TN=446  FP=1
+FN=48  TP=5
 
-recall    = TP / (TP + FN)   "Of what was REALLY there, how much did I CATCH?"
-                             --> punished by MISSES
+Total legit (0): 447, Total fraud (1): 53
+Fraud caught: 5/53
+Fraud missed: 48/53
 ```
 
-Teach the denominators, not the formulas. *Precision looks at your column of flags. Recall looks at the row of real positives.* Point at the 2×2 grid as you say it.
+**This is the payoff moment for the whole session.** Our "90.2% accurate" model catches **5 out of 53 fraud cases** — it misses 48 of them. It is barely better than doing nothing, and the accuracy score completely hid that from us.
 
-### Choosing between them
+**Ask the class:** *"If this model went to production at a bank, what would happen?"* Let them reason it through: nearly all fraud slips through, while the accuracy dashboard reports "90%, looks great."
 
-| Scenario | The expensive error | Optimise | Reasoning |
-|---|---|---|---|
-| Cancer screening | FN — missing a tumour | **Recall** | A false alarm costs one extra scan. A miss costs a life. |
-| Spam filter | FP — binning a job offer | **Precision** | Users tolerate spam. They never forgive a lost email. |
-| Fraud alerts | FN — letting fraud through | **Recall** | A blocked card annoys. Stolen money is gone. |
-| Loan approval | FP — approving a defaulter | **Precision** | Every bad approval is a direct rupee loss. |
-
-**The tradeoff is real and unavoidable.** Flag more aggressively → recall up, precision down. Flag conservatively → precision up, recall down. You cannot have both for free; you can only choose where to sit.
-
-### F1 — the harmonic mean
-
-```
-F1 = 2 * (precision * recall) / (precision + recall)
-```
-
-Ask: *"Why not just average them?"* Then show why:
-
-| Precision | Recall | Plain average | F1 |
-|---|---|---|---|
-| 1.00 | 0.02 | 0.51 — looks fine | **0.04** — correctly awful |
-| 0.90 | 0.85 | 0.875 | **0.87** |
-
-The harmonic mean is dragged towards the **smaller** number. It refuses to let a model hide a terrible recall behind a perfect precision. Use F1 when both errors genuinely matter and you need one number. Do *not* use it when one error clearly dominates — optimise that one and just report the other.
-
-### Specificity
-
-```
-specificity = TN / (TN + FP)   "Of the genuine negatives, how many did I leave alone?"
-```
-
-Recall is also called **sensitivity**. Sensitivity and specificity are the medical world's pair — sensitivity catches the sick, specificity avoids terrifying the healthy.
-
----
-
-## Practical Block 2: classification_report and Naming the Errors (15 min)
-
-```python
-from sklearn.metrics import (classification_report, precision_score,
-                             recall_score, f1_score)
-
-print(classification_report(
-    y_test, y_pred,
-    target_names=["Legit (0)", "Fraud (1)"],
-    digits=3
-))
-```
-
-Read the **Fraud** row out loud. Precision is high (around 0.88) — when it does flag something, it is usually right. Recall is low (around 0.44) — it catches under half the frauds. Note the `support` column: 81 frauds vs 1,419 legit. That column is where the imbalance becomes impossible to ignore.
-
-```python
-# --- Compute the same numbers by hand from the matrix, to demystify them ---
-tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
-
-precision   = tp / (tp + fp)
-recall      = tp / (tp + fn)
-specificity = tn / (tn + fp)
-f1          = 2 * precision * recall / (precision + recall)
-
-print(f"Precision   : {precision:.3f}  (of flagged, this fraction was real fraud)")
-print(f"Recall      : {recall:.3f}  (of real frauds, this fraction was caught)")
-print(f"Specificity : {specificity:.3f}  (of legit txns, this fraction left alone)")
-print(f"F1          : {f1:.3f}")
-
-# Sanity check against sklearn
-print("\nsklearn agrees:",
-      round(precision_score(y_test, y_pred), 3),
-      round(recall_score(y_test, y_pred), 3),
-      round(f1_score(y_test, y_pred), 3))
-```
-
-```python
-# --- Put a rupee value on each error box ---
-COST_MISSED_FRAUD = 5000   # money gone
-COST_FALSE_ALARM  = 500    # manual review + annoyed customer
-
-total_cost = fn * COST_MISSED_FRAUD + fp * COST_FALSE_ALARM
-print(f"\nMissed frauds : {fn} x Rs.5000 = Rs.{fn * COST_MISSED_FRAUD:,}")
-print(f"False alarms  : {fp} x Rs.500  = Rs.{fp * COST_FALSE_ALARM:,}")
-print(f"TOTAL COST at threshold 0.5   = Rs.{total_cost:,}")
-```
-
-At the default threshold this lands somewhere near ₹2,30,000 — and almost all of it is missed frauds.
-
-**Live walk-through:** Point at the cost split. *"Ninety-eight percent of our loss is coming from one box — the misses. And what metric measures misses? Recall. So recall is our metric. We are not going to argue about it again."* Then ask the room the question that sets up the break: **"The model's recall is 0.44. We did not choose that number. So who did?"** Let them sit with it. The answer is: a hardcoded 0.5 that nobody thought about.
+**Write on the board:** *A single accuracy number can never tell you which of the four confusion-matrix cells your errors are landing in. Always ask for the matrix.*
 
 ---
 
 ## BREAK (10 min)
 
-*Mull this over: the model gave every transaction a fraud probability. Then something quietly turned those probabilities into yes/no answers using a cut-off of 0.5. Nobody in this room chose 0.5. What happens if we choose something else?*
+*Suggested break prompt — ask students to predict, before they come back: "Given this confusion matrix, do you think precision or recall will be closer to zero?" They'll find out in the next block.*
 
 ---
 
-## Concept Block 3: The Threshold Is a Dial, Not a Law (10 min)
+## Concept Block 3: Precision, Recall & F1-Score (10 min)
 
-### What `.predict()` is hiding
-
-Write this on the board:
+### The Formulas — Derived Directly from the Confusion Matrix
 
 ```
-model.predict_proba(X)[:, 1]   -->  0.03, 0.71, 0.12, 0.48, 0.95, ...
-                                    (the model's actual belief)
-
-model.predict(X)               -->  0,    1,    0,    0,    1,    ...
-                                    (probabilities silently cut at 0.5)
+Precision = TP / (TP + FP)   → "Of everything I flagged positive, how much was right?"
+Recall    = TP / (TP + FN)   → "Of everything that was actually positive, how much did I catch?"
+F1-Score  = 2 · (Precision · Recall) / (Precision + Recall)   → harmonic mean of the two
 ```
 
-`.predict()` is not a separate model. It is `.predict_proba()` plus one hardcoded line: `if p >= 0.5: positive`.
+**Teaching point — say this slowly:** Precision is about the *quality* of your positive predictions. Recall is about the *completeness* of your positive predictions. A model can be excellent at one and terrible at the other — that's exactly what happened with our fraud model.
 
-**Ask the room:** *"Where did 0.5 come from? Was it derived from our data? From our cost of fraud? From anything at all about our problem?"* The answer is no. It is a library default. It is the single most unexamined number in machine learning.
+### When Each Metric Matters Most
 
-### Moving the dial
-
-Lowering the threshold to 0.2 means: *flag anything the model is even 20% suspicious of.*
-
-| Threshold | Rows flagged | FN (misses) | FP (false alarms) | Recall | Precision |
-|---|---|---|---|---|---|
-| 0.10 | Many | Few | Many | **High** | Low |
-| 0.50 | Default | Medium | Few | Medium | High |
-| 0.90 | Very few | Many | Almost none | Low | **Very high** |
-
-**Critical point to hammer:** moving the threshold **does not retrain the model**. The probabilities are frozen. The model's knowledge is unchanged. You are only choosing where to draw the line — which means you can tune your model's behaviour to the business *after* training, in one line, for free.
-
-### The threshold analysis workflow
-
-```
-1. Get probabilities:    proba = model.predict_proba(X_test)[:, 1]
-2. Sweep thresholds:     for t in 0.05 ... 0.95
-3. At each t:            preds = (proba >= t); record precision, recall, FN, FP
-4. Apply your rule:      "recall must be >= 0.90"  OR  "minimise total rupee cost"
-5. Pick t. Justify it in a sentence a manager understands.
-```
-
-Step 4 is not a machine learning decision. It is a business decision. That is the whole point.
-
----
-
-## Practical Block 3: Sweep the Threshold, Walk the Tradeoff (15 min)
-
-```python
-# --- The probabilities that .predict() was hiding from us ---
-proba = model.predict_proba(X_test)[:, 1]
-
-print("First 10 fraud probabilities:", np.round(proba[:10], 3))
-print("Highest probability in test set:", round(proba.max(), 3))
-```
-
-```python
-# --- Sweep the threshold and record what happens ---
-rows = []
-for t in [0.05, 0.10, 0.15, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90]:
-    preds = (proba >= t).astype(int)
-    tn, fp, fn, tp = confusion_matrix(y_test, preds).ravel()
-    rows.append({
-        "threshold": t,
-        "flagged": tp + fp,
-        "TP": tp, "FP": fp, "FN": fn,
-        "precision": round(precision_score(y_test, preds, zero_division=0), 3),
-        "recall": round(recall_score(y_test, preds), 3),
-        "f1": round(f1_score(y_test, preds, zero_division=0), 3),
-    })
-
-sweep = pd.DataFrame(rows)
-print(sweep.to_string(index=False))
-```
-
-The shape to expect: as the threshold falls from 0.90 down to 0.05, **recall climbs steadily** (from under 0.10 up to roughly 0.89) while **precision collapses** (from around 0.90 down to roughly 0.22). FN drains out of the miss box and FP fills up the false-alarm box. Same model. Same probabilities. Completely different behaviour.
-
-```python
-# --- Plot the tradeoff ---
-plt.figure(figsize=(9, 5))
-plt.plot(sweep["threshold"], sweep["precision"], "o-", label="Precision", lw=2)
-plt.plot(sweep["threshold"], sweep["recall"], "s-", label="Recall", lw=2)
-plt.plot(sweep["threshold"], sweep["f1"], "^--", label="F1", lw=1.5, alpha=0.7)
-plt.axvline(0.5, color="grey", ls=":", label="Default 0.5 (chosen by nobody)")
-plt.xlabel("Decision threshold")
-plt.ylabel("Score")
-plt.title("One model, eleven personalities — the precision-recall tradeoff")
-plt.legend()
-plt.grid(alpha=0.3)
-plt.show()
-```
-
-```python
-# --- Apply a business rule: "we must catch at least 80% of frauds" ---
-target_recall = 0.80
-ok = sweep[sweep["recall"] >= target_recall]
-print(f"Thresholds that hit recall >= {target_recall}:")
-print(ok.to_string(index=False))
-print("\nOf those, the one with the best precision:")
-print(ok.loc[ok["precision"].idxmax()])
-```
-
-**Live walk-through:** Point at the two crossing lines. *"The default threshold put us here, at recall 0.44. Nobody chose that. If the business says 'catch 80% of frauds', we just read the answer off this table — around 0.10 — and we did not retrain anything."* Then ask: **"What did that recall cost us? Look at the FP column."** They will see false alarms jump from about 5 to over 140. That honest tradeoff is the lesson.
-
----
-
-## Concept Block 4: ROC-AUC vs the Precision–Recall Curve (10 min)
-
-### The problem with the sweep table
-
-The table above is the model at eleven thresholds. What if you want to judge the model at **every** threshold at once — and compare two models before choosing any operating point?
-
-### The ROC curve
-
-Plot, as the threshold slides from 1 down to 0:
-
-```
-y-axis: TPR (True Positive Rate)  = TP / (TP + FN)   <-- this is just RECALL
-x-axis: FPR (False Positive Rate) = FP / (FP + TN)   <-- share of legit rows wrongly flagged
-```
-
-- Top-left corner = perfect: full recall, zero false alarms
-- The diagonal = random guessing
-- **ROC-AUC** = area under that curve
-
-| ROC-AUC | Meaning |
-|---|---|
-| 1.00 | Perfect ranking — every fraud scores above every legit row |
-| 0.90 | A random fraud outranks a random legit row 90% of the time |
-| 0.50 | Coin flip. The model learnt nothing. |
-
-AUC is **threshold-independent**. It does not ask "how good is your cut-off?" — it asks "does the model *rank* the rows well?" That makes it the right tool for comparing two models.
-
-### Where ROC lies to you
-
-Look hard at the FPR denominator: `FP / (FP + TN)`.
-
-**TN is in there.** On our data, TN is around 1,400. So 140 false alarms move FPR by only 0.1 — barely a wobble on the plot. On heavily imbalanced data, ROC curves flatter every model.
-
-### The precision–recall curve
-
-```
-y-axis: Precision = TP / (TP + FP)
-x-axis: Recall    = TP / (TP + FN)
-```
-
-**There is no TN anywhere in that curve.** The vast, boring majority class cannot inflate your score. Every false alarm hits precision immediately.
-
-| | ROC curve | Precision–Recall curve |
+| Scenario | Which matters more | Why |
 |---|---|---|
-| Uses TN? | Yes (in FPR) | **No** |
-| Baseline for a random model | Diagonal, AUC = 0.5 | A flat line at the positive-class rate |
-| On balanced data | Excellent | Fine |
-| On rare positives | **Over-optimistic** | **Honest — use this one** |
+| Disease screening | **Recall** | Missing a real case (FN) can cost a life; a false alarm (FP) just means one extra test |
+| Spam filter | **Precision** | Blocking a real email (FP) can cost a job offer; letting one spam through (FN) is a minor annoyance |
+| Fraud detection | Usually **Recall**, tuned with precision in mind | Missed fraud (FN) is a direct financial loss; too many false alarms (FP) annoys customers and burns investigator time |
+| Search/recommendation results | **Precision** | Users only see the top few results; irrelevant ones (FP) waste their attention |
 
-**The rule:** balanced classes → ROC is fine. Rare positive class → trust the PR curve.
+**Why F1 exists:** Precision and recall trade off against each other. If you want to compare two models with a *single* number, F1 punishes models that are lopsided (very high on one, very low on the other) — because it's a *harmonic* mean, not a simple average. A model with precision=1.0 and recall=0.01 gets an F1 near 0.02, not 0.5.
+
+**Teaching point:** There is no universal "best" metric — the right choice depends on which error (FP or FN) is more expensive *in your specific business context*. Always ask: "What does a false positive cost us? What does a false negative cost us?" before picking a metric.
 
 ---
 
-## Practical Block 4: Curves, AUC, and a Threshold Chosen by Cost (10 min)
+## Practical Block 3: Computing Precision, Recall, F1 (15 min)
 
 ```python
-from sklearn.metrics import (roc_curve, roc_auc_score,
-                             precision_recall_curve, average_precision_score)
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import (precision_score, recall_score,
+                              f1_score, classification_report, accuracy_score)
 
-# Train a second model so we have something to compare against
-rf = RandomForestClassifier(n_estimators=200, random_state=42)
-rf.fit(X_train, y_train)
-proba_rf = rf.predict_proba(X_test)[:, 1]
+preds = model.predict(X_test)
 
-print("Logistic Regression  ROC-AUC:", round(roc_auc_score(y_test, proba), 3))
-print("Random Forest        ROC-AUC:", round(roc_auc_score(y_test, proba_rf), 3))
-print()
-print("Logistic Regression  PR-AUC :", round(average_precision_score(y_test, proba), 3))
-print("Random Forest        PR-AUC :", round(average_precision_score(y_test, proba_rf), 3))
+acc = accuracy_score(y_test, preds)
+prec = precision_score(y_test, preds)
+rec = recall_score(y_test, preds)
+f1 = f1_score(y_test, preds)
+
+print(f"Accuracy:  {acc:.4f}")
+print(f"Precision: {prec:.4f}")
+print(f"Recall:    {rec:.4f}")
+print(f"F1-score:  {f1:.4f}")
 ```
 
-Expect the ROC-AUCs to look close (both in the 0.91–0.95 range) while the PR-AUCs are **far apart** (roughly 0.67 vs 0.87). That gap is the entire lesson of Concept 4 — do not skip past it.
+**Output:**
+```
+Accuracy:  0.9020
+Precision: 0.8333
+Recall:    0.0943
+F1-score:  0.1695
+```
+
+**Pause here.** Accuracy says 90%. F1 says 17%. **Same model, same predictions — wildly different verdicts depending on the metric.** This is the entire lesson of today in four printed lines.
 
 ```python
-fig, axes = plt.subplots(1, 2, figsize=(13, 5))
+print(classification_report(y_test, preds, target_names=["legit(0)", "fraud(1)"]))
+```
 
-# --- ROC curves ---
-for name, p in [("Logistic Regression", proba), ("Random Forest", proba_rf)]:
-    fpr, tpr, _ = roc_curve(y_test, p)
-    axes[0].plot(fpr, tpr, lw=2, label=f"{name} (AUC={roc_auc_score(y_test, p):.3f})")
-axes[0].plot([0, 1], [0, 1], "k--", lw=1, label="Random guessing")
-axes[0].set_xlabel("False Positive Rate")
-axes[0].set_ylabel("True Positive Rate (Recall)")
-axes[0].set_title("ROC — both models look great")
-axes[0].legend(); axes[0].grid(alpha=0.3)
+**Output:**
+```
+              precision    recall  f1-score   support
 
-# --- Precision-Recall curves ---
-for name, p in [("Logistic Regression", proba), ("Random Forest", proba_rf)]:
-    pr, rc, _ = precision_recall_curve(y_test, p)
-    axes[1].plot(rc, pr, lw=2, label=f"{name} (AP={average_precision_score(y_test, p):.3f})")
-axes[1].axhline(y_test.mean(), color="k", ls="--", lw=1,
-                label=f"Random baseline = {y_test.mean():.3f}")
-axes[1].set_xlabel("Recall")
-axes[1].set_ylabel("Precision")
-axes[1].set_title("Precision-Recall — the honest picture")
-axes[1].legend(); axes[1].grid(alpha=0.3)
+    legit(0)       0.90      1.00      0.95       447
+    fraud(1)       0.83      0.09      0.17        53
 
-plt.tight_layout()
-plt.show()
+    accuracy                           0.90       500
+   macro avg       0.87      0.55      0.56       500
+weighted avg       0.90      0.90      0.87       500
+```
+
+**Walk through every column.** Precision for fraud (0.83) is *not bad* — when the model does flag fraud, it's usually right. But recall for fraud (0.09) is disastrous — it catches only 9% of actual fraud cases. Point out **macro avg** (unweighted average across classes — treats both classes as equally important) versus **weighted avg** (weighted by class size — dominated by the majority class, and therefore *just as misleading as accuracy* for imbalanced problems). Ask: *"Which average would you report to a manager who wants to know if fraud is being caught?"* → macro avg, or better, the fraud row alone.
+
+```python
+# Manual verification from the confusion matrix — precision/recall are NOT magic
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y_test, preds)
+tn, fp, fn, tp = cm.ravel()
+manual_prec = tp / (tp + fp)
+manual_rec = tp / (tp + fn)
+manual_f1 = 2 * manual_prec * manual_rec / (manual_prec + manual_rec)
+print(f"Manual check -> precision: {manual_prec:.4f}, recall: {manual_rec:.4f}, f1: {manual_f1:.4f}")
+```
+
+**Output:**
+```
+Manual check -> precision: 0.8333, recall: 0.0943, f1: 0.1695
+```
+
+**Teaching point:** Every one of these metrics is arithmetic on four numbers you already know how to count. `sklearn` just saves you the typing — there is no hidden magic. Have students compute `manual_prec` by hand on paper from the printed `tn, fp, fn, tp` before revealing the sklearn numbers match.
+
+---
+
+## Concept Block 4: Threshold Tuning, ROC Curve & AUC (10 min)
+
+### Every Classifier is Secretly a Probability Model
+
+`model.predict()` defaults to a **0.5 probability threshold** — anything ≥ 0.5 becomes class 1. That threshold is a *choice*, not a law of nature. `model.predict_proba(X)` exposes the raw probability so you can choose your own cutoff.
+
+```
+Raw probability:   0.04   0.12   0.48   0.55   0.91
+Threshold = 0.5:    0      0      0      1      1
+Threshold = 0.3:    0      0      1      1      1
+Threshold = 0.7:    0      0      0      0      1
+```
+
+**Teaching point:** Lowering the threshold makes the model flag *more* things as positive → recall goes up, precision typically goes down (more false alarms). Raising the threshold does the opposite. This is THE core lever for tuning a classifier to a business need, and it costs nothing to change — no retraining required.
+
+### The ROC Curve: TPR vs FPR Across Every Threshold
+
+Instead of picking one threshold and computing one precision/recall pair, the **ROC curve** (Receiver Operating Characteristic) plots two rates as the threshold sweeps from 1.0 down to 0.0:
+
+```
+True Positive Rate (TPR) = TP / (TP + FN)   →  this IS recall
+False Positive Rate (FPR) = FP / (FP + TN)  →  "how often do we cry wolf on negatives?"
+```
+
+```
+TPR
+ 1.0 |                                    ***** (perfect classifier: top-left corner)
+     |                            ****
+     |                      ***
+     |                 **
+     |             *. .  <- our model's curve
+     |         . '
+     |     . '
+     | . '  <- diagonal = random guessing (AUC = 0.5)
+ 0.0 +---------------------------------------- FPR
+    0.0                                      1.0
+```
+
+**Teaching point:** A curve that hugs the top-left corner is a strong classifier — high TPR (catches positives) at low FPR (few false alarms). A curve that sits on the diagonal is no better than a coin flip. **AUC (Area Under the Curve)** compresses the whole curve into one number between 0 and 1: **AUC = the probability that the model ranks a randomly chosen positive example higher than a randomly chosen negative one.** AUC = 0.5 is random; AUC = 1.0 is a perfect ranker.
+
+**Key distinction to hammer home:** Precision/recall/F1 evaluate one *fixed threshold*. ROC/AUC evaluate the model's *entire ranking ability*, independent of any threshold — useful for comparing models before you've decided where to draw the line.
+
+---
+
+## Practical Block 4: Threshold Sweep & ROC/AUC (10 min)
+
+```python
+from sklearn.metrics import roc_curve, roc_auc_score
+
+probs = model.predict_proba(X_test)[:, 1]
+print("First 10 predicted fraud probabilities:")
+print(np.round(probs[:10], 3))
+```
+
+**Output:**
+```
+First 10 predicted fraud probabilities:
+[0.004 0.08  0.095 0.128 0.062 0.013 0.208 0.112 0.011 0.042]
 ```
 
 ```python
-# --- Choose the operating threshold from BUSINESS COST, not from a metric ---
-COST_MISSED_FRAUD = 5000   # rupees lost per fraud we let through
-COST_FALSE_ALARM  = 500    # rupees per manual review of an honest customer
-
-thresholds = np.arange(0.02, 0.99, 0.01)
-costs = []
-for t in thresholds:
-    preds = (proba >= t).astype(int)
-    tn, fp, fn, tp = confusion_matrix(y_test, preds).ravel()
-    costs.append(fn * COST_MISSED_FRAUD + fp * COST_FALSE_ALARM)
-
-costs = np.array(costs)
-best_t = thresholds[costs.argmin()]
-cost_at_default = costs[np.argmin(np.abs(thresholds - 0.5))]
-
-print(f"Cost at default threshold 0.50 : Rs.{cost_at_default:,}")
-print(f"Best threshold                 : {best_t:.2f}")
-print(f"Cost at best threshold         : Rs.{costs.min():,}")
-print(f"Saving, purely from moving one number: Rs.{cost_at_default - costs.min():,}")
-
-plt.figure(figsize=(9, 4))
-plt.plot(thresholds, costs, lw=2)
-plt.axvline(best_t, color="green", ls="--", label=f"Best = {best_t:.2f}")
-plt.axvline(0.50, color="red", ls=":", label="Default = 0.50")
-plt.xlabel("Threshold"); plt.ylabel("Total cost (Rs.)")
-plt.title("The threshold is a business decision")
-plt.legend(); plt.grid(alpha=0.3)
-plt.show()
+print(f"{'Threshold':>10} {'Precision':>10} {'Recall':>10} {'F1':>8} {'FraudCaught':>12}")
+for t in [0.3, 0.5, 0.7]:
+    preds_t = (probs >= t).astype(int)
+    p = precision_score(y_test, preds_t, zero_division=0)
+    r = recall_score(y_test, preds_t, zero_division=0)
+    f1 = f1_score(y_test, preds_t, zero_division=0)
+    tp = ((preds_t == 1) & (y_test == 1)).sum()
+    total_fraud = (y_test == 1).sum()
+    print(f"{t:>10} {p:>10.3f} {r:>10.3f} {f1:>8.3f} {tp:>8}/{total_fraud}")
 ```
 
-The optimum should land low — somewhere near **0.14** — because a missed fraud costs ten times a false alarm, so the model should be told to be far more suspicious than 0.5 allows. The saving versus the default is large, roughly half the total cost.
+**Output:**
+```
+ Threshold  Precision     Recall       F1  FraudCaught
+       0.3      0.593      0.302    0.400       16/53
+       0.5      0.833      0.094    0.169        5/53
+       0.7      1.000      0.019    0.037        1/53
+```
 
-**Live walk-through:** Point at the green line. *"We did not collect more data. We did not tune a hyperparameter. We did not retrain anything. We changed one number from 0.5 to 0.14 and cut the company's losses roughly in half. This is the highest-return line of code in the whole module."*
+**Walk through this table slowly — it's the crux of threshold tuning.** At threshold 0.5 (the default), we catch only 5 fraud cases. Simply **lowering the threshold to 0.3** more than triples our catch rate to 16 fraud cases, at the cost of more false alarms (precision drops from 0.83 to 0.59). At 0.7, precision is perfect (every flag is real fraud) but we catch almost nothing.
+
+**Discussion prompt:** *"You're the fraud team lead. Investigating a false alarm costs 10 minutes. Missing real fraud costs $2,000 on average. Which threshold do you pick?"* Let students argue for 0.3 using the cost numbers — this is a live cost-benefit calculation, not just a metrics exercise.
+
+```python
+fpr, tpr, thresholds = roc_curve(y_test, probs)
+auc = roc_auc_score(y_test, probs)
+print(f"ROC AUC: {auc:.4f}")
+
+idx_show = np.linspace(0, len(thresholds) - 1, 6).astype(int)
+print("\nSample ROC points (threshold, FPR, TPR):")
+for i in idx_show:
+    print(f"thresh={thresholds[i]:.3f}  FPR={fpr[i]:.3f}  TPR={tpr[i]:.3f}")
+```
+
+**Output:**
+```
+ROC AUC: 0.7218
+
+Sample ROC points (threshold, FPR, TPR):
+thresh=inf  FPR=0.000  TPR=0.000
+thresh=0.257  FPR=0.049  TPR=0.340
+thresh=0.114  FPR=0.262  TPR=0.509
+thresh=0.081  FPR=0.396  TPR=0.679
+thresh=0.058  FPR=0.557  TPR=0.849
+thresh=0.004  FPR=1.000  TPR=1.000
+```
+
+**Interpretation:** An AUC of 0.72 means the model is meaningfully better than random guessing (0.5) but far from perfect (1.0) — it *can* rank fraud higher than legit transactions reasonably often, but the default 0.5 threshold was throwing that ranking ability away. This is the punchline: **the model was never as bad as the 0.5-threshold confusion matrix suggested — we were just using the wrong cutoff.**
+
+**If time allows / advanced students:** Plot the curve with `RocCurveDisplay.from_predictions(y_test, probs)` and show visually how moving along the curve corresponds to sliding the threshold.
 
 ---
 
 ## Summary & Wrap-Up (5 min)
 
-**The spine of this session:**
+**What we covered today:**
+- Why accuracy is misleading on imbalanced data — a do-nothing baseline scored 89.4%, barely below our trained model's 90.2%
+- The confusion matrix: TP, TN, FP, FN, and how to read each cell in context (disease screening, fraud)
+- Precision, recall, and F1 — derived directly from the confusion matrix, and *when* each one matters
+- Threshold tuning with `predict_proba()` — the default 0.5 cutoff is a choice, not a rule
+- ROC curve (TPR vs FPR) and AUC — evaluating a model's ranking ability across *all* thresholds at once
 
-1. **Accuracy lies on imbalanced data.** A model that predicts "not fraud" forever scored 94.6%. Never report accuracy alone again.
-2. **The confusion matrix splits your errors into FP and FN.** Name them in plain English, as sentences about a real person, before you pick a metric.
-3. **Precision punishes false alarms; recall punishes misses.** Choose based on which error costs more. F1 only when both matter equally.
-4. **`.predict()` hides `predict_proba()` and a hardcoded 0.5.** That 0.5 was chosen by nobody. Moving it retrains nothing and changes everything.
-5. **ROC-AUC judges ranking at every threshold** — but on rare positives it flatters. The precision–recall curve has no TN in it, so it tells the truth.
-6. **The final threshold is a business decision**, justified in rupees, not in metrics.
+**Bridge to next session:** *"Every metric today assumed we already had labels — `y_true` was given to us. Next class we flip that assumption entirely: Unsupervised Learning and Clustering, where there are no labels at all, and the model's job is to discover structure in the data on its own."*
 
-**Bridge:** *"Everything for the last three sessions has depended on one luxury: labels. We knew which transactions were fraud, so we could count our mistakes. Next session — **Unsupervised Learning: Clustering** — the labels vanish. You get raw data and no answer key, and you have to find the structure anyway. There is no confusion matrix waiting for you there."*
+**Homework / self-practice:** Load `sklearn.datasets.load_breast_cancer()`, train a Logistic Regression, and produce: (1) the confusion matrix, (2) precision/recall/F1, (3) the ROC-AUC score. Then write two sentences: which threshold would you recommend for a cancer-screening deployment, and why?
 
 ---
 
 ## Q&A & Doubt Solving (5 min)
 
-**Q: If I move the threshold, am I cheating? Am I just tuning until the numbers look good?**
-→ No — as long as you choose the threshold using a rule fixed *in advance* ("catch 80% of frauds", "minimise rupee cost") and you select it on validation data, not the final test set. Cheating would be trying twenty thresholds on the test set and reporting the best one. Choosing an operating point from a stated business requirement is the job.
+**Likely questions and suggested answers:**
 
-**Q: Should I fix imbalance with `class_weight='balanced'` instead of moving the threshold?**
-→ They are different tools that often reach a similar place. `class_weight='balanced'` changes the *training* objective, so the model itself is penalised more for missing the rare class. Threshold moving changes only the *decision* after training. Threshold tuning is cheaper, reversible, and lets one model serve several business rules at once. In practice people do both and compare.
+**Q: If accuracy is so misleading, why do we still see it reported everywhere?**
+→ Accuracy is intuitive and fine when classes are roughly balanced and errors are equally costly. The mistake is using it *by default* on every problem without checking the class balance first.
 
-**Q: My ROC-AUC is 0.93 but my precision is 0.22. How can both be true?**
-→ Perfectly consistent, and it is the classic imbalanced-data signature. AUC 0.93 says the model *ranks* well — frauds generally score above legit rows. Precision 0.22 says that at your chosen threshold, you are flagging far more rows than there are frauds. Good ranking, bad operating point. Fix it with the threshold, not with a new model.
+**Q: Is there a "correct" threshold I should always use instead of 0.5?**
+→ No universal answer — it depends on the relative cost of false positives vs. false negatives in your specific application. The threshold sweep and ROC curve are how you *find* the right one for your business case, not a fixed formula.
 
-**Q: Which class does sklearn treat as "positive"?**
-→ The one with the higher label value — so class `1`, by default, in a 0/1 problem. This is why you must encode the interesting, rare class as `1`. If you label fraud as `0`, every precision and recall number you print will be about legitimate transactions, and you will draw exactly the wrong conclusion.
+**Q: Why does F1 use the harmonic mean instead of just averaging precision and recall?**
+→ The harmonic mean punishes imbalance between the two more heavily than a simple average. A model with precision=1.0, recall=0.01 would get a misleadingly high simple average (0.505) but a correctly low F1 (~0.02) — F1 reflects that the model is barely usable.
 
-**Q: What if the classes are balanced? Do I still need all this?**
-→ You still need the confusion matrix, because FP and FN almost never cost the same even when they are equally common. But accuracy becomes a defensible headline number again, and ROC-AUC becomes reliable. The threshold discipline still applies — 0.5 is still just a default.
+**Q: Does a higher AUC always mean a better model to deploy?**
+→ AUC measures ranking quality across all thresholds, which is great for comparing models. But you still deploy at *one* threshold, so always pair AUC comparison with a look at precision/recall at your intended operating point.
+
+**Q: Can I compute precision/recall for problems with more than two classes?**
+→ Yes — `sklearn` computes per-class precision/recall/F1 (one-vs-rest) and then lets you average them (`macro`, `weighted`, `micro`). The `classification_report` output already shows this pattern for two classes; the same table extends to N classes.
+
+**Q: What's the difference between ROC-AUC and just looking at the confusion matrix?**
+→ The confusion matrix is a snapshot at one threshold. ROC-AUC summarizes performance across *every possible* threshold in one number, so it's better for comparing models before you've committed to an operating point.
 
 ---
 
 ## Instructor Notes
 
-- **No installs needed** beyond the standard stack: `scikit-learn`, `pandas`, `numpy`, `matplotlib`. Everything is generated with `make_classification`, so nothing depends on a download.
-- **Do not change the `make_classification` parameters.** `weights=[0.95, 0.05]` with `class_sep=1.5` and `random_state=42` is tuned so that the lazy model gets ~94.6%, the trained model gets ~96.6% with recall only ~0.44 (the paradox lands hard), *and* the ROC/PR curves are still well-shaped. Raise `class_sep` and the paradox dissolves; lower it and the curves become ugly.
-- **The exact numbers will vary slightly** across sklearn versions. Never promise a specific figure to the room — write the print statements and read the output live. The *shape* of the result is what matters, and that is stable.
-- **The single most common student mistake:** reporting `accuracy_score` on imbalanced data and declaring victory. Pre-empt it by making the lazy-model demo the very first thing they run in Practical 1, before they see any real model. Once they have personally printed 0.946 for a model that is literally `np.zeros()`, they never fully trust accuracy again — which is exactly the reflex you want.
-- **The second most common mistake:** believing that moving the threshold retrains the model. Say "the probabilities did not change" out loud at least three times during Practical 3, while pointing at the same `proba` array.
-- **Pacing:** Practical 4 is the tightest block. If you are running behind, cut the Random Forest comparison and plot only the logistic regression curves — but *never* cut the cost-based threshold selection at the end. That is the takeaway the whole session is built towards.
+- **Dataset:** `make_classification(weights=[0.9, 0.1], flip_y=0.02, random_state=42)` gives a reproducible, deliberately imbalanced dataset where the "always predict majority" trap is obvious and the trained model's recall failure is dramatic (5/53 fraud caught) — ideal for the emotional payoff in Practical Block 2. No internet access needed.
+- **Common student mistake:** Confusing precision and recall directionally. Anchor it with the mnemonic: **Recall** = "did I **re-call** (catch) everyone who mattered?" **Precision** = "when I said yes, was I **precise** (correct)?"
+- **Common student mistake:** Assuming `confusion_matrix()` always orders rows/columns as `[negative, positive]` — it sorts by label value, so with non-0/1 labels the order can differ. Always check `model.classes_` or pass `labels=[0, 1]` explicitly.
+- **Live coding tip:** Before printing `classification_report`, ask students to predict whether precision or recall will be lower for the fraud class, based only on the confusion matrix numbers from Practical 2. This forces active recall of the formulas rather than passive reading.
+- **For advanced students:** Have them re-run Practical 4 with `class_weight='balanced'` in `LogisticRegression` and compare the new confusion matrix and AUC — a preview of handling imbalance at the model level rather than just the threshold level.
+- **For advanced students:** Introduce `precision_recall_curve()` as a companion to `roc_curve()` — more informative than ROC when the positive class is very rare, since ROC's FPR term can look artificially good with a huge negative class.
+- **Time check:** If running long after the break, compress Practical 3 to just the `classification_report` output (skip the manual verification code) and move straight to Practical 4 — the threshold sweep table is the highest-value, most memorable part of the session and should not be cut.

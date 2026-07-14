@@ -5,14 +5,24 @@
 
 ## Dataset
 
-40 noisy readings from a sensor. The true underlying pattern is a smooth wave — everything else is noise.
+A small student pass/fail dataset. `certificate_issued` is a **leaky feature** — in the real world it is only recorded *after* a student's pass/fail status is already decided.
 
 ```python
-import numpy as np
+import pandas as pd
 
-rng = np.random.RandomState(42)
-X = rng.uniform(0, 1, 40).reshape(-1, 1)                      # 40 inputs
-y = np.sin(2 * np.pi * X).ravel() + rng.normal(0, 0.3, 40)    # true wave + noise
+data = {
+    "study_hours":        [2, 8, 6, 4, 1, 7, 4, 8, 4, 6, 2, 5, 1, 7, 1, 7, 7, 5, 8, 6,
+                            8, 7, 9, 1, 1, 6, 7, 7, 8, 4, 8, 5, 2, 3, 8, 6, 8, 9, 8, 3],
+    "attendance_pct":     [72, 67, 55, 92, 97, 72, 51, 64, 65, 79, 94, 41, 43, 49, 41, 91, 59, 49, 43, 41,
+                            91, 94, 46, 84, 87, 97, 95, 84, 94, 94, 54, 60, 75, 84, 72, 49, 46, 88, 66, 83],
+    "prev_score":         [48, 41, 79, 41, 83, 40, 38, 80, 36, 71, 77, 47, 38, 70, 76, 72, 80, 72, 52, 91,
+                            67, 82, 35, 56, 74, 32, 73, 44, 52, 34, 84, 78, 88, 79, 36, 43, 53, 88, 91, 50],
+    "certificate_issued": [0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0,
+                            1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1],
+    "passed":             [0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0,
+                            1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1],
+}
+df = pd.DataFrame(data)
 ```
 
 ---
@@ -20,37 +30,35 @@ y = np.sin(2 * np.pi * X).ravel() + rng.normal(0, 0.3, 40)    # true wave + nois
 ## Tasks
 
 **Task 1 — Basic**
-Split the data into 75% train and 25% test with `random_state=42`, and print the number of rows in each.
+Print the count and percentage of each class in `passed` (use `value_counts()`).
 
 **Task 2 — Basic**
-Fit three polynomial models — **degree 1**, **degree 3**, and **degree 10** — on the training set.
-For each, print the train R², the test R², and the **gap** (`train - test`), rounded to 2 decimals.
-Use `make_pipeline(PolynomialFeatures(degree), LinearRegression())`.
+Run `cross_val_score` (`cv=5`) with a `LogisticRegression` twice: once using all four features (including `certificate_issued`), and once using only `study_hours`, `attendance_pct`, `prev_score`. Print the mean accuracy for both and note which one is inflated by leakage.
 
 **Task 3 — Mid**
-Run **5-fold cross-validation** on the *full* dataset for the same three degrees, using `KFold(n_splits=5, shuffle=True, random_state=42)`.
-Print `mean ± std` for each — then print which degree generalises best, and why the *training* score alone would have led you to the wrong answer.
+Using only the clean features (`study_hours`, `attendance_pct`, `prev_score`), split the data with `train_test_split(test_size=0.3, random_state=42, stratify=y)`. Fit two `DecisionTreeClassifier(random_state=42)` models — one with `max_depth=None`, one with `max_depth=2` — and print train vs test accuracy for each to diagnose which one overfits.
 
 ---
 
 ## Expected Output
 
 ```
-Train rows: 30 | Test rows: 10
+Class balance of 'passed':
+passed
+0    20
+1    20
+Name: count, dtype: int64
+passed
+0    50.0
+1    50.0
+Name: proportion, dtype: float64
 
-degree  train R2   test R2    gap
-   1       0.47      0.29     0.18   <- underfit: both scores low
-   3       0.85      0.80     0.05   <- good fit: small gap
-  10       0.93      0.59     0.34   <- overfit: best train, worst gap
+CV accuracy WITH certificate_issued: [1.    1.    0.875 0.875 0.875] mean: 0.925
+CV accuracy WITHOUT certificate_issued: [0.625 0.75  0.75  0.75  0.625] mean: 0.7
 
-5-fold cross-validation (full dataset):
-degree  1  ->  R2 = 0.079 ± 0.740
-degree  3  ->  R2 = 0.736 ± 0.261
-degree 10  ->  R2 = 0.558 ± 0.513
+DecisionTree (unlimited) -> train acc: 1.000, test acc: 0.667
 
-Best generalising degree: 3
-Degree 10 had the HIGHEST training score (0.93) but the worst gap.
-Training score rewards memorisation, not learning.
+DecisionTree (max_depth=2) -> train acc: 0.857, test acc: 0.750
 ```
 
 ---
@@ -59,48 +67,50 @@ Training score rewards memorisation, not learning.
 <summary>Solution</summary>
 
 ```python
-import numpy as np
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split, cross_val_score, KFold
+import pandas as pd
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import LogisticRegression
 
-# --- Dataset ---
-rng = np.random.RandomState(42)
-X = rng.uniform(0, 1, 40).reshape(-1, 1)
-y = np.sin(2 * np.pi * X).ravel() + rng.normal(0, 0.3, 40)
+data = {
+    "study_hours":        [2, 8, 6, 4, 1, 7, 4, 8, 4, 6, 2, 5, 1, 7, 1, 7, 7, 5, 8, 6,
+                            8, 7, 9, 1, 1, 6, 7, 7, 8, 4, 8, 5, 2, 3, 8, 6, 8, 9, 8, 3],
+    "attendance_pct":     [72, 67, 55, 92, 97, 72, 51, 64, 65, 79, 94, 41, 43, 49, 41, 91, 59, 49, 43, 41,
+                            91, 94, 46, 84, 87, 97, 95, 84, 94, 94, 54, 60, 75, 84, 72, 49, 46, 88, 66, 83],
+    "prev_score":         [48, 41, 79, 41, 83, 40, 38, 80, 36, 71, 77, 47, 38, 70, 76, 72, 80, 72, 52, 91,
+                            67, 82, 35, 56, 74, 32, 73, 44, 52, 34, 84, 78, 88, 79, 36, 43, 53, 88, 91, 50],
+    "certificate_issued": [0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0,
+                            1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1],
+    "passed":             [0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0,
+                            1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1],
+}
+df = pd.DataFrame(data)
 
-# --- Task 1: 75 / 25 split ---
+# Task 1
+print("Class balance of 'passed':")
+print(df["passed"].value_counts())
+print(df["passed"].value_counts(normalize=True).round(2) * 100)
+
+# Task 2
+y = df["passed"]
+leaky_features = ["study_hours", "attendance_pct", "prev_score", "certificate_issued"]
+clean_features = ["study_hours", "attendance_pct", "prev_score"]
+
+scores_leaky = cross_val_score(LogisticRegression(max_iter=1000), df[leaky_features], y, cv=5)
+scores_clean = cross_val_score(LogisticRegression(max_iter=1000), df[clean_features], y, cv=5)
+print("\nCV accuracy WITH certificate_issued:", scores_leaky.round(3), "mean:", round(scores_leaky.mean(), 3))
+print("CV accuracy WITHOUT certificate_issued:", scores_clean.round(3), "mean:", round(scores_clean.mean(), 3))
+
+# Task 3
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=42)
-print(f"Train rows: {len(X_train)} | Test rows: {len(X_test)}\n")
-
-# --- Task 2: fit three complexities, measure the gap ---
-degrees = [1, 3, 10]
-print("degree  train R2   test R2    gap")
-for d in degrees:
-    model = make_pipeline(PolynomialFeatures(d), LinearRegression())
-    model.fit(X_train, y_train)
-    train_r2 = model.score(X_train, y_train)
-    test_r2 = model.score(X_test, y_test)
-    gap = train_r2 - test_r2
-    print(f"  {d:2d}       {train_r2:.2f}      {test_r2:.2f}     {gap:.2f}")
-
-# --- Task 3: 5-fold cross-validation on the full dataset ---
-cv = KFold(n_splits=5, shuffle=True, random_state=42)
-cv_means = {}
-
-print("\n5-fold cross-validation (full dataset):")
-for d in degrees:
-    model = make_pipeline(PolynomialFeatures(d), LinearRegression())
-    scores = cross_val_score(model, X, y, cv=cv)
-    cv_means[d] = scores.mean()
-    print(f"degree {d:2d}  ->  R2 = {scores.mean():.3f} ± {scores.std():.3f}")
-
-best = max(cv_means, key=cv_means.get)
-print(f"\nBest generalising degree: {best}")
-print("Degree 10 had the HIGHEST training score (0.93) but the worst gap.")
-print("Training score rewards memorisation, not learning.")
+    df[clean_features], y, test_size=0.3, random_state=42, stratify=y
+)
+for depth, label in [(None, "unlimited"), (2, "max_depth=2")]:
+    clf = DecisionTreeClassifier(max_depth=depth, random_state=42)
+    clf.fit(X_train, y_train)
+    train_acc = clf.score(X_train, y_train)
+    test_acc = clf.score(X_test, y_test)
+    print(f"\nDecisionTree ({label}) -> train acc: {train_acc:.3f}, test acc: {test_acc:.3f}")
 ```
 
 </details>

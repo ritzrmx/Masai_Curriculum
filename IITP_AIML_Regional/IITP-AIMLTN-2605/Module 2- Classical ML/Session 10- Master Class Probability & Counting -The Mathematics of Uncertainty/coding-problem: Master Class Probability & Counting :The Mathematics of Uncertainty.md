@@ -1,58 +1,57 @@
-# Coding Problem: Master Class — Probability & Counting: The Mathematics of Uncertainty
+# Coding Problem: Master Class Probability & Counting :The Mathematics of Uncertainty
 > **Session 10 — Module 2: Classical ML** | ⏱ 5 mins
 
 ---
 
 ## Dataset
 
-A screening test for a rare condition. Everything you need is in three numbers.
+No file to load — enumerate the sample space directly, and use the stated medical-test numbers below.
 
+**Two dice, all 36 equally-likely outcomes:**
 ```python
-import numpy as np
+import itertools
 
-test_info = {
-    "prevalence":  0.001,   # P(disease)              — 1 person in 1,000
-    "sensitivity": 0.99,    # P(test positive | disease)
-    "specificity": 0.99,    # P(test negative | healthy)
-}
-
-N_PEOPLE = 100_000
-rng = np.random.default_rng(42)
+faces = [1, 2, 3, 4, 5, 6]
+sample_space = list(itertools.product(faces, faces))   # 36 outcomes, e.g. (1,1), (1,2), ...
 ```
 
-Before you write a line of code, work the answer out on paper using the 100,000-people table from the pre-read. Your code is here to *confirm* you, not to *tell* you.
+**Medical test priors and likelihoods (stated, not computed):**
+```
+P(Disease)          = 0.02   (2% of the population has the condition)
+P(+ | Disease)      = 0.95   (sensitivity)
+P(+ | No Disease)   = 0.10   (false positive rate)
+```
 
 ---
 
 ## Tasks
 
 **Task 1 — Basic**
-Compute `P(positive)` — the chance a randomly chosen person tests positive — using the law of total probability:
-`P(+) = P(+|D) × P(D) + P(+|healthy) × P(healthy)`. Print it to 5 decimal places.
+Using the enumerated two-dice `sample_space`, compute `P(sum = 8)` and `P(at least one die shows 5)` by counting outcomes directly. Then compute `P(sum=8 OR at least one die shows 5)` using the addition rule.
 
 **Task 2 — Basic**
-Use **Bayes' theorem** to compute `P(disease | positive) = P(+|D) × P(D) / P(+)`. Print it as a decimal to 4 places and as a percentage to 1 place.
+Compute the conditional probability `P(sum=8 | at least one die shows 5)` — i.e., among only the outcomes where at least one die is a 5, what fraction also sum to 8?
 
 **Task 3 — Mid**
-Simulate `N_PEOPLE` patients with `rng`: first decide who actually has the disease, then run the test on each person (positive with probability `sensitivity` if ill, and with probability `1 − specificity` if healthy). Count the **true positives** and **false positives**, then print the simulated `P(disease | positive) = TP / (TP + FP)` and check that it lands close to your Bayes answer from Task 2.
+Using the medical test numbers above, apply the Law of Total Probability to find `P(Positive test)`, then apply Bayes' Theorem to find `P(Disease | Positive test)`.
+
+Round every probability to 4 decimal places with `round(x, 4)`.
 
 ---
 
 ## Expected Output
 
 ```
-P(positive) = 0.01098
-P(disease | positive) = 0.0902  (9.0%)
+Sample space size: 36
+P(sum = 8): 0.1389
+P(at least one 5): 0.3056
+P(sum=8 OR at least one 5): 0.3889
 
-Simulated 100,000 patients
-Positive tests   : ~1,100
-True positives   : ~100
-False positives  : ~1,000
-Simulated P(disease | positive) = 0.09xx
-Bayes  said                     = 0.0902
+P(sum=8 | at least one 5): 0.1818
+
+P(Positive test): 0.117
+P(Disease | Positive): 0.1624
 ```
-
-(The simulated counts wobble a little each run; the ratio should always sit near 0.09.)
 
 ---
 
@@ -60,48 +59,42 @@ Bayes  said                     = 0.0902
 <summary>Solution</summary>
 
 ```python
-import numpy as np
+import itertools
 
-test_info = {
-    "prevalence":  0.001,
-    "sensitivity": 0.99,
-    "specificity": 0.99,
-}
-N_PEOPLE = 100_000
-rng = np.random.default_rng(42)
+# --- Dataset: two-dice sample space (enumerated) ---
+faces = [1, 2, 3, 4, 5, 6]
+sample_space = list(itertools.product(faces, faces))
 
-p_d  = test_info["prevalence"]
-sens = test_info["sensitivity"]
-spec = test_info["specificity"]
+# Task 1
+event_sum8 = [pair for pair in sample_space if sum(pair) == 8]
+event_has5 = [pair for pair in sample_space if 5 in pair]
+p_sum8 = len(event_sum8) / len(sample_space)
+p_has5 = len(event_has5) / len(sample_space)
 
-# --- Task 1: law of total probability -------------------------------------
-# A positive can come from an ill person (correctly) or a healthy one (falsely).
-p_pos = sens * p_d + (1 - spec) * (1 - p_d)
-print(f"P(positive) = {p_pos:.5f}")
+union = set(event_sum8) | set(event_has5)
+p_union = len(union) / len(sample_space)
 
-# --- Task 2: Bayes' theorem -----------------------------------------------
-# P(D|+) = P(+|D) * P(D) / P(+)
-p_d_given_pos = (sens * p_d) / p_pos
-print(f"P(disease | positive) = {p_d_given_pos:.4f}  ({p_d_given_pos * 100:.1f}%)")
+print("Sample space size:", len(sample_space))
+print("P(sum = 8):", round(p_sum8, 4))
+print("P(at least one 5):", round(p_has5, 4))
+print("P(sum=8 OR at least one 5):", round(p_union, 4))
 
-# --- Task 3: simulate 100,000 patients and just count ----------------------
-has_disease = rng.random(N_PEOPLE) < p_d                      # who is actually ill
-prob_positive = np.where(has_disease, sens, 1 - spec)         # each person's chance of a positive
-tests_positive = rng.random(N_PEOPLE) < prob_positive         # run the test
+# Task 2
+intersect = set(event_sum8) & set(event_has5)
+p_sum8_given_has5 = len(intersect) / len(event_has5)
+print("\nP(sum=8 | at least one 5):", round(p_sum8_given_has5, 4))
 
-n_positive       = tests_positive.sum()
-n_true_positive  = ( has_disease & tests_positive).sum()
-n_false_positive = (~has_disease & tests_positive).sum()
+# Task 3 - Bayes' Theorem
+p_disease = 0.02
+p_pos_given_disease = 0.95
+p_pos_given_no_disease = 0.10
+p_no_disease = 1 - p_disease
 
-print(f"\nSimulated {N_PEOPLE:,} patients")
-print(f"Positive tests   : {n_positive}")
-print(f"True positives   : {n_true_positive}")
-print(f"False positives  : {n_false_positive}")
-print(f"Simulated P(disease | positive) = {n_true_positive / n_positive:.4f}")
-print(f"Bayes  said                     = {p_d_given_pos:.4f}")
+p_positive = p_pos_given_disease * p_disease + p_pos_given_no_disease * p_no_disease
+p_disease_given_pos = (p_pos_given_disease * p_disease) / p_positive
 
-# The false positives massively outnumber the true positives — that is the base
-# rate at work, and it is exactly why precision (Session 8) collapses on rare classes.
+print("\nP(Positive test):", round(p_positive, 4))
+print("P(Disease | Positive):", round(p_disease_given_pos, 4))
 ```
 
 </details>

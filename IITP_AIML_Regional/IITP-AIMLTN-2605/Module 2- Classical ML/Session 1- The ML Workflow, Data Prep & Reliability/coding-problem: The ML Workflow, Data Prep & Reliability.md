@@ -5,53 +5,67 @@
 
 ## Dataset
 
-Sixteen used two-wheelers listed on a resale portal. You want to predict the **resale price (₹)**.
+A small house-price dataset with one categorical column (`city`) and two numeric features:
 
 ```python
 import pandas as pd
 
-bikes = pd.DataFrame({
-    "age_years":         [1, 3, 5, 2, 7, 4, 6, 1, 8, 3, 5, 2, 9, 4, 6, 2],
-    "km_driven":         [4000, 21000, 38000, 12000, 55000, 30000, 46000, 6500,
-                          62000, 18000, 41000, 9000, 70000, 26000, 49000, 15000],
-    "engine_cc":         [150, 125, 110, 200, 100, 150, 125, 220, 100, 160, 110, 180, 100, 150, 125, 200],
-    "services_done":     [2, 5, 8, 3, 11, 6, 9, 1, 13, 4, 8, 3, 14, 7, 10, 4],
-    "dealer_commission": [5850, 3425, 2825, 6525, 1600, 4300, 2450, 7525,
-                          1175, 5725, 2750, 6000, 925, 4275, 2600, 6525],
-    "price":             [117000, 68500, 56500, 130500, 32000, 86000, 49000, 150500,
-                          23500, 114500, 55000, 120000, 18500, 85500, 52000, 130500],
-})
+data = {
+    "city":        ["Delhi", "Mumbai", "Pune", "Delhi", "Mumbai", "Pune", "Delhi", "Mumbai", "Pune", "Delhi"],
+    "area_sqft":   [850, 1200, 950, 1100, 1600, 800, 1400, 2000, 1000, 1250],
+    "age_years":   [5, 2, 10, 8, 1, 15, 3, 0, 12, 6],
+    "price_lakhs": [65, 110, 58, 82, 165, 48, 105, 210, 55, 92]
+}
+df = pd.DataFrame(data)
 ```
-
-> The dealer takes a flat 5% commission on every sale.
 
 ---
 
 ## Tasks
 
 **Task 1 — Basic**
-Separate the data into features `X` and target `y`. The target is `price`. Print the shape of each.
+Separate the DataFrame into features `X` (everything except `price_lakhs`) and label `y` (`price_lakhs`). Print the shape of each and the list of feature column names.
 
 **Task 2 — Basic**
-Split `X` and `y` into a training set and a test set using `test_size=0.25` and `random_state=42`. Print how many rows ended up in each.
+One-hot encode the `city` column using `pd.get_dummies(..., drop_first=True)`. Print the resulting column names and the encoded DataFrame.
 
 **Task 3 — Mid**
-Fit a `LinearRegression` on the training set and print the **test MAE**. Then look hard at the feature list: **one column is a data leak**. Identify it, drop it, re-split, re-fit, and print the test MAE again. Which of the two models would you actually deploy, and why?
+Split the encoded features into train/test sets (`test_size=0.2, random_state=42`). Fit a `StandardScaler` on `area_sqft` and `age_years` using **train only**, then transform both train and test. Print the train shape, test shape, the scaled train mean (rounded to 2 decimals), and the scaled test values (rounded to 2 decimals).
 
 ---
 
 ## Expected Output
 
 ```
-X shape: (16, 5)
-y shape: (16,)
-Training rows: 12 | Test rows: 4
+X shape: (10, 3)
+y shape: (10,)
+Feature columns: ['city', 'area_sqft', 'age_years']
 
-MAE with dealer_commission   : 0
-MAE without dealer_commission: 4,737
+Encoded columns: ['area_sqft', 'age_years', 'city_Mumbai', 'city_Pune']
+   area_sqft  age_years  city_Mumbai  city_Pune
+0        850          5        False      False
+1       1200          2         True      False
+2        950         10        False       True
+3       1100          8        False      False
+4       1600          1         True      False
+5        800         15        False       True
+6       1400          3        False      False
+7       2000          0         True      False
+8       1000         12        False       True
+9       1250          6        False      False
+
+Train shape: (8, 4) Test shape: (2, 4)
+
+Scaled train mean (should be ~0):
+area_sqft    0.0
+age_years    0.0
+dtype: float64
+
+Scaled test values:
+   area_sqft  age_years
+8      -0.63       1.29
+1      -0.11      -0.86
 ```
-
-The first model is off by ₹0 on every test bike — a perfect score. It is also useless: `dealer_commission` is 5% of `price`, so it hands the model the answer. On a bike that has not sold yet, there is no commission to look up.
 
 ---
 
@@ -61,52 +75,45 @@ The first model is off by ₹0 on every test bike — a perfect score. It is als
 ```python
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error
+from sklearn.preprocessing import StandardScaler
 
-bikes = pd.DataFrame({
-    "age_years":         [1, 3, 5, 2, 7, 4, 6, 1, 8, 3, 5, 2, 9, 4, 6, 2],
-    "km_driven":         [4000, 21000, 38000, 12000, 55000, 30000, 46000, 6500,
-                          62000, 18000, 41000, 9000, 70000, 26000, 49000, 15000],
-    "engine_cc":         [150, 125, 110, 200, 100, 150, 125, 220, 100, 160, 110, 180, 100, 150, 125, 200],
-    "services_done":     [2, 5, 8, 3, 11, 6, 9, 1, 13, 4, 8, 3, 14, 7, 10, 4],
-    "dealer_commission": [5850, 3425, 2825, 6525, 1600, 4300, 2450, 7525,
-                          1175, 5725, 2750, 6000, 925, 4275, 2600, 6525],
-    "price":             [117000, 68500, 56500, 130500, 32000, 86000, 49000, 150500,
-                          23500, 114500, 55000, 120000, 18500, 85500, 52000, 130500],
-})
+data = {
+    "city":        ["Delhi", "Mumbai", "Pune", "Delhi", "Mumbai", "Pune", "Delhi", "Mumbai", "Pune", "Delhi"],
+    "area_sqft":   [850, 1200, 950, 1100, 1600, 800, 1400, 2000, 1000, 1250],
+    "age_years":   [5, 2, 10, 8, 1, 15, 3, 0, 12, 6],
+    "price_lakhs": [65, 110, 58, 82, 165, 48, 105, 210, 55, 92]
+}
+df = pd.DataFrame(data)
 
-# --- Task 1: features (X) and target (y) ---
-X = bikes.drop(columns=["price"])
-y = bikes["price"]
+# Task 1
+X = df.drop(columns=["price_lakhs"])
+y = df["price_lakhs"]
 print("X shape:", X.shape)
 print("y shape:", y.shape)
+print("Feature columns:", list(X.columns))
 
-# --- Task 2: hold out a test set BEFORE doing anything else ---
+# Task 2
+X_encoded = pd.get_dummies(X, columns=["city"], drop_first=True)
+print("\nEncoded columns:", list(X_encoded.columns))
+print(X_encoded)
+
+# Task 3
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=42
+    X_encoded, y, test_size=0.2, random_state=42
 )
-print(f"Training rows: {len(X_train)} | Test rows: {len(X_test)}")
-print()
+print("\nTrain shape:", X_train.shape, "Test shape:", X_test.shape)
 
-# --- Task 3a: fit with the leaky column still in ---
-leaky = LinearRegression().fit(X_train, y_train)
-mae_leaky = mean_absolute_error(y_test, leaky.predict(X_test))
-print(f"MAE with dealer_commission   : {mae_leaky:,.0f}")
+num_cols = ["area_sqft", "age_years"]
+scaler = StandardScaler()
+X_train_scaled = X_train.copy()
+X_test_scaled = X_test.copy()
+X_train_scaled[num_cols] = scaler.fit_transform(X_train[num_cols])
+X_test_scaled[num_cols] = scaler.transform(X_test[num_cols])
 
-# --- Task 3b: dealer_commission = 5% of price -> it IS the target. Drop it. ---
-X_clean = X.drop(columns=["dealer_commission"])
-Xc_train, Xc_test, yc_train, yc_test = train_test_split(
-    X_clean, y, test_size=0.25, random_state=42
-)
-honest = LinearRegression().fit(Xc_train, yc_train)
-mae_honest = mean_absolute_error(yc_test, honest.predict(Xc_test))
-print(f"MAE without dealer_commission: {mae_honest:,.0f}")
-
-# Deploy the SECOND model. The first scores perfectly only because it can read
-# the answer off dealer_commission — a value that does not exist until the bike
-# has already been sold. A worse score on honest features beats a perfect score
-# on a leak, every time.
+print("\nScaled train mean (should be ~0):")
+print(X_train_scaled[num_cols].mean().round(2) + 0.0)
+print("\nScaled test values:")
+print(X_test_scaled[num_cols].round(2))
 ```
 
 </details>
