@@ -1,0 +1,8 @@
+emp_id,name,department,salary,join_date,city
+101,Alice,HR,52000,2022-03-15,Mumbai
+102,Bob,Tech,85000,2021-07-01,Pune
+103,Charlie,Tech,,2020-11-20,Mumbai
+104,Diana,HR,48000,,Delhi
+105,Eve,Finance,73000,2023-01-10,
+106,bob,Tech,85000,2021-07-01,Pune
+107,Frank,Tech,not_a_number,2022-06-01,Bangalore
