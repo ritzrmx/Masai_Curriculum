@@ -11,24 +11,24 @@ flowchart LR
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
-direction TB
+direction LR
     CURMOD["<b>CURRENT MODULE</b><br/><i>Module 1: Analytics Foundations + GenAI + Spreadsheets</i><br/>&nbsp;<br/><b>Covered so far:</b> Statistics — Understanding Data and Averages (mean, median, mode, outliers, range)<br/>This is Session 2 of 41"]
     CURSES["<b>CURRENT SESSION</b><br/><b>Analytics Workflow, Metrics & KPIs</b><br/>&nbsp;<br/><i>The shift:</i> from <i>computing summary numbers in isolation</i> to <b>using a structured process to turn a business question into a measurable insight</b><br/>&nbsp;<br/>Analytics workflow steps · Breaking down problems<br/>Metrics vs KPIs · Question to KPI"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
-direction TB
+direction LR
     OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Take a vague business problem, break it into the problem → data → analysis → insight<br/>steps, and convert a business question into a measurable KPI"]
 end
 
 subgraph value[" WHY IT MATTERS "]
 direction LR
     CVAL["<b>Course Value</b><br/>This workflow is the skeleton the whole course hangs on — every SQL query, Tableau<br/>dashboard, and Python script you write later is just executing one step of it faster"]
-    RVAL["<b>Real-Life Value</b><br/>Turning a fuzzy question like "was our college fest a success—<br/>into concrete, trackable numbers you can actually report"]
+    RVAL["<b>Real-Life Value</b><br/>Turning a fuzzy question like 'was our college fest a success'—<br/>into concrete, trackable numbers you can actually report"]
 end
 
 subgraph future[" WHAT COMES NEXT "]
-direction TB
+direction LR
     U0["<b>Next Session</b><br/>GenAI for Analytics: Prompt, Check, Improve<br/><i>Using GenAI as a helper at each step of this same workflow — without blindly trusting it</i>"]
     U1["<b>Later in Module 1</b><br/>Clean Up the Data · Make Data Ready for Analysis<br/>Formulas for Analysis · Pivot Tables and Quick Insights"]
     U2["<b>Upcoming Modules</b><br/>Module 2: SQL for Data Analysis · Module 3: Tableau Dashboards + Storytelling · Module 4: GenAI Workflows + Python<br/><i>Each tool ahead automates one stage of this same problem → data → analysis → insight workflow</i>"]

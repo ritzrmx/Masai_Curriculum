@@ -13,13 +13,13 @@ flowchart TB
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
-direction TB
+direction LR
     CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages - Analytics Workflow &amp; KPIs - GenAI for Analytics - Clean Up the Data - Make Data Ready - Formulas - Pivot Tables - Spread &amp; Variability - SQL Basics - Sorting &amp; Filtering - Aggregation - Grouping for KPIs - Joining Tables Together<br/>This is Session 14 of 41"]
     CURSES["<b>CURRENT SESSION</b><br/><b>Insights from Combined Data</b><br/>&nbsp;<br/><i>The shift:</i> from correctly RUNNING a joined query <i>to</i> <b>correctly TRUSTING and explaining what it shows</b><br/>&nbsp;<br/>Numbers → insight - Join fan-out trap<br/>Fair comparisons (rates, not totals) - Writing the insight"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
-direction TB
+direction LR
     OUT["<b>By the end, you can...</b><br/>&nbsp;<br/>Spot when a JOIN has silently duplicated and inflated your<br/>numbers, compare groups fairly using rates instead of raw totals,<br/>and write a joined-data insight that doesn't overreach into causation"]
 end
 
@@ -30,7 +30,7 @@ direction LR
 end
 
 subgraph future[" WHAT COMES NEXT "]
-direction TB
+direction LR
     U0["<b>Next Session</b><br/>Subqueries in Action<br/><i>Answering questions that need a query inside a query</i>"]
     U1["<b>Later in Module 2</b><br/>CTEs and GenAI for SQL"]
     U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling - Module 4: GenAI Workflows + Basic Python<br/><i>Reading a dashboard critically and writing insights with GenAI both build directly on today's judgment</i>"]

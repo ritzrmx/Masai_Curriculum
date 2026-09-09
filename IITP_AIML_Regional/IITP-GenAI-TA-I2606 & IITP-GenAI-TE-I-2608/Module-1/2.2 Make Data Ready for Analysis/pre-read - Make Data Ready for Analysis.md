@@ -11,13 +11,13 @@ flowchart LR
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
-direction TB
+direction LR
     CURMOD["<b>CURRENT MODULE</b><br/><i>Module 1: Analytics Foundations + GenAI + Spreadsheets</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data and Averages · Analytics Workflow, Metrics & KPIs · GenAI for Analytics · Clean Up the Data<br/>This is Session 5 of 41"]
     CURSES["<b>CURRENT SESSION</b><br/><b>Make Data Ready for Analysis</b><br/>&nbsp;<br/><i>The shift:</i> from <i>removing obvious dirt from the data</i> to <b>structuring it consistently and proving, with checks, that it's genuinely ready to analyze</b><br/>&nbsp;<br/>Consistent columns & data types · Fixing inconsistent entries<br/>Validating cleaned data · Final prep checklist"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
-direction TB
+direction LR
     OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Structure a dataset into consistent columns and data types, fix inconsistent text/number/date<br/>entries, and validate a dataset with simple checks before trusting it for analysis"]
 end
 
@@ -28,7 +28,7 @@ direction LR
 end
 
 subgraph future[" WHAT COMES NEXT "]
-direction TB
+direction LR
     U0["<b>Next Session</b><br/>Formulas for Analysis<br/><i>Using SUM, AVERAGE, COUNT and new calculated columns — now safely, on data you trust</i>"]
     U1["<b>Later in Module 1</b><br/>Pivot Tables and Quick Insights"]
     U2["<b>Upcoming Modules</b><br/>Module 2: SQL for Data Analysis · Module 3: Tableau Dashboards + Storytelling · Module 4: GenAI Workflows + Python<br/><i>SQL data types, Tableau field types, and pandas dtypes are the same consistency idea in each new tool</i>"]

@@ -13,13 +13,13 @@ flowchart TB
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
-direction TB
+direction LR
     CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages - Analytics Workflow &amp; KPIs - GenAI for Analytics - Clean Up the Data - Make Data Ready - Formulas - Pivot Tables - Spread &amp; Variability - SQL Basics - Sorting &amp; Filtering - Aggregation - Grouping for KPIs - Joining Tables - Insights from Combined Data<br/>This is Session 15 of 41"]
     CURSES["<b>CURRENT SESSION</b><br/><b>Subqueries in Action</b><br/>&nbsp;<br/><i>The shift:</i> from answering questions with one query <i>to</i> <b>answering questions that need a query's own answer as an input</b><br/>&nbsp;<br/>Scalar subqueries (WHERE) - IN/NOT IN<br/>Subqueries in FROM - Subqueries vs. JOIN"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
-direction TB
+direction LR
     OUT["<b>By the end, you can...</b><br/>&nbsp;<br/>Write a query that compares rows against a value only another<br/>query can calculate - like 'above average' or 'never ordered' -<br/>and use a subquery to aggregate safely before joining"]
 end
 
@@ -30,7 +30,7 @@ direction LR
 end
 
 subgraph future[" WHAT COMES NEXT "]
-direction TB
+direction LR
     U0["<b>Next Session</b><br/>CTEs and GenAI for SQL<br/><i>A cleaner, more readable way to write multi-step queries</i>"]
     U1["<b>Later in Module 2</b><br/>Module wrap and transition into Module 3"]
     U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling - Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's calculated fields and pandas' multi-step chained operations mirror this exact 'answer feeding an answer' logic</i>"]
