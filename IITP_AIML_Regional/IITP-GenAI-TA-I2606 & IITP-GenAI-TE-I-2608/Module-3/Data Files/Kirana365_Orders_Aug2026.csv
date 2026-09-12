@@ -1,0 +1,3001 @@
+Order ID,Order Date,City,Category,Quantity,Revenue (INR),Delivery Partner
+12920,2026-08-01,Bengaluru,Snacks,6,407,RapidVan
+10215,2026-08-01,Bengaluru,Snacks,6,389,QuickDash
+11815,2026-08-01,Hyderabad,Groceries,8,636,CityLogix
+11809,2026-08-01,Chennai,Beverages,4,171,SwiftKart
+11353,2026-08-01,Hyderabad,Beverages,1,43,SwiftKart
+10883,2026-08-01,Chennai,Snacks,8,495,LocalHub
+11797,2026-08-01,Chennai,Groceries,5,360,SwiftKart
+10887,2026-08-01,Pune,Beverages,6,287,LocalHub
+10916,2026-08-01,Pune,Groceries,3,241,LocalHub
+10408,2026-08-01,Hyderabad,Bakery,5,320,CityLogix
+12503,2026-08-01,Chennai,Personal Care,4,591,SwiftKart
+11074,2026-08-01,Bengaluru,Dairy,2,101,LocalHub
+10611,2026-08-01,Pune,Snacks,3,195,LocalHub
+10405,2026-08-01,Chennai,Dairy,5,267,SwiftKart
+11754,2026-08-01,Chennai,Groceries,7,563,SwiftKart
+12696,2026-08-01,Chennai,Dairy,8,408,RapidVan
+10249,2026-08-01,Bengaluru,Snacks,2,129,QuickDash
+11740,2026-08-01,Pune,Groceries,6,519,SwiftKart
+11817,2026-08-01,Hyderabad,Household Essentials,6,875,QuickDash
+10211,2026-08-01,Bengaluru,Dairy,3,144,SwiftKart
+10208,2026-08-01,Pune,Groceries,5,417,SwiftKart
+11342,2026-08-01,Bengaluru,Snacks,5,282,LocalHub
+10514,2026-08-01,Hyderabad,Beverages,4,192,LocalHub
+10644,2026-08-01,Chennai,Groceries,8,775,LocalHub
+10436,2026-08-01,Pune,Beverages,5,276,SwiftKart
+11895,2026-08-01,Bengaluru,Bakery,8,532,LocalHub
+10641,2026-08-01,Pune,Snacks,4,223,SwiftKart
+11095,2026-08-01,Pune,Groceries,1,88,CityLogix
+10517,2026-08-01,Bengaluru,Snacks,7,402,QuickDash
+11092,2026-08-01,Pune,Snacks,8,500,SwiftKart
+11733,2026-08-01,Hyderabad,Household Essentials,2,248,RapidVan
+10639,2026-08-01,Bengaluru,Snacks,7,392,LocalHub
+10425,2026-08-01,Hyderabad,Household Essentials,7,786,RapidVan
+12254,2026-08-01,Bengaluru,Snacks,7,409,QuickDash
+11085,2026-08-01,Chennai,Household Essentials,5,653,LocalHub
+11869,2026-08-01,Pune,Dairy,7,380,LocalHub
+11865,2026-08-01,Hyderabad,Dairy,1,56,LocalHub
+12257,2026-08-01,Hyderabad,Snacks,1,59,LocalHub
+12512,2026-08-01,Chennai,Baby Care,6,1226,CityLogix
+11830,2026-08-01,Hyderabad,Groceries,1,86,LocalHub
+13034,2026-08-01,Pune,Snacks,1,63,LocalHub
+12694,2026-08-01,Pune,Snacks,1,63,QuickDash
+12489,2026-08-01,Pune,Beverages,4,175,CityLogix
+12692,2026-08-01,Chennai,Baby Care,1,194,LocalHub
+11465,2026-08-01,Pune,Snacks,8,462,CityLogix
+11471,2026-08-01,Chennai,Groceries,6,532,RapidVan
+12646,2026-08-01,Chennai,Groceries,4,344,QuickDash
+12953,2026-08-01,Chennai,Beverages,1,44,QuickDash
+12383,2026-08-01,Bengaluru,Snacks,7,444,LocalHub
+11602,2026-08-01,Hyderabad,Household Essentials,1,120,QuickDash
+10567,2026-08-01,Hyderabad,Snacks,4,240,SwiftKart
+10356,2026-08-01,Pune,Snacks,3,185,LocalHub
+12375,2026-08-01,Pune,Bakery,5,381,SwiftKart
+11007,2026-08-01,Hyderabad,Beverages,6,287,LocalHub
+10555,2026-08-01,Pune,Bakery,4,283,QuickDash
+12955,2026-08-01,Hyderabad,Beverages,4,194,LocalHub
+11532,2026-08-01,Chennai,Household Essentials,3,349,LocalHub
+11016,2026-08-01,Chennai,Beverages,2,83,LocalHub
+11531,2026-08-01,Bengaluru,Groceries,5,452,SwiftKart
+11493,2026-08-01,Bengaluru,Dairy,5,284,LocalHub
+11027,2026-08-01,Chennai,Groceries,2,170,LocalHub
+11509,2026-08-01,Pune,Personal Care,3,444,RapidVan
+12447,2026-08-01,Chennai,Household Essentials,5,667,CityLogix
+12521,2026-08-01,Chennai,Snacks,3,199,LocalHub
+12639,2026-08-01,Bengaluru,Baby Care,5,1033,CityLogix
+10307,2026-08-01,Hyderabad,Personal Care,8,1198,LocalHub
+11706,2026-08-01,Bengaluru,Frozen Foods,8,976,SwiftKart
+12847,2026-08-01,Hyderabad,Groceries,21,1848,LocalHub
+10948,2026-08-01,Chennai,Groceries,3,249,SwiftKart
+12683,2026-08-01,Hyderabad,Beverages,2,90,CityLogix
+11699,2026-08-01,Bengaluru,Dairy,7,352,SwiftKart
+11401,2026-08-01,Bengaluru,Beverages,7,329,RapidVan
+12989,2026-08-01,Hyderabad,Frozen Foods,3,373,QuickDash
+12678,2026-08-01,Hyderabad,Personal Care,3,409,SwiftKart
+10988,2026-08-01,Hyderabad,Dairy,2,103,CityLogix
+12479,2026-08-01,Chennai,Groceries,8,699,LocalHub
+12466,2026-08-01,Chennai,Groceries,4,347,QuickDash
+10377,2026-08-01,Bengaluru,Snacks,4,243,SwiftKart
+11163,2026-08-01,Bengaluru,Household Essentials,3,347,RapidVan
+12872,2026-08-01,Hyderabad,Personal Care,1,149,RapidVan
+12675,2026-08-01,Hyderabad,Bakery,6,365,QuickDash
+11658,2026-08-01,Chennai,Groceries,8,678,SwiftKart
+12632,2026-08-01,Hyderabad,Snacks,5,297,LocalHub
+10984,2026-08-01,Bengaluru,Household Essentials,3,364,SwiftKart
+11685,2026-08-01,Bengaluru,Household Essentials,6,761,RapidVan
+10439,2026-08-01,Bengaluru,Personal Care,5,729,SwiftKart
+11031,2026-08-01,Hyderabad,Personal Care,6,888,CityLogix
+11986,2026-08-01,Bengaluru,Snacks,7,439,CityLogix
+12103,2026-08-01,Bengaluru,Personal Care,2,291,SwiftKart
+11189,2026-08-01,Bengaluru,Groceries,2,175,CityLogix
+12566,2026-08-01,Bengaluru,Frozen Foods,7,884,QuickDash
+10808,2026-08-01,Bengaluru,Groceries,5,451,SwiftKart
+11205,2026-08-01,Hyderabad,Groceries,3,235,CityLogix
+10111,2026-08-01,Hyderabad,Household Essentials,4,492,RapidVan
+12885,2026-08-01,Bengaluru,Bakery,2,142,LocalHub
+11123,2026-08-01,Chennai,Groceries,2,195,RapidVan
+10793,2026-08-01,Bengaluru,Dairy,5,257,SwiftKart
+12163,2026-08-01,Pune,Bakery,4,266,LocalHub
+10669,2026-08-01,Hyderabad,Household Essentials,8,885,CityLogix
+12773,2026-08-01,Hyderabad,Groceries,5,417,RapidVan
+12551,2026-08-01,Bengaluru,Personal Care,7,927,QuickDash
+12764,2026-08-01,Hyderabad,Personal Care,7,1105,RapidVan
+12754,2026-08-01,Chennai,Groceries,7,568,RapidVan
+12895,2026-08-01,Bengaluru,Snacks,1,57,LocalHub
+12557,2026-08-01,Bengaluru,Bakery,5,382,RapidVan
+12758,2026-08-01,Pune,Groceries,5,451,CityLogix
+11113,2026-08-01,Hyderabad,Personal Care,4,626,LocalHub
+12024,2026-08-01,Hyderabad,Dairy,4,239,SwiftKart
+12606,2026-08-01,Pune,Snacks,2,129,RapidVan
+12757,2026-08-01,Hyderabad,Beverages,1,45,RapidVan
+12041,2026-08-01,Bengaluru,Groceries,6,514,CityLogix
+10835,2026-08-01,Pune,Dairy,7,346,SwiftKart
+10458,2026-08-01,Chennai,Groceries,1,92,RapidVan
+12109,2026-08-01,Chennai,Groceries,2,154,RapidVan
+12184,2026-08-01,Bengaluru,Household Essentials,6,640,RapidVan
+10158,2026-08-01,Pune,Bakery,2,118,LocalHub
+10097,2026-08-01,Bengaluru,Snacks,7,371,CityLogix
+12530,2026-08-01,Hyderabad,Dairy,5,251,LocalHub
+11942,2026-08-01,Hyderabad,Snacks,2,126,LocalHub
+10662,2026-08-01,Pune,Frozen Foods,3,369,RapidVan
+10825,2026-08-01,Bengaluru,Snacks,2,118,RapidVan
+12594,2026-08-01,Hyderabad,Dairy,1,50,CityLogix
+10661,2026-08-01,Chennai,Beverages,2,88,CityLogix
+11150,2026-08-01,Chennai,Groceries,5,486,RapidVan
+10093,2026-08-02,Bengaluru,Beverages,6,316,RapidVan
+10335,2026-08-02,Pune,Personal Care,6,872,RapidVan
+11412,2026-08-02,Bengaluru,Dairy,3,147,SwiftKart
+10994,2026-08-02,Chennai,Groceries,6,574,SwiftKart
+11520,2026-08-02,Bengaluru,Baby Care,2,397,SwiftKart
+11429,2026-08-02,Bengaluru,Dairy,3,175,CityLogix
+12058,2026-08-02,Chennai,Groceries,4,329,SwiftKart
+11682,2026-08-02,Hyderabad,Groceries,8,689,CityLogix
+11222,2026-08-02,Bengaluru,Personal Care,1,157,RapidVan
+10952,2026-08-02,Bengaluru,Groceries,2,166,QuickDash
+12138,2026-08-02,Pune,Baby Care,1,236,RapidVan
+10273,2026-08-02,Pune,Baby Care,5,1005,SwiftKart
+11059,2026-08-02,Bengaluru,Snacks,7,425,RapidVan
+12630,2026-08-02,Hyderabad,Beverages,7,306,QuickDash
+12338,2026-08-02,Chennai,Groceries,4,345,RapidVan
+12808,2026-08-02,Hyderabad,Baby Care,3,510,RapidVan
+11512,2026-08-02,Pune,Personal Care,8,1178,SwiftKart
+12048,2026-08-02,Chennai,Groceries,1,101,SwiftKart
+10463,2026-08-02,Pune,Dairy,8,474,RapidVan
+12583,2026-08-02,Bengaluru,Dairy,8,404,CityLogix
+13069,2026-08-02,Hyderabad,Beverages,2,90,LocalHub
+10484,2026-08-02,Bengaluru,Groceries,2,192,RapidVan
+11675,2026-08-02,Hyderabad,Bakery,5,334,QuickDash
+11127,2026-08-02,Hyderabad,Dairy,4,212,QuickDash
+11674,2026-08-02,Bengaluru,Dairy,6,318,LocalHub
+10491,2026-08-02,Pune,Bakery,7,487,LocalHub
+11037,2026-08-02,Chennai,Groceries,8,724,QuickDash
+10748,2026-08-02,Bengaluru,Snacks,6,348,SwiftKart
+11570,2026-08-02,Bengaluru,Snacks,7,391,SwiftKart
+12969,2026-08-02,Bengaluru,Bakery,1,66,QuickDash
+10996,2026-08-02,Bengaluru,Household Essentials,7,874,QuickDash
+12638,2026-08-02,Bengaluru,Frozen Foods,6,838,SwiftKart
+11453,2026-08-02,Chennai,Groceries,2,166,RapidVan
+10545,2026-08-02,Chennai,Dairy,4,245,QuickDash
+12463,2026-08-02,Hyderabad,Baby Care,3,677,QuickDash
+11634,2026-08-02,Hyderabad,Household Essentials,8,715,LocalHub
+11636,2026-08-02,Hyderabad,Beverages,5,242,SwiftKart
+11557,2026-08-02,Pune,Household Essentials,4,491,CityLogix
+12361,2026-08-02,Hyderabad,Snacks,3,218,CityLogix
+12945,2026-08-02,Bengaluru,Dairy,7,374,CityLogix
+12859,2026-08-02,Pune,Beverages,8,304,QuickDash
+11009,2026-08-02,Hyderabad,Snacks,5,296,LocalHub
+10742,2026-08-02,Hyderabad,Groceries,7,562,CityLogix
+12672,2026-08-02,Bengaluru,Baby Care,3,521,LocalHub
+10297,2026-08-02,Hyderabad,Baby Care,1,191,LocalHub
+11207,2026-08-02,Pune,Beverages,3,139,CityLogix
+11442,2026-08-02,Hyderabad,Household Essentials,6,671,RapidVan
+11662,2026-08-02,Bengaluru,Snacks,7,360,RapidVan
+10975,2026-08-02,Hyderabad,Snacks,7,433,QuickDash
+12074,2026-08-02,Bengaluru,Snacks,7,427,RapidVan
+12891,2026-08-02,Hyderabad,Snacks,4,209,QuickDash
+11096,2026-08-02,Chennai,Groceries,1,92,RapidVan
+12333,2026-08-02,Hyderabad,Dairy,8,496,QuickDash
+11673,2026-08-02,Chennai,Groceries,7,599,SwiftKart
+11081,2026-08-02,Chennai,Groceries,5,489,RapidVan
+12215,2026-08-02,Bengaluru,Snacks,5,325,CityLogix
+11354,2026-08-02,Chennai,Groceries,8,674,CityLogix
+11952,2026-08-02,Bengaluru,Dairy,3,152,LocalHub
+11806,2026-08-02,Bengaluru,Household Essentials,8,1012,RapidVan
+11103,2026-08-02,Pune,Groceries,2,160,CityLogix
+10874,2026-08-02,Chennai,Household Essentials,3,384,CityLogix
+12430,2026-08-02,Bengaluru,Snacks,5,281,SwiftKart
+10131,2026-08-02,Chennai,Groceries,3,307,CityLogix
+11351,2026-08-02,Pune,Frozen Foods,4,565,SwiftKart
+12749,2026-08-02,Bengaluru,Beverages,5,241,RapidVan
+11820,2026-08-02,Pune,Groceries,5,445,SwiftKart
+12276,2026-08-02,Bengaluru,Groceries,7,587,SwiftKart
+10209,2026-08-02,Hyderabad,Beverages,6,293,QuickDash
+12884,2026-08-02,Chennai,Beverages,6,266,QuickDash
+10865,2026-08-02,Pune,Baby Care,3,615,QuickDash
+12743,2026-08-02,Hyderabad,Snacks,8,454,SwiftKart
+12538,2026-08-02,Bengaluru,Dairy,6,360,SwiftKart
+10658,2026-08-02,Pune,Snacks,8,486,SwiftKart
+11333,2026-08-02,Hyderabad,Groceries,1,87,RapidVan
+11098,2026-08-02,Hyderabad,Bakery,1,57,SwiftKart
+11845,2026-08-02,Bengaluru,Beverages,2,89,RapidVan
+10862,2026-08-02,Pune,Personal Care,1,159,QuickDash
+11099,2026-08-02,Pune,Beverages,1,45,LocalHub
+10198,2026-08-02,Pune,Snacks,4,253,CityLogix
+12256,2026-08-02,Chennai,Dairy,1,56,CityLogix
+11959,2026-08-02,Hyderabad,Personal Care,7,1012,CityLogix
+12702,2026-08-02,Bengaluru,Snacks,7,398,SwiftKart
+12824,2026-08-02,Hyderabad,Personal Care,7,1110,RapidVan
+12926,2026-08-02,Pune,Baby Care,6,1196,CityLogix
+12837,2026-08-02,Hyderabad,Frozen Foods,5,667,LocalHub
+13000,2026-08-02,Hyderabad,Groceries,3,270,QuickDash
+10602,2026-08-02,Hyderabad,Groceries,5,430,RapidVan
+12629,2026-08-02,Hyderabad,Bakery,3,194,LocalHub
+12322,2026-08-02,Bengaluru,Household Essentials,1,114,SwiftKart
+11298,2026-08-02,Hyderabad,Personal Care,7,1062,RapidVan
+10133,2026-08-02,Bengaluru,Groceries,7,654,CityLogix
+10502,2026-08-02,Pune,Beverages,8,376,QuickDash
+10923,2026-08-02,Bengaluru,Dairy,3,181,SwiftKart
+10828,2026-08-02,Bengaluru,Personal Care,6,874,SwiftKart
+12312,2026-08-02,Hyderabad,Bakery,5,365,CityLogix
+12495,2026-08-02,Chennai,Bakery,7,526,RapidVan
+10182,2026-08-02,Chennai,Bakery,6,442,LocalHub
+10192,2026-08-02,Hyderabad,Dairy,5,287,SwiftKart
+12501,2026-08-02,Hyderabad,Frozen Foods,6,805,LocalHub
+12547,2026-08-02,Hyderabad,Beverages,5,219,LocalHub
+11321,2026-08-02,Chennai,Groceries,7,661,RapidVan
+10403,2026-08-02,Chennai,Groceries,8,710,CityLogix
+12189,2026-08-02,Bengaluru,Beverages,2,88,SwiftKart
+10612,2026-08-02,Bengaluru,Snacks,7,445,CityLogix
+10614,2026-08-02,Bengaluru,Snacks,3,171,LocalHub
+11756,2026-08-02,Hyderabad,Dairy,6,325,RapidVan
+10791,2026-08-02,Chennai,Bakery,4,357,RapidVan
+11770,2026-08-02,Pune,Groceries,6,469,QuickDash
+11776,2026-08-02,Hyderabad,Snacks,6,383,LocalHub
+10349,2026-08-03,Hyderabad,Dairy,2,95,SwiftKart
+11317,2026-08-03,Hyderabad,Groceries,2,146,CityLogix
+11482,2026-08-03,Chennai,Groceries,6,492,LocalHub
+12590,2026-08-03,Chennai,Personal Care,5,783,LocalHub
+11032,2026-08-03,Pune,Household Essentials,5,678,QuickDash
+11097,2026-08-03,Hyderabad,Groceries,5,494,QuickDash
+11395,2026-08-03,Hyderabad,Frozen Foods,8,1006,LocalHub
+10446,2026-08-03,Hyderabad,Frozen Foods,8,1081,LocalHub
+11387,2026-08-03,Bengaluru,Personal Care,1,153,RapidVan
+11406,2026-08-03,Hyderabad,Snacks,6,358,RapidVan
+11385,2026-08-03,Pune,Bakery,3,233,RapidVan
+11058,2026-08-03,Pune,Snacks,6,317,SwiftKart
+12492,2026-08-03,Chennai,Groceries,1,89,LocalHub
+11375,2026-08-03,Bengaluru,Groceries,3,249,RapidVan
+10497,2026-08-03,Pune,Bakery,2,124,CityLogix
+12940,2026-08-03,Bengaluru,Baby Care,3,586,SwiftKart
+12601,2026-08-03,Hyderabad,Beverages,4,169,RapidVan
+10371,2026-08-03,Hyderabad,Baby Care,5,1023,CityLogix
+12546,2026-08-03,Pune,Groceries,5,423,RapidVan
+11350,2026-08-03,Bengaluru,Bakery,8,613,LocalHub
+11182,2026-08-03,Bengaluru,Bakery,1,73,QuickDash
+12621,2026-08-03,Bengaluru,Groceries,4,387,QuickDash
+12577,2026-08-03,Pune,Beverages,5,257,QuickDash
+10478,2026-08-03,Pune,Dairy,8,409,LocalHub
+11271,2026-08-03,Chennai,Bakery,5,380,QuickDash
+11588,2026-08-03,Pune,Beverages,1,48,CityLogix
+12890,2026-08-03,Chennai,Dairy,7,414,SwiftKart
+10284,2026-08-03,Chennai,Groceries,2,195,CityLogix
+10783,2026-08-03,Pune,Dairy,2,100,LocalHub
+10673,2026-08-03,Hyderabad,Personal Care,4,647,QuickDash
+10279,2026-08-03,Bengaluru,Frozen Foods,3,359,SwiftKart
+10959,2026-08-03,Hyderabad,Snacks,1,61,SwiftKart
+12993,2026-08-03,Bengaluru,Bakery,4,308,LocalHub
+12332,2026-08-03,Bengaluru,Snacks,5,261,RapidVan
+10146,2026-08-03,Bengaluru,Personal Care,2,328,LocalHub
+11741,2026-08-03,Hyderabad,Bakery,5,356,LocalHub
+10608,2026-08-03,Hyderabad,Frozen Foods,3,396,LocalHub
+11982,2026-08-03,Pune,Bakery,8,519,SwiftKart
+12208,2026-08-03,Hyderabad,Dairy,6,328,CityLogix
+11757,2026-08-03,Pune,Snacks,5,313,RapidVan
+12843,2026-08-03,Bengaluru,Household Essentials,5,582,CityLogix
+10236,2026-08-03,Pune,Snacks,5,283,LocalHub
+11945,2026-08-03,Bengaluru,Snacks,2,118,LocalHub
+12830,2026-08-03,Hyderabad,Snacks,1,57,QuickDash
+12724,2026-08-03,Bengaluru,Baby Care,7,1298,LocalHub
+12720,2026-08-03,Pune,Bakery,5,345,RapidVan
+10853,2026-08-03,Pune,Snacks,2,127,LocalHub
+11892,2026-08-03,Bengaluru,Bakery,8,607,CityLogix
+11881,2026-08-03,Bengaluru,Household Essentials,6,688,CityLogix
+12251,2026-08-03,Pune,Household Essentials,4,420,QuickDash
+10634,2026-08-03,Chennai,Groceries,4,322,QuickDash
+10861,2026-08-03,Pune,Frozen Foods,4,491,QuickDash
+10583,2026-08-03,Chennai,Groceries,2,165,LocalHub
+12350,2026-08-03,Pune,Baby Care,4,795,SwiftKart
+12013,2026-08-03,Chennai,Groceries,37,3357,QuickDash
+12832,2026-08-03,Pune,Beverages,5,203,QuickDash
+10745,2026-08-03,Pune,Baby Care,3,601,QuickDash
+10315,2026-08-03,Bengaluru,Snacks,2,124,CityLogix
+12673,2026-08-03,Bengaluru,Household Essentials,1,107,SwiftKart
+10990,2026-08-03,Hyderabad,Bakery,4,291,SwiftKart
+10310,2026-08-03,Pune,Beverages,5,220,QuickDash
+12110,2026-08-03,Chennai,Groceries,4,350,QuickDash
+12134,2026-08-03,Bengaluru,Beverages,6,306,LocalHub
+12661,2026-08-03,Bengaluru,Snacks,8,540,RapidVan
+12135,2026-08-03,Hyderabad,Baby Care,5,985,LocalHub
+12370,2026-08-03,Hyderabad,Frozen Foods,2,269,SwiftKart
+11627,2026-08-03,Bengaluru,Beverages,1,43,RapidVan
+10115,2026-08-03,Chennai,Bakery,8,517,LocalHub
+10767,2026-08-03,Bengaluru,Snacks,5,270,SwiftKart
+12656,2026-08-03,Bengaluru,Snacks,1,60,CityLogix
+12665,2026-08-03,Pune,Dairy,6,359,RapidVan
+10755,2026-08-03,Bengaluru,Beverages,8,338,SwiftKart
+10332,2026-08-03,Pune,Snacks,5,298,LocalHub
+12421,2026-08-03,Hyderabad,Groceries,8,722,QuickDash
+13039,2026-08-04,Bengaluru,Dairy,4,240,CityLogix
+12782,2026-08-04,Pune,Personal Care,1,151,RapidVan
+10490,2026-08-04,Bengaluru,Frozen Foods,7,1026,CityLogix
+11885,2026-08-04,Hyderabad,Bakery,3,211,CityLogix
+11311,2026-08-04,Pune,Groceries,4,361,CityLogix
+12250,2026-08-04,Bengaluru,Snacks,6,343,CityLogix
+11171,2026-08-04,Hyderabad,Snacks,1,57,LocalHub
+11323,2026-08-04,Chennai,Bakery,5,382,RapidVan
+10516,2026-08-04,Chennai,Dairy,4,188,SwiftKart
+13083,2026-08-04,Pune,Groceries,3,290,RapidVan
+12050,2026-08-04,Bengaluru,Groceries,8,769,SwiftKart
+11958,2026-08-04,Hyderabad,Groceries,7,689,CityLogix
+10123,2026-08-04,Bengaluru,Household Essentials,8,866,QuickDash
+12180,2026-08-04,Chennai,Groceries,7,588,CityLogix
+12029,2026-08-04,Bengaluru,Beverages,1,48,CityLogix
+12088,2026-08-04,Hyderabad,Personal Care,2,316,CityLogix
+12618,2026-08-04,Bengaluru,Personal Care,7,1119,RapidVan
+12192,2026-08-04,Bengaluru,Snacks,6,347,RapidVan
+10456,2026-08-04,Pune,Groceries,6,513,RapidVan
+11992,2026-08-04,Chennai,Personal Care,6,877,LocalHub
+12091,2026-08-04,Hyderabad,Baby Care,4,799,SwiftKart
+10148,2026-08-04,Hyderabad,Baby Care,6,1235,LocalHub
+10799,2026-08-04,Hyderabad,Household Essentials,8,932,LocalHub
+12541,2026-08-04,Hyderabad,Dairy,4,218,SwiftKart
+10153,2026-08-04,Pune,Household Essentials,1,121,RapidVan
+12155,2026-08-04,Chennai,Groceries,6,551,LocalHub
+12150,2026-08-04,Bengaluru,Dairy,8,438,RapidVan
+12827,2026-08-04,Bengaluru,Personal Care,5,720,LocalHub
+10155,2026-08-04,Pune,Dairy,1,53,SwiftKart
+12654,2026-08-04,Pune,Groceries,6,549,RapidVan
+11340,2026-08-04,Pune,Snacks,1,60,RapidVan
+11711,2026-08-04,Pune,Snacks,7,451,CityLogix
+11336,2026-08-04,Hyderabad,Dairy,4,223,CityLogix
+11696,2026-08-04,Bengaluru,Groceries,1,86,SwiftKart
+10274,2026-08-04,Pune,Bakery,5,342,LocalHub
+12853,2026-08-04,Hyderabad,Bakery,5,407,RapidVan
+11424,2026-08-04,Pune,Groceries,7,666,SwiftKart
+11427,2026-08-04,Bengaluru,Personal Care,8,1143,CityLogix
+12347,2026-08-04,Chennai,Dairy,4,217,SwiftKart
+11432,2026-08-04,Pune,Bakery,2,121,CityLogix
+10296,2026-08-04,Bengaluru,Personal Care,8,1324,QuickDash
+11390,2026-08-04,Chennai,Groceries,1,81,RapidVan
+10299,2026-08-04,Hyderabad,Household Essentials,2,270,SwiftKart
+12949,2026-08-04,Bengaluru,Personal Care,8,1289,CityLogix
+11623,2026-08-04,Hyderabad,Baby Care,2,390,RapidVan
+12641,2026-08-04,Bengaluru,Personal Care,3,486,SwiftKart
+12663,2026-08-04,Chennai,Groceries,6,572,LocalHub
+11615,2026-08-04,Hyderabad,Groceries,40,3942,LocalHub
+11474,2026-08-04,Hyderabad,Baby Care,5,891,SwiftKart
+11595,2026-08-04,Chennai,Beverages,1,47,SwiftKart
+10565,2026-08-04,Bengaluru,Snacks,1,58,LocalHub
+11013,2026-08-04,Pune,Beverages,5,196,QuickDash
+12657,2026-08-04,Bengaluru,Dairy,3,169,SwiftKart
+11445,2026-08-04,Chennai,Dairy,7,395,LocalHub
+11062,2026-08-04,Chennai,Groceries,1,77,QuickDash
+12337,2026-08-04,Pune,Frozen Foods,2,292,LocalHub
+12319,2026-08-04,Bengaluru,Frozen Foods,4,549,CityLogix
+12267,2026-08-04,Hyderabad,Personal Care,1,158,LocalHub
+12623,2026-08-04,Pune,Dairy,3,178,LocalHub
+10345,2026-08-04,Bengaluru,Snacks,6,302,CityLogix
+11352,2026-08-04,Pune,Household Essentials,38,4157,SwiftKart
+11814,2026-08-04,Hyderabad,Groceries,3,253,LocalHub
+10876,2026-08-04,Chennai,Dairy,2,99,QuickDash
+12284,2026-08-04,Chennai,Groceries,3,256,LocalHub
+11726,2026-08-04,Hyderabad,Snacks,4,254,RapidVan
+10235,2026-08-04,Hyderabad,Beverages,3,114,SwiftKart
+12714,2026-08-04,Pune,Bakery,1,64,LocalHub
+11750,2026-08-04,Pune,Snacks,2,120,CityLogix
+11066,2026-08-04,Bengaluru,Bakery,4,267,SwiftKart
+11766,2026-08-04,Bengaluru,Groceries,2,181,CityLogix
+13008,2026-08-04,Bengaluru,Snacks,5,313,SwiftKart
+10401,2026-08-04,Bengaluru,Snacks,5,269,SwiftKart
+10613,2026-08-05,Pune,Baby Care,1,189,RapidVan
+10506,2026-08-05,Bengaluru,Dairy,8,413,QuickDash
+10735,2026-08-05,Bengaluru,Snacks,4,234,RapidVan
+10864,2026-08-05,Bengaluru,Household Essentials,4,505,CityLogix
+10740,2026-08-05,Hyderabad,Dairy,6,293,CityLogix
+11039,2026-08-05,Chennai,Dairy,8,462,CityLogix
+10871,2026-08-05,Hyderabad,Personal Care,2,305,QuickDash
+11067,2026-08-05,Pune,Groceries,7,625,SwiftKart
+10813,2026-08-05,Hyderabad,Household Essentials,1,131,RapidVan
+10891,2026-08-05,Bengaluru,Snacks,4,245,RapidVan
+12624,2026-08-05,Bengaluru,Frozen Foods,4,465,RapidVan
+10619,2026-08-05,Hyderabad,Groceries,5,465,LocalHub
+10759,2026-08-05,Hyderabad,Dairy,7,383,CityLogix
+10647,2026-08-05,Chennai,Personal Care,1,143,CityLogix
+10578,2026-08-05,Bengaluru,Bakery,7,458,RapidVan
+12760,2026-08-05,Chennai,Groceries,5,461,CityLogix
+12871,2026-08-05,Pune,Baby Care,1,194,QuickDash
+12740,2026-08-05,Bengaluru,Snacks,2,128,CityLogix
+10675,2026-08-05,Bengaluru,Personal Care,3,478,LocalHub
+10765,2026-08-05,Chennai,Beverages,2,93,QuickDash
+12797,2026-08-05,Hyderabad,Household Essentials,1,138,QuickDash
+12241,2026-08-05,Chennai,Snacks,5,260,QuickDash
+11356,2026-08-05,Chennai,Bakery,7,538,CityLogix
+11357,2026-08-05,Chennai,Frozen Foods,7,980,SwiftKart
+11937,2026-08-05,Chennai,Groceries,6,587,QuickDash
+12220,2026-08-05,Chennai,Baby Care,8,1613,QuickDash
+11915,2026-08-05,Hyderabad,Beverages,5,235,RapidVan
+10387,2026-08-05,Chennai,Personal Care,5,712,SwiftKart
+11909,2026-08-05,Bengaluru,Snacks,3,164,SwiftKart
+12238,2026-08-05,Pune,Frozen Foods,2,254,CityLogix
+12351,2026-08-05,Bengaluru,Dairy,3,161,CityLogix
+11454,2026-08-05,Pune,Groceries,4,376,RapidVan
+12253,2026-08-05,Pune,Groceries,2,182,LocalHub
+10214,2026-08-05,Hyderabad,Bakery,3,215,RapidVan
+11810,2026-08-05,Chennai,Beverages,5,243,LocalHub
+12296,2026-08-05,Pune,Groceries,7,670,LocalHub
+11344,2026-08-05,Hyderabad,Beverages,6,250,QuickDash
+11529,2026-08-05,Chennai,Snacks,5,316,QuickDash
+11546,2026-08-05,Hyderabad,Household Essentials,2,237,SwiftKart
+10240,2026-08-05,Pune,Groceries,2,144,RapidVan
+11555,2026-08-05,Hyderabad,Groceries,4,352,LocalHub
+10327,2026-08-05,Bengaluru,Groceries,2,190,RapidVan
+12325,2026-08-05,Bengaluru,Snacks,5,294,RapidVan
+11599,2026-08-05,Hyderabad,Frozen Foods,8,998,SwiftKart
+11612,2026-08-05,Bengaluru,Beverages,3,128,CityLogix
+11704,2026-08-05,Pune,Dairy,8,392,LocalHub
+10483,2026-08-05,Pune,Household Essentials,8,841,CityLogix
+11694,2026-08-05,Pune,Groceries,1,78,QuickDash
+12339,2026-08-05,Chennai,Groceries,8,772,CityLogix
+11686,2026-08-05,Bengaluru,Bakery,8,508,RapidVan
+12358,2026-08-05,Bengaluru,Snacks,3,155,CityLogix
+10281,2026-08-05,Chennai,Groceries,3,264,QuickDash
+12965,2026-08-05,Chennai,Personal Care,3,521,RapidVan
+12915,2026-08-05,Pune,Groceries,4,345,CityLogix
+10285,2026-08-05,Hyderabad,Baby Care,2,404,QuickDash
+12128,2026-08-05,Bengaluru,Snacks,8,437,RapidVan
+12067,2026-08-05,Chennai,Beverages,7,320,LocalHub
+10428,2026-08-05,Hyderabad,Household Essentials,1,119,RapidVan
+13057,2026-08-05,Pune,Baby Care,2,440,CityLogix
+10422,2026-08-05,Bengaluru,Snacks,6,353,QuickDash
+12892,2026-08-05,Pune,Beverages,1,40,LocalHub
+12140,2026-08-05,Pune,Snacks,6,349,SwiftKart
+13046,2026-08-05,Hyderabad,Bakery,8,563,SwiftKart
+12190,2026-08-05,Bengaluru,Frozen Foods,8,1090,SwiftKart
+11956,2026-08-05,Bengaluru,Groceries,6,520,RapidVan
+12197,2026-08-05,Chennai,Snacks,1,55,LocalHub
+12077,2026-08-05,Pune,Beverages,5,213,RapidVan
+10161,2026-08-05,Chennai,Dairy,1,53,CityLogix
+13073,2026-08-05,Chennai,Groceries,2,202,QuickDash
+13074,2026-08-05,Pune,Snacks,5,344,LocalHub
+11991,2026-08-05,Bengaluru,Groceries,6,495,QuickDash
+12829,2026-08-06,Chennai,Dairy,8,392,SwiftKart
+12316,2026-08-06,Pune,Personal Care,4,627,SwiftKart
+10606,2026-08-06,Bengaluru,Snacks,7,468,QuickDash
+12053,2026-08-06,Chennai,Snacks,7,420,SwiftKart
+12805,2026-08-06,Chennai,Bakery,3,192,RapidVan
+10931,2026-08-06,Hyderabad,Bakery,4,286,SwiftKart
+12998,2026-08-06,Chennai,Frozen Foods,6,736,QuickDash
+12999,2026-08-06,Chennai,Beverages,4,214,CityLogix
+12691,2026-08-06,Pune,Groceries,1,91,CityLogix
+10936,2026-08-06,Hyderabad,Dairy,7,368,QuickDash
+12684,2026-08-06,Chennai,Beverages,2,104,QuickDash
+12089,2026-08-06,Bengaluru,Snacks,1,62,LocalHub
+12105,2026-08-06,Bengaluru,Household Essentials,2,281,QuickDash
+13085,2026-08-06,Chennai,Household Essentials,7,853,RapidVan
+10964,2026-08-06,Hyderabad,Bakery,7,466,CityLogix
+12784,2026-08-06,Hyderabad,Dairy,6,362,SwiftKart
+10584,2026-08-06,Bengaluru,Personal Care,5,709,QuickDash
+11715,2026-08-06,Bengaluru,Baby Care,7,1354,CityLogix
+11748,2026-08-06,Hyderabad,Groceries,8,729,CityLogix
+12302,2026-08-06,Bengaluru,Groceries,6,552,QuickDash
+10785,2026-08-06,Bengaluru,Frozen Foods,6,828,CityLogix
+10829,2026-08-06,Bengaluru,Baby Care,5,952,SwiftKart
+11946,2026-08-06,Bengaluru,Snacks,8,406,QuickDash
+10818,2026-08-06,Bengaluru,Bakery,6,476,CityLogix
+11935,2026-08-06,Pune,Personal Care,1,139,RapidVan
+12727,2026-08-06,Bengaluru,Personal Care,4,671,RapidVan
+10847,2026-08-06,Bengaluru,Frozen Foods,4,532,SwiftKart
+10177,2026-08-06,Bengaluru,Beverages,4,203,LocalHub
+10163,2026-08-06,Pune,Bakery,7,448,LocalHub
+11964,2026-08-06,Hyderabad,Household Essentials,8,1096,CityLogix
+11971,2026-08-06,Bengaluru,Beverages,4,197,SwiftKart
+10246,2026-08-06,Bengaluru,Snacks,1,57,CityLogix
+10858,2026-08-06,Hyderabad,Bakery,5,350,LocalHub
+11829,2026-08-06,Hyderabad,Groceries,7,627,LocalHub
+12275,2026-08-06,Hyderabad,Frozen Foods,1,132,CityLogix
+11983,2026-08-06,Chennai,Dairy,6,331,QuickDash
+10220,2026-08-06,Hyderabad,Groceries,7,717,QuickDash
+10625,2026-08-06,Hyderabad,Groceries,4,376,SwiftKart
+11785,2026-08-06,Bengaluru,Dairy,6,352,CityLogix
+12700,2026-08-06,Hyderabad,Groceries,1,87,SwiftKart
+10911,2026-08-06,Hyderabad,Bakery,1,61,RapidVan
+12297,2026-08-06,Bengaluru,Bakery,7,517,SwiftKart
+10917,2026-08-06,Hyderabad,Snacks,8,500,LocalHub
+11979,2026-08-06,Hyderabad,Snacks,8,451,RapidVan
+11167,2026-08-06,Chennai,Groceries,2,168,SwiftKart
+10394,2026-08-06,Bengaluru,Frozen Foods,2,254,QuickDash
+12941,2026-08-06,Bengaluru,Snacks,5,250,LocalHub
+11516,2026-08-06,Hyderabad,Bakery,1,68,QuickDash
+12559,2026-08-06,Pune,Beverages,8,415,RapidVan
+11235,2026-08-06,Hyderabad,Beverages,5,217,LocalHub
+11241,2026-08-06,Pune,Beverages,4,185,SwiftKart
+12956,2026-08-06,Bengaluru,Frozen Foods,6,656,RapidVan
+11477,2026-08-06,Bengaluru,Snacks,2,137,SwiftKart
+11242,2026-08-06,Hyderabad,Household Essentials,7,866,CityLogix
+11473,2026-08-06,Pune,Groceries,4,327,LocalHub
+12644,2026-08-06,Pune,Snacks,3,197,LocalHub
+11551,2026-08-06,Chennai,Frozen Foods,1,138,RapidVan
+12458,2026-08-06,Chennai,Snacks,3,164,QuickDash
+10973,2026-08-06,Chennai,Groceries,3,286,CityLogix
+11294,2026-08-06,Chennai,Groceries,2,185,LocalHub
+12465,2026-08-06,Chennai,Groceries,8,638,CityLogix
+11407,2026-08-06,Chennai,Household Essentials,6,656,QuickDash
+11403,2026-08-06,Bengaluru,Household Essentials,1,122,CityLogix
+11308,2026-08-06,Bengaluru,Groceries,4,329,RapidVan
+11325,2026-08-06,Chennai,Beverages,3,126,CityLogix
+11328,2026-08-06,Bengaluru,Groceries,24,2034,CityLogix
+11363,2026-08-06,Bengaluru,Personal Care,8,1187,CityLogix
+12531,2026-08-06,Chennai,Beverages,8,423,RapidVan
+11011,2026-08-06,Hyderabad,Groceries,7,583,QuickDash
+12608,2026-08-06,Chennai,Groceries,3,257,SwiftKart
+12516,2026-08-06,Pune,Dairy,8,433,CityLogix
+11553,2026-08-06,Bengaluru,Household Essentials,3,379,LocalHub
+11616,2026-08-06,Pune,Dairy,8,495,LocalHub
+12980,2026-08-06,Bengaluru,Snacks,6,381,QuickDash
+10993,2026-08-06,Hyderabad,Dairy,5,284,SwiftKart
+10566,2026-08-06,Hyderabad,Groceries,3,286,CityLogix
+11174,2026-08-06,Pune,Groceries,4,371,RapidVan
+10573,2026-08-06,Pune,Groceries,5,397,QuickDash
+10291,2026-08-06,Pune,Household Essentials,1,130,QuickDash
+12660,2026-08-06,Hyderabad,Baby Care,4,842,SwiftKart
+11665,2026-08-06,Bengaluru,Dairy,7,356,SwiftKart
+10298,2026-08-06,Hyderabad,Dairy,3,166,CityLogix
+11149,2026-08-07,Bengaluru,Beverages,6,252,QuickDash
+12745,2026-08-07,Bengaluru,Beverages,7,337,SwiftKart
+10717,2026-08-07,Hyderabad,Bakery,1,69,RapidVan
+11168,2026-08-07,Chennai,Personal Care,1,159,QuickDash
+11275,2026-08-07,Hyderabad,Bakery,4,281,LocalHub
+12130,2026-08-07,Pune,Personal Care,5,804,LocalHub
+11969,2026-08-07,Bengaluru,Snacks,7,468,CityLogix
+11302,2026-08-07,Bengaluru,Snacks,4,256,RapidVan
+11980,2026-08-07,Hyderabad,Personal Care,2,326,SwiftKart
+12137,2026-08-07,Hyderabad,Household Essentials,4,562,RapidVan
+12781,2026-08-07,Bengaluru,Dairy,1,65,CityLogix
+11285,2026-08-07,Bengaluru,Snacks,8,555,LocalHub
+11261,2026-08-07,Pune,Dairy,6,391,RapidVan
+12604,2026-08-07,Hyderabad,Personal Care,1,133,QuickDash
+10743,2026-08-07,Bengaluru,Frozen Foods,7,880,QuickDash
+12769,2026-08-07,Pune,Baby Care,4,778,CityLogix
+12083,2026-08-07,Hyderabad,Personal Care,4,609,RapidVan
+11217,2026-08-07,Bengaluru,Beverages,5,195,CityLogix
+12069,2026-08-07,Bengaluru,Snacks,4,261,SwiftKart
+12766,2026-08-07,Hyderabad,Beverages,7,284,QuickDash
+12159,2026-08-07,Hyderabad,Bakery,7,431,QuickDash
+11230,2026-08-07,Bengaluru,Groceries,1,98,LocalHub
+11259,2026-08-07,Chennai,Personal Care,4,542,RapidVan
+11214,2026-08-07,Hyderabad,Dairy,8,427,SwiftKart
+12598,2026-08-07,Hyderabad,Frozen Foods,1,124,LocalHub
+12027,2026-08-07,Bengaluru,Bakery,2,130,SwiftKart
+12026,2026-08-07,Pune,Frozen Foods,3,407,RapidVan
+12186,2026-08-07,Bengaluru,Snacks,2,122,SwiftKart
+12016,2026-08-07,Chennai,Groceries,2,188,SwiftKart
+11119,2026-08-07,Hyderabad,Bakery,4,250,CityLogix
+11106,2026-08-07,Pune,Snacks,6,366,CityLogix
+11954,2026-08-07,Chennai,Groceries,7,657,SwiftKart
+11254,2026-08-07,Pune,Bakery,4,248,LocalHub
+10969,2026-08-07,Pune,Snacks,4,240,QuickDash
+12619,2026-08-07,Bengaluru,Bakery,7,453,QuickDash
+11025,2026-08-07,Bengaluru,Snacks,2,128,CityLogix
+12298,2026-08-07,Chennai,Groceries,21,1689,CityLogix
+11777,2026-08-07,Hyderabad,Snacks,6,337,QuickDash
+11530,2026-08-07,Bengaluru,Personal Care,3,479,QuickDash
+12304,2026-08-07,Chennai,Beverages,4,201,LocalHub
+11768,2026-08-07,Pune,Household Essentials,4,586,QuickDash
+10920,2026-08-07,Bengaluru,Bakery,7,514,CityLogix
+11005,2026-08-07,Pune,Snacks,8,412,LocalHub
+11563,2026-08-07,Bengaluru,Snacks,2,128,CityLogix
+11569,2026-08-07,Chennai,Frozen Foods,5,685,QuickDash
+13087,2026-08-07,Hyderabad,Personal Care,7,1234,SwiftKart
+11622,2026-08-07,Chennai,Dairy,2,108,CityLogix
+10947,2026-08-07,Bengaluru,Groceries,20,1761,RapidVan
+12360,2026-08-07,Chennai,Groceries,2,188,CityLogix
+11657,2026-08-07,Pune,Snacks,8,506,CityLogix
+10957,2026-08-07,Chennai,Personal Care,6,958,SwiftKart
+10982,2026-08-07,Chennai,Groceries,3,249,QuickDash
+10965,2026-08-07,Pune,Beverages,2,83,RapidVan
+12676,2026-08-07,Chennai,Groceries,8,670,CityLogix
+11026,2026-08-07,Hyderabad,Snacks,7,415,SwiftKart
+11780,2026-08-07,Hyderabad,Personal Care,1,148,SwiftKart
+11514,2026-08-07,Chennai,Groceries,6,567,CityLogix
+11503,2026-08-07,Bengaluru,Snacks,3,202,QuickDash
+11364,2026-08-07,Hyderabad,Personal Care,5,773,SwiftKart
+11376,2026-08-07,Bengaluru,Frozen Foods,1,126,LocalHub
+12796,2026-08-07,Chennai,Personal Care,2,274,SwiftKart
+11389,2026-08-07,Bengaluru,Dairy,6,363,SwiftKart
+11441,2026-08-07,Chennai,Baby Care,7,1332,CityLogix
+11886,2026-08-07,Bengaluru,Dairy,6,309,LocalHub
+10855,2026-08-07,Hyderabad,Personal Care,7,1026,QuickDash
+11878,2026-08-07,Bengaluru,Personal Care,3,403,SwiftKart
+12717,2026-08-07,Bengaluru,Snacks,4,227,QuickDash
+11330,2026-08-07,Hyderabad,Bakery,8,445,LocalHub
+11468,2026-08-07,Chennai,Snacks,8,443,LocalHub
+11857,2026-08-07,Bengaluru,Snacks,8,484,CityLogix
+11847,2026-08-07,Pune,Dairy,2,109,CityLogix
+11825,2026-08-07,Hyderabad,Personal Care,2,313,CityLogix
+11041,2026-08-07,Chennai,Groceries,4,382,LocalHub
+11475,2026-08-07,Hyderabad,Household Essentials,3,374,CityLogix
+11801,2026-08-07,Hyderabad,Groceries,5,430,CityLogix
+12449,2026-08-07,Hyderabad,Frozen Foods,5,683,CityLogix
+11793,2026-08-07,Pune,Snacks,2,109,RapidVan
+12708,2026-08-07,Pune,Baby Care,7,1308,LocalHub
+11872,2026-08-07,Pune,Frozen Foods,4,436,RapidVan
+11702,2026-08-07,Hyderabad,Groceries,3,272,QuickDash
+11115,2026-08-07,Pune,Groceries,7,622,LocalHub
+10229,2026-08-07,Pune,Groceries,8,653,LocalHub
+10544,2026-08-07,Chennai,Groceries,8,794,LocalHub
+10243,2026-08-07,Chennai,Bakery,4,275,CityLogix
+13058,2026-08-07,Hyderabad,Baby Care,7,1408,SwiftKart
+12909,2026-08-07,Hyderabad,Groceries,7,582,CityLogix
+10468,2026-08-07,Pune,Dairy,2,103,CityLogix
+10107,2026-08-07,Pune,Personal Care,7,1000,CityLogix
+10272,2026-08-07,Hyderabad,Baby Care,1,245,LocalHub
+10326,2026-08-07,Bengaluru,Baby Care,6,1065,QuickDash
+10604,2026-08-07,Bengaluru,Household Essentials,3,357,LocalHub
+13052,2026-08-07,Hyderabad,Snacks,5,295,SwiftKart
+10358,2026-08-07,Hyderabad,Snacks,4,213,CityLogix
+10526,2026-08-07,Bengaluru,Dairy,7,395,SwiftKart
+13011,2026-08-07,Bengaluru,Groceries,5,517,CityLogix
+10338,2026-08-07,Chennai,Groceries,3,294,RapidVan
+10411,2026-08-07,Chennai,Frozen Foods,5,682,SwiftKart
+13015,2026-08-07,Pune,Groceries,8,675,RapidVan
+12957,2026-08-07,Hyderabad,Household Essentials,1,119,LocalHub
+10232,2026-08-07,Chennai,Groceries,4,415,RapidVan
+10293,2026-08-07,Bengaluru,Groceries,5,446,QuickDash
+12947,2026-08-07,Pune,Dairy,3,181,SwiftKart
+10292,2026-08-07,Pune,Groceries,4,333,SwiftKart
+11976,2026-08-08,Hyderabad,Beverages,6,265,QuickDash
+12204,2026-08-08,Pune,Dairy,5,260,SwiftKart
+12161,2026-08-08,Hyderabad,Beverages,8,342,LocalHub
+10850,2026-08-08,Chennai,Dairy,8,455,SwiftKart
+10486,2026-08-08,Hyderabad,Baby Care,5,1060,CityLogix
+10262,2026-08-08,Chennai,Dairy,2,108,CityLogix
+12200,2026-08-08,Pune,Groceries,1,102,SwiftKart
+11993,2026-08-08,Pune,Frozen Foods,8,1078,CityLogix
+11136,2026-08-08,Hyderabad,Household Essentials,6,796,SwiftKart
+12386,2026-08-08,Bengaluru,Frozen Foods,5,646,QuickDash
+11179,2026-08-08,Bengaluru,Beverages,1,35,LocalHub
+10481,2026-08-08,Chennai,Household Essentials,1,117,SwiftKart
+10844,2026-08-08,Bengaluru,Household Essentials,7,750,QuickDash
+12564,2026-08-08,Chennai,Groceries,1,84,SwiftKart
+11183,2026-08-08,Bengaluru,Bakery,2,158,CityLogix
+10809,2026-08-08,Bengaluru,Personal Care,3,458,RapidVan
+10453,2026-08-08,Bengaluru,Beverages,4,165,SwiftKart
+12899,2026-08-08,Pune,Household Essentials,5,659,RapidVan
+11736,2026-08-08,Chennai,Frozen Foods,3,383,CityLogix
+10659,2026-08-08,Bengaluru,Personal Care,1,135,CityLogix
+11246,2026-08-08,Bengaluru,Snacks,3,166,QuickDash
+10461,2026-08-08,Hyderabad,Snacks,3,168,CityLogix
+11960,2026-08-08,Pune,Beverages,3,141,CityLogix
+10474,2026-08-08,Hyderabad,Groceries,3,311,QuickDash
+11229,2026-08-08,Pune,Beverages,4,202,RapidVan
+11556,2026-08-08,Pune,Baby Care,5,1011,SwiftKart
+11965,2026-08-08,Bengaluru,Household Essentials,4,478,CityLogix
+10225,2026-08-08,Bengaluru,Personal Care,7,979,LocalHub
+12563,2026-08-08,Bengaluru,Bakery,6,360,SwiftKart
+12977,2026-08-08,Pune,Groceries,1,102,LocalHub
+12737,2026-08-08,Chennai,Beverages,1,44,RapidVan
+11573,2026-08-08,Bengaluru,Personal Care,3,425,LocalHub
+11187,2026-08-08,Hyderabad,Dairy,8,465,QuickDash
+10823,2026-08-08,Bengaluru,Snacks,8,498,SwiftKart
+11998,2026-08-08,Pune,Beverages,1,46,CityLogix
+11799,2026-08-08,Chennai,Snacks,3,179,RapidVan
+11606,2026-08-08,Hyderabad,Groceries,1,99,SwiftKart
+10117,2026-08-08,Bengaluru,Beverages,2,87,CityLogix
+11644,2026-08-08,Pune,Dairy,3,181,SwiftKart
+11648,2026-08-08,Hyderabad,Beverages,4,165,LocalHub
+10925,2026-08-08,Bengaluru,Snacks,5,329,CityLogix
+10926,2026-08-08,Bengaluru,Baby Care,4,911,CityLogix
+10560,2026-08-08,Hyderabad,Personal Care,3,488,QuickDash
+11004,2026-08-08,Hyderabad,Personal Care,4,614,QuickDash
+11000,2026-08-08,Bengaluru,Dairy,3,169,LocalHub
+11654,2026-08-08,Hyderabad,Household Essentials,2,240,LocalHub
+10572,2026-08-08,Hyderabad,Groceries,8,673,SwiftKart
+12985,2026-08-08,Bengaluru,Dairy,4,220,SwiftKart
+10579,2026-08-08,Bengaluru,Groceries,2,170,SwiftKart
+10580,2026-08-08,Bengaluru,Personal Care,3,430,LocalHub
+13022,2026-08-08,Hyderabad,Snacks,6,358,RapidVan
+11818,2026-08-08,Bengaluru,Baby Care,5,1070,CityLogix
+12054,2026-08-08,Hyderabad,Frozen Foods,7,957,QuickDash
+10213,2026-08-08,Hyderabad,Bakery,2,127,CityLogix
+12682,2026-08-08,Pune,Bakery,2,135,RapidVan
+10951,2026-08-08,Chennai,Beverages,7,290,SwiftKart
+12364,2026-08-08,Bengaluru,Household Essentials,2,245,CityLogix
+12841,2026-08-08,Chennai,Groceries,4,344,SwiftKart
+12345,2026-08-08,Bengaluru,Snacks,7,417,LocalHub
+10135,2026-08-08,Bengaluru,Snacks,6,371,RapidVan
+11836,2026-08-08,Bengaluru,Bakery,3,200,RapidVan
+12191,2026-08-08,Bengaluru,Household Essentials,6,761,CityLogix
+11104,2026-08-08,Bengaluru,Snacks,8,385,LocalHub
+12900,2026-08-08,Pune,Beverages,3,125,RapidVan
+12883,2026-08-08,Chennai,Groceries,7,607,CityLogix
+12620,2026-08-08,Pune,Personal Care,4,529,QuickDash
+11620,2026-08-08,Hyderabad,Groceries,2,197,RapidVan
+12012,2026-08-08,Pune,Groceries,6,592,LocalHub
+10140,2026-08-08,Hyderabad,Beverages,5,219,CityLogix
+11604,2026-08-08,Bengaluru,Bakery,1,78,CityLogix
+11069,2026-08-08,Hyderabad,Snacks,6,352,RapidVan
+12017,2026-08-08,Chennai,Snacks,1,60,CityLogix
+10530,2026-08-08,Hyderabad,Beverages,5,221,CityLogix
+11807,2026-08-08,Hyderabad,Baby Care,5,908,LocalHub
+11827,2026-08-08,Pune,Household Essentials,3,339,QuickDash
+10538,2026-08-08,Chennai,Baby Care,7,1544,CityLogix
+11826,2026-08-08,Chennai,Personal Care,2,328,RapidVan
+11043,2026-08-08,Bengaluru,Beverages,6,279,QuickDash
+12072,2026-08-08,Chennai,Groceries,8,688,SwiftKart
+10910,2026-08-08,Bengaluru,Baby Care,4,671,CityLogix
+12079,2026-08-08,Bengaluru,Snacks,1,53,QuickDash
+11737,2026-08-08,Bengaluru,Dairy,2,110,SwiftKart
+10157,2026-08-08,Pune,Groceries,7,671,LocalHub
+11263,2026-08-08,Chennai,Personal Care,3,399,SwiftKart
+12247,2026-08-08,Pune,Snacks,7,396,SwiftKart
+10777,2026-08-08,Hyderabad,Beverages,3,143,QuickDash
+12308,2026-08-08,Chennai,Dairy,6,318,CityLogix
+11519,2026-08-08,Bengaluru,Beverages,1,44,QuickDash
+12228,2026-08-08,Chennai,Groceries,4,383,CityLogix
+10696,2026-08-08,Pune,Bakery,3,211,CityLogix
+11343,2026-08-08,Bengaluru,Snacks,5,322,RapidVan
+10355,2026-08-08,Hyderabad,Personal Care,5,749,RapidVan
+10354,2026-08-08,Chennai,Bakery,3,213,RapidVan
+12779,2026-08-08,Chennai,Beverages,6,242,LocalHub
+11417,2026-08-08,Pune,Beverages,6,282,QuickDash
+11873,2026-08-08,Chennai,Groceries,5,499,CityLogix
+10181,2026-08-08,Hyderabad,Groceries,7,621,SwiftKart
+12427,2026-08-08,Hyderabad,Dairy,5,308,LocalHub
+12783,2026-08-08,Pune,Groceries,4,379,SwiftKart
+10410,2026-08-08,Bengaluru,Groceries,2,174,SwiftKart
+11359,2026-08-08,Hyderabad,Household Essentials,2,216,RapidVan
+11759,2026-08-08,Chennai,Snacks,1,58,QuickDash
+10384,2026-08-08,Bengaluru,Snacks,6,379,QuickDash
+11896,2026-08-08,Hyderabad,Personal Care,6,881,QuickDash
+11362,2026-08-08,Hyderabad,Snacks,3,169,QuickDash
+10180,2026-08-08,Pune,Groceries,2,197,QuickDash
+11916,2026-08-08,Pune,Dairy,5,289,SwiftKart
+12236,2026-08-08,Bengaluru,Beverages,8,359,SwiftKart
+10751,2026-08-08,Bengaluru,Snacks,6,430,RapidVan
+11379,2026-08-08,Chennai,Household Essentials,1,116,QuickDash
+11910,2026-08-08,Bengaluru,Baby Care,5,1144,LocalHub
+11762,2026-08-08,Pune,Groceries,7,569,LocalHub
+13033,2026-08-08,Hyderabad,Baby Care,3,662,SwiftKart
+10395,2026-08-08,Hyderabad,Dairy,8,441,CityLogix
+12767,2026-08-08,Bengaluru,Snacks,6,396,LocalHub
+12309,2026-08-08,Chennai,Groceries,8,660,CityLogix
+11425,2026-08-08,Hyderabad,Household Essentials,7,897,QuickDash
+10396,2026-08-08,Pune,Baby Care,3,608,SwiftKart
+12144,2026-08-08,Bengaluru,Snacks,8,529,LocalHub
+12792,2026-08-08,Bengaluru,Baby Care,6,1318,SwiftKart
+10708,2026-08-08,Bengaluru,Baby Care,8,1709,SwiftKart
+11933,2026-08-08,Bengaluru,Snacks,8,430,QuickDash
+11527,2026-08-08,Chennai,Dairy,4,222,QuickDash
+12154,2026-08-08,Hyderabad,Frozen Foods,3,387,LocalHub
+10362,2026-08-08,Bengaluru,Snacks,1,63,RapidVan
+12451,2026-08-08,Bengaluru,Dairy,3,147,QuickDash
+11305,2026-08-08,Bengaluru,Beverages,1,43,CityLogix
+11856,2026-08-08,Pune,Dairy,5,261,QuickDash
+10091,2026-08-08,Chennai,Groceries,8,771,RapidVan
+11270,2026-08-08,Chennai,Groceries,7,653,SwiftKart
+11264,2026-08-08,Bengaluru,Snacks,7,412,CityLogix
+11440,2026-08-08,Hyderabad,Household Essentials,8,995,CityLogix
+12156,2026-08-08,Bengaluru,Snacks,2,106,RapidVan
+11320,2026-08-08,Bengaluru,Snacks,4,263,QuickDash
+11925,2026-08-08,Bengaluru,Beverages,2,94,RapidVan
+11880,2026-08-08,Bengaluru,Snacks,6,315,SwiftKart
+12814,2026-08-08,Bengaluru,Bakery,6,454,CityLogix
+11443,2026-08-08,Hyderabad,Beverages,8,349,LocalHub
+11312,2026-08-08,Bengaluru,Snacks,2,106,SwiftKart
+12022,2026-08-09,Chennai,Groceries,2,173,QuickDash
+12931,2026-08-09,Pune,Groceries,3,295,RapidVan
+11633,2026-08-09,Bengaluru,Bakery,3,224,CityLogix
+11057,2026-08-09,Hyderabad,Beverages,2,91,SwiftKart
+11466,2026-08-09,Pune,Frozen Foods,8,1117,CityLogix
+12446,2026-08-09,Hyderabad,Groceries,3,271,CityLogix
+11394,2026-08-09,Bengaluru,Snacks,3,189,CityLogix
+10365,2026-08-09,Bengaluru,Dairy,5,275,RapidVan
+11393,2026-08-09,Pune,Baby Care,1,212,LocalHub
+12631,2026-08-09,Bengaluru,Personal Care,4,598,CityLogix
+11483,2026-08-09,Bengaluru,Groceries,5,417,RapidVan
+12636,2026-08-09,Bengaluru,Household Essentials,7,793,SwiftKart
+10361,2026-08-09,Bengaluru,Beverages,2,87,SwiftKart
+12650,2026-08-09,Pune,Bakery,8,553,LocalHub
+12036,2026-08-09,Hyderabad,Frozen Foods,5,656,RapidVan
+12038,2026-08-09,Pune,Beverages,6,288,LocalHub
+10559,2026-08-09,Chennai,Personal Care,5,722,RapidVan
+11008,2026-08-09,Hyderabad,Household Essentials,6,755,SwiftKart
+12491,2026-08-09,Chennai,Dairy,3,175,SwiftKart
+12664,2026-08-09,Chennai,Snacks,1,56,LocalHub
+11652,2026-08-09,Chennai,Beverages,3,125,SwiftKart
+12181,2026-08-09,Hyderabad,Personal Care,5,768,QuickDash
+11015,2026-08-09,Pune,Household Essentials,8,1008,LocalHub
+11022,2026-08-09,Chennai,Groceries,6,519,LocalHub
+12651,2026-08-09,Hyderabad,Frozen Foods,5,649,CityLogix
+10210,2026-08-09,Chennai,Groceries,2,180,CityLogix
+10974,2026-08-09,Chennai,Dairy,6,362,LocalHub
+11889,2026-08-09,Hyderabad,Dairy,4,214,LocalHub
+12461,2026-08-09,Chennai,Personal Care,5,739,SwiftKart
+12679,2026-08-09,Bengaluru,Snacks,2,118,LocalHub
+11447,2026-08-09,Bengaluru,Personal Care,6,778,QuickDash
+10312,2026-08-09,Chennai,Dairy,6,325,SwiftKart
+12187,2026-08-09,Bengaluru,Household Essentials,2,234,QuickDash
+12230,2026-08-09,Hyderabad,Snacks,6,386,CityLogix
+11170,2026-08-09,Hyderabad,Groceries,3,250,CityLogix
+13050,2026-08-09,Bengaluru,Bakery,2,119,LocalHub
+11975,2026-08-09,Bengaluru,Personal Care,4,621,QuickDash
+12518,2026-08-09,Bengaluru,Frozen Foods,3,400,LocalHub
+12570,2026-08-09,Bengaluru,Frozen Foods,4,552,CityLogix
+10432,2026-08-09,Pune,Personal Care,7,1010,CityLogix
+10433,2026-08-09,Pune,Snacks,4,254,CityLogix
+11197,2026-08-09,Chennai,Groceries,4,352,QuickDash
+10154,2026-08-09,Hyderabad,Dairy,3,171,LocalHub
+10340,2026-08-09,Bengaluru,Snacks,2,123,QuickDash
+11848,2026-08-09,Hyderabad,Beverages,4,171,RapidVan
+11339,2026-08-09,Chennai,Frozen Foods,5,639,CityLogix
+10469,2026-08-09,Chennai,Groceries,1,85,RapidVan
+10958,2026-08-09,Bengaluru,Snacks,8,467,SwiftKart
+10440,2026-08-09,Bengaluru,Snacks,3,161,CityLogix
+10173,2026-08-09,Pune,Groceries,4,387,QuickDash
+12408,2026-08-09,Pune,Household Essentials,3,332,RapidVan
+11279,2026-08-09,Chennai,Snacks,1,62,CityLogix
+11955,2026-08-09,Hyderabad,Personal Care,6,854,QuickDash
+12966,2026-08-09,Hyderabad,Groceries,4,364,CityLogix
+12217,2026-08-09,Bengaluru,Snacks,4,257,CityLogix
+10460,2026-08-09,Hyderabad,Household Essentials,4,481,QuickDash
+11539,2026-08-09,Bengaluru,Snacks,2,129,LocalHub
+11540,2026-08-09,Hyderabad,Groceries,7,605,CityLogix
+12544,2026-08-09,Bengaluru,Household Essentials,6,801,RapidVan
+11523,2026-08-09,Hyderabad,Personal Care,8,1146,QuickDash
+13037,2026-08-09,Bengaluru,Personal Care,4,636,CityLogix
+10482,2026-08-09,Hyderabad,Beverages,7,328,CityLogix
+11583,2026-08-09,Chennai,Bakery,5,365,LocalHub
+11068,2026-08-09,Chennai,Personal Care,6,1083,SwiftKart
+11492,2026-08-09,Hyderabad,Groceries,5,491,SwiftKart
+10308,2026-08-09,Hyderabad,Household Essentials,4,398,CityLogix
+11371,2026-08-09,Hyderabad,Bakery,4,272,LocalHub
+10141,2026-08-09,Hyderabad,Bakery,6,478,CityLogix
+11091,2026-08-09,Hyderabad,Groceries,6,571,SwiftKart
+12882,2026-08-09,Hyderabad,Frozen Foods,7,890,SwiftKart
+13028,2026-08-09,Bengaluru,Household Essentials,5,481,CityLogix
+12414,2026-08-09,Hyderabad,Beverages,3,127,RapidVan
+10512,2026-08-09,Chennai,Frozen Foods,8,1061,SwiftKart
+12231,2026-08-09,Hyderabad,Dairy,8,461,QuickDash
+11498,2026-08-09,Pune,Frozen Foods,7,816,SwiftKart
+11506,2026-08-09,Chennai,Household Essentials,8,792,LocalHub
+12502,2026-08-09,Bengaluru,Groceries,1,85,SwiftKart
+12003,2026-08-09,Hyderabad,Beverages,4,166,CityLogix
+12431,2026-08-09,Bengaluru,Beverages,3,138,QuickDash
+11601,2026-08-09,Bengaluru,Personal Care,1,157,RapidVan
+12193,2026-08-09,Bengaluru,Household Essentials,2,252,LocalHub
+10197,2026-08-09,Hyderabad,Frozen Foods,4,508,CityLogix
+11349,2026-08-09,Hyderabad,Dairy,2,117,LocalHub
+11594,2026-08-09,Bengaluru,Groceries,1,84,QuickDash
+11144,2026-08-09,Pune,Bakery,3,210,SwiftKart
+11146,2026-08-09,Bengaluru,Frozen Foods,8,985,LocalHub
+11587,2026-08-09,Hyderabad,Household Essentials,4,464,QuickDash
+12198,2026-08-09,Hyderabad,Snacks,6,385,SwiftKart
+12505,2026-08-09,Chennai,Groceries,1,96,LocalHub
+10504,2026-08-09,Pune,Dairy,5,257,QuickDash
+12353,2026-08-09,Hyderabad,Dairy,1,60,LocalHub
+12272,2026-08-09,Chennai,Groceries,6,495,QuickDash
+12817,2026-08-09,Bengaluru,Snacks,4,217,LocalHub
+10642,2026-08-09,Hyderabad,Frozen Foods,2,250,CityLogix
+10258,2026-08-09,Hyderabad,Bakery,6,464,LocalHub
+10900,2026-08-09,Bengaluru,Beverages,2,81,RapidVan
+12341,2026-08-09,Pune,Frozen Foods,3,373,RapidVan
+13079,2026-08-09,Hyderabad,Bakery,4,274,SwiftKart
+12133,2026-08-09,Bengaluru,Personal Care,3,486,SwiftKart
+12328,2026-08-09,Chennai,Dairy,8,440,SwiftKart
+12096,2026-08-09,Chennai,Groceries,40,3737,LocalHub
+12153,2026-08-09,Chennai,Groceries,5,410,LocalHub
+10723,2026-08-09,Chennai,Beverages,7,272,SwiftKart
+10915,2026-08-09,Bengaluru,Snacks,5,278,RapidVan
+11790,2026-08-09,Hyderabad,Personal Care,5,705,CityLogix
+12810,2026-08-09,Hyderabad,Snacks,5,322,RapidVan
+10649,2026-08-09,Hyderabad,Baby Care,4,831,QuickDash
+10834,2026-08-09,Pune,Groceries,8,667,SwiftKart
+12346,2026-08-09,Pune,Beverages,2,75,LocalHub
+10833,2026-08-09,Chennai,Groceries,8,755,RapidVan
+10954,2026-08-09,Hyderabad,Groceries,4,333,SwiftKart
+12695,2026-08-09,Chennai,Beverages,1,36,SwiftKart
+11693,2026-08-09,Bengaluru,Baby Care,8,1823,SwiftKart
+10928,2026-08-09,Bengaluru,Snacks,2,118,LocalHub
+10892,2026-08-09,Hyderabad,Beverages,1,44,SwiftKart
+12994,2026-08-09,Hyderabad,Household Essentials,5,581,CityLogix
+12148,2026-08-09,Chennai,Groceries,8,712,RapidVan
+10628,2026-08-09,Pune,Household Essentials,6,663,RapidVan
+12305,2026-08-09,Bengaluru,Groceries,5,411,SwiftKart
+10875,2026-08-09,Bengaluru,Bakery,2,128,LocalHub
+11788,2026-08-09,Bengaluru,Household Essentials,2,240,RapidVan
+12772,2026-08-09,Chennai,Household Essentials,5,529,RapidVan
+11712,2026-08-09,Hyderabad,Groceries,2,189,QuickDash
+12335,2026-08-09,Pune,Groceries,6,461,RapidVan
+10763,2026-08-09,Bengaluru,Bakery,7,502,QuickDash
+10863,2026-08-09,Hyderabad,Frozen Foods,4,533,SwiftKart
+10633,2026-08-09,Chennai,Groceries,2,181,CityLogix
+10101,2026-08-09,Bengaluru,Groceries,4,348,SwiftKart
+10859,2026-08-09,Hyderabad,Groceries,6,586,CityLogix
+11763,2026-08-09,Chennai,Personal Care,2,257,LocalHub
+12774,2026-08-09,Pune,Groceries,8,737,SwiftKart
+12336,2026-08-09,Bengaluru,Snacks,3,192,RapidVan
+11764,2026-08-09,Hyderabad,Beverages,4,183,RapidVan
+10888,2026-08-09,Hyderabad,Bakery,4,289,SwiftKart
+10692,2026-08-09,Chennai,Snacks,1,56,RapidVan
+10638,2026-08-09,Hyderabad,Household Essentials,2,261,RapidVan
+10929,2026-08-09,Chennai,Groceries,4,393,RapidVan
+12099,2026-08-09,Pune,Dairy,7,341,QuickDash
+12801,2026-08-09,Bengaluru,Beverages,6,278,RapidVan
+10795,2026-08-09,Hyderabad,Baby Care,6,1229,QuickDash
+12108,2026-08-09,Bengaluru,Snacks,6,363,SwiftKart
+12106,2026-08-09,Hyderabad,Baby Care,2,467,QuickDash
+10816,2026-08-09,Pune,Frozen Foods,7,858,CityLogix
+12349,2026-08-09,Chennai,Household Essentials,5,589,RapidVan
+12788,2026-08-09,Bengaluru,Household Essentials,2,220,RapidVan
+12850,2026-08-09,Hyderabad,Bakery,8,576,LocalHub
+11735,2026-08-09,Bengaluru,Frozen Foods,1,128,LocalHub
+12791,2026-08-09,Hyderabad,Snacks,5,315,QuickDash
+12690,2026-08-09,Chennai,Groceries,7,625,SwiftKart
+12748,2026-08-09,Pune,Groceries,5,473,SwiftKart
+10857,2026-08-10,Bengaluru,Beverages,6,255,QuickDash
+10488,2026-08-10,Hyderabad,Snacks,5,276,RapidVan
+10681,2026-08-10,Bengaluru,Beverages,2,90,LocalHub
+10694,2026-08-10,Bengaluru,Snacks,7,446,CityLogix
+10150,2026-08-10,Bengaluru,Snacks,8,518,RapidVan
+10590,2026-08-10,Hyderabad,Household Essentials,4,555,CityLogix
+10429,2026-08-10,Hyderabad,Frozen Foods,2,274,RapidVan
+10448,2026-08-10,Pune,Beverages,1,45,RapidVan
+10577,2026-08-10,Bengaluru,Snacks,1,60,RapidVan
+10854,2026-08-10,Chennai,Snacks,5,331,RapidVan
+12234,2026-08-10,Pune,Snacks,4,202,SwiftKart
+11921,2026-08-10,Pune,Beverages,2,90,QuickDash
+10255,2026-08-10,Hyderabad,Frozen Foods,6,754,QuickDash
+10979,2026-08-10,Chennai,Dairy,4,216,RapidVan
+10589,2026-08-10,Pune,Groceries,4,288,CityLogix
+11957,2026-08-10,Bengaluru,Snacks,1,57,LocalHub
+10204,2026-08-10,Bengaluru,Snacks,3,186,SwiftKart
+12976,2026-08-10,Chennai,Groceries,8,796,CityLogix
+11072,2026-08-10,Pune,Snacks,1,61,RapidVan
+13020,2026-08-10,Bengaluru,Household Essentials,2,237,SwiftKart
+10415,2026-08-10,Hyderabad,Personal Care,2,321,LocalHub
+12129,2026-08-10,Chennai,Groceries,8,770,RapidVan
+10703,2026-08-10,Bengaluru,Snacks,7,390,SwiftKart
+11840,2026-08-10,Bengaluru,Dairy,4,214,LocalHub
+12059,2026-08-10,Hyderabad,Baby Care,7,1290,SwiftKart
+11147,2026-08-10,Bengaluru,Household Essentials,4,474,RapidVan
+12614,2026-08-10,Hyderabad,Household Essentials,6,723,LocalHub
+13035,2026-08-10,Hyderabad,Groceries,6,528,SwiftKart
+12121,2026-08-10,Chennai,Groceries,6,463,QuickDash
+11659,2026-08-10,Hyderabad,Dairy,8,386,CityLogix
+10710,2026-08-10,Bengaluru,Frozen Foods,7,898,QuickDash
+12291,2026-08-10,Hyderabad,Baby Care,3,598,LocalHub
+12803,2026-08-10,Pune,Personal Care,8,1199,CityLogix
+12391,2026-08-10,Bengaluru,Bakery,7,570,CityLogix
+11450,2026-08-10,Bengaluru,Bakery,2,141,SwiftKart
+10511,2026-08-10,Pune,Groceries,5,530,CityLogix
+10962,2026-08-10,Hyderabad,Groceries,2,203,QuickDash
+12726,2026-08-10,Hyderabad,Groceries,1,85,QuickDash
+11677,2026-08-10,Chennai,Dairy,8,446,CityLogix
+10134,2026-08-10,Chennai,Groceries,6,509,QuickDash
+12225,2026-08-10,Bengaluru,Household Essentials,5,702,LocalHub
+10168,2026-08-10,Bengaluru,Personal Care,3,520,SwiftKart
+10758,2026-08-10,Bengaluru,Snacks,5,331,LocalHub
+11225,2026-08-10,Pune,Groceries,3,264,QuickDash
+10719,2026-08-10,Bengaluru,Snacks,3,187,SwiftKart
+12031,2026-08-10,Pune,Frozen Foods,2,303,QuickDash
+12359,2026-08-10,Bengaluru,Beverages,2,91,LocalHub
+10698,2026-08-10,Chennai,Dairy,3,160,CityLogix
+11224,2026-08-10,Bengaluru,Snacks,2,118,SwiftKart
+11884,2026-08-10,Chennai,Groceries,5,505,LocalHub
+11255,2026-08-10,Pune,Beverages,4,163,CityLogix
+11262,2026-08-10,Bengaluru,Snacks,6,336,LocalHub
+10563,2026-08-10,Hyderabad,Household Essentials,4,517,SwiftKart
+11213,2026-08-10,Pune,Beverages,6,268,LocalHub
+10444,2026-08-10,Chennai,Bakery,4,315,RapidVan
+12185,2026-08-10,Hyderabad,Personal Care,4,609,SwiftKart
+10454,2026-08-10,Pune,Snacks,3,169,QuickDash
+11193,2026-08-10,Pune,Beverages,4,172,SwiftKart
+12168,2026-08-10,Pune,Bakery,1,72,CityLogix
+12379,2026-08-10,Bengaluru,Groceries,3,290,SwiftKart
+10676,2026-08-10,Pune,Snacks,4,280,RapidVan
+12167,2026-08-10,Hyderabad,Personal Care,2,323,QuickDash
+11416,2026-08-10,Chennai,Household Essentials,6,709,QuickDash
+12497,2026-08-10,Bengaluru,Personal Care,5,781,LocalHub
+11774,2026-08-10,Bengaluru,Beverages,8,376,RapidVan
+11926,2026-08-10,Bengaluru,Household Essentials,2,231,LocalHub
+12569,2026-08-10,Chennai,Groceries,1,93,SwiftKart
+12100,2026-08-10,Hyderabad,Snacks,2,122,QuickDash
+10913,2026-08-10,Chennai,Groceries,8,706,QuickDash
+12399,2026-08-10,Hyderabad,Beverages,3,127,RapidVan
+11277,2026-08-10,Pune,Frozen Foods,7,961,QuickDash
+12776,2026-08-10,Bengaluru,Personal Care,6,865,QuickDash
+12007,2026-08-10,Pune,Baby Care,5,955,SwiftKart
+11314,2026-08-10,Hyderabad,Snacks,2,121,RapidVan
+12838,2026-08-10,Bengaluru,Frozen Foods,8,896,LocalHub
+11545,2026-08-10,Pune,Frozen Foods,5,533,CityLogix
+12554,2026-08-10,Bengaluru,Household Essentials,5,601,CityLogix
+12742,2026-08-11,Hyderabad,Baby Care,5,965,SwiftKart
+11798,2026-08-11,Chennai,Dairy,4,216,SwiftKart
+11134,2026-08-11,Chennai,Dairy,7,353,LocalHub
+10630,2026-08-11,Bengaluru,Beverages,4,181,QuickDash
+12603,2026-08-11,Chennai,Groceries,2,171,CityLogix
+10467,2026-08-11,Hyderabad,Snacks,3,165,RapidVan
+11142,2026-08-11,Hyderabad,Personal Care,8,1194,CityLogix
+12528,2026-08-11,Bengaluru,Groceries,4,389,SwiftKart
+11966,2026-08-11,Pune,Groceries,4,332,CityLogix
+10441,2026-08-11,Hyderabad,Beverages,3,139,CityLogix
+12424,2026-08-11,Hyderabad,Snacks,4,247,SwiftKart
+10789,2026-08-11,Bengaluru,Groceries,7,581,RapidVan
+10438,2026-08-11,Chennai,Baby Care,1,195,LocalHub
+11522,2026-08-11,Pune,Groceries,2,173,CityLogix
+11744,2026-08-11,Chennai,Groceries,4,271,RapidVan
+10872,2026-08-11,Chennai,Groceries,3,313,SwiftKart
+12520,2026-08-11,Pune,Beverages,5,203,QuickDash
+10329,2026-08-11,Pune,Baby Care,4,864,RapidVan
+11517,2026-08-11,Bengaluru,Household Essentials,7,815,RapidVan
+11329,2026-08-11,Pune,Bakery,5,336,RapidVan
+12580,2026-08-11,Pune,Groceries,1,89,RapidVan
+11169,2026-08-11,Bengaluru,Snacks,2,118,RapidVan
+12201,2026-08-11,Bengaluru,Frozen Foods,7,926,LocalHub
+11791,2026-08-11,Pune,Household Essentials,3,396,CityLogix
+11739,2026-08-11,Bengaluru,Beverages,7,317,SwiftKart
+12196,2026-08-11,Bengaluru,Snacks,2,100,CityLogix
+10449,2026-08-11,Hyderabad,Groceries,5,488,SwiftKart
+10803,2026-08-11,Bengaluru,Personal Care,1,154,CityLogix
+12425,2026-08-11,Hyderabad,Bakery,1,77,SwiftKart
+12394,2026-08-11,Chennai,Groceries,4,305,SwiftKart
+10627,2026-08-11,Bengaluru,Personal Care,5,797,RapidVan
+10521,2026-08-11,Bengaluru,Household Essentials,8,800,QuickDash
+10524,2026-08-11,Hyderabad,Household Essentials,6,757,RapidVan
+11075,2026-08-11,Hyderabad,Bakery,5,338,QuickDash
+10693,2026-08-11,Bengaluru,Bakery,3,238,RapidVan
+11006,2026-08-11,Pune,Personal Care,4,611,RapidVan
+10739,2026-08-11,Bengaluru,Dairy,1,61,LocalHub
+12667,2026-08-11,Bengaluru,Personal Care,6,954,SwiftKart
+10622,2026-08-11,Bengaluru,Bakery,7,474,LocalHub
+12844,2026-08-11,Pune,Beverages,5,208,CityLogix
+12707,2026-08-11,Bengaluru,Baby Care,4,727,CityLogix
+10379,2026-08-11,Pune,Dairy,2,101,LocalHub
+12172,2026-08-11,Chennai,Frozen Foods,1,120,CityLogix
+10383,2026-08-11,Chennai,Groceries,1,84,LocalHub
+10992,2026-08-11,Bengaluru,Dairy,6,331,LocalHub
+10277,2026-08-11,Bengaluru,Household Essentials,6,674,SwiftKart
+11828,2026-08-11,Pune,Frozen Foods,7,898,RapidVan
+10351,2026-08-11,Hyderabad,Baby Care,5,1032,SwiftKart
+12183,2026-08-11,Bengaluru,Bakery,7,434,SwiftKart
+10933,2026-08-11,Hyderabad,Dairy,1,53,RapidVan
+10621,2026-08-11,Bengaluru,Groceries,8,834,QuickDash
+12021,2026-08-11,Bengaluru,Personal Care,6,800,SwiftKart
+11053,2026-08-11,Bengaluru,Snacks,5,276,SwiftKart
+11771,2026-08-11,Pune,Groceries,1,83,LocalHub
+11010,2026-08-11,Pune,Snacks,3,194,QuickDash
+10092,2026-08-11,Chennai,Household Essentials,4,464,QuickDash
+11373,2026-08-11,Hyderabad,Household Essentials,6,709,QuickDash
+10550,2026-08-11,Bengaluru,Household Essentials,7,801,QuickDash
+11111,2026-08-11,Hyderabad,Personal Care,6,936,RapidVan
+12056,2026-08-11,Hyderabad,Household Essentials,7,766,RapidVan
+11110,2026-08-11,Chennai,Beverages,3,134,QuickDash
+11834,2026-08-11,Chennai,Groceries,2,192,QuickDash
+10746,2026-08-11,Chennai,Groceries,4,348,CityLogix
+10966,2026-08-11,Bengaluru,Personal Care,5,794,LocalHub
+11461,2026-08-11,Hyderabad,Frozen Foods,8,1097,QuickDash
+10380,2026-08-11,Pune,Frozen Foods,3,423,QuickDash
+11786,2026-08-11,Bengaluru,Snacks,5,321,SwiftKart
+10184,2026-08-11,Hyderabad,Frozen Foods,7,845,SwiftKart
+12659,2026-08-11,Chennai,Groceries,8,648,CityLogix
+11638,2026-08-11,Chennai,Snacks,2,129,LocalHub
+12061,2026-08-11,Bengaluru,Snacks,8,429,SwiftKart
+11380,2026-08-11,Bengaluru,Dairy,1,59,CityLogix
+10267,2026-08-11,Hyderabad,Household Essentials,4,501,CityLogix
+12983,2026-08-11,Bengaluru,Personal Care,1,143,SwiftKart
+11428,2026-08-11,Hyderabad,Groceries,1,105,RapidVan
+10193,2026-08-12,Chennai,Groceries,3,275,RapidVan
+10697,2026-08-12,Hyderabad,Household Essentials,6,674,CityLogix
+12259,2026-08-12,Hyderabad,Bakery,7,476,CityLogix
+11930,2026-08-12,Hyderabad,Personal Care,6,806,QuickDash
+10337,2026-08-12,Chennai,Baby Care,6,1204,CityLogix
+11725,2026-08-12,Bengaluru,Snacks,6,376,RapidVan
+12862,2026-08-12,Bengaluru,Household Essentials,2,242,QuickDash
+12277,2026-08-12,Bengaluru,Snacks,8,554,CityLogix
+10561,2026-08-12,Bengaluru,Bakery,3,202,SwiftKart
+12143,2026-08-12,Chennai,Household Essentials,3,376,QuickDash
+11444,2026-08-12,Hyderabad,Frozen Foods,4,496,SwiftKart
+10998,2026-08-12,Bengaluru,Snacks,3,178,RapidVan
+12950,2026-08-12,Bengaluru,Snacks,6,415,RapidVan
+12822,2026-08-12,Hyderabad,Dairy,1,59,LocalHub
+12849,2026-08-12,Hyderabad,Personal Care,1,146,RapidVan
+11948,2026-08-12,Bengaluru,Frozen Foods,7,719,QuickDash
+12460,2026-08-12,Pune,Groceries,1,85,RapidVan
+11672,2026-08-12,Bengaluru,Groceries,2,170,LocalHub
+13044,2026-08-12,Bengaluru,Beverages,8,355,SwiftKart
+12410,2026-08-12,Bengaluru,Personal Care,6,929,CityLogix
+10294,2026-08-12,Pune,Beverages,5,230,QuickDash
+12249,2026-08-12,Bengaluru,Groceries,2,190,LocalHub
+12262,2026-08-12,Hyderabad,Bakery,4,310,QuickDash
+11535,2026-08-12,Bengaluru,Beverages,8,376,QuickDash
+12040,2026-08-12,Bengaluru,Snacks,4,238,SwiftKart
+10462,2026-08-12,Hyderabad,Dairy,3,161,CityLogix
+10820,2026-08-12,Pune,Groceries,6,554,RapidVan
+10300,2026-08-12,Pune,Household Essentials,4,483,QuickDash
+10574,2026-08-12,Chennai,Beverages,5,234,QuickDash
+10570,2026-08-12,Bengaluru,Baby Care,3,628,CityLogix
+11223,2026-08-12,Pune,Baby Care,4,783,SwiftKart
+12537,2026-08-12,Bengaluru,Snacks,2,140,CityLogix
+12462,2026-08-12,Pune,Beverages,6,263,SwiftKart
+10324,2026-08-12,Hyderabad,Beverages,1,41,LocalHub
+12986,2026-08-12,Hyderabad,Groceries,3,260,CityLogix
+12753,2026-08-12,Bengaluru,Personal Care,1,155,SwiftKart
+11920,2026-08-12,Pune,Personal Care,6,1034,LocalHub
+10736,2026-08-12,Chennai,Snacks,1,60,QuickDash
+11904,2026-08-12,Hyderabad,Baby Care,1,229,SwiftKart
+10507,2026-08-12,Bengaluru,Personal Care,3,434,SwiftKart
+12487,2026-08-12,Bengaluru,Personal Care,7,1001,CityLogix
+11101,2026-08-12,Pune,Groceries,5,447,SwiftKart
+11433,2026-08-12,Hyderabad,Bakery,8,638,SwiftKart
+12513,2026-08-12,Chennai,Groceries,5,464,CityLogix
+12804,2026-08-12,Hyderabad,Snacks,7,432,SwiftKart
+11586,2026-08-12,Pune,Household Essentials,8,951,SwiftKart
+11868,2026-08-12,Bengaluru,Beverages,1,45,LocalHub
+11917,2026-08-12,Hyderabad,Baby Care,6,1153,QuickDash
+11701,2026-08-12,Pune,Snacks,4,220,CityLogix
+11088,2026-08-12,Pune,Groceries,3,265,QuickDash
+11377,2026-08-12,Hyderabad,Snacks,4,258,LocalHub
+10688,2026-08-12,Hyderabad,Bakery,7,438,LocalHub
+12996,2026-08-12,Pune,Beverages,1,42,SwiftKart
+11800,2026-08-12,Bengaluru,Snacks,7,403,CityLogix
+12384,2026-08-12,Chennai,Bakery,2,126,RapidVan
+11054,2026-08-12,Chennai,Groceries,4,412,LocalHub
+12396,2026-08-12,Hyderabad,Personal Care,4,509,RapidVan
+11821,2026-08-12,Chennai,Groceries,7,645,SwiftKart
+11030,2026-08-12,Hyderabad,Dairy,5,282,RapidVan
+11361,2026-08-12,Hyderabad,Bakery,1,67,QuickDash
+10912,2026-08-12,Bengaluru,Groceries,5,423,SwiftKart
+12090,2026-08-12,Chennai,Groceries,1,80,QuickDash
+10341,2026-08-12,Chennai,Groceries,7,639,RapidVan
+10218,2026-08-12,Hyderabad,Baby Care,2,420,RapidVan
+12610,2026-08-12,Hyderabad,Groceries,6,600,QuickDash
+10094,2026-08-12,Pune,Beverages,7,312,LocalHub
+13086,2026-08-12,Chennai,Frozen Foods,4,553,RapidVan
+10499,2026-08-12,Chennai,Snacks,7,458,SwiftKart
+10907,2026-08-12,Chennai,Groceries,8,753,LocalHub
+10760,2026-08-12,Bengaluru,Snacks,4,259,SwiftKart
+12288,2026-08-12,Bengaluru,Frozen Foods,7,830,SwiftKart
+12068,2026-08-12,Pune,Baby Care,2,387,RapidVan
+10175,2026-08-12,Hyderabad,Groceries,1,93,CityLogix
+10435,2026-08-12,Chennai,Snacks,1,62,CityLogix
+12903,2026-08-13,Hyderabad,Bakery,5,344,CityLogix
+11460,2026-08-13,Hyderabad,Household Essentials,5,629,RapidVan
+10805,2026-08-13,Chennai,Dairy,8,555,LocalHub
+13017,2026-08-13,Chennai,Beverages,2,102,RapidVan
+11278,2026-08-13,Hyderabad,Groceries,6,514,SwiftKart
+12958,2026-08-13,Pune,Beverages,7,307,CityLogix
+10683,2026-08-13,Pune,Dairy,6,342,SwiftKart
+11767,2026-08-13,Pune,Groceries,7,602,CityLogix
+12930,2026-08-13,Bengaluru,Household Essentials,2,233,CityLogix
+11335,2026-08-13,Bengaluru,Groceries,3,300,CityLogix
+11755,2026-08-13,Bengaluru,Groceries,4,356,SwiftKart
+10447,2026-08-13,Hyderabad,Snacks,1,61,SwiftKart
+11901,2026-08-13,Chennai,Snacks,8,556,CityLogix
+12132,2026-08-13,Bengaluru,Snacks,2,123,SwiftKart
+12242,2026-08-13,Chennai,Beverages,2,93,CityLogix
+10250,2026-08-13,Hyderabad,Personal Care,6,689,RapidVan
+11293,2026-08-13,Chennai,Household Essentials,5,536,QuickDash
+12468,2026-08-13,Hyderabad,Beverages,3,147,CityLogix
+11299,2026-08-13,Hyderabad,Snacks,3,172,QuickDash
+12415,2026-08-13,Bengaluru,Bakery,8,555,RapidVan
+11313,2026-08-13,Pune,Frozen Foods,5,656,CityLogix
+10363,2026-08-13,Bengaluru,Dairy,1,55,RapidVan
+12102,2026-08-13,Pune,Groceries,1,89,CityLogix
+12066,2026-08-13,Bengaluru,Snacks,5,290,LocalHub
+11160,2026-08-13,Pune,Frozen Foods,7,951,CityLogix
+10301,2026-08-13,Pune,Baby Care,3,673,SwiftKart
+11014,2026-08-13,Chennai,Household Essentials,8,1095,LocalHub
+11215,2026-08-13,Chennai,Snacks,3,183,QuickDash
+12404,2026-08-13,Chennai,Groceries,8,678,RapidVan
+12011,2026-08-13,Hyderabad,Snacks,6,314,RapidVan
+11562,2026-08-13,Chennai,Groceries,5,437,LocalHub
+11117,2026-08-13,Bengaluru,Household Essentials,8,893,SwiftKart
+10282,2026-08-13,Chennai,Groceries,5,451,RapidVan
+12647,2026-08-13,Bengaluru,Beverages,4,184,CityLogix
+11990,2026-08-13,Chennai,Household Essentials,7,891,SwiftKart
+10551,2026-08-13,Hyderabad,Baby Care,6,1088,LocalHub
+10472,2026-08-13,Pune,Groceries,7,670,SwiftKart
+11823,2026-08-13,Bengaluru,Dairy,3,165,QuickDash
+11202,2026-08-13,Bengaluru,Snacks,3,180,CityLogix
+11637,2026-08-13,Chennai,Beverages,8,355,RapidVan
+12373,2026-08-13,Hyderabad,Baby Care,7,1402,CityLogix
+11585,2026-08-13,Bengaluru,Frozen Foods,3,355,QuickDash
+12265,2026-08-13,Bengaluru,Personal Care,7,955,SwiftKart
+11695,2026-08-13,Bengaluru,Personal Care,2,294,QuickDash
+10139,2026-08-13,Pune,Personal Care,2,291,SwiftKart
+12098,2026-08-13,Bengaluru,Snacks,3,195,CityLogix
+11118,2026-08-13,Bengaluru,Bakery,8,576,QuickDash
+13056,2026-08-13,Hyderabad,Groceries,1,79,LocalHub
+12270,2026-08-13,Chennai,Bakery,3,230,SwiftKart
+11689,2026-08-13,Bengaluru,Frozen Foods,3,387,RapidVan
+10305,2026-08-13,Bengaluru,Frozen Foods,8,1042,SwiftKart
+11247,2026-08-13,Pune,Bakery,5,278,SwiftKart
+12094,2026-08-13,Hyderabad,Beverages,2,82,CityLogix
+11181,2026-08-13,Bengaluru,Groceries,42,3883,RapidVan
+12848,2026-08-13,Bengaluru,Personal Care,5,763,QuickDash
+10970,2026-08-13,Chennai,Groceries,1,94,SwiftKart
+12279,2026-08-13,Hyderabad,Personal Care,1,145,SwiftKart
+11838,2026-08-13,Chennai,Frozen Foods,8,970,RapidVan
+11552,2026-08-13,Bengaluru,Personal Care,5,840,QuickDash
+12855,2026-08-13,Pune,Dairy,8,428,CityLogix
+10104,2026-08-13,Chennai,Groceries,6,467,SwiftKart
+12643,2026-08-13,Bengaluru,Snacks,5,291,CityLogix
+10826,2026-08-13,Bengaluru,Beverages,3,139,RapidVan
+11661,2026-08-13,Pune,Frozen Foods,2,240,LocalHub
+12294,2026-08-14,Bengaluru,Snacks,7,407,LocalHub
+10528,2026-08-14,Pune,Baby Care,4,747,LocalHub
+12371,2026-08-14,Hyderabad,Snacks,2,122,RapidVan
+12020,2026-08-14,Bengaluru,Dairy,8,407,SwiftKart
+11257,2026-08-14,Bengaluru,Personal Care,7,1039,CityLogix
+12875,2026-08-14,Hyderabad,Household Essentials,2,226,SwiftKart
+12981,2026-08-14,Pune,Personal Care,3,475,CityLogix
+12771,2026-08-14,Chennai,Groceries,2,165,CityLogix
+11372,2026-08-14,Pune,Frozen Foods,5,679,RapidVan
+11614,2026-08-14,Pune,Household Essentials,2,268,CityLogix
+11102,2026-08-14,Bengaluru,Baby Care,4,797,QuickDash
+11495,2026-08-14,Bengaluru,Frozen Foods,8,1005,LocalHub
+10109,2026-08-14,Chennai,Groceries,2,192,LocalHub
+11705,2026-08-14,Bengaluru,Personal Care,1,148,RapidVan
+10889,2026-08-14,Hyderabad,Snacks,7,457,LocalHub
+13021,2026-08-14,Hyderabad,Frozen Foods,2,238,SwiftKart
+12010,2026-08-14,Bengaluru,Snacks,3,190,LocalHub
+12928,2026-08-14,Bengaluru,Dairy,6,347,QuickDash
+12634,2026-08-14,Pune,Beverages,6,276,QuickDash
+12995,2026-08-14,Hyderabad,Household Essentials,6,694,QuickDash
+10311,2026-08-14,Pune,Household Essentials,2,217,SwiftKart
+11870,2026-08-14,Hyderabad,Dairy,1,54,LocalHub
+12442,2026-08-14,Bengaluru,Snacks,8,437,CityLogix
+10519,2026-08-14,Pune,Groceries,5,465,LocalHub
+10388,2026-08-14,Bengaluru,Beverages,8,334,LocalHub
+13025,2026-08-14,Bengaluru,Dairy,2,117,RapidVan
+10179,2026-08-14,Bengaluru,Bakery,8,518,SwiftKart
+13060,2026-08-14,Pune,Personal Care,2,249,LocalHub
+10922,2026-08-14,Chennai,Beverages,6,259,RapidVan
+10189,2026-08-14,Bengaluru,Bakery,8,632,LocalHub
+12858,2026-08-14,Bengaluru,Dairy,5,266,LocalHub
+12063,2026-08-14,Chennai,Bakery,3,230,CityLogix
+10938,2026-08-14,Chennai,Groceries,7,642,QuickDash
+11448,2026-08-14,Chennai,Baby Care,7,1529,CityLogix
+11434,2026-08-14,Pune,Beverages,2,85,LocalHub
+10977,2026-08-14,Pune,Household Essentials,3,353,LocalHub
+12459,2026-08-14,Hyderabad,Frozen Foods,3,375,QuickDash
+10699,2026-08-14,Chennai,Groceries,1,97,CityLogix
+12852,2026-08-14,Bengaluru,Household Essentials,6,792,LocalHub
+11459,2026-08-14,Bengaluru,Snacks,7,387,RapidVan
+10597,2026-08-14,Hyderabad,Personal Care,2,320,CityLogix
+12174,2026-08-14,Hyderabad,Beverages,3,155,LocalHub
+12457,2026-08-14,Bengaluru,Household Essentials,2,268,LocalHub
+12355,2026-08-14,Hyderabad,Baby Care,5,881,QuickDash
+11050,2026-08-14,Chennai,Groceries,6,554,SwiftKart
+12025,2026-08-14,Hyderabad,Beverages,1,41,CityLogix
+12467,2026-08-14,Chennai,Groceries,6,562,QuickDash
+11898,2026-08-14,Pune,Baby Care,7,1403,LocalHub
+10219,2026-08-14,Hyderabad,Snacks,7,431,CityLogix
+12369,2026-08-14,Pune,Frozen Foods,6,865,LocalHub
+12475,2026-08-14,Chennai,Snacks,7,393,QuickDash
+10280,2026-08-14,Bengaluru,Groceries,1,88,SwiftKart
+10540,2026-08-14,Chennai,Groceries,3,261,SwiftKart
+12474,2026-08-14,Hyderabad,Household Essentials,5,626,LocalHub
+10721,2026-08-14,Hyderabad,Groceries,8,678,SwiftKart
+11874,2026-08-14,Bengaluru,Snacks,6,318,RapidVan
+12473,2026-08-14,Bengaluru,Snacks,2,117,CityLogix
+10727,2026-08-14,Bengaluru,Snacks,8,478,LocalHub
+12800,2026-08-14,Chennai,Groceries,5,472,CityLogix
+13036,2026-08-14,Hyderabad,Frozen Foods,7,959,SwiftKart
+11476,2026-08-14,Chennai,Dairy,6,336,LocalHub
+10724,2026-08-14,Hyderabad,Household Essentials,3,339,RapidVan
+12863,2026-08-14,Bengaluru,Dairy,8,441,LocalHub
+11419,2026-08-14,Bengaluru,Dairy,8,475,SwiftKart
+11112,2026-08-14,Hyderabad,Personal Care,5,847,RapidVan
+12712,2026-08-14,Chennai,Snacks,7,414,RapidVan
+11365,2026-08-14,Hyderabad,Dairy,2,114,CityLogix
+11846,2026-08-14,Pune,Dairy,4,206,LocalHub
+11322,2026-08-14,Bengaluru,Snacks,6,373,LocalHub
+12327,2026-08-14,Hyderabad,Household Essentials,5,585,LocalHub
+12519,2026-08-14,Hyderabad,Groceries,7,580,RapidVan
+11185,2026-08-14,Bengaluru,Groceries,25,2182,CityLogix
+11795,2026-08-14,Chennai,Household Essentials,7,868,CityLogix
+10100,2026-08-14,Bengaluru,Groceries,3,242,SwiftKart
+11191,2026-08-14,Pune,Dairy,6,333,CityLogix
+11310,2026-08-14,Bengaluru,Baby Care,5,1006,SwiftKart
+12565,2026-08-14,Chennai,Groceries,2,195,LocalHub
+10836,2026-08-14,Bengaluru,Snacks,4,264,LocalHub
+12205,2026-08-14,Chennai,Beverages,8,361,CityLogix
+12970,2026-08-14,Bengaluru,Beverages,7,293,QuickDash
+11567,2026-08-14,Bengaluru,Snacks,3,200,SwiftKart
+12894,2026-08-14,Hyderabad,Beverages,8,337,SwiftKart
+10102,2026-08-14,Chennai,Personal Care,3,437,LocalHub
+12907,2026-08-14,Hyderabad,Bakery,6,401,QuickDash
+11256,2026-08-14,Bengaluru,Snacks,1,52,CityLogix
+10331,2026-08-14,Chennai,Personal Care,7,1113,QuickDash
+10801,2026-08-14,Hyderabad,Dairy,2,113,QuickDash
+12114,2026-08-14,Hyderabad,Groceries,3,260,LocalHub
+10457,2026-08-14,Hyderabad,Personal Care,5,753,RapidVan
+10253,2026-08-14,Bengaluru,Frozen Foods,7,811,LocalHub
+12095,2026-08-14,Bengaluru,Snacks,2,117,RapidVan
+11732,2026-08-14,Bengaluru,Personal Care,7,1150,CityLogix
+12263,2026-08-14,Chennai,Groceries,8,796,RapidVan
+12556,2026-08-14,Pune,Household Essentials,3,422,SwiftKart
+12219,2026-08-14,Bengaluru,Beverages,5,262,RapidVan
+13043,2026-08-14,Pune,Personal Care,8,1375,LocalHub
+12812,2026-08-14,Hyderabad,Bakery,4,298,SwiftKart
+11564,2026-08-14,Pune,Snacks,7,373,LocalHub
+13004,2026-08-14,Bengaluru,Personal Care,1,155,SwiftKart
+10774,2026-08-14,Chennai,Personal Care,2,296,LocalHub
+12562,2026-08-14,Chennai,Groceries,3,258,QuickDash
+10493,2026-08-14,Hyderabad,Bakery,4,296,LocalHub
+12600,2026-08-14,Bengaluru,Bakery,5,377,SwiftKart
+13009,2026-08-14,Bengaluru,Household Essentials,1,119,SwiftKart
+12893,2026-08-14,Bengaluru,Snacks,8,432,SwiftKart
+11143,2026-08-14,Pune,Beverages,4,171,SwiftKart
+10260,2026-08-14,Chennai,Groceries,3,277,RapidVan
+11346,2026-08-14,Bengaluru,Household Essentials,1,107,LocalHub
+10764,2026-08-14,Hyderabad,Bakery,1,69,RapidVan
+10868,2026-08-14,Chennai,Baby Care,8,1577,SwiftKart
+10320,2026-08-14,Hyderabad,Beverages,2,96,SwiftKart
+10869,2026-08-14,Bengaluru,Groceries,1,93,CityLogix
+11603,2026-08-14,Bengaluru,Snacks,6,331,SwiftKart
+10199,2026-08-14,Pune,Snacks,1,52,LocalHub
+11507,2026-08-14,Pune,Snacks,6,385,CityLogix
+12921,2026-08-14,Bengaluru,Snacks,8,495,RapidVan
+12718,2026-08-14,Bengaluru,Dairy,3,168,RapidVan
+11122,2026-08-14,Hyderabad,Groceries,1,85,RapidVan
+10479,2026-08-14,Bengaluru,Personal Care,8,1201,QuickDash
+12002,2026-08-14,Pune,Groceries,6,574,LocalHub
+10664,2026-08-14,Bengaluru,Baby Care,7,1467,LocalHub
+12258,2026-08-14,Chennai,Baby Care,8,1600,SwiftKart
+10640,2026-08-14,Hyderabad,Frozen Foods,8,923,LocalHub
+11922,2026-08-14,Pune,Groceries,1,88,CityLogix
+10851,2026-08-14,Bengaluru,Baby Care,8,1641,LocalHub
+11858,2026-08-15,Pune,Household Essentials,5,568,CityLogix
+10333,2026-08-15,Hyderabad,Baby Care,8,1646,SwiftKart
+12354,2026-08-15,Bengaluru,Baby Care,4,684,CityLogix
+10348,2026-08-15,Bengaluru,Groceries,4,369,LocalHub
+12411,2026-08-15,Hyderabad,Snacks,8,501,CityLogix
+11738,2026-08-15,Pune,Dairy,5,236,SwiftKart
+12452,2026-08-15,Hyderabad,Groceries,1,104,LocalHub
+10254,2026-08-15,Bengaluru,Groceries,4,357,QuickDash
+10314,2026-08-15,Chennai,Groceries,8,713,LocalHub
+12413,2026-08-15,Chennai,Dairy,6,342,RapidVan
+11855,2026-08-15,Chennai,Household Essentials,5,521,CityLogix
+12300,2026-08-15,Bengaluru,Beverages,2,89,QuickDash
+12321,2026-08-15,Chennai,Beverages,2,97,SwiftKart
+12283,2026-08-15,Bengaluru,Bakery,6,404,LocalHub
+10283,2026-08-15,Hyderabad,Dairy,4,210,CityLogix
+11753,2026-08-15,Chennai,Groceries,3,280,QuickDash
+13006,2026-08-15,Bengaluru,Bakery,5,340,QuickDash
+10248,2026-08-15,Bengaluru,Baby Care,2,419,SwiftKart
+12959,2026-08-15,Hyderabad,Household Essentials,7,746,QuickDash
+13026,2026-08-15,Chennai,Frozen Foods,7,991,CityLogix
+11745,2026-08-15,Bengaluru,Snacks,6,287,CityLogix
+11511,2026-08-15,Bengaluru,Snacks,1,61,RapidVan
+10344,2026-08-15,Hyderabad,Snacks,6,359,RapidVan
+11521,2026-08-15,Chennai,Groceries,3,287,CityLogix
+11590,2026-08-15,Pune,Frozen Foods,3,346,QuickDash
+11571,2026-08-15,Bengaluru,Bakery,2,140,LocalHub
+12436,2026-08-15,Chennai,Groceries,8,738,RapidVan
+13029,2026-08-15,Pune,Baby Care,4,818,LocalHub
+10201,2026-08-15,Bengaluru,Groceries,8,701,CityLogix
+11524,2026-08-15,Bengaluru,Household Essentials,3,353,RapidVan
+12400,2026-08-15,Hyderabad,Household Essentials,4,516,SwiftKart
+11860,2026-08-15,Chennai,Dairy,6,335,LocalHub
+10257,2026-08-15,Pune,Groceries,6,566,QuickDash
+13024,2026-08-15,Chennai,Household Essentials,8,1025,RapidVan
+11593,2026-08-15,Bengaluru,Snacks,7,438,RapidVan
+12405,2026-08-15,Bengaluru,Frozen Foods,5,685,QuickDash
+10251,2026-08-15,Chennai,Household Essentials,7,762,QuickDash
+11572,2026-08-15,Bengaluru,Baby Care,2,412,CityLogix
+11240,2026-08-15,Chennai,Household Essentials,8,825,RapidVan
+10186,2026-08-15,Bengaluru,Frozen Foods,2,259,CityLogix
+11196,2026-08-15,Pune,Household Essentials,7,854,CityLogix
+11972,2026-08-15,Bengaluru,Dairy,2,110,RapidVan
+11201,2026-08-15,Pune,Household Essentials,1,114,RapidVan
+13076,2026-08-15,Chennai,Dairy,7,423,QuickDash
+10944,2026-08-15,Bengaluru,Personal Care,8,1092,QuickDash
+12207,2026-08-15,Chennai,Groceries,8,738,SwiftKart
+11209,2026-08-15,Chennai,Dairy,3,173,LocalHub
+10943,2026-08-15,Chennai,Groceries,1,90,RapidVan
+12060,2026-08-15,Chennai,Groceries,3,279,RapidVan
+12062,2026-08-15,Bengaluru,Snacks,8,436,CityLogix
+11968,2026-08-15,Bengaluru,Snacks,8,522,SwiftKart
+10605,2026-08-15,Chennai,Personal Care,2,288,CityLogix
+10905,2026-08-15,Bengaluru,Frozen Foods,7,1054,SwiftKart
+10903,2026-08-15,Bengaluru,Snacks,8,446,QuickDash
+13047,2026-08-15,Pune,Groceries,5,490,QuickDash
+10166,2026-08-15,Hyderabad,Beverages,8,365,RapidVan
+12075,2026-08-15,Hyderabad,Snacks,4,250,CityLogix
+11949,2026-08-15,Chennai,Groceries,3,265,LocalHub
+11458,2026-08-15,Chennai,Groceries,3,251,RapidVan
+10885,2026-08-15,Bengaluru,Groceries,8,709,LocalHub
+10884,2026-08-15,Bengaluru,Snacks,5,285,RapidVan
+10880,2026-08-15,Hyderabad,Groceries,40,3328,LocalHub
+12539,2026-08-15,Bengaluru,Household Essentials,7,886,QuickDash
+11274,2026-08-15,Bengaluru,Personal Care,4,636,RapidVan
+10632,2026-08-15,Chennai,Bakery,2,145,LocalHub
+10955,2026-08-15,Bengaluru,Snacks,8,481,QuickDash
+12568,2026-08-15,Hyderabad,Groceries,1,91,QuickDash
+11977,2026-08-15,Bengaluru,Snacks,7,376,LocalHub
+11175,2026-08-15,Pune,Snacks,1,55,RapidVan
+10531,2026-08-15,Bengaluru,Personal Care,5,726,RapidVan
+10537,2026-08-15,Chennai,Household Essentials,3,345,SwiftKart
+11094,2026-08-15,Bengaluru,Frozen Foods,1,129,QuickDash
+12006,2026-08-15,Bengaluru,Snacks,2,133,SwiftKart
+11047,2026-08-15,Pune,Baby Care,5,873,LocalHub
+10505,2026-08-15,Hyderabad,Bakery,7,415,RapidVan
+11109,2026-08-15,Hyderabad,Groceries,3,251,CityLogix
+11044,2026-08-15,Chennai,Frozen Foods,8,874,QuickDash
+11116,2026-08-15,Chennai,Groceries,1,95,QuickDash
+10542,2026-08-15,Bengaluru,Snacks,1,68,CityLogix
+12023,2026-08-15,Chennai,Dairy,4,223,LocalHub
+11017,2026-08-15,Hyderabad,Household Essentials,4,469,LocalHub
+10635,2026-08-15,Hyderabad,Personal Care,3,390,CityLogix
+11996,2026-08-15,Pune,Snacks,8,500,SwiftKart
+10494,2026-08-15,Bengaluru,Beverages,1,44,RapidVan
+13055,2026-08-15,Bengaluru,Snacks,5,325,CityLogix
+10558,2026-08-15,Chennai,Groceries,2,188,CityLogix
+13054,2026-08-15,Pune,Groceries,5,426,QuickDash
+10489,2026-08-15,Hyderabad,Household Essentials,4,465,LocalHub
+11151,2026-08-15,Hyderabad,Groceries,1,82,SwiftKart
+10997,2026-08-15,Bengaluru,Snacks,6,354,CityLogix
+11153,2026-08-15,Bengaluru,Snacks,8,494,QuickDash
+10130,2026-08-15,Chennai,Dairy,3,151,CityLogix
+10983,2026-08-15,Hyderabad,Baby Care,5,1070,RapidVan
+10581,2026-08-15,Hyderabad,Snacks,3,196,CityLogix
+12582,2026-08-15,Hyderabad,Frozen Foods,8,1167,SwiftKart
+12860,2026-08-15,Hyderabad,Beverages,5,217,LocalHub
+11297,2026-08-15,Pune,Household Essentials,1,125,LocalHub
+12543,2026-08-15,Hyderabad,Bakery,2,117,RapidVan
+12522,2026-08-15,Bengaluru,Snacks,4,230,QuickDash
+12506,2026-08-15,Bengaluru,Snacks,3,199,RapidVan
+12751,2026-08-15,Chennai,Household Essentials,5,613,CityLogix
+10416,2026-08-15,Bengaluru,Snacks,5,268,LocalHub
+12923,2026-08-15,Pune,Beverages,7,327,SwiftKart
+12755,2026-08-15,Bengaluru,Household Essentials,7,694,SwiftKart
+10407,2026-08-15,Hyderabad,Beverages,6,286,SwiftKart
+11360,2026-08-15,Pune,Bakery,7,470,RapidVan
+10674,2026-08-15,Bengaluru,Groceries,6,571,RapidVan
+11300,2026-08-15,Pune,Baby Care,2,429,CityLogix
+12152,2026-08-15,Hyderabad,Snacks,3,164,RapidVan
+10776,2026-08-15,Bengaluru,Snacks,1,57,CityLogix
+12768,2026-08-15,Hyderabad,Personal Care,6,889,CityLogix
+11908,2026-08-15,Hyderabad,Snacks,4,221,RapidVan
+10392,2026-08-15,Hyderabad,Baby Care,4,694,RapidVan
+10689,2026-08-15,Chennai,Groceries,4,370,CityLogix
+12131,2026-08-15,Pune,Household Essentials,5,590,LocalHub
+12243,2026-08-15,Chennai,Groceries,4,387,RapidVan
+10378,2026-08-15,Chennai,Snacks,1,65,LocalHub
+11887,2026-08-15,Chennai,Snacks,2,109,LocalHub
+12790,2026-08-15,Chennai,Personal Care,3,450,CityLogix
+10711,2026-08-15,Hyderabad,Dairy,4,229,QuickDash
+10090,2026-08-15,Chennai,Groceries,2,181,RapidVan
+11446,2026-08-15,Chennai,Groceries,3,230,RapidVan
+10419,2026-08-15,Bengaluru,Groceries,2,154,QuickDash
+10797,2026-08-15,Chennai,Baby Care,6,1151,RapidVan
+11070,2026-08-15,Pune,Snacks,2,125,LocalHub
+11326,2026-08-15,Hyderabad,Household Essentials,3,353,CityLogix
+12160,2026-08-15,Bengaluru,Snacks,7,463,RapidVan
+12738,2026-08-15,Chennai,Household Essentials,1,106,LocalHub
+11307,2026-08-15,Bengaluru,Household Essentials,6,755,LocalHub
+10819,2026-08-15,Bengaluru,Snacks,5,300,LocalHub
+10103,2026-08-15,Bengaluru,Bakery,8,582,QuickDash
+10424,2026-08-15,Bengaluru,Snacks,7,421,LocalHub
+12655,2026-08-16,Chennai,Dairy,2,115,CityLogix
+11643,2026-08-16,Hyderabad,Beverages,1,44,CityLogix
+10553,2026-08-16,Chennai,Baby Care,4,747,CityLogix
+10237,2026-08-16,Bengaluru,Snacks,4,245,RapidVan
+10737,2026-08-16,Hyderabad,Dairy,7,383,RapidVan
+11647,2026-08-16,Chennai,Beverages,4,176,SwiftKart
+11649,2026-08-16,Hyderabad,Bakery,1,68,RapidVan
+10738,2026-08-16,Hyderabad,Beverages,4,183,RapidVan
+11651,2026-08-16,Chennai,Dairy,7,425,QuickDash
+10741,2026-08-16,Hyderabad,Groceries,4,357,SwiftKart
+10549,2026-08-16,Hyderabad,Bakery,5,379,QuickDash
+10546,2026-08-16,Chennai,Personal Care,7,1122,LocalHub
+12112,2026-08-16,Chennai,Frozen Foods,1,155,RapidVan
+10753,2026-08-16,Hyderabad,Snacks,4,227,RapidVan
+11064,2026-08-16,Chennai,Frozen Foods,4,536,CityLogix
+10648,2026-08-16,Pune,Groceries,5,470,RapidVan
+10136,2026-08-16,Bengaluru,Snacks,1,61,SwiftKart
+10532,2026-08-16,Hyderabad,Household Essentials,7,951,SwiftKart
+12330,2026-08-16,Hyderabad,Dairy,2,95,RapidVan
+11717,2026-08-16,Bengaluru,Frozen Foods,6,840,SwiftKart
+10848,2026-08-16,Chennai,Groceries,6,551,RapidVan
+10713,2026-08-16,Bengaluru,Dairy,2,111,QuickDash
+12868,2026-08-16,Chennai,Beverages,2,92,SwiftKart
+10716,2026-08-16,Pune,Snacks,2,120,QuickDash
+10643,2026-08-16,Bengaluru,Snacks,7,456,CityLogix
+12093,2026-08-16,Bengaluru,Personal Care,5,769,LocalHub
+12731,2026-08-16,Bengaluru,Household Essentials,7,798,LocalHub
+10734,2026-08-16,Bengaluru,Household Essentials,7,664,RapidVan
+10227,2026-08-16,Pune,Beverages,1,46,SwiftKart
+12649,2026-08-16,Hyderabad,Beverages,8,383,RapidVan
+10757,2026-08-16,Hyderabad,Frozen Foods,7,888,LocalHub
+12833,2026-08-16,Pune,Frozen Foods,8,1114,SwiftKart
+11001,2026-08-16,Bengaluru,Snacks,4,234,CityLogix
+11687,2026-08-16,Hyderabad,Personal Care,1,140,QuickDash
+10815,2026-08-16,Pune,Groceries,3,300,LocalHub
+12836,2026-08-16,Hyderabad,Groceries,5,435,QuickDash
+12699,2026-08-16,Pune,Groceries,8,712,LocalHub
+10796,2026-08-16,Chennai,Household Essentials,4,503,RapidVan
+10817,2026-08-16,Bengaluru,Bakery,1,65,LocalHub
+10794,2026-08-16,Bengaluru,Snacks,6,373,RapidVan
+12280,2026-08-16,Chennai,Groceries,2,190,SwiftKart
+12703,2026-08-16,Pune,Beverages,8,358,CityLogix
+12078,2026-08-16,Chennai,Beverages,8,342,QuickDash
+12164,2026-08-16,Hyderabad,Dairy,4,207,CityLogix
+10672,2026-08-16,Hyderabad,Dairy,7,386,LocalHub
+10113,2026-08-16,Bengaluru,Snacks,3,195,SwiftKart
+12084,2026-08-16,Bengaluru,Dairy,6,325,LocalHub
+12802,2026-08-16,Chennai,Groceries,5,412,LocalHub
+12681,2026-08-16,Bengaluru,Household Essentials,4,481,LocalHub
+11667,2026-08-16,Bengaluru,Personal Care,5,736,QuickDash
+12851,2026-08-16,Chennai,Bakery,6,438,RapidVan
+12677,2026-08-16,Hyderabad,Snacks,3,176,QuickDash
+10112,2026-08-16,Bengaluru,Beverages,2,75,SwiftKart
+12051,2026-08-16,Bengaluru,Dairy,1,55,SwiftKart
+13002,2026-08-16,Hyderabad,Snacks,8,522,LocalHub
+10122,2026-08-16,Chennai,Baby Care,8,1780,QuickDash
+12176,2026-08-16,Bengaluru,Beverages,1,53,LocalHub
+11752,2026-08-16,Pune,Household Essentials,8,834,QuickDash
+12119,2026-08-16,Pune,Household Essentials,4,505,SwiftKart
+10773,2026-08-16,Pune,Groceries,5,456,RapidVan
+12666,2026-08-16,Pune,Beverages,4,166,QuickDash
+10878,2026-08-16,Pune,Personal Care,7,986,RapidVan
+11734,2026-08-16,Bengaluru,Dairy,7,428,RapidVan
+10247,2026-08-16,Hyderabad,Personal Care,7,1056,RapidVan
+10678,2026-08-16,Bengaluru,Dairy,5,270,CityLogix
+12625,2026-08-16,Bengaluru,Bakery,6,486,SwiftKart
+11248,2026-08-16,Pune,Household Essentials,6,654,LocalHub
+12510,2026-08-16,Bengaluru,Snacks,8,536,QuickDash
+12210,2026-08-16,Chennai,Groceries,42,3797,LocalHub
+11227,2026-08-16,Hyderabad,Snacks,8,511,SwiftKart
+12917,2026-08-16,Hyderabad,Groceries,7,598,QuickDash
+11355,2026-08-16,Chennai,Groceries,4,364,CityLogix
+11864,2026-08-16,Pune,Beverages,3,138,LocalHub
+11867,2026-08-16,Chennai,Dairy,3,188,LocalHub
+10191,2026-08-16,Bengaluru,Bakery,7,420,CityLogix
+10400,2026-08-16,Hyderabad,Household Essentials,4,537,CityLogix
+11306,2026-08-16,Pune,Household Essentials,7,845,QuickDash
+12927,2026-08-16,Hyderabad,Household Essentials,6,704,RapidVan
+10471,2026-08-16,Hyderabad,Beverages,3,141,SwiftKart
+11472,2026-08-16,Chennai,Groceries,1,77,RapidVan
+10398,2026-08-16,Pune,Snacks,2,128,LocalHub
+11190,2026-08-16,Pune,Bakery,8,526,CityLogix
+10473,2026-08-16,Bengaluru,Bakery,7,447,CityLogix
+11212,2026-08-16,Bengaluru,Household Essentials,6,712,CityLogix
+11491,2026-08-16,Hyderabad,Personal Care,3,438,LocalHub
+10421,2026-08-16,Bengaluru,Frozen Foods,3,367,RapidVan
+12550,2026-08-16,Hyderabad,Beverages,4,192,RapidVan
+11931,2026-08-16,Hyderabad,Bakery,8,576,SwiftKart
+11528,2026-08-16,Bengaluru,Dairy,2,107,LocalHub
+12963,2026-08-16,Hyderabad,Frozen Foods,3,390,QuickDash
+13040,2026-08-16,Bengaluru,Household Essentials,3,382,QuickDash
+11284,2026-08-16,Bengaluru,Snacks,5,317,CityLogix
+11282,2026-08-16,Bengaluru,Household Essentials,8,867,SwiftKart
+11893,2026-08-16,Pune,Snacks,2,113,LocalHub
+11953,2026-08-16,Hyderabad,Snacks,8,442,LocalHub
+10200,2026-08-16,Hyderabad,Frozen Foods,1,119,SwiftKart
+11941,2026-08-16,Pune,Household Essentials,7,905,LocalHub
+11943,2026-08-16,Hyderabad,Baby Care,5,1032,RapidVan
+11518,2026-08-16,Hyderabad,Frozen Foods,4,525,CityLogix
+12260,2026-08-16,Hyderabad,Bakery,5,335,RapidVan
+11853,2026-08-16,Chennai,Groceries,3,239,LocalHub
+11249,2026-08-16,Bengaluru,Groceries,8,714,SwiftKart
+11918,2026-08-16,Pune,Frozen Foods,2,290,RapidVan
+10431,2026-08-16,Hyderabad,Baby Care,8,1591,SwiftKart
+11574,2026-08-16,Hyderabad,Snacks,6,340,LocalHub
+13049,2026-08-16,Bengaluru,Groceries,1,100,CityLogix
+12599,2026-08-16,Bengaluru,Dairy,2,101,SwiftKart
+10510,2026-08-16,Bengaluru,Beverages,5,225,LocalHub
+11995,2026-08-16,Hyderabad,Beverages,8,308,QuickDash
+12944,2026-08-16,Chennai,Bakery,5,352,RapidVan
+12613,2026-08-16,Chennai,Groceries,4,380,SwiftKart
+12440,2026-08-16,Hyderabad,Snacks,6,404,CityLogix
+12001,2026-08-16,Bengaluru,Snacks,6,386,QuickDash
+11133,2026-08-16,Bengaluru,Beverages,3,122,CityLogix
+11835,2026-08-16,Chennai,Bakery,5,318,QuickDash
+12398,2026-08-16,Pune,Dairy,6,323,SwiftKart
+11609,2026-08-16,Pune,Personal Care,3,463,QuickDash
+11605,2026-08-16,Hyderabad,Beverages,6,251,CityLogix
+11905,2026-08-16,Pune,Household Essentials,3,345,RapidVan
+11607,2026-08-16,Chennai,Beverages,8,300,CityLogix
+10391,2026-08-16,Chennai,Groceries,5,475,SwiftKart
+10500,2026-08-16,Hyderabad,Baby Care,8,1732,QuickDash
+10203,2026-08-16,Bengaluru,Frozen Foods,2,266,RapidVan
+11120,2026-08-16,Hyderabad,Groceries,7,585,SwiftKart
+11157,2026-08-16,Bengaluru,Snacks,3,164,LocalHub
+10522,2026-08-16,Chennai,Groceries,4,403,RapidVan
+11580,2026-08-16,Pune,Snacks,6,400,RapidVan
+12274,2026-08-16,Bengaluru,Snacks,3,184,RapidVan
+11080,2026-08-16,Bengaluru,Household Essentials,3,381,LocalHub
+10374,2026-08-16,Chennai,Beverages,4,172,QuickDash
+10147,2026-08-16,Hyderabad,Personal Care,8,1355,QuickDash
+11077,2026-08-16,Bengaluru,Snacks,8,577,LocalHub
+11155,2026-08-16,Pune,Household Essentials,6,756,SwiftKart
+12596,2026-08-16,Pune,Groceries,6,486,CityLogix
+11158,2026-08-16,Hyderabad,Bakery,8,630,LocalHub
+12584,2026-08-16,Chennai,Groceries,2,185,RapidVan
+11438,2026-08-16,Chennai,Groceries,6,531,CityLogix
+12395,2026-08-16,Chennai,Personal Care,1,143,SwiftKart
+10821,2026-08-17,Bengaluru,Bakery,3,209,LocalHub
+12320,2026-08-17,Chennai,Groceries,7,636,QuickDash
+10831,2026-08-17,Hyderabad,Bakery,6,346,LocalHub
+10650,2026-08-17,Bengaluru,Household Essentials,5,592,RapidVan
+11414,2026-08-17,Chennai,Household Essentials,4,374,CityLogix
+12151,2026-08-17,Bengaluru,Groceries,7,624,LocalHub
+10806,2026-08-17,Bengaluru,Snacks,1,57,SwiftKart
+10342,2026-08-17,Bengaluru,Snacks,2,109,QuickDash
+11382,2026-08-17,Chennai,Groceries,1,88,QuickDash
+10766,2026-08-17,Chennai,Groceries,3,255,CityLogix
+12233,2026-08-17,Bengaluru,Personal Care,3,418,LocalHub
+10780,2026-08-17,Bengaluru,Snacks,8,448,LocalHub
+10402,2026-08-17,Bengaluru,Bakery,8,531,RapidVan
+10784,2026-08-17,Bengaluru,Bakery,8,550,QuickDash
+10241,2026-08-17,Pune,Household Essentials,1,117,SwiftKart
+11388,2026-08-17,Bengaluru,Household Essentials,2,261,SwiftKart
+11510,2026-08-17,Hyderabad,Beverages,5,190,LocalHub
+10812,2026-08-17,Chennai,Groceries,8,693,CityLogix
+12111,2026-08-17,Bengaluru,Snacks,5,300,CityLogix
+11337,2026-08-17,Chennai,Baby Care,4,770,RapidVan
+11907,2026-08-17,Hyderabad,Beverages,7,327,SwiftKart
+11392,2026-08-17,Bengaluru,Groceries,1,94,QuickDash
+11513,2026-08-17,Hyderabad,Beverages,2,82,LocalHub
+11327,2026-08-17,Hyderabad,Frozen Foods,4,497,SwiftKart
+11927,2026-08-17,Pune,Household Essentials,8,921,LocalHub
+10170,2026-08-17,Bengaluru,Bakery,5,423,LocalHub
+11720,2026-08-17,Chennai,Groceries,4,362,CityLogix
+11679,2026-08-17,Hyderabad,Bakery,7,518,SwiftKart
+12348,2026-08-17,Chennai,Beverages,3,127,RapidVan
+12688,2026-08-17,Bengaluru,Household Essentials,2,222,CityLogix
+12264,2026-08-17,Bengaluru,Dairy,4,221,QuickDash
+12967,2026-08-17,Bengaluru,Snacks,2,135,SwiftKart
+11203,2026-08-17,Hyderabad,Dairy,2,120,CityLogix
+11199,2026-08-17,Hyderabad,Snacks,4,253,QuickDash
+12680,2026-08-17,Chennai,Groceries,7,602,SwiftKart
+10202,2026-08-17,Pune,Dairy,3,142,CityLogix
+11655,2026-08-17,Chennai,Personal Care,5,787,RapidVan
+12861,2026-08-17,Hyderabad,Personal Care,5,728,SwiftKart
+10302,2026-08-17,Hyderabad,Bakery,8,558,SwiftKart
+12978,2026-08-17,Chennai,Groceries,2,194,SwiftKart
+11029,2026-08-17,Pune,Beverages,5,236,RapidVan
+12864,2026-08-17,Chennai,Groceries,1,91,QuickDash
+11034,2026-08-17,Bengaluru,Bakery,7,429,RapidVan
+10317,2026-08-17,Hyderabad,Groceries,4,369,LocalHub
+10927,2026-08-17,Chennai,Groceries,8,760,SwiftKart
+11558,2026-08-17,Hyderabad,Bakery,3,206,QuickDash
+10607,2026-08-17,Bengaluru,Snacks,5,273,CityLogix
+13048,2026-08-17,Hyderabad,Dairy,6,346,LocalHub
+11932,2026-08-17,Chennai,Frozen Foods,7,829,CityLogix
+13080,2026-08-17,Hyderabad,Groceries,3,266,CityLogix
+10877,2026-08-17,Hyderabad,Frozen Foods,6,742,SwiftKart
+11708,2026-08-17,Chennai,Household Essentials,2,292,QuickDash
+11479,2026-08-17,Bengaluru,Personal Care,7,963,SwiftKart
+12086,2026-08-17,Hyderabad,Beverages,4,177,QuickDash
+11266,2026-08-17,Hyderabad,Bakery,5,347,QuickDash
+11076,2026-08-17,Hyderabad,Bakery,4,250,SwiftKart
+11309,2026-08-17,Bengaluru,Dairy,3,163,RapidVan
+11421,2026-08-17,Chennai,Baby Care,8,1602,RapidVan
+12835,2026-08-17,Bengaluru,Snacks,5,299,RapidVan
+11906,2026-08-17,Pune,Bakery,5,335,CityLogix
+12799,2026-08-17,Hyderabad,Groceries,2,179,QuickDash
+10897,2026-08-17,Hyderabad,Personal Care,5,761,CityLogix
+10114,2026-08-17,Pune,Groceries,6,538,QuickDash
+12555,2026-08-17,Hyderabad,Groceries,6,509,QuickDash
+10618,2026-08-17,Bengaluru,Groceries,2,183,QuickDash
+11803,2026-08-17,Hyderabad,Dairy,6,302,QuickDash
+11765,2026-08-17,Hyderabad,Baby Care,4,892,RapidVan
+11781,2026-08-18,Hyderabad,Groceries,3,249,CityLogix
+13027,2026-08-18,Chennai,Snacks,8,531,SwiftKart
+13081,2026-08-18,Bengaluru,Frozen Foods,5,697,RapidVan
+12218,2026-08-18,Hyderabad,Baby Care,5,910,RapidVan
+12162,2026-08-18,Bengaluru,Frozen Foods,5,647,LocalHub
+10169,2026-08-18,Bengaluru,Personal Care,5,761,SwiftKart
+11804,2026-08-18,Bengaluru,Beverages,2,86,CityLogix
+11808,2026-08-18,Chennai,Bakery,8,571,QuickDash
+12211,2026-08-18,Pune,Groceries,3,259,QuickDash
+13023,2026-08-18,Bengaluru,Baby Care,5,1113,CityLogix
+12042,2026-08-18,Bengaluru,Beverages,4,179,CityLogix
+12266,2026-08-18,Chennai,Personal Care,5,797,RapidVan
+12000,2026-08-18,Chennai,Beverages,2,78,QuickDash
+10098,2026-08-18,Chennai,Groceries,2,168,LocalHub
+12471,2026-08-18,Bengaluru,Baby Care,5,1000,SwiftKart
+12142,2026-08-18,Chennai,Groceries,3,253,LocalHub
+10464,2026-08-18,Hyderabad,Groceries,6,536,LocalHub
+10529,2026-08-18,Pune,Beverages,7,351,LocalHub
+12873,2026-08-18,Bengaluru,Beverages,1,47,RapidVan
+12867,2026-08-18,Pune,Household Essentials,5,654,SwiftKart
+11018,2026-08-18,Pune,Household Essentials,4,446,QuickDash
+12662,2026-08-18,Bengaluru,Personal Care,5,801,RapidVan
+12433,2026-08-18,Pune,Frozen Foods,6,670,CityLogix
+11496,2026-08-18,Bengaluru,Frozen Foods,8,997,LocalHub
+12874,2026-08-18,Bengaluru,Household Essentials,7,818,QuickDash
+12426,2026-08-18,Bengaluru,Beverages,8,366,QuickDash
+11541,2026-08-18,Chennai,Baby Care,8,1485,CityLogix
+10585,2026-08-18,Bengaluru,Personal Care,7,987,LocalHub
+12392,2026-08-18,Hyderabad,Personal Care,5,716,QuickDash
+12387,2026-08-18,Hyderabad,Snacks,8,477,SwiftKart
+11596,2026-08-18,Hyderabad,Beverages,4,177,CityLogix
+10902,2026-08-18,Pune,Bakery,5,366,CityLogix
+10306,2026-08-18,Bengaluru,Household Essentials,3,297,SwiftKart
+11537,2026-08-18,Bengaluru,Bakery,6,391,QuickDash
+11630,2026-08-18,Hyderabad,Snacks,7,360,QuickDash
+11413,2026-08-18,Bengaluru,Baby Care,8,1648,QuickDash
+12597,2026-08-18,Hyderabad,Snacks,3,159,RapidVan
+11265,2026-08-18,Bengaluru,Household Essentials,4,487,QuickDash
+11237,2026-08-18,Chennai,Frozen Foods,7,1039,LocalHub
+11287,2026-08-18,Hyderabad,Frozen Foods,4,538,CityLogix
+11291,2026-08-18,Hyderabad,Groceries,8,718,RapidVan
+12523,2026-08-18,Pune,Groceries,8,713,SwiftKart
+11295,2026-08-18,Chennai,Groceries,2,183,RapidVan
+10231,2026-08-18,Chennai,Bakery,7,460,SwiftKart
+10386,2026-08-18,Pune,Snacks,3,205,CityLogix
+11226,2026-08-18,Bengaluru,Household Essentials,4,429,CityLogix
+12558,2026-08-18,Chennai,Household Essentials,4,531,QuickDash
+12573,2026-08-18,Chennai,Groceries,4,351,RapidVan
+12914,2026-08-18,Chennai,Groceries,4,359,SwiftKart
+11176,2026-08-18,Hyderabad,Bakery,5,345,QuickDash
+11159,2026-08-18,Chennai,Groceries,3,235,CityLogix
+11148,2026-08-18,Chennai,Groceries,8,785,LocalHub
+12486,2026-08-18,Pune,Groceries,5,464,LocalHub
+10466,2026-08-18,Pune,Groceries,2,184,LocalHub
+10879,2026-08-18,Bengaluru,Household Essentials,5,578,SwiftKart
+12545,2026-08-18,Hyderabad,Groceries,41,3667,LocalHub
+12775,2026-08-18,Hyderabad,Household Essentials,8,891,RapidVan
+10824,2026-08-18,Pune,Beverages,7,341,CityLogix
+10769,2026-08-18,Bengaluru,Household Essentials,3,367,LocalHub
+12331,2026-08-18,Bengaluru,Snacks,7,407,RapidVan
+12732,2026-08-18,Bengaluru,Frozen Foods,3,407,RapidVan
+10287,2026-08-18,Bengaluru,Bakery,4,320,CityLogix
+10289,2026-08-18,Chennai,Dairy,7,398,CityLogix
+10790,2026-08-18,Hyderabad,Snacks,6,342,CityLogix
+10645,2026-08-18,Hyderabad,Beverages,5,215,QuickDash
+12736,2026-08-18,Bengaluru,Bakery,6,476,LocalHub
+12992,2026-08-18,Pune,Groceries,7,611,CityLogix
+10629,2026-08-18,Bengaluru,Snacks,1,55,QuickDash
+11128,2026-08-19,Hyderabad,Snacks,1,53,QuickDash
+12239,2026-08-19,Hyderabad,Bakery,3,193,LocalHub
+10498,2026-08-19,Chennai,Beverages,6,220,CityLogix
+11997,2026-08-19,Bengaluru,Baby Care,8,1497,RapidVan
+10814,2026-08-19,Hyderabad,Snacks,4,248,CityLogix
+12363,2026-08-19,Bengaluru,Snacks,5,312,SwiftKart
+11418,2026-08-19,Pune,Household Essentials,2,236,CityLogix
+11431,2026-08-19,Bengaluru,Dairy,5,278,LocalHub
+12157,2026-08-19,Bengaluru,Groceries,4,331,LocalHub
+12282,2026-08-19,Chennai,Groceries,8,672,SwiftKart
+12019,2026-08-19,Hyderabad,Household Essentials,3,403,LocalHub
+10368,2026-08-19,Hyderabad,Personal Care,7,1007,QuickDash
+11879,2026-08-19,Bengaluru,Snacks,4,255,RapidVan
+12450,2026-08-19,Hyderabad,Baby Care,8,1494,CityLogix
+12607,2026-08-19,Chennai,Bakery,5,334,CityLogix
+11391,2026-08-19,Bengaluru,Snacks,7,438,LocalHub
+10145,2026-08-19,Pune,Dairy,8,404,RapidVan
+10492,2026-08-19,Chennai,Household Essentials,8,913,LocalHub
+10234,2026-08-19,Hyderabad,Beverages,5,241,CityLogix
+11944,2026-08-19,Bengaluru,Household Essentials,2,234,CityLogix
+12552,2026-08-19,Bengaluru,Snacks,8,464,CityLogix
+11238,2026-08-19,Hyderabad,Household Essentials,7,762,CityLogix
+11272,2026-08-19,Chennai,Household Essentials,1,102,LocalHub
+11234,2026-08-19,Chennai,Groceries,2,190,LocalHub
+12906,2026-08-19,Bengaluru,Groceries,2,189,RapidVan
+10691,2026-08-19,Hyderabad,Beverages,5,194,QuickDash
+10749,2026-08-19,Bengaluru,Beverages,1,41,SwiftKart
+10768,2026-08-19,Bengaluru,Snacks,3,176,RapidVan
+11743,2026-08-19,Bengaluru,Baby Care,7,1590,QuickDash
+11315,2026-08-19,Pune,Household Essentials,7,911,SwiftKart
+11208,2026-08-19,Bengaluru,Groceries,8,706,RapidVan
+11204,2026-08-19,Pune,Groceries,4,403,LocalHub
+10224,2026-08-19,Bengaluru,Groceries,3,231,SwiftKart
+10475,2026-08-19,Hyderabad,Personal Care,3,460,CityLogix
+10485,2026-08-19,Chennai,Groceries,7,620,RapidVan
+12499,2026-08-19,Bengaluru,Groceries,8,812,CityLogix
+10667,2026-08-19,Bengaluru,Beverages,8,302,LocalHub
+11154,2026-08-19,Bengaluru,Frozen Foods,1,138,SwiftKart
+10552,2026-08-19,Pune,Frozen Foods,7,841,QuickDash
+12929,2026-08-19,Hyderabad,Snacks,2,126,RapidVan
+11480,2026-08-19,Hyderabad,Snacks,6,397,RapidVan
+11060,2026-08-19,Hyderabad,Snacks,3,155,SwiftKart
+12444,2026-08-19,Bengaluru,Frozen Foods,6,773,LocalHub
+11543,2026-08-19,Pune,Snacks,5,301,SwiftKart
+10989,2026-08-19,Chennai,Frozen Foods,1,131,LocalHub
+10637,2026-08-19,Bengaluru,Groceries,1,87,CityLogix
+10587,2026-08-19,Bengaluru,Bakery,3,210,CityLogix
+10121,2026-08-19,Bengaluru,Snacks,1,56,QuickDash
+10596,2026-08-19,Bengaluru,Snacks,2,119,LocalHub
+10288,2026-08-19,Bengaluru,Groceries,5,414,RapidVan
+12686,2026-08-19,Chennai,Baby Care,2,384,LocalHub
+10937,2026-08-19,Bengaluru,Frozen Foods,8,1044,LocalHub
+10908,2026-08-19,Pune,Groceries,8,764,LocalHub
+10898,2026-08-19,Hyderabad,Groceries,3,249,LocalHub
+12706,2026-08-19,Hyderabad,Groceries,5,413,RapidVan
+12081,2026-08-19,Pune,Frozen Foods,8,1171,CityLogix
+11670,2026-08-19,Hyderabad,Household Essentials,3,336,RapidVan
+10886,2026-08-19,Hyderabad,Personal Care,2,297,LocalHub
+10110,2026-08-19,Bengaluru,Snacks,3,174,SwiftKart
+12368,2026-08-19,Chennai,Beverages,8,346,CityLogix
+10646,2026-08-19,Bengaluru,Snacks,2,116,LocalHub
+12422,2026-08-19,Hyderabad,Personal Care,4,610,CityLogix
+11577,2026-08-19,Chennai,Dairy,5,250,SwiftKart
+12035,2026-08-19,Hyderabad,Bakery,7,480,RapidVan
+12032,2026-08-19,Bengaluru,Personal Care,4,570,SwiftKart
+12255,2026-08-19,Bengaluru,Frozen Foods,8,1044,SwiftKart
+12432,2026-08-19,Pune,Beverages,4,191,SwiftKart
+10221,2026-08-19,Bengaluru,Frozen Foods,7,830,LocalHub
+11951,2026-08-19,Chennai,Household Essentials,1,100,RapidVan
+11002,2026-08-19,Hyderabad,Dairy,6,340,LocalHub
+12560,2026-08-20,Bengaluru,Groceries,8,748,SwiftKart
+10167,2026-08-20,Bengaluru,Snacks,8,448,QuickDash
+10599,2026-08-20,Bengaluru,Personal Care,2,357,RapidVan
+12171,2026-08-20,Bengaluru,Snacks,5,332,RapidVan
+11021,2026-08-20,Bengaluru,Household Essentials,42,5356,QuickDash
+12716,2026-08-20,Chennai,Snacks,3,171,RapidVan
+12770,2026-08-20,Bengaluru,Groceries,5,427,LocalHub
+12828,2026-08-20,Chennai,Groceries,2,145,QuickDash
+12834,2026-08-20,Hyderabad,Snacks,4,214,SwiftKart
+12030,2026-08-20,Hyderabad,Bakery,8,504,SwiftKart
+11233,2026-08-20,Hyderabad,Dairy,4,229,RapidVan
+10730,2026-08-20,Hyderabad,Snacks,2,111,RapidVan
+12713,2026-08-20,Bengaluru,Beverages,4,160,LocalHub
+10162,2026-08-20,Chennai,Baby Care,1,208,QuickDash
+12553,2026-08-20,Pune,Household Essentials,7,858,LocalHub
+12785,2026-08-20,Bengaluru,Snacks,5,289,SwiftKart
+12866,2026-08-20,Chennai,Dairy,8,391,RapidVan
+12711,2026-08-20,Bengaluru,Household Essentials,8,916,QuickDash
+10655,2026-08-20,Bengaluru,Snacks,6,409,SwiftKart
+12206,2026-08-20,Bengaluru,Snacks,5,297,SwiftKart
+11198,2026-08-20,Hyderabad,Snacks,1,54,QuickDash
+12856,2026-08-20,Hyderabad,Beverages,7,337,CityLogix
+10822,2026-08-20,Bengaluru,Snacks,3,181,QuickDash
+10569,2026-08-20,Pune,Snacks,1,63,RapidVan
+12889,2026-08-20,Bengaluru,Groceries,4,365,CityLogix
+12037,2026-08-20,Pune,Groceries,4,373,CityLogix
+10496,2026-08-20,Chennai,Snacks,1,58,LocalHub
+11107,2026-08-20,Bengaluru,Household Essentials,4,513,QuickDash
+12593,2026-08-20,Pune,Bakery,1,70,LocalHub
+10800,2026-08-20,Bengaluru,Baby Care,3,552,QuickDash
+12046,2026-08-20,Chennai,Personal Care,6,840,LocalHub
+12175,2026-08-20,Bengaluru,Snacks,4,207,CityLogix
+10513,2026-08-20,Hyderabad,Groceries,1,93,QuickDash
+10129,2026-08-20,Hyderabad,Frozen Foods,1,142,CityLogix
+12616,2026-08-20,Pune,Bakery,1,59,SwiftKart
+13082,2026-08-20,Bengaluru,Beverages,5,229,RapidVan
+10592,2026-08-20,Pune,Bakery,3,209,CityLogix
+10595,2026-08-20,Chennai,Bakery,4,285,RapidVan
+13053,2026-08-20,Pune,Beverages,6,275,LocalHub
+12589,2026-08-20,Pune,Groceries,4,310,SwiftKart
+11078,2026-08-20,Chennai,Groceries,3,252,LocalHub
+12685,2026-08-20,Bengaluru,Groceries,2,189,LocalHub
+10941,2026-08-20,Bengaluru,Dairy,5,299,QuickDash
+12763,2026-08-20,Bengaluru,Snacks,7,405,CityLogix
+11124,2026-08-20,Pune,Baby Care,2,377,QuickDash
+10568,2026-08-20,Bengaluru,Baby Care,5,927,QuickDash
+10700,2026-08-20,Hyderabad,Baby Care,6,1042,QuickDash
+10423,2026-08-20,Bengaluru,Groceries,3,229,SwiftKart
+12311,2026-08-20,Bengaluru,Snacks,1,67,QuickDash
+12227,2026-08-20,Bengaluru,Snacks,4,224,LocalHub
+12912,2026-08-20,Chennai,Groceries,4,347,LocalHub
+11625,2026-08-20,Chennai,Frozen Foods,1,141,RapidVan
+11331,2026-08-20,Pune,Frozen Foods,2,274,SwiftKart
+11437,2026-08-20,Bengaluru,Snacks,8,492,CityLogix
+10264,2026-08-20,Chennai,Frozen Foods,3,423,CityLogix
+12988,2026-08-20,Chennai,Beverages,8,350,LocalHub
+11639,2026-08-20,Pune,Household Essentials,6,666,LocalHub
+11722,2026-08-20,Bengaluru,Household Essentials,2,250,QuickDash
+11402,2026-08-20,Bengaluru,Snacks,2,126,CityLogix
+12454,2026-08-20,Pune,Household Essentials,6,670,SwiftKart
+10404,2026-08-20,Pune,Groceries,6,601,SwiftKart
+12235,2026-08-20,Chennai,Groceries,3,256,LocalHub
+12952,2026-08-20,Hyderabad,Bakery,3,185,SwiftKart
+12938,2026-08-20,Hyderabad,Beverages,8,370,CityLogix
+12385,2026-08-20,Hyderabad,Bakery,4,276,SwiftKart
+11843,2026-08-20,Hyderabad,Bakery,6,396,SwiftKart
+11650,2026-08-20,Hyderabad,Snacks,5,284,QuickDash
+11565,2026-08-20,Hyderabad,Personal Care,7,1032,SwiftKart
+11816,2026-08-20,Hyderabad,Snacks,4,231,QuickDash
+11568,2026-08-20,Hyderabad,Beverages,1,48,LocalHub
+11281,2026-08-20,Bengaluru,Baby Care,5,1041,LocalHub
+11544,2026-08-20,Chennai,Groceries,4,326,RapidVan
+12281,2026-08-20,Pune,Household Essentials,6,686,RapidVan
+12222,2026-08-20,Bengaluru,Snacks,1,59,SwiftKart
+12987,2026-08-20,Bengaluru,Household Essentials,6,672,CityLogix
+12372,2026-08-20,Bengaluru,Household Essentials,1,131,SwiftKart
+11844,2026-08-20,Bengaluru,Dairy,4,188,QuickDash
+11929,2026-08-20,Bengaluru,Household Essentials,2,244,SwiftKart
+11286,2026-08-20,Bengaluru,Snacks,8,481,CityLogix
+10894,2026-08-21,Pune,Personal Care,5,744,QuickDash
+12082,2026-08-21,Bengaluru,Groceries,6,473,CityLogix
+12376,2026-08-21,Bengaluru,Snacks,5,303,LocalHub
+12166,2026-08-21,Chennai,Groceries,7,699,LocalHub
+10624,2026-08-21,Chennai,Groceries,2,218,QuickDash
+10896,2026-08-21,Bengaluru,Beverages,5,257,QuickDash
+12212,2026-08-21,Bengaluru,Snacks,3,168,RapidVan
+10904,2026-08-21,Chennai,Household Essentials,1,120,RapidVan
+10125,2026-08-21,Bengaluru,Beverages,5,212,QuickDash
+10328,2026-08-21,Pune,Household Essentials,5,707,QuickDash
+11560,2026-08-21,Chennai,Frozen Foods,2,273,QuickDash
+12052,2026-08-21,Pune,Frozen Foods,4,626,LocalHub
+10961,2026-08-21,Hyderabad,Snacks,4,237,LocalHub
+12397,2026-08-21,Bengaluru,Baby Care,3,563,QuickDash
+10945,2026-08-21,Bengaluru,Snacks,5,333,RapidVan
+11589,2026-08-21,Pune,Frozen Foods,2,291,RapidVan
+11611,2026-08-21,Hyderabad,Dairy,1,57,RapidVan
+10316,2026-08-21,Pune,Groceries,8,674,SwiftKart
+12846,2026-08-21,Hyderabad,Bakery,5,342,LocalHub
+13077,2026-08-21,Pune,Beverages,3,121,QuickDash
+12697,2026-08-21,Bengaluru,Snacks,2,125,LocalHub
+12170,2026-08-21,Hyderabad,Beverages,4,185,QuickDash
+10909,2026-08-21,Hyderabad,Dairy,5,246,SwiftKart
+12377,2026-08-21,Chennai,Groceries,7,648,RapidVan
+11631,2026-08-21,Pune,Beverages,6,269,SwiftKart
+12728,2026-08-21,Chennai,Groceries,2,199,SwiftKart
+10881,2026-08-21,Bengaluru,Snacks,6,386,QuickDash
+11731,2026-08-21,Pune,Groceries,2,196,LocalHub
+12149,2026-08-21,Bengaluru,Groceries,3,283,SwiftKart
+10687,2026-08-21,Bengaluru,Snacks,5,297,QuickDash
+12147,2026-08-21,Pune,Baby Care,5,1003,LocalHub
+12146,2026-08-21,Hyderabad,Snacks,7,434,RapidVan
+12127,2026-08-21,Bengaluru,Household Essentials,4,494,LocalHub
+12289,2026-08-21,Bengaluru,Beverages,2,87,CityLogix
+10690,2026-08-21,Pune,Bakery,2,152,LocalHub
+11761,2026-08-21,Bengaluru,Snacks,3,187,SwiftKart
+13019,2026-08-21,Hyderabad,Personal Care,4,610,CityLogix
+12777,2026-08-21,Pune,Beverages,6,270,SwiftKart
+13010,2026-08-21,Hyderabad,Beverages,5,231,SwiftKart
+12145,2026-08-21,Chennai,Bakery,6,362,QuickDash
+10718,2026-08-21,Hyderabad,Bakery,6,415,QuickDash
+10238,2026-08-21,Hyderabad,Baby Care,8,1598,CityLogix
+12807,2026-08-21,Bengaluru,Snacks,8,467,SwiftKart
+12324,2026-08-21,Hyderabad,Personal Care,2,283,QuickDash
+12811,2026-08-21,Bengaluru,Bakery,4,268,LocalHub
+12750,2026-08-21,Bengaluru,Dairy,2,113,SwiftKart
+11646,2026-08-21,Chennai,Personal Care,4,642,SwiftKart
+11663,2026-08-21,Chennai,Personal Care,8,1200,RapidVan
+11811,2026-08-21,Hyderabad,Household Essentials,2,245,LocalHub
+11684,2026-08-21,Hyderabad,Baby Care,6,1396,LocalHub
+10971,2026-08-21,Bengaluru,Groceries,3,265,RapidVan
+12097,2026-08-21,Chennai,Groceries,1,78,SwiftKart
+10841,2026-08-21,Hyderabad,Groceries,6,622,LocalHub
+11635,2026-08-21,Hyderabad,Household Essentials,4,498,LocalHub
+12343,2026-08-21,Hyderabad,Groceries,8,705,LocalHub
+10827,2026-08-21,Pune,Baby Care,3,545,SwiftKart
+10269,2026-08-21,Hyderabad,Snacks,3,186,LocalHub
+11703,2026-08-21,Hyderabad,Household Essentials,1,126,LocalHub
+11707,2026-08-21,Hyderabad,Snacks,4,260,CityLogix
+10656,2026-08-21,Pune,Beverages,3,141,QuickDash
+11710,2026-08-21,Bengaluru,Beverages,5,202,SwiftKart
+10261,2026-08-21,Chennai,Personal Care,8,1338,QuickDash
+10654,2026-08-21,Hyderabad,Groceries,5,441,SwiftKart
+11245,2026-08-21,Chennai,Groceries,7,632,RapidVan
+11851,2026-08-21,Pune,Household Essentials,6,709,QuickDash
+12179,2026-08-21,Bengaluru,Bakery,2,153,RapidVan
+10406,2026-08-21,Bengaluru,Snacks,2,110,RapidVan
+11368,2026-08-21,Hyderabad,Groceries,2,203,QuickDash
+12496,2026-08-21,Pune,Household Essentials,2,234,RapidVan
+12592,2026-08-21,Hyderabad,Beverages,6,278,LocalHub
+12493,2026-08-21,Pune,Snacks,2,111,LocalHub
+11383,2026-08-21,Pune,Personal Care,8,1196,SwiftKart
+12488,2026-08-21,Bengaluru,Bakery,6,433,LocalHub
+10495,2026-08-21,Hyderabad,Household Essentials,2,227,QuickDash
+11902,2026-08-21,Hyderabad,Frozen Foods,8,1002,LocalHub
+12484,2026-08-21,Chennai,Groceries,7,543,LocalHub
+12177,2026-08-21,Chennai,Groceries,7,639,LocalHub
+11408,2026-08-21,Bengaluru,Groceries,4,355,SwiftKart
+11411,2026-08-21,Pune,Baby Care,2,371,LocalHub
+11423,2026-08-21,Chennai,Dairy,2,109,SwiftKart
+10382,2026-08-21,Hyderabad,Dairy,3,162,QuickDash
+11177,2026-08-21,Chennai,Snacks,3,205,LocalHub
+11093,2026-08-21,Chennai,Dairy,3,162,QuickDash
+12574,2026-08-21,Chennai,Frozen Foods,6,913,LocalHub
+12517,2026-08-21,Bengaluru,Frozen Foods,4,570,LocalHub
+11253,2026-08-21,Bengaluru,Snacks,7,423,CityLogix
+12901,2026-08-21,Pune,Frozen Foods,1,149,RapidVan
+11267,2026-08-21,Chennai,Groceries,6,592,RapidVan
+11269,2026-08-21,Bengaluru,Beverages,8,378,SwiftKart
+11276,2026-08-21,Hyderabad,Bakery,2,145,QuickDash
+10164,2026-08-21,Hyderabad,Dairy,4,243,QuickDash
+10445,2026-08-21,Chennai,Groceries,6,518,QuickDash
+11296,2026-08-21,Chennai,Groceries,6,479,CityLogix
+11228,2026-08-21,Bengaluru,Groceries,1,83,CityLogix
+10465,2026-08-21,Chennai,Dairy,4,206,LocalHub
+11303,2026-08-21,Hyderabad,Frozen Foods,1,132,CityLogix
+11316,2026-08-21,Bengaluru,Personal Care,4,602,LocalHub
+12910,2026-08-21,Chennai,Snacks,3,176,SwiftKart
+12561,2026-08-21,Hyderabad,Beverages,3,131,SwiftKart
+11200,2026-08-21,Pune,Snacks,4,186,QuickDash
+10427,2026-08-21,Bengaluru,Bakery,8,540,LocalHub
+12008,2026-08-21,Bengaluru,Snacks,3,183,RapidVan
+12934,2026-08-21,Pune,Groceries,4,362,CityLogix
+10187,2026-08-21,Bengaluru,Household Essentials,7,924,SwiftKart
+12648,2026-08-21,Chennai,Bakery,6,385,LocalHub
+11508,2026-08-21,Chennai,Bakery,8,573,RapidVan
+10334,2026-08-21,Hyderabad,Snacks,5,336,SwiftKart
+11490,2026-08-21,Pune,Bakery,2,139,LocalHub
+11550,2026-08-21,Hyderabad,Beverages,8,361,LocalHub
+10373,2026-08-21,Bengaluru,Personal Care,8,1056,CityLogix
+10575,2026-08-21,Hyderabad,Frozen Foods,6,713,SwiftKart
+12668,2026-08-21,Hyderabad,Household Essentials,4,389,LocalHub
+11457,2026-08-21,Chennai,Frozen Foods,5,722,CityLogix
+11888,2026-08-21,Pune,Snacks,7,467,LocalHub
+12954,2026-08-21,Hyderabad,Personal Care,4,571,LocalHub
+11073,2026-08-21,Bengaluru,Snacks,2,131,CityLogix
+10525,2026-08-21,Hyderabad,Frozen Foods,2,240,CityLogix
+10582,2026-08-21,Hyderabad,Dairy,2,110,QuickDash
+10126,2026-08-21,Bengaluru,Personal Care,6,916,CityLogix
+11084,2026-08-21,Bengaluru,Beverages,4,209,SwiftKart
+11871,2026-08-21,Chennai,Groceries,5,479,CityLogix
+10185,2026-08-21,Hyderabad,Frozen Foods,1,138,SwiftKart
+11515,2026-08-21,Bengaluru,Bakery,5,348,CityLogix
+12429,2026-08-22,Bengaluru,Snacks,2,142,CityLogix
+12268,2026-08-22,Bengaluru,Dairy,7,385,QuickDash
+12982,2026-08-22,Bengaluru,Household Essentials,6,583,RapidVan
+12209,2026-08-22,Hyderabad,Beverages,6,273,SwiftKart
+12306,2026-08-22,Hyderabad,Beverages,6,265,CityLogix
+12423,2026-08-22,Chennai,Household Essentials,1,126,LocalHub
+12287,2026-08-22,Hyderabad,Snacks,3,187,LocalHub
+12417,2026-08-22,Hyderabad,Household Essentials,7,981,LocalHub
+12778,2026-08-22,Bengaluru,Groceries,7,603,LocalHub
+13072,2026-08-22,Bengaluru,Snacks,7,455,LocalHub
+12794,2026-08-22,Pune,Baby Care,5,890,SwiftKart
+12795,2026-08-22,Bengaluru,Baby Care,1,186,RapidVan
+12173,2026-08-22,Pune,Personal Care,8,1366,SwiftKart
+12382,2026-08-22,Pune,Groceries,6,547,RapidVan
+12916,2026-08-22,Bengaluru,Groceries,8,689,SwiftKart
+12756,2026-08-22,Bengaluru,Snacks,1,61,CityLogix
+12879,2026-08-22,Bengaluru,Baby Care,8,1495,RapidVan
+12937,2026-08-22,Chennai,Groceries,5,449,QuickDash
+12612,2026-08-22,Bengaluru,Household Essentials,4,470,LocalHub
+12888,2026-08-22,Chennai,Groceries,8,821,SwiftKart
+12627,2026-08-22,Bengaluru,Snacks,1,59,CityLogix
+12482,2026-08-22,Bengaluru,Snacks,6,388,SwiftKart
+12464,2026-08-22,Hyderabad,Household Essentials,4,529,LocalHub
+12605,2026-08-22,Chennai,Groceries,4,382,LocalHub
+12194,2026-08-22,Hyderabad,Dairy,8,416,RapidVan
+12759,2026-08-22,Hyderabad,Baby Care,1,229,CityLogix
+12733,2026-08-22,Chennai,Groceries,2,178,QuickDash
+12485,2026-08-22,Bengaluru,Household Essentials,1,124,QuickDash
+12380,2026-08-22,Chennai,Household Essentials,7,838,RapidVan
+12195,2026-08-22,Hyderabad,Bakery,4,255,LocalHub
+12870,2026-08-22,Pune,Groceries,5,505,QuickDash
+12698,2026-08-22,Hyderabad,Snacks,8,544,RapidVan
+12842,2026-08-22,Bengaluru,Dairy,6,329,CityLogix
+12951,2026-08-22,Pune,Snacks,1,66,LocalHub
+12581,2026-08-22,Chennai,Bakery,6,431,RapidVan
+12438,2026-08-22,Chennai,Dairy,6,305,RapidVan
+12340,2026-08-22,Bengaluru,Baby Care,7,1484,RapidVan
+12301,2026-08-22,Bengaluru,Dairy,7,372,SwiftKart
+10089,2026-08-22,Hyderabad,Frozen Foods,5,657,LocalHub
+10149,2026-08-22,Hyderabad,Dairy,6,336,QuickDash
+11180,2026-08-22,Hyderabad,Snacks,3,198,RapidVan
+11681,2026-08-22,Hyderabad,Baby Care,4,738,SwiftKart
+11688,2026-08-22,Chennai,Groceries,4,380,SwiftKart
+11186,2026-08-22,Hyderabad,Snacks,5,302,RapidVan
+11591,2026-08-22,Hyderabad,Household Essentials,6,747,QuickDash
+11581,2026-08-22,Bengaluru,Personal Care,6,959,QuickDash
+11206,2026-08-22,Hyderabad,Personal Care,4,593,QuickDash
+10615,2026-08-22,Chennai,Baby Care,2,434,RapidVan
+10811,2026-08-22,Bengaluru,Frozen Foods,5,560,QuickDash
+11692,2026-08-22,Bengaluru,Personal Care,1,157,SwiftKart
+10434,2026-08-22,Chennai,Groceries,5,474,CityLogix
+11244,2026-08-22,Bengaluru,Bakery,1,68,QuickDash
+11283,2026-08-22,Chennai,Groceries,8,786,LocalHub
+10265,2026-08-22,Pune,Beverages,5,225,LocalHub
+11883,2026-08-22,Bengaluru,Household Essentials,8,1000,QuickDash
+10787,2026-08-22,Hyderabad,Snacks,1,65,QuickDash
+11994,2026-08-22,Bengaluru,Snacks,8,393,QuickDash
+11542,2026-08-22,Chennai,Household Essentials,5,622,QuickDash
+12004,2026-08-22,Hyderabad,Groceries,6,470,QuickDash
+11936,2026-08-22,Bengaluru,Snacks,6,400,CityLogix
+11608,2026-08-22,Bengaluru,Snacks,3,179,LocalHub
+11852,2026-08-22,Hyderabad,Beverages,8,371,RapidVan
+10571,2026-08-22,Pune,Household Essentials,5,638,RapidVan
+10919,2026-08-22,Chennai,Personal Care,2,313,QuickDash
+11890,2026-08-22,Bengaluru,Groceries,5,460,SwiftKart
+10176,2026-08-22,Bengaluru,Household Essentials,8,953,RapidVan
+11653,2026-08-22,Hyderabad,Baby Care,4,773,SwiftKart
+10899,2026-08-22,Pune,Groceries,6,619,CityLogix
+10290,2026-08-22,Bengaluru,Personal Care,3,400,CityLogix
+11897,2026-08-22,Chennai,Frozen Foods,3,399,LocalHub
+11135,2026-08-22,Pune,Groceries,1,102,QuickDash
+10165,2026-08-22,Bengaluru,Personal Care,4,618,QuickDash
+10263,2026-08-22,Bengaluru,Snacks,6,378,QuickDash
+11145,2026-08-22,Bengaluru,Beverages,3,135,CityLogix
+10867,2026-08-22,Pune,Beverages,2,88,CityLogix
+11156,2026-08-22,Bengaluru,Snacks,1,60,RapidVan
+11914,2026-08-22,Hyderabad,Frozen Foods,6,720,CityLogix
+11669,2026-08-22,Pune,Snacks,2,136,RapidVan
+11619,2026-08-22,Bengaluru,Snacks,6,371,RapidVan
+10275,2026-08-22,Hyderabad,Personal Care,1,165,QuickDash
+10313,2026-08-22,Hyderabad,Personal Care,6,898,RapidVan
+11928,2026-08-22,Chennai,Groceries,8,806,LocalHub
+10849,2026-08-22,Pune,Baby Care,1,207,LocalHub
+11152,2026-08-22,Hyderabad,Household Essentials,3,361,RapidVan
+11718,2026-08-22,Bengaluru,Household Essentials,4,429,SwiftKart
+10788,2026-08-22,Hyderabad,Snacks,2,123,SwiftKart
+11730,2026-08-22,Hyderabad,Household Essentials,8,1016,CityLogix
+10534,2026-08-22,Chennai,Groceries,4,332,SwiftKart
+10226,2026-08-22,Hyderabad,Beverages,7,312,CityLogix
+11052,2026-08-22,Hyderabad,Groceries,4,367,QuickDash
+11019,2026-08-22,Chennai,Groceries,8,721,SwiftKart
+11415,2026-08-22,Pune,Bakery,2,151,RapidVan
+10775,2026-08-22,Hyderabad,Frozen Foods,6,745,SwiftKart
+11046,2026-08-22,Bengaluru,Groceries,3,285,CityLogix
+11464,2026-08-22,Chennai,Groceries,6,504,CityLogix
+11051,2026-08-22,Hyderabad,Bakery,3,210,LocalHub
+11478,2026-08-22,Hyderabad,Household Essentials,3,376,RapidVan
+11470,2026-08-22,Bengaluru,Personal Care,5,743,SwiftKart
+10369,2026-08-22,Bengaluru,Bakery,7,505,LocalHub
+10714,2026-08-22,Pune,Baby Care,4,968,LocalHub
+12115,2026-08-22,Chennai,Snacks,5,345,RapidVan
+11023,2026-08-22,Bengaluru,Snacks,1,58,QuickDash
+11782,2026-08-22,Bengaluru,Groceries,3,286,SwiftKart
+10729,2026-08-22,Hyderabad,Groceries,2,167,LocalHub
+12118,2026-08-22,Pune,Dairy,1,52,LocalHub
+12057,2026-08-22,Bengaluru,Personal Care,5,749,QuickDash
+12049,2026-08-22,Chennai,Personal Care,8,1310,LocalHub
+10980,2026-08-22,Hyderabad,Bakery,6,477,RapidVan
+10652,2026-08-22,Bengaluru,Snacks,7,451,LocalHub
+10981,2026-08-22,Chennai,Groceries,8,634,LocalHub
+12033,2026-08-22,Hyderabad,Bakery,4,280,QuickDash
+10095,2026-08-22,Hyderabad,Snacks,2,109,QuickDash
+11805,2026-08-22,Hyderabad,Bakery,4,272,SwiftKart
+11721,2026-08-22,Bengaluru,Snacks,7,460,CityLogix
+10660,2026-08-22,Pune,Beverages,3,118,QuickDash
+10670,2026-08-22,Hyderabad,Dairy,5,292,LocalHub
+12044,2026-08-22,Chennai,Groceries,3,297,LocalHub
+11462,2026-08-22,Hyderabad,Groceries,7,603,LocalHub
+11497,2026-08-22,Bengaluru,Personal Care,3,400,QuickDash
+11463,2026-08-22,Bengaluru,Snacks,8,531,LocalHub
+11055,2026-08-22,Hyderabad,Dairy,7,393,LocalHub
+12645,2026-08-23,Chennai,Bakery,3,224,QuickDash
+11129,2026-08-23,Bengaluru,Household Essentials,4,475,QuickDash
+11751,2026-08-23,Chennai,Beverages,8,306,QuickDash
+11746,2026-08-23,Hyderabad,Bakery,4,292,QuickDash
+11664,2026-08-23,Hyderabad,Snacks,2,123,SwiftKart
+12990,2026-08-23,Chennai,Household Essentials,2,244,CityLogix
+10278,2026-08-23,Hyderabad,Beverages,2,88,RapidVan
+11749,2026-08-23,Chennai,Groceries,8,762,QuickDash
+10259,2026-08-23,Hyderabad,Household Essentials,6,767,CityLogix
+10242,2026-08-23,Pune,Household Essentials,7,866,CityLogix
+12635,2026-08-23,Hyderabad,Frozen Foods,7,914,CityLogix
+12609,2026-08-23,Bengaluru,Personal Care,1,148,CityLogix
+11683,2026-08-23,Chennai,Frozen Foods,2,292,LocalHub
+11114,2026-08-23,Bengaluru,Bakery,6,375,RapidVan
+11105,2026-08-23,Bengaluru,Household Essentials,3,299,SwiftKart
+11690,2026-08-23,Pune,Groceries,8,734,LocalHub
+10268,2026-08-23,Pune,Baby Care,2,478,RapidVan
+10520,2026-08-23,Chennai,Groceries,1,105,RapidVan
+12323,2026-08-23,Bengaluru,Household Essentials,8,1022,LocalHub
+11086,2026-08-23,Bengaluru,Dairy,4,214,QuickDash
+11063,2026-08-23,Hyderabad,Snacks,2,125,QuickDash
+10515,2026-08-23,Bengaluru,Personal Care,3,388,LocalHub
+11713,2026-08-23,Hyderabad,Bakery,2,148,SwiftKart
+11676,2026-08-23,Bengaluru,Groceries,8,797,QuickDash
+12356,2026-08-23,Pune,Household Essentials,3,298,CityLogix
+10367,2026-08-23,Chennai,Dairy,4,194,RapidVan
+11660,2026-08-23,Pune,Household Essentials,8,945,RapidVan
+11301,2026-08-23,Hyderabad,Baby Care,2,414,QuickDash
+11319,2026-08-23,Pune,Household Essentials,8,936,SwiftKart
+10409,2026-08-23,Chennai,Bakery,7,445,LocalHub
+11504,2026-08-23,Hyderabad,Personal Care,8,1291,CityLogix
+11502,2026-08-23,Bengaluru,Frozen Foods,7,1029,LocalHub
+11332,2026-08-23,Bengaluru,Household Essentials,1,116,LocalHub
+11501,2026-08-23,Chennai,Household Essentials,5,611,QuickDash
+12515,2026-08-23,Chennai,Beverages,6,284,RapidVan
+12508,2026-08-23,Chennai,Groceries,3,256,SwiftKart
+12962,2026-08-23,Pune,Groceries,6,522,CityLogix
+12924,2026-08-23,Bengaluru,Frozen Foods,2,303,SwiftKart
+11369,2026-08-23,Chennai,Groceries,3,285,CityLogix
+11378,2026-08-23,Hyderabad,Snacks,7,445,LocalHub
+12936,2026-08-23,Hyderabad,Groceries,5,534,LocalHub
+11386,2026-08-23,Bengaluru,Bakery,8,557,LocalHub
+12480,2026-08-23,Hyderabad,Frozen Foods,4,535,LocalHub
+12477,2026-08-23,Bengaluru,Snacks,6,363,CityLogix
+12946,2026-08-23,Bengaluru,Snacks,4,254,LocalHub
+11455,2026-08-23,Hyderabad,Groceries,1,100,CityLogix
+12948,2026-08-23,Hyderabad,Groceries,5,447,RapidVan
+10366,2026-08-23,Chennai,Frozen Foods,1,128,LocalHub
+12469,2026-08-23,Pune,Groceries,8,764,RapidVan
+11374,2026-08-23,Chennai,Groceries,3,290,CityLogix
+11290,2026-08-23,Hyderabad,Frozen Foods,7,974,SwiftKart
+12416,2026-08-23,Chennai,Household Essentials,3,332,CityLogix
+11538,2026-08-23,Chennai,Beverages,7,370,LocalHub
+10487,2026-08-23,Hyderabad,Dairy,4,182,QuickDash
+11645,2026-08-23,Hyderabad,Snacks,3,203,LocalHub
+12365,2026-08-23,Bengaluru,Household Essentials,2,208,QuickDash
+11138,2026-08-23,Hyderabad,Personal Care,3,380,SwiftKart
+10303,2026-08-23,Bengaluru,Snacks,7,405,CityLogix
+10477,2026-08-23,Bengaluru,Groceries,1,97,SwiftKart
+10459,2026-08-23,Bengaluru,Frozen Foods,4,501,CityLogix
+12896,2026-08-23,Chennai,Household Essentials,5,587,QuickDash
+11040,2026-08-23,Pune,Beverages,7,321,LocalHub
+11173,2026-08-23,Bengaluru,Personal Care,3,503,CityLogix
+10452,2026-08-23,Bengaluru,Personal Care,3,484,CityLogix
+11597,2026-08-23,Hyderabad,Bakery,3,225,CityLogix
+11592,2026-08-23,Chennai,Personal Care,3,482,CityLogix
+12572,2026-08-23,Pune,Bakery,7,433,CityLogix
+12571,2026-08-23,Pune,Household Essentials,2,235,QuickDash
+11192,2026-08-23,Pune,Snacks,8,528,RapidVan
+11576,2026-08-23,Bengaluru,Frozen Foods,7,980,CityLogix
+11211,2026-08-23,Hyderabad,Beverages,1,51,CityLogix
+11236,2026-08-23,Pune,Snacks,3,176,RapidVan
+11273,2026-08-23,Hyderabad,Dairy,7,368,LocalHub
+10414,2026-08-23,Hyderabad,Groceries,6,457,LocalHub
+12533,2026-08-23,Chennai,Groceries,7,588,QuickDash
+12532,2026-08-23,Pune,Personal Care,8,1091,SwiftKart
+11131,2026-08-23,Bengaluru,Frozen Foods,7,1053,SwiftKart
+11758,2026-08-23,Chennai,Groceries,5,477,RapidVan
+12876,2026-08-23,Hyderabad,Snacks,8,544,SwiftKart
+10143,2026-08-23,Chennai,Groceries,5,443,RapidVan
+12746,2026-08-23,Pune,Snacks,2,104,LocalHub
+12744,2026-08-23,Bengaluru,Beverages,4,166,RapidVan
+11978,2026-08-23,Chennai,Dairy,3,170,SwiftKart
+10617,2026-08-23,Bengaluru,Groceries,2,191,SwiftKart
+10839,2026-08-23,Chennai,Dairy,1,52,QuickDash
+11950,2026-08-23,Chennai,Personal Care,3,487,CityLogix
+12213,2026-08-23,Pune,Snacks,4,237,RapidVan
+12216,2026-08-23,Pune,Groceries,4,372,LocalHub
+11981,2026-08-23,Hyderabad,Baby Care,6,1084,QuickDash
+10843,2026-08-23,Pune,Snacks,2,124,CityLogix
+10151,2026-08-23,Hyderabad,Beverages,8,366,QuickDash
+10866,2026-08-23,Hyderabad,Frozen Foods,6,750,LocalHub
+11919,2026-08-23,Pune,Beverages,8,351,SwiftKart
+12715,2026-08-23,Hyderabad,Groceries,2,199,CityLogix
+10890,2026-08-23,Bengaluru,Household Essentials,6,737,RapidVan
+11899,2026-08-23,Hyderabad,Bakery,7,472,RapidVan
+10893,2026-08-23,Chennai,Groceries,3,253,LocalHub
+12704,2026-08-23,Pune,Personal Care,5,791,CityLogix
+10144,2026-08-23,Chennai,Groceries,5,448,LocalHub
+11875,2026-08-23,Pune,Personal Care,7,872,QuickDash
+10802,2026-08-23,Chennai,Snacks,3,176,SwiftKart
+10786,2026-08-23,Bengaluru,Personal Care,2,313,CityLogix
+13084,2026-08-23,Pune,Dairy,7,374,QuickDash
+10701,2026-08-23,Bengaluru,Personal Care,3,429,QuickDash
+12122,2026-08-23,Hyderabad,Snacks,2,116,SwiftKart
+10106,2026-08-23,Pune,Dairy,6,305,LocalHub
+12798,2026-08-23,Pune,Dairy,7,377,CityLogix
+10108,2026-08-23,Pune,Dairy,3,186,SwiftKart
+10668,2026-08-23,Bengaluru,Dairy,3,177,RapidVan
+12813,2026-08-23,Hyderabad,Personal Care,7,1220,RapidVan
+12752,2026-08-23,Pune,Frozen Foods,7,907,LocalHub
+12818,2026-08-23,Hyderabad,Groceries,6,546,LocalHub
+10663,2026-08-23,Bengaluru,Snacks,1,58,SwiftKart
+12065,2026-08-23,Pune,Personal Care,8,1203,LocalHub
+10124,2026-08-23,Bengaluru,Dairy,7,370,LocalHub
+12178,2026-08-23,Chennai,Groceries,2,170,RapidVan
+10752,2026-08-23,Bengaluru,Snacks,8,573,QuickDash
+12826,2026-08-23,Bengaluru,Snacks,8,492,CityLogix
+13066,2026-08-23,Pune,Baby Care,2,432,SwiftKart
+10782,2026-08-23,Chennai,Dairy,8,380,LocalHub
+10732,2026-08-23,Bengaluru,Snacks,4,212,QuickDash
+10188,2026-08-23,Chennai,Frozen Foods,5,594,LocalHub
+11430,2026-08-23,Bengaluru,Snacks,2,117,SwiftKart
+12689,2026-08-23,Bengaluru,Bakery,1,73,QuickDash
+10968,2026-08-23,Hyderabad,Household Essentials,2,239,CityLogix
+10960,2026-08-23,Bengaluru,Dairy,8,421,SwiftKart
+11783,2026-08-23,Chennai,Household Essentials,5,570,LocalHub
+13031,2026-08-23,Hyderabad,Snacks,5,311,LocalHub
+13032,2026-08-23,Chennai,Frozen Foods,3,433,RapidVan
+13018,2026-08-23,Bengaluru,Snacks,7,465,QuickDash
+10999,2026-08-23,Bengaluru,Snacks,8,557,RapidVan
+10554,2026-08-23,Bengaluru,Snacks,8,474,SwiftKart
+10946,2026-08-23,Bengaluru,Snacks,6,372,CityLogix
+10557,2026-08-23,Pune,Baby Care,2,378,LocalHub
+10190,2026-08-23,Pune,Snacks,6,312,LocalHub
+10976,2026-08-23,Bengaluru,Frozen Foods,6,761,LocalHub
+12303,2026-08-23,Chennai,Household Essentials,6,824,RapidVan
+12857,2026-08-23,Bengaluru,Beverages,6,281,LocalHub
+11775,2026-08-23,Chennai,Groceries,5,373,QuickDash
+11772,2026-08-23,Chennai,Groceries,1,90,CityLogix
+13016,2026-08-23,Chennai,Groceries,3,292,CityLogix
+10985,2026-08-23,Bengaluru,Personal Care,2,276,CityLogix
+10771,2026-08-24,Chennai,Snacks,7,368,CityLogix
+11526,2026-08-24,Chennai,Personal Care,2,261,QuickDash
+13064,2026-08-24,Chennai,Groceries,2,178,SwiftKart
+12043,2026-08-24,Chennai,Groceries,4,360,LocalHub
+12534,2026-08-24,Chennai,Snacks,5,312,CityLogix
+11784,2026-08-24,Hyderabad,Household Essentials,6,730,QuickDash
+10412,2026-08-24,Pune,Groceries,2,169,QuickDash
+11727,2026-08-24,Pune,Bakery,1,77,CityLogix
+10986,2026-08-24,Chennai,Groceries,5,483,QuickDash
+12880,2026-08-24,Chennai,Groceries,4,345,QuickDash
+12045,2026-08-24,Bengaluru,Snacks,7,465,SwiftKart
+10330,2026-08-24,Pune,Beverages,4,200,CityLogix
+12525,2026-08-24,Bengaluru,Personal Care,4,670,CityLogix
+11794,2026-08-24,Bengaluru,Snacks,7,393,RapidVan
+11802,2026-08-24,Bengaluru,Bakery,7,415,LocalHub
+12509,2026-08-24,Pune,Baby Care,3,622,LocalHub
+10360,2026-08-24,Bengaluru,Bakery,4,248,SwiftKart
+10682,2026-08-24,Chennai,Groceries,6,597,RapidVan
+10099,2026-08-24,Hyderabad,Household Essentials,5,634,QuickDash
+11456,2026-08-24,Chennai,Groceries,5,470,LocalHub
+12120,2026-08-24,Bengaluru,Snacks,2,124,SwiftKart
+12310,2026-08-24,Chennai,Dairy,1,57,SwiftKart
+12653,2026-08-24,Chennai,Beverages,2,84,CityLogix
+11042,2026-08-24,Bengaluru,Snacks,2,144,RapidVan
+10715,2026-08-24,Chennai,Groceries,6,595,LocalHub
+10393,2026-08-24,Bengaluru,Snacks,6,351,CityLogix
+10722,2026-08-24,Chennai,Dairy,1,53,SwiftKart
+10119,2026-08-24,Hyderabad,Beverages,4,186,RapidVan
+11779,2026-08-24,Chennai,Personal Care,5,826,LocalHub
+12073,2026-08-24,Hyderabad,Beverages,6,294,LocalHub
+12071,2026-08-24,Chennai,Groceries,1,91,QuickDash
+10385,2026-08-24,Pune,Groceries,7,591,CityLogix
+10623,2026-08-24,Bengaluru,Dairy,2,112,CityLogix
+11348,2026-08-24,Bengaluru,Frozen Foods,1,127,LocalHub
+11049,2026-08-24,Bengaluru,Snacks,6,371,RapidVan
+12293,2026-08-24,Hyderabad,Baby Care,3,674,RapidVan
+12483,2026-08-24,Pune,Groceries,7,725,LocalHub
+11366,2026-08-24,Hyderabad,Dairy,4,247,CityLogix
+11436,2026-08-24,Hyderabad,Groceries,2,181,CityLogix
+12869,2026-08-24,Pune,Frozen Foods,5,620,SwiftKart
+10846,2026-08-24,Bengaluru,Household Essentials,6,777,CityLogix
+12542,2026-08-24,Hyderabad,Household Essentials,5,652,RapidVan
+12378,2026-08-24,Hyderabad,Beverages,1,43,CityLogix
+10600,2026-08-24,Chennai,Bakery,8,532,CityLogix
+12229,2026-08-24,Bengaluru,Frozen Foods,3,395,LocalHub
+10593,2026-08-24,Hyderabad,Frozen Foods,4,464,QuickDash
+10588,2026-08-24,Bengaluru,Frozen Foods,5,688,QuickDash
+11640,2026-08-24,Chennai,Snacks,4,248,CityLogix
+11141,2026-08-24,Chennai,Frozen Foods,7,855,SwiftKart
+10895,2026-08-24,Pune,Snacks,8,440,CityLogix
+12362,2026-08-24,Hyderabad,Groceries,5,470,CityLogix
+11842,2026-08-24,Bengaluru,Groceries,4,320,LocalHub
+12246,2026-08-24,Hyderabad,Personal Care,7,1186,SwiftKart
+10906,2026-08-24,Chennai,Groceries,6,539,CityLogix
+10918,2026-08-24,Bengaluru,Household Essentials,8,994,CityLogix
+10183,2026-08-24,Pune,Personal Care,3,439,SwiftKart
+11862,2026-08-24,Pune,Frozen Foods,3,374,SwiftKart
+11861,2026-08-24,Bengaluru,Snacks,4,258,RapidVan
+10501,2026-08-24,Chennai,Groceries,5,390,QuickDash
+11035,2026-08-24,Bengaluru,Personal Care,3,420,RapidVan
+10609,2026-08-24,Pune,Groceries,1,93,LocalHub
+12997,2026-08-24,Bengaluru,Snacks,6,351,LocalHub
+10840,2026-08-24,Bengaluru,Personal Care,5,660,LocalHub
+11561,2026-08-24,Bengaluru,Personal Care,3,500,SwiftKart
+10518,2026-08-24,Hyderabad,Beverages,7,341,CityLogix
+10443,2026-08-24,Bengaluru,Bakery,4,298,SwiftKart
+10838,2026-08-24,Hyderabad,Snacks,6,369,QuickDash
+11947,2026-08-24,Bengaluru,Personal Care,3,427,LocalHub
+11714,2026-08-24,Bengaluru,Beverages,4,181,RapidVan
+12975,2026-08-24,Bengaluru,Dairy,8,447,RapidVan
+11584,2026-08-24,Chennai,Snacks,8,423,RapidVan
+12734,2026-08-24,Bengaluru,Snacks,1,57,CityLogix
+11824,2026-08-24,Bengaluru,Personal Care,3,479,SwiftKart
+12579,2026-08-25,Bengaluru,Dairy,8,436,SwiftKart
+11334,2026-08-25,Bengaluru,Snacks,6,376,SwiftKart
+12825,2026-08-25,Bengaluru,Bakery,4,316,LocalHub
+10548,2026-08-25,Pune,Groceries,2,179,LocalHub
+11216,2026-08-25,Pune,Beverages,6,247,LocalHub
+12674,2026-08-25,Bengaluru,Snacks,6,343,LocalHub
+12922,2026-08-25,Chennai,Groceries,5,418,QuickDash
+12652,2026-08-25,Bengaluru,Frozen Foods,5,695,LocalHub
+12701,2026-08-25,Hyderabad,Groceries,2,191,LocalHub
+10832,2026-08-25,Hyderabad,Household Essentials,4,492,RapidVan
+10901,2026-08-25,Hyderabad,Frozen Foods,6,800,SwiftKart
+10450,2026-08-25,Bengaluru,Baby Care,5,972,SwiftKart
+11024,2026-08-25,Hyderabad,Beverages,1,39,LocalHub
+10781,2026-08-25,Pune,Snacks,3,192,RapidVan
+12141,2026-08-25,Bengaluru,Dairy,1,53,QuickDash
+10956,2026-08-25,Bengaluru,Snacks,2,118,QuickDash
+10725,2026-08-25,Chennai,Groceries,3,265,CityLogix
+12898,2026-08-25,Chennai,Beverages,7,282,CityLogix
+12526,2026-08-25,Chennai,Groceries,2,202,RapidVan
+11384,2026-08-25,Pune,Snacks,4,257,CityLogix
+10591,2026-08-25,Hyderabad,Beverages,3,118,CityLogix
+12761,2026-08-25,Pune,Household Essentials,3,345,RapidVan
+11161,2026-08-25,Bengaluru,Groceries,4,416,RapidVan
+12507,2026-08-25,Bengaluru,Snacks,3,174,LocalHub
+10756,2026-08-25,Bengaluru,Frozen Foods,4,529,CityLogix
+10932,2026-08-25,Pune,Beverages,6,263,SwiftKart
+11090,2026-08-25,Hyderabad,Groceries,7,622,CityLogix
+12015,2026-08-25,Bengaluru,Snacks,6,379,CityLogix
+13003,2026-08-25,Bengaluru,Personal Care,1,161,LocalHub
+11484,2026-08-25,Hyderabad,Household Essentials,5,568,LocalHub
+12403,2026-08-25,Hyderabad,Frozen Foods,5,694,QuickDash
+12406,2026-08-25,Chennai,Groceries,1,89,RapidVan
+12329,2026-08-25,Chennai,Groceries,3,243,CityLogix
+12439,2026-08-25,Chennai,Beverages,2,105,CityLogix
+12971,2026-08-25,Chennai,Frozen Foods,1,136,SwiftKart
+12402,2026-08-25,Bengaluru,Groceries,6,520,CityLogix
+12352,2026-08-25,Bengaluru,Snacks,7,357,LocalHub
+12434,2026-08-25,Pune,Snacks,1,59,SwiftKart
+11698,2026-08-25,Hyderabad,Frozen Foods,6,787,LocalHub
+11547,2026-08-25,Bengaluru,Snacks,7,448,QuickDash
+11536,2026-08-25,Hyderabad,Beverages,4,172,LocalHub
+12991,2026-08-25,Bengaluru,Frozen Foods,1,141,QuickDash
+11505,2026-08-25,Hyderabad,Bakery,2,136,LocalHub
+12261,2026-08-25,Bengaluru,Snacks,8,493,CityLogix
+11813,2026-08-25,Bengaluru,Snacks,8,472,SwiftKart
+10252,2026-08-25,Bengaluru,Snacks,1,62,RapidVan
+12224,2026-08-25,Hyderabad,Beverages,5,246,QuickDash
+10205,2026-08-25,Hyderabad,Dairy,7,424,RapidVan
+12113,2026-08-25,Bengaluru,Snacks,1,63,SwiftKart
+11618,2026-08-25,Hyderabad,Groceries,7,737,LocalHub
+10138,2026-08-25,Chennai,Personal Care,7,1063,RapidVan
+12221,2026-08-25,Bengaluru,Groceries,2,181,RapidVan
+11940,2026-08-25,Pune,Bakery,3,220,SwiftKart
+12245,2026-08-25,Hyderabad,Bakery,8,606,RapidVan
+12318,2026-08-25,Bengaluru,Snacks,3,182,CityLogix
+11435,2026-08-25,Chennai,Frozen Foods,7,948,LocalHub
+11973,2026-08-25,Pune,Groceries,5,495,CityLogix
+11548,2026-08-26,Pune,Frozen Foods,3,348,QuickDash
+10995,2026-08-26,Chennai,Groceries,4,363,QuickDash
+10991,2026-08-26,Bengaluru,Snacks,1,51,CityLogix
+11232,2026-08-26,Bengaluru,Beverages,7,300,SwiftKart
+11188,2026-08-26,Hyderabad,Groceries,6,538,LocalHub
+10503,2026-08-26,Hyderabad,Snacks,2,116,RapidVan
+10914,2026-08-26,Hyderabad,Snacks,1,52,SwiftKart
+12588,2026-08-26,Chennai,Dairy,8,429,QuickDash
+10451,2026-08-26,Hyderabad,Snacks,3,175,RapidVan
+11554,2026-08-26,Chennai,Beverages,7,269,QuickDash
+11859,2026-08-26,Hyderabad,Dairy,8,424,QuickDash
+12407,2026-08-26,Hyderabad,Snacks,4,211,CityLogix
+12919,2026-08-26,Pune,Groceries,2,175,SwiftKart
+10598,2026-08-26,Bengaluru,Baby Care,1,196,LocalHub
+11132,2026-08-26,Bengaluru,Dairy,7,322,RapidVan
+11258,2026-08-26,Bengaluru,Snacks,5,267,QuickDash
+12723,2026-08-26,Hyderabad,Snacks,3,186,LocalHub
+12344,2026-08-26,Hyderabad,Beverages,5,244,QuickDash
+12367,2026-08-26,Chennai,Dairy,4,207,SwiftKart
+12972,2026-08-26,Hyderabad,Baby Care,1,177,SwiftKart
+10804,2026-08-26,Chennai,Groceries,31,3060,LocalHub
+11045,2026-08-26,Hyderabad,Dairy,7,399,CityLogix
+11195,2026-08-26,Pune,Household Essentials,3,372,SwiftKart
+11533,2026-08-26,Hyderabad,Groceries,7,630,QuickDash
+10437,2026-08-26,Chennai,Groceries,2,171,QuickDash
+10343,2026-08-26,Chennai,Household Essentials,4,456,QuickDash
+11370,2026-08-26,Hyderabad,Personal Care,2,337,QuickDash
+13001,2026-08-26,Chennai,Groceries,5,504,RapidVan
+12787,2026-08-26,Chennai,Groceries,6,661,RapidVan
+12028,2026-08-26,Chennai,Snacks,8,464,CityLogix
+12710,2026-08-26,Pune,Bakery,1,67,SwiftKart
+12670,2026-08-26,Pune,Household Essentials,7,752,RapidVan
+11400,2026-08-26,Chennai,Groceries,1,83,RapidVan
+10706,2026-08-26,Pune,Beverages,7,276,LocalHub
+11841,2026-08-26,Hyderabad,Beverages,4,192,SwiftKart
+11839,2026-08-26,Bengaluru,Beverages,6,262,RapidVan
+11048,2026-08-26,Pune,Dairy,7,368,CityLogix
+10353,2026-08-26,Bengaluru,Snacks,8,485,RapidVan
+10357,2026-08-26,Bengaluru,Beverages,2,78,RapidVan
+10684,2026-08-26,Chennai,Groceries,3,293,LocalHub
+10096,2026-08-26,Bengaluru,Dairy,8,471,RapidVan
+12313,2026-08-26,Bengaluru,Snacks,2,116,QuickDash
+11071,2026-08-26,Hyderabad,Snacks,6,347,LocalHub
+12381,2026-08-26,Pune,Snacks,1,58,RapidVan
+11345,2026-08-26,Hyderabad,Frozen Foods,2,265,LocalHub
+11913,2026-08-26,Chennai,Groceries,7,627,RapidVan
+10270,2026-08-26,Hyderabad,Snacks,5,299,CityLogix
+11108,2026-08-26,Pune,Bakery,2,138,LocalHub
+11709,2026-08-26,Chennai,Household Essentials,7,812,QuickDash
+10728,2026-08-26,Hyderabad,Snacks,6,347,CityLogix
+11854,2026-08-26,Chennai,Groceries,5,461,CityLogix
+11700,2026-08-26,Hyderabad,Household Essentials,3,387,RapidVan
+11912,2026-08-26,Hyderabad,Frozen Foods,6,712,CityLogix
+13051,2026-08-26,Chennai,Dairy,1,53,LocalHub
+11621,2026-08-27,Hyderabad,Household Essentials,1,115,SwiftKart
+11164,2026-08-27,Pune,Groceries,37,2855,CityLogix
+10172,2026-08-27,Chennai,Groceries,1,95,SwiftKart
+10271,2026-08-27,Bengaluru,Dairy,6,301,QuickDash
+12640,2026-08-27,Bengaluru,Frozen Foods,6,716,RapidVan
+11742,2026-08-27,Bengaluru,Household Essentials,7,870,CityLogix
+12374,2026-08-27,Hyderabad,Personal Care,3,443,SwiftKart
+11100,2026-08-27,Hyderabad,Snacks,6,320,LocalHub
+12317,2026-08-27,Hyderabad,Bakery,6,438,RapidVan
+11769,2026-08-27,Bengaluru,Groceries,8,698,LocalHub
+11911,2026-08-27,Hyderabad,Snacks,5,295,LocalHub
+12591,2026-08-27,Chennai,Groceries,4,348,SwiftKart
+10244,2026-08-27,Bengaluru,Snacks,6,376,QuickDash
+12725,2026-08-27,Chennai,Bakery,4,249,LocalHub
+12240,2026-08-27,Bengaluru,Snacks,7,436,QuickDash
+10860,2026-08-27,Bengaluru,Beverages,4,141,RapidVan
+10508,2026-08-27,Pune,Frozen Foods,5,661,RapidVan
+10160,2026-08-27,Chennai,Household Essentials,4,532,RapidVan
+11061,2026-08-27,Chennai,Groceries,1,100,LocalHub
+11130,2026-08-27,Hyderabad,Groceries,7,577,LocalHub
+10480,2026-08-27,Pune,Groceries,3,271,SwiftKart
+11087,2026-08-27,Bengaluru,Frozen Foods,7,1054,RapidVan
+11036,2026-08-27,Bengaluru,Snacks,2,115,RapidVan
+11137,2026-08-27,Hyderabad,Snacks,3,169,RapidVan
+11760,2026-08-27,Chennai,Household Essentials,2,249,RapidVan
+10304,2026-08-27,Chennai,Groceries,2,189,CityLogix
+10610,2026-08-27,Pune,Groceries,1,96,CityLogix
+12705,2026-08-27,Bengaluru,Beverages,2,86,QuickDash
+13042,2026-08-27,Pune,Groceries,6,480,LocalHub
+11617,2026-08-27,Chennai,Groceries,1,87,CityLogix
+12034,2026-08-27,Pune,Groceries,1,81,RapidVan
+12964,2026-08-27,Bengaluru,Snacks,3,191,QuickDash
+10128,2026-08-27,Bengaluru,Snacks,4,237,SwiftKart
+12435,2026-08-27,Chennai,Beverages,3,132,QuickDash
+12169,2026-08-27,Hyderabad,Dairy,4,213,QuickDash
+10665,2026-08-27,Hyderabad,Personal Care,2,320,SwiftKart
+10389,2026-08-27,Chennai,Groceries,1,81,CityLogix
+12816,2026-08-27,Pune,Snacks,3,185,CityLogix
+13078,2026-08-27,Bengaluru,Household Essentials,5,630,RapidVan
+10116,2026-08-27,Hyderabad,Beverages,8,387,CityLogix
+12933,2026-08-27,Chennai,Frozen Foods,3,445,SwiftKart
+10935,2026-08-27,Bengaluru,Personal Care,7,1083,SwiftKart
+12441,2026-08-27,Bengaluru,Beverages,7,335,RapidVan
+10666,2026-08-27,Hyderabad,Bakery,5,397,RapidVan
+12101,2026-08-27,Hyderabad,Dairy,4,224,RapidVan
+12104,2026-08-27,Chennai,Groceries,5,399,RapidVan
+12490,2026-08-27,Chennai,Groceries,6,532,QuickDash
+12939,2026-08-27,Chennai,Groceries,5,433,RapidVan
+10543,2026-08-27,Hyderabad,Groceries,2,194,SwiftKart
+10212,2026-08-27,Hyderabad,Dairy,2,90,SwiftKart
+11469,2026-08-27,Bengaluru,Household Essentials,1,134,QuickDash
+11409,2026-08-27,Chennai,Dairy,4,231,SwiftKart
+12455,2026-08-27,Chennai,Dairy,2,113,QuickDash
+10680,2026-08-27,Pune,Personal Care,2,294,RapidVan
+11420,2026-08-27,Bengaluru,Snacks,4,264,QuickDash
+12278,2026-08-27,Bengaluru,Snacks,5,298,RapidVan
+12420,2026-08-27,Pune,Baby Care,2,392,QuickDash
+10761,2026-08-27,Hyderabad,Personal Care,2,289,RapidVan
+12418,2026-08-27,Bengaluru,Personal Care,5,707,CityLogix
+12575,2026-08-27,Hyderabad,Personal Care,1,155,RapidVan
+10963,2026-08-27,Pune,Frozen Foods,4,522,RapidVan
+12388,2026-08-27,Pune,Personal Care,7,1014,CityLogix
+12389,2026-08-27,Bengaluru,Personal Care,7,913,SwiftKart
+13041,2026-08-27,Chennai,Beverages,5,209,CityLogix
+10319,2026-08-27,Bengaluru,Groceries,6,518,RapidVan
+10174,2026-08-27,Chennai,Groceries,4,386,QuickDash
+10137,2026-08-27,Pune,Groceries,2,173,RapidVan
+11579,2026-08-27,Hyderabad,Baby Care,1,194,QuickDash
+11020,2026-08-27,Bengaluru,Beverages,8,332,LocalHub
+11575,2026-08-27,Pune,Beverages,2,92,RapidVan
+10810,2026-08-27,Pune,Personal Care,8,1174,RapidVan
+10322,2026-08-27,Pune,Baby Care,6,1235,RapidVan
+11984,2026-08-27,Bengaluru,Bakery,6,370,RapidVan
+12202,2026-08-27,Bengaluru,Personal Care,6,833,RapidVan
+12548,2026-08-27,Hyderabad,Dairy,4,216,CityLogix
+12911,2026-08-27,Pune,Household Essentials,40,3895,QuickDash
+10792,2026-08-27,Chennai,Bakery,4,325,CityLogix
+10420,2026-08-27,Pune,Personal Care,7,1026,CityLogix
+12693,2026-08-27,Pune,Snacks,8,524,QuickDash
+12412,2026-08-27,Bengaluru,Groceries,6,509,LocalHub
+12918,2026-08-27,Hyderabad,Snacks,6,391,LocalHub
+10586,2026-08-27,Pune,Groceries,4,309,LocalHub
+10934,2026-08-27,Chennai,Personal Care,2,314,RapidVan
+13065,2026-08-27,Bengaluru,Bakery,1,59,QuickDash
+10924,2026-08-28,Pune,Snacks,2,117,LocalHub
+10950,2026-08-28,Bengaluru,Household Essentials,6,791,LocalHub
+11850,2026-08-28,Bengaluru,Groceries,5,426,SwiftKart
+10171,2026-08-28,Hyderabad,Bakery,7,483,LocalHub
+10940,2026-08-28,Bengaluru,Beverages,5,217,CityLogix
+12244,2026-08-28,Chennai,Groceries,4,343,CityLogix
+11439,2026-08-28,Chennai,Baby Care,7,1295,SwiftKart
+12735,2026-08-28,Bengaluru,Snacks,2,116,QuickDash
+10882,2026-08-28,Hyderabad,Baby Care,6,1190,RapidVan
+12014,2026-08-28,Bengaluru,Bakery,8,551,QuickDash
+12765,2026-08-28,Hyderabad,Bakery,3,219,CityLogix
+10653,2026-08-28,Hyderabad,Frozen Foods,4,521,QuickDash
+13070,2026-08-28,Pune,Frozen Foods,6,868,LocalHub
+12070,2026-08-28,Hyderabad,Personal Care,3,445,QuickDash
+12092,2026-08-28,Bengaluru,Household Essentials,2,244,RapidVan
+10779,2026-08-28,Hyderabad,Snacks,2,99,SwiftKart
+12158,2026-08-28,Pune,Personal Care,7,1118,LocalHub
+12793,2026-08-28,Hyderabad,Beverages,2,74,QuickDash
+10702,2026-08-28,Bengaluru,Snacks,4,263,CityLogix
+12116,2026-08-28,Bengaluru,Beverages,2,85,QuickDash
+12123,2026-08-28,Bengaluru,Snacks,8,474,SwiftKart
+10695,2026-08-28,Bengaluru,Snacks,2,123,CityLogix
+10677,2026-08-28,Bengaluru,Dairy,3,161,SwiftKart
+10709,2026-08-28,Bengaluru,Snacks,1,56,LocalHub
+12009,2026-08-28,Bengaluru,Snacks,5,357,SwiftKart
+12005,2026-08-28,Chennai,Beverages,1,46,CityLogix
+11989,2026-08-28,Chennai,Groceries,8,662,SwiftKart
+10159,2026-08-28,Chennai,Groceries,6,528,QuickDash
+10856,2026-08-28,Bengaluru,Household Essentials,4,475,LocalHub
+11924,2026-08-28,Pune,Groceries,5,488,SwiftKart
+10601,2026-08-28,Hyderabad,Frozen Foods,2,235,CityLogix
+12845,2026-08-28,Chennai,Personal Care,2,310,LocalHub
+11938,2026-08-28,Bengaluru,Frozen Foods,3,418,LocalHub
+12730,2026-08-28,Chennai,Personal Care,8,1189,LocalHub
+10142,2026-08-28,Bengaluru,Beverages,2,88,RapidVan
+11961,2026-08-28,Hyderabad,Personal Care,6,811,CityLogix
+11963,2026-08-28,Hyderabad,Snacks,2,123,RapidVan
+10837,2026-08-28,Hyderabad,Personal Care,5,742,LocalHub
+12839,2026-08-28,Bengaluru,Bakery,1,60,QuickDash
+12199,2026-08-28,Bengaluru,Snacks,4,245,QuickDash
+10798,2026-08-28,Bengaluru,Snacks,5,302,RapidVan
+11985,2026-08-28,Bengaluru,Bakery,1,68,SwiftKart
+11894,2026-08-28,Bengaluru,Snacks,2,132,CityLogix
+10194,2026-08-28,Chennai,Bakery,4,285,QuickDash
+12878,2026-08-28,Pune,Household Essentials,7,820,RapidVan
+12806,2026-08-28,Pune,Beverages,1,42,QuickDash
+12271,2026-08-28,Hyderabad,Personal Care,1,165,RapidVan
+11566,2026-08-28,Hyderabad,Snacks,4,263,SwiftKart
+11578,2026-08-28,Bengaluru,Snacks,7,329,CityLogix
+11485,2026-08-28,Bengaluru,Groceries,7,622,RapidVan
+10376,2026-08-28,Pune,Bakery,5,337,LocalHub
+11481,2026-08-28,Bengaluru,Bakery,8,560,RapidVan
+11184,2026-08-28,Bengaluru,Snacks,1,58,QuickDash
+12942,2026-08-28,Hyderabad,Frozen Foods,2,266,SwiftKart
+11600,2026-08-28,Hyderabad,Baby Care,2,434,LocalHub
+12576,2026-08-28,Hyderabad,Dairy,8,469,QuickDash
+11399,2026-08-28,Pune,Baby Care,7,1279,SwiftKart
+11162,2026-08-28,Chennai,Snacks,1,59,CityLogix
+10476,2026-08-28,Hyderabad,Bakery,5,306,RapidVan
+12586,2026-08-28,Hyderabad,Frozen Foods,3,392,RapidVan
+11624,2026-08-28,Chennai,Snacks,3,169,RapidVan
+11338,2026-08-28,Bengaluru,Groceries,6,598,SwiftKart
+12595,2026-08-28,Bengaluru,Beverages,7,270,LocalHub
+12961,2026-08-28,Pune,Personal Care,1,149,QuickDash
+11139,2026-08-28,Bengaluru,Bakery,1,80,SwiftKart
+11219,2026-08-28,Hyderabad,Groceries,1,108,QuickDash
+11239,2026-08-28,Chennai,Household Essentials,6,787,LocalHub
+12511,2026-08-28,Hyderabad,Frozen Foods,7,876,LocalHub
+10336,2026-08-28,Hyderabad,Household Essentials,3,370,LocalHub
+12968,2026-08-28,Hyderabad,Household Essentials,2,267,QuickDash
+12925,2026-08-28,Bengaluru,Beverages,2,94,RapidVan
+11304,2026-08-28,Hyderabad,Snacks,3,182,QuickDash
+11292,2026-08-28,Pune,Beverages,3,148,CityLogix
+12437,2026-08-28,Chennai,Household Essentials,8,1074,QuickDash
+11289,2026-08-28,Hyderabad,Personal Care,6,876,LocalHub
+11288,2026-08-28,Hyderabad,Baby Care,7,1508,LocalHub
+11549,2026-08-28,Pune,Snacks,2,116,SwiftKart
+10413,2026-08-28,Hyderabad,Groceries,8,685,RapidVan
+11280,2026-08-28,Pune,Groceries,7,669,SwiftKart
+12932,2026-08-28,Hyderabad,Snacks,1,56,LocalHub
+10417,2026-08-28,Pune,Beverages,5,202,LocalHub
+11487,2026-08-28,Bengaluru,Snacks,2,122,LocalHub
+12549,2026-08-28,Hyderabad,Household Essentials,4,474,SwiftKart
+11559,2026-08-28,Bengaluru,Snacks,5,269,QuickDash
+11367,2026-08-28,Bengaluru,Snacks,8,472,QuickDash
+10295,2026-08-28,Chennai,Groceries,6,480,CityLogix
+11628,2026-08-28,Bengaluru,Snacks,1,59,SwiftKart
+11656,2026-08-28,Hyderabad,Baby Care,1,197,CityLogix
+11641,2026-08-28,Chennai,Bakery,1,77,LocalHub
+11467,2026-08-28,Bengaluru,Frozen Foods,7,1006,QuickDash
+13014,2026-08-28,Bengaluru,Baby Care,3,598,LocalHub
+10230,2026-08-28,Hyderabad,Bakery,4,307,RapidVan
+10228,2026-08-28,Hyderabad,Groceries,2,184,LocalHub
+10533,2026-08-28,Hyderabad,Dairy,1,54,RapidVan
+12478,2026-08-28,Chennai,Frozen Foods,7,913,CityLogix
+11012,2026-08-28,Bengaluru,Snacks,7,420,CityLogix
+10347,2026-08-28,Pune,Household Essentials,5,652,LocalHub
+12286,2026-08-28,Pune,Snacks,2,118,CityLogix
+10536,2026-08-28,Bengaluru,Snacks,6,357,QuickDash
+10217,2026-08-28,Bengaluru,Bakery,2,129,RapidVan
+11796,2026-08-28,Chennai,Beverages,2,107,RapidVan
+10216,2026-08-28,Hyderabad,Household Essentials,27,3706,LocalHub
+10350,2026-08-28,Pune,Frozen Foods,2,258,LocalHub
+11449,2026-08-28,Bengaluru,Groceries,1,86,LocalHub
+10195,2026-08-28,Bengaluru,Household Essentials,44,5018,RapidVan
+10527,2026-08-28,Pune,Snacks,8,504,LocalHub
+11033,2026-08-28,Bengaluru,Frozen Foods,3,432,RapidVan
+11405,2026-08-28,Chennai,Beverages,5,234,CityLogix
+12615,2026-08-28,Chennai,Personal Care,4,573,LocalHub
+11126,2026-08-28,Hyderabad,Snacks,6,340,LocalHub
+12611,2026-08-28,Chennai,Personal Care,6,901,LocalHub
+10233,2026-08-28,Hyderabad,Bakery,6,527,QuickDash
+12886,2026-08-28,Bengaluru,Snacks,3,163,RapidVan
+11083,2026-08-28,Hyderabad,Dairy,5,286,SwiftKart
+12622,2026-08-28,Chennai,Personal Care,2,342,LocalHub
+12628,2026-08-28,Bengaluru,Personal Care,4,551,RapidVan
+12881,2026-08-28,Bengaluru,Dairy,8,454,CityLogix
+10245,2026-08-28,Bengaluru,Bakery,6,438,SwiftKart
+12314,2026-08-28,Bengaluru,Snacks,8,472,LocalHub
+10239,2026-08-28,Bengaluru,Bakery,1,64,QuickDash
+11056,2026-08-28,Hyderabad,Groceries,8,754,CityLogix
+10286,2026-08-28,Pune,Baby Care,5,971,SwiftKart
+10679,2026-08-29,Chennai,Snacks,3,199,LocalHub
+12819,2026-08-29,Bengaluru,Snacks,2,112,RapidVan
+10339,2026-08-29,Chennai,Household Essentials,5,530,QuickDash
+10370,2026-08-29,Pune,Bakery,4,278,QuickDash
+10364,2026-08-29,Chennai,Groceries,2,203,QuickDash
+10346,2026-08-29,Bengaluru,Bakery,6,355,CityLogix
+12960,2026-08-29,Pune,Frozen Foods,7,981,RapidVan
+10118,2026-08-29,Hyderabad,Baby Care,7,1387,QuickDash
+10390,2026-08-29,Hyderabad,Household Essentials,8,874,LocalHub
+12943,2026-08-29,Bengaluru,Dairy,3,145,LocalHub
+10671,2026-08-29,Pune,Baby Care,8,1667,RapidVan
+12809,2026-08-29,Hyderabad,Household Essentials,8,916,SwiftKart
+12815,2026-08-29,Chennai,Snacks,5,287,RapidVan
+13075,2026-08-29,Pune,Dairy,3,182,RapidVan
+10127,2026-08-29,Pune,Household Essentials,4,457,QuickDash
+10556,2026-08-29,Hyderabad,Personal Care,6,963,SwiftKart
+10399,2026-08-29,Pune,Baby Care,8,1457,CityLogix
+10196,2026-08-29,Bengaluru,Snacks,3,145,SwiftKart
+10206,2026-08-29,Chennai,Bakery,4,298,SwiftKart
+10564,2026-08-29,Hyderabad,Household Essentials,7,711,SwiftKart
+10541,2026-08-29,Bengaluru,Snacks,6,380,LocalHub
+10223,2026-08-29,Hyderabad,Groceries,4,329,QuickDash
+12854,2026-08-29,Hyderabad,Baby Care,3,608,LocalHub
+13013,2026-08-29,Chennai,Groceries,2,193,LocalHub
+13012,2026-08-29,Chennai,Groceries,2,174,LocalHub
+12877,2026-08-29,Chennai,Groceries,7,668,RapidVan
+13045,2026-08-29,Pune,Household Essentials,1,120,QuickDash
+10594,2026-08-29,Hyderabad,Bakery,2,157,LocalHub
+12984,2026-08-29,Bengaluru,Snacks,5,295,QuickDash
+12897,2026-08-29,Bengaluru,Snacks,3,176,RapidVan
+12979,2026-08-29,Bengaluru,Frozen Foods,2,294,LocalHub
+13071,2026-08-29,Pune,Household Essentials,6,688,RapidVan
+10318,2026-08-29,Chennai,Groceries,3,242,RapidVan
+12902,2026-08-29,Chennai,Groceries,6,545,QuickDash
+13059,2026-08-29,Chennai,Household Essentials,2,241,QuickDash
+10132,2026-08-29,Bengaluru,Snacks,2,119,QuickDash
+13061,2026-08-29,Hyderabad,Snacks,6,330,CityLogix
+10620,2026-08-29,Pune,Household Essentials,1,114,LocalHub
+12905,2026-08-29,Bengaluru,Bakery,7,519,RapidVan
+12913,2026-08-29,Bengaluru,Groceries,2,203,QuickDash
+13062,2026-08-29,Hyderabad,Beverages,7,310,SwiftKart
+10626,2026-08-29,Hyderabad,Beverages,6,250,RapidVan
+10323,2026-08-29,Hyderabad,Household Essentials,4,370,QuickDash
+12831,2026-08-29,Bengaluru,Dairy,1,58,QuickDash
+13068,2026-08-29,Pune,Beverages,8,372,LocalHub
+10657,2026-08-29,Bengaluru,Frozen Foods,6,758,QuickDash
+10325,2026-08-29,Chennai,Groceries,1,93,QuickDash
+12974,2026-08-29,Bengaluru,Personal Care,4,555,CityLogix
+12904,2026-08-29,Chennai,Baby Care,1,196,QuickDash
+12139,2026-08-29,Pune,Frozen Foods,2,246,QuickDash
+12472,2026-08-29,Pune,Baby Care,8,1514,LocalHub
+12536,2026-08-29,Hyderabad,Frozen Foods,1,128,QuickDash
+11812,2026-08-29,Pune,Dairy,6,284,QuickDash
+11452,2026-08-29,Pune,Household Essentials,8,970,CityLogix
+12637,2026-08-29,Pune,Bakery,6,401,SwiftKart
+12642,2026-08-29,Hyderabad,Snacks,3,187,CityLogix
+11038,2026-08-29,Chennai,Groceries,2,177,RapidVan
+11028,2026-08-29,Chennai,Groceries,6,501,QuickDash
+12658,2026-08-29,Chennai,Groceries,2,186,CityLogix
+11831,2026-08-29,Bengaluru,Snacks,6,352,SwiftKart
+11787,2026-08-29,Hyderabad,Groceries,1,91,LocalHub
+11832,2026-08-29,Hyderabad,Baby Care,2,433,QuickDash
+11626,2026-08-29,Bengaluru,Snacks,2,111,QuickDash
+11837,2026-08-29,Hyderabad,Household Essentials,2,249,SwiftKart
+11849,2026-08-29,Hyderabad,Personal Care,8,1070,RapidVan
+10978,2026-08-29,Bengaluru,Snacks,4,227,RapidVan
+10972,2026-08-29,Bengaluru,Personal Care,2,294,QuickDash
+12390,2026-08-29,Hyderabad,Frozen Foods,1,124,RapidVan
+10949,2026-08-29,Bengaluru,Beverages,6,255,QuickDash
+12248,2026-08-29,Hyderabad,Snacks,7,458,LocalHub
+11678,2026-08-29,Chennai,Groceries,8,734,LocalHub
+12529,2026-08-29,Bengaluru,Personal Care,2,287,SwiftKart
+11900,2026-08-29,Hyderabad,Frozen Foods,2,269,CityLogix
+12290,2026-08-29,Bengaluru,Household Essentials,2,250,SwiftKart
+11089,2026-08-29,Pune,Frozen Foods,6,807,QuickDash
+11697,2026-08-29,Bengaluru,Bakery,4,259,CityLogix
+11221,2026-08-29,Chennai,Baby Care,5,868,QuickDash
+12334,2026-08-29,Hyderabad,Dairy,8,387,RapidVan
+11716,2026-08-29,Pune,Dairy,6,329,QuickDash
+11671,2026-08-29,Hyderabad,Groceries,2,167,LocalHub
+11194,2026-08-29,Bengaluru,Snacks,1,62,SwiftKart
+12567,2026-08-29,Bengaluru,Personal Care,7,1008,QuickDash
+11723,2026-08-29,Hyderabad,Groceries,8,721,SwiftKart
+11724,2026-08-29,Chennai,Groceries,8,765,SwiftKart
+12540,2026-08-29,Chennai,Groceries,41,3061,RapidVan
+11172,2026-08-29,Pune,Snacks,6,349,SwiftKart
+11165,2026-08-29,Hyderabad,Household Essentials,3,361,SwiftKart
+11252,2026-08-29,Bengaluru,Personal Care,5,849,SwiftKart
+11729,2026-08-29,Chennai,Household Essentials,3,311,RapidVan
+11666,2026-08-29,Bengaluru,Snacks,7,415,RapidVan
+12366,2026-08-29,Chennai,Groceries,3,278,RapidVan
+12299,2026-08-29,Chennai,Beverages,8,362,LocalHub
+11125,2026-08-29,Hyderabad,Beverages,8,430,RapidVan
+11121,2026-08-29,Hyderabad,Personal Care,8,1094,SwiftKart
+11778,2026-08-29,Hyderabad,Groceries,4,357,QuickDash
+11728,2026-08-29,Hyderabad,Groceries,8,736,RapidVan
+10939,2026-08-29,Hyderabad,Snacks,2,127,SwiftKart
+10942,2026-08-29,Bengaluru,Dairy,5,271,CityLogix
+12393,2026-08-29,Bengaluru,Frozen Foods,6,799,RapidVan
+10778,2026-08-29,Hyderabad,Groceries,6,513,SwiftKart
+11988,2026-08-29,Bengaluru,Groceries,22,1916,QuickDash
+12237,2026-08-29,Bengaluru,Beverages,1,47,CityLogix
+12762,2026-08-29,Bengaluru,Baby Care,5,1044,QuickDash
+11499,2026-08-29,Hyderabad,Household Essentials,8,997,SwiftKart
+10770,2026-08-29,Chennai,Household Essentials,3,388,RapidVan
+12018,2026-08-29,Chennai,Household Essentials,4,522,SwiftKart
+10754,2026-08-29,Bengaluru,Snacks,4,253,QuickDash
+12494,2026-08-29,Pune,Groceries,8,833,CityLogix
+12047,2026-08-29,Pune,Personal Care,1,157,QuickDash
+11404,2026-08-29,Hyderabad,Snacks,8,489,LocalHub
+12080,2026-08-29,Pune,Groceries,5,497,LocalHub
+12085,2026-08-29,Bengaluru,Dairy,6,313,LocalHub
+12087,2026-08-29,Bengaluru,Snacks,2,125,SwiftKart
+12117,2026-08-29,Bengaluru,Groceries,3,282,SwiftKart
+12476,2026-08-29,Hyderabad,Personal Care,8,1235,QuickDash
+11410,2026-08-29,Hyderabad,Frozen Foods,5,629,RapidVan
+12136,2026-08-29,Bengaluru,Snacks,6,358,RapidVan
+12443,2026-08-29,Chennai,Household Essentials,3,374,RapidVan
+12203,2026-08-29,Hyderabad,Beverages,5,218,RapidVan
+11999,2026-08-29,Pune,Groceries,7,643,SwiftKart
+11939,2026-08-29,Chennai,Groceries,7,634,CityLogix
+12226,2026-08-29,Bengaluru,Snacks,7,383,RapidVan
+10870,2026-08-29,Bengaluru,Personal Care,1,173,CityLogix
+12223,2026-08-29,Bengaluru,Snacks,6,372,CityLogix
+11347,2026-08-29,Hyderabad,Household Essentials,6,711,RapidVan
+11341,2026-08-29,Bengaluru,Household Essentials,1,127,CityLogix
+10873,2026-08-29,Hyderabad,Beverages,6,248,CityLogix
+11923,2026-08-29,Bengaluru,Snacks,3,178,CityLogix
+12729,2026-08-29,Bengaluru,Snacks,4,215,QuickDash
+12401,2026-08-29,Bengaluru,Household Essentials,4,418,SwiftKart
+10830,2026-08-29,Pune,Snacks,1,64,QuickDash
+10921,2026-08-29,Hyderabad,Personal Care,5,752,SwiftKart
+12709,2026-08-29,Chennai,Groceries,6,526,LocalHub
+12453,2026-08-30,Bengaluru,Frozen Foods,7,842,CityLogix
+10352,2026-08-30,Bengaluru,Groceries,1,85,CityLogix
+12448,2026-08-30,Pune,Beverages,6,278,CityLogix
+11668,2026-08-30,Hyderabad,Household Essentials,1,97,RapidVan
+10321,2026-08-30,Bengaluru,Snacks,6,388,RapidVan
+11500,2026-08-30,Chennai,Groceries,3,230,SwiftKart
+11486,2026-08-30,Hyderabad,Dairy,6,299,LocalHub
+12445,2026-08-30,Bengaluru,Bakery,8,573,RapidVan
+10309,2026-08-30,Hyderabad,Baby Care,7,1292,LocalHub
+12419,2026-08-30,Bengaluru,Baby Care,2,420,RapidVan
+11488,2026-08-30,Bengaluru,Dairy,8,416,SwiftKart
+11489,2026-08-30,Bengaluru,Groceries,5,471,QuickDash
+11632,2026-08-30,Hyderabad,Snacks,7,434,SwiftKart
+11494,2026-08-30,Chennai,Dairy,3,152,RapidVan
+11582,2026-08-30,Pune,Snacks,2,117,SwiftKart
+12973,2026-08-30,Chennai,Beverages,4,190,QuickDash
+11629,2026-08-30,Hyderabad,Groceries,5,429,QuickDash
+11613,2026-08-30,Hyderabad,Snacks,3,174,CityLogix
+11680,2026-08-30,Hyderabad,Snacks,2,146,QuickDash
+10207,2026-08-30,Bengaluru,Household Essentials,8,1033,QuickDash
+11691,2026-08-30,Pune,Snacks,5,293,RapidVan
+11970,2026-08-30,Bengaluru,Snacks,5,291,SwiftKart
+11974,2026-08-30,Hyderabad,Groceries,7,643,RapidVan
+11987,2026-08-30,Hyderabad,Dairy,3,150,CityLogix
+13063,2026-08-30,Hyderabad,Groceries,7,574,LocalHub
+12188,2026-08-30,Pune,Snacks,6,342,QuickDash
+13067,2026-08-30,Bengaluru,Household Essentials,4,483,SwiftKart
+12182,2026-08-30,Chennai,Beverages,4,177,LocalHub
+12039,2026-08-30,Bengaluru,Snacks,4,239,SwiftKart
+12055,2026-08-30,Chennai,Snacks,1,65,CityLogix
+10120,2026-08-30,Chennai,Groceries,1,102,CityLogix
+12076,2026-08-30,Bengaluru,Snacks,7,417,QuickDash
+12165,2026-08-30,Hyderabad,Household Essentials,3,346,QuickDash
+12107,2026-08-30,Bengaluru,Personal Care,4,587,SwiftKart
+10105,2026-08-30,Bengaluru,Snacks,4,233,LocalHub
+12124,2026-08-30,Chennai,Groceries,4,356,CityLogix
+12125,2026-08-30,Bengaluru,Baby Care,5,901,SwiftKart
+12126,2026-08-30,Hyderabad,Dairy,3,157,LocalHub
+11967,2026-08-30,Pune,Household Essentials,8,1078,QuickDash
+12342,2026-08-30,Chennai,Snacks,2,123,CityLogix
+12214,2026-08-30,Bengaluru,Snacks,7,411,QuickDash
+12232,2026-08-30,Bengaluru,Snacks,8,501,SwiftKart
+10266,2026-08-30,Chennai,Groceries,3,291,SwiftKart
+11719,2026-08-30,Hyderabad,Frozen Foods,7,955,QuickDash
+10256,2026-08-30,Hyderabad,Personal Care,5,794,SwiftKart
+13007,2026-08-30,Hyderabad,Groceries,6,521,SwiftKart
+12307,2026-08-30,Bengaluru,Household Essentials,7,787,QuickDash
+11773,2026-08-30,Hyderabad,Groceries,4,367,SwiftKart
+12295,2026-08-30,Chennai,Dairy,2,115,SwiftKart
+12292,2026-08-30,Pune,Snacks,2,111,CityLogix
+11789,2026-08-30,Pune,Dairy,1,52,SwiftKart
+11822,2026-08-30,Hyderabad,Household Essentials,2,278,SwiftKart
+11833,2026-08-30,Pune,Beverages,1,46,QuickDash
+12269,2026-08-30,Hyderabad,Groceries,6,470,QuickDash
+13038,2026-08-30,Pune,Snacks,6,354,CityLogix
+12252,2026-08-30,Bengaluru,Bakery,4,309,RapidVan
+11877,2026-08-30,Bengaluru,Snacks,8,500,LocalHub
+11882,2026-08-30,Bengaluru,Snacks,2,113,LocalHub
+11903,2026-08-30,Pune,Baby Care,4,897,SwiftKart
+11934,2026-08-30,Bengaluru,Snacks,2,135,LocalHub
+11451,2026-08-30,Chennai,Groceries,2,157,CityLogix
+10686,2026-08-30,Hyderabad,Snacks,5,262,CityLogix
+13088,2026-08-30,Pune,Bakery,3,215,RapidVan
+11166,2026-08-30,Chennai,Groceries,6,591,SwiftKart
+10616,2026-08-30,Bengaluru,Beverages,7,295,RapidVan
+12578,2026-08-30,Bengaluru,Snacks,3,184,RapidVan
+12741,2026-08-30,Hyderabad,Snacks,4,231,SwiftKart
+11178,2026-08-30,Chennai,Baby Care,8,1774,SwiftKart
+10807,2026-08-30,Pune,Groceries,8,791,LocalHub
+10470,2026-08-30,Bengaluru,Bakery,2,113,LocalHub
+11218,2026-08-30,Pune,Bakery,4,311,QuickDash
+10631,2026-08-30,Pune,Groceries,2,195,QuickDash
+11231,2026-08-30,Bengaluru,Personal Care,7,1022,QuickDash
+11243,2026-08-30,Hyderabad,Snacks,7,441,SwiftKart
+11250,2026-08-30,Chennai,Groceries,5,473,RapidVan
+10430,2026-08-30,Bengaluru,Groceries,7,597,RapidVan
+10636,2026-08-30,Hyderabad,Groceries,4,378,LocalHub
+11220,2026-08-30,Chennai,Groceries,8,767,LocalHub
+10426,2026-08-30,Bengaluru,Bakery,8,564,CityLogix
+12587,2026-08-30,Bengaluru,Snacks,7,419,RapidVan
+12887,2026-08-30,Bengaluru,Household Essentials,2,256,CityLogix
+12865,2026-08-30,Pune,Bakery,7,533,SwiftKart
+10953,2026-08-30,Hyderabad,Snacks,3,161,QuickDash
+10562,2026-08-30,Bengaluru,Bakery,8,590,SwiftKart
+12671,2026-08-30,Bengaluru,Snacks,6,362,SwiftKart
+12669,2026-08-30,Bengaluru,Groceries,3,221,SwiftKart
+10987,2026-08-30,Hyderabad,Groceries,1,91,QuickDash
+11140,2026-08-30,Bengaluru,Household Essentials,5,626,RapidVan
+10523,2026-08-30,Pune,Frozen Foods,5,601,RapidVan
+12721,2026-08-30,Pune,Snacks,6,345,QuickDash
+10603,2026-08-30,Pune,Snacks,3,188,CityLogix
+11079,2026-08-30,Hyderabad,Baby Care,6,1063,CityLogix
+11082,2026-08-30,Bengaluru,Household Essentials,8,958,RapidVan
+10509,2026-08-30,Chennai,Groceries,2,179,LocalHub
+12617,2026-08-30,Chennai,Groceries,1,85,CityLogix
+11065,2026-08-30,Pune,Groceries,3,252,CityLogix
+10651,2026-08-30,Bengaluru,Household Essentials,2,262,SwiftKart
+12908,2026-08-30,Bengaluru,Groceries,5,473,LocalHub
+10762,2026-08-30,Hyderabad,Dairy,7,353,CityLogix
+12498,2026-08-30,Pune,Household Essentials,3,375,QuickDash
+10720,2026-08-30,Chennai,Personal Care,8,1190,QuickDash
+10772,2026-08-30,Bengaluru,Beverages,5,229,SwiftKart
+12935,2026-08-30,Hyderabad,Frozen Foods,6,774,RapidVan
+11381,2026-08-30,Chennai,Groceries,7,647,CityLogix
+11396,2026-08-30,Hyderabad,Groceries,3,292,CityLogix
+10726,2026-08-30,Chennai,Beverages,3,139,LocalHub
+10375,2026-08-30,Bengaluru,Snacks,3,178,CityLogix
+11397,2026-08-30,Pune,Bakery,4,305,CityLogix
+10705,2026-08-30,Chennai,Bakery,2,138,RapidVan
+12481,2026-08-30,Hyderabad,Beverages,7,275,CityLogix
+10685,2026-08-30,Pune,Frozen Foods,6,776,QuickDash
+11422,2026-08-30,Pune,Bakery,1,68,CityLogix
+12470,2026-08-30,Chennai,Groceries,3,278,QuickDash
+10707,2026-08-30,Chennai,Household Essentials,4,535,RapidVan
+12500,2026-08-30,Hyderabad,Baby Care,7,1541,RapidVan
+12786,2026-08-30,Bengaluru,Frozen Foods,5,639,RapidVan
+10547,2026-08-30,Bengaluru,Groceries,1,93,RapidVan
+10744,2026-08-30,Hyderabad,Baby Care,1,173,RapidVan
+12821,2026-08-30,Chennai,Groceries,8,801,CityLogix
+12527,2026-08-30,Hyderabad,Household Essentials,5,596,QuickDash
+12524,2026-08-30,Pune,Dairy,4,231,QuickDash
+11324,2026-08-30,Bengaluru,Frozen Foods,6,814,SwiftKart
+12535,2026-08-30,Hyderabad,Personal Care,5,761,RapidVan
+12823,2026-08-30,Bengaluru,Baby Care,5,998,RapidVan
+10747,2026-08-30,Hyderabad,Groceries,8,801,SwiftKart
+11891,2026-08-31,Chennai,Groceries,1,102,SwiftKart
+10704,2026-08-31,Pune,Dairy,8,483,SwiftKart
+10576,2026-08-31,Bengaluru,Groceries,2,168,CityLogix
+10930,2026-08-31,Hyderabad,Personal Care,4,604,CityLogix
+12719,2026-08-31,Bengaluru,Household Essentials,3,371,RapidVan
+10156,2026-08-31,Pune,Groceries,2,191,RapidVan
+10750,2026-08-31,Bengaluru,Beverages,8,369,CityLogix
+12687,2026-08-31,Chennai,Household Essentials,8,945,LocalHub
+10152,2026-08-31,Hyderabad,Beverages,7,329,RapidVan
+10731,2026-08-31,Bengaluru,Snacks,2,137,CityLogix
+12780,2026-08-31,Hyderabad,Personal Care,5,780,SwiftKart
+12722,2026-08-31,Chennai,Dairy,8,448,LocalHub
+10845,2026-08-31,Bengaluru,Household Essentials,1,114,LocalHub
+12064,2026-08-31,Pune,Snacks,5,310,RapidVan
+10712,2026-08-31,Pune,Groceries,4,330,CityLogix
+12747,2026-08-31,Pune,Dairy,1,53,LocalHub
+12789,2026-08-31,Chennai,Groceries,3,249,QuickDash
+10842,2026-08-31,Bengaluru,Groceries,2,185,QuickDash
+12820,2026-08-31,Chennai,Household Essentials,8,962,QuickDash
+10733,2026-08-31,Pune,Groceries,7,627,LocalHub
+11962,2026-08-31,Chennai,Snacks,7,428,RapidVan
+12739,2026-08-31,Pune,Groceries,8,745,LocalHub
+12840,2026-08-31,Bengaluru,Bakery,7,495,RapidVan
+10852,2026-08-31,Chennai,Frozen Foods,3,344,CityLogix
+10967,2026-08-31,Chennai,Beverages,3,158,RapidVan
+11426,2026-08-31,Bengaluru,Snacks,5,267,RapidVan
+10178,2026-08-31,Hyderabad,Dairy,5,265,RapidVan
+10418,2026-08-31,Bengaluru,Household Essentials,4,451,LocalHub
+12357,2026-08-31,Bengaluru,Personal Care,5,692,RapidVan
+11642,2026-08-31,Hyderabad,Snacks,2,125,LocalHub
+11260,2026-08-31,Hyderabad,Snacks,3,187,SwiftKart
+11268,2026-08-31,Pune,Snacks,7,482,QuickDash
+11318,2026-08-31,Chennai,Groceries,3,259,CityLogix
+11610,2026-08-31,Bengaluru,Snacks,2,109,QuickDash
+11598,2026-08-31,Chennai,Groceries,6,478,CityLogix
+12514,2026-08-31,Chennai,Snacks,8,500,SwiftKart
+10276,2026-08-31,Bengaluru,Bakery,3,220,RapidVan
+10397,2026-08-31,Hyderabad,Baby Care,3,499,CityLogix
+11358,2026-08-31,Chennai,Snacks,7,436,LocalHub
+12409,2026-08-31,Hyderabad,Groceries,6,485,LocalHub
+11534,2026-08-31,Hyderabad,Frozen Foods,1,125,LocalHub
+11525,2026-08-31,Bengaluru,Snacks,3,188,SwiftKart
+12428,2026-08-31,Bengaluru,Frozen Foods,2,258,SwiftKart
+10381,2026-08-31,Bengaluru,Groceries,1,83,CityLogix
+10372,2026-08-31,Chennai,Groceries,7,619,RapidVan
+11398,2026-08-31,Hyderabad,Beverages,6,225,LocalHub
+12456,2026-08-31,Chennai,Dairy,8,475,SwiftKart
+12504,2026-08-31,Hyderabad,Frozen Foods,4,510,QuickDash
+11876,2026-08-31,Bengaluru,Snacks,6,355,SwiftKart
+11251,2026-08-31,Hyderabad,Baby Care,8,1842,QuickDash
+11210,2026-08-31,Hyderabad,Personal Care,5,787,CityLogix
+11866,2026-08-31,Bengaluru,Snacks,1,65,QuickDash
+11863,2026-08-31,Bengaluru,Personal Care,5,720,QuickDash
+10539,2026-08-31,Bengaluru,Beverages,4,177,QuickDash
+13030,2026-08-31,Bengaluru,Frozen Foods,5,709,QuickDash
+10535,2026-08-31,Hyderabad,Frozen Foods,2,285,SwiftKart
+12273,2026-08-31,Hyderabad,Snacks,3,186,QuickDash
+11003,2026-08-31,Bengaluru,Snacks,4,235,SwiftKart
+12633,2026-08-31,Hyderabad,Snacks,6,353,CityLogix
+11819,2026-08-31,Bengaluru,Snacks,8,459,RapidVan
+10442,2026-08-31,Bengaluru,Bakery,1,67,QuickDash
+12285,2026-08-31,Bengaluru,Snacks,6,377,CityLogix
+10359,2026-08-31,Chennai,Household Essentials,6,734,SwiftKart
+12626,2026-08-31,Bengaluru,Groceries,6,519,QuickDash
+12602,2026-08-31,Pune,Groceries,8,812,RapidVan
+11747,2026-08-31,Bengaluru,Snacks,5,256,QuickDash
+12315,2026-08-31,Hyderabad,Dairy,4,188,CityLogix
+12585,2026-08-31,Bengaluru,Household Essentials,2,236,RapidVan
+13005,2026-08-31,Bengaluru,Snacks,7,459,RapidVan
+10455,2026-08-31,Bengaluru,Snacks,3,189,LocalHub
+12326,2026-08-31,Bengaluru,Beverages,2,85,RapidVan
+10222,2026-08-31,Bengaluru,Beverages,8,412,QuickDash
+11792,2026-08-31,Hyderabad,Groceries,2,195,QuickDash

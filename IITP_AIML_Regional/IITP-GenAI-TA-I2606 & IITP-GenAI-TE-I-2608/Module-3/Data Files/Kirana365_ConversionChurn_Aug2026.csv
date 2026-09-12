@@ -1,0 +1,10 @@
+Metric,Count,Notes
+Festival Sale App Openers,100,"Bengaluru, single festival-week sample"
+Festival Sale -> Placed Order,82,82% probability of purchase
+"Regular App Sessions (August, Bengaluru)",2000,Monthly total
+Regular Sessions -> Orders Placed,620,31% conversion rate
+"Active Customers (Bengaluru, July)",4000,Base for churn calc
+Customers With Zero Orders in August,240,6% churn probability
+Diwali Banner - Times Shown,9000,Impressions
+Diwali Banner - Clicks,450,5% click-through rate
+Diwali Banner Clicks -> Orders,140,31% conversion-from-click
