@@ -31,9 +31,9 @@ end
 
 subgraph future[" WHAT COMES NEXT "]
 direction LR
-    U0["<b>Next Session</b><br/>Statistics: Probability and Uncertainty<br/><i>Module 3 begins - Tableau Dashboards + Storytelling</i>"]
-    U1["<b>Later in Module 2</b><br/>Module 2 concludes with this session"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling - Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's calculated fields and pandas' method-chaining both echo today's 'name each step clearly' habit</i>"]
+    U0["<b>Next Session</b><br/><i>Module 3 begins - Tableau Dashboards + Storytelling</i>"]
+    U1["<b>Later in Module 3</b><br/>Building Interactive Dashboards + Storytelling"]
+    U2["<b>Upcoming Modules</b><br/>Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's calculated fields and pandas' method-chaining both echo today's 'name each step clearly' habit</i>"]
 end
 
 START ==>|" begin "| CURMOD
@@ -238,4 +238,4 @@ Using the `customers`, `orders`, and `customer_addresses` tables from this modul
 
 > ✅ **You're done!** You can now write clean, readable, multi-step SQL using CTEs, and use GenAI to draft queries safely - always checking its output against your real schema and real data before trusting a single number.
 >
-> This wraps up **Module 2: SQL for Data Analysis.** Next up: **Statistics - Probability and Uncertainty**, opening **Module 3: Tableau Dashboards + Storytelling**.
+> This wraps up **Module 2: SQL for Data Analysis.** Next up: **Module 3: Tableau Dashboards + Storytelling**.
