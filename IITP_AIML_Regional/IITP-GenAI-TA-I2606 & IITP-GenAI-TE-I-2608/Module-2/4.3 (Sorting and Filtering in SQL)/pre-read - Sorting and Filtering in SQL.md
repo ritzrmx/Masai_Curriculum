@@ -13,13 +13,13 @@ flowchart TB
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
-direction TB
+direction LR
     CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages - Analytics Workflow &amp; KPIs - GenAI for Analytics - Clean Up the Data - Make Data Ready for Analysis - Formulas for Analysis - Pivot Tables &amp; Quick Insights - Spread, Variability &amp; Outliers - SQL Query Basics<br/>This is Session 10 of 41"]
     CURSES["<b>CURRENT SESSION</b><br/><b>Sorting and Filtering in SQL</b><br/>&nbsp;<br/><i>The shift:</i> from filtering to the right rows <i>to</i> <b>ranking them and pulling only the top or bottom results</b><br/>&nbsp;<br/>ORDER BY (ASC/DESC) - Multi-column sorting<br/>LIMIT - WHERE + ORDER BY + LIMIT together"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
-direction TB
+direction LR
     OUT["<b>By the end, you can...</b><br/>&nbsp;<br/>Sort query results ascending or descending, sort by more than<br/>one column, and pull only the top or bottom N rows to answer<br/>'who's the best/worst' business questions in one query"]
 end
 
@@ -30,7 +30,7 @@ direction LR
 end
 
 subgraph future[" WHAT COMES NEXT "]
-direction TB
+direction LR
     U0["<b>Next Session</b><br/>Aggregation Essentials<br/><i>SUM, COUNT, AVG - turning rows into totals</i>"]
     U1["<b>Later in Module 2</b><br/>Grouping for KPIs (GROUP BY) - Joining Tables Together - Insights from Combined Data"]
     U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling - Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's sort-and-filter panel and pandas' .sort_values()/.head() mirror exactly what you learn today</i>"]

@@ -13,13 +13,13 @@ flowchart TB
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
-direction TB
+direction LR
     CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages - Analytics Workflow &amp; KPIs - GenAI for Analytics - Clean Up the Data - Make Data Ready for Analysis - Formulas for Analysis - Pivot Tables &amp; Quick Insights - Spread, Variability &amp; Outliers<br/>This is Session 9 of 41"]
     CURSES["<b>CURRENT SESSION</b><br/><b>SQL Query Basics</b><br/>&nbsp;<br/><i>The shift:</i> from scrolling a spreadsheet <i>to</i> <b>querying a real database directly</b><br/>&nbsp;<br/>Tables: rows &amp; columns - SELECT<br/>WHERE - AND/OR operators"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
-direction TB
+direction LR
     OUT["<b>By the end, you can...</b><br/>&nbsp;<br/>Write a SELECT query with specific columns, filter rows<br/>with WHERE, and combine conditions correctly using AND/OR<br/>to answer a real business question in one query"]
 end
 
@@ -30,7 +30,7 @@ direction LR
 end
 
 subgraph future[" WHAT COMES NEXT "]
-direction TB
+direction LR
     U0["<b>Next Session</b><br/>Sorting and Filtering in SQL<br/><i>ORDER BY - let the database sort results for you</i>"]
     U1["<b>Later in Module 2</b><br/>Aggregation Essentials (SUM, COUNT, AVG) - Grouping for KPIs (GROUP BY) - Joining Tables Together"]
     U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling - Module 4: GenAI Workflows + Basic Python<br/><i>Tableau connects straight to tables like this one; pandas mirrors SELECT/WHERE almost line for line</i>"]

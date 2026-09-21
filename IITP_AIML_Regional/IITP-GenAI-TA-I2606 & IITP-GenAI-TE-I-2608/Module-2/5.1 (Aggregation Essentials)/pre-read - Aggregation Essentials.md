@@ -13,13 +13,13 @@ flowchart TB
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
-direction TB
+direction LR
     CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages - Analytics Workflow &amp; KPIs - GenAI for Analytics - Clean Up the Data - Make Data Ready for Analysis - Formulas for Analysis - Pivot Tables &amp; Quick Insights - Spread, Variability &amp; Outliers - SQL Query Basics - Sorting &amp; Filtering in SQL<br/>This is Session 11 of 41"]
     CURSES["<b>CURRENT SESSION</b><br/><b>Aggregation Essentials</b><br/>&nbsp;<br/><i>The shift:</i> from viewing individual rows <i>to</i> <b>collapsing many rows into one meaningful number</b><br/>&nbsp;<br/>COUNT - SUM - AVG<br/>MIN/MAX - Aggregates + WHERE"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
-direction TB
+direction LR
     OUT["<b>By the end, you can...</b><br/>&nbsp;<br/>Use COUNT, SUM, AVG, MIN and MAX to turn a full table of rows<br/>into a single trustworthy total, average, or extreme value -<br/>and combine them with WHERE to aggregate just the rows that matter"]
 end
 
@@ -30,7 +30,7 @@ direction LR
 end
 
 subgraph future[" WHAT COMES NEXT "]
-direction TB
+direction LR
     U0["<b>Next Session</b><br/>Grouping for KPIs<br/><i>GROUP BY - aggregate separately for each city, item, or customer</i>"]
     U1["<b>Later in Module 2</b><br/>Joining Tables Together - Insights from Combined Data - Subqueries in Action"]
     U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling - Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's SUM()/AVG() aggregations and pandas' .sum()/.mean() are the exact same idea, different syntax</i>"]

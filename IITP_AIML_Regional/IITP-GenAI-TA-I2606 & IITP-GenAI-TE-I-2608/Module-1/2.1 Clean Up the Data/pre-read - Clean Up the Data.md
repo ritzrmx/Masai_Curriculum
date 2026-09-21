@@ -11,13 +11,13 @@ flowchart LR
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
-direction TB
+direction LR
     CURMOD["<b>CURRENT MODULE</b><br/><i>Module 1: Analytics Foundations + GenAI + Spreadsheets</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data and Averages · Analytics Workflow, Metrics & KPIs<br/>· GenAI for Analytics<br/>This is Session 4 of 41"]
     CURSES["<b>CURRENT SESSION</b><br/><b>Clean Up the Data</b><br/>&nbsp;<br/><i>The shift:</i> from <i>discussing analytics ideas conceptually</i><br/>to <b>getting hands-on in a spreadsheet with real, messy data</b><br/>&nbsp;<br/>Loading data into spreadsheets · Spotting missing values, duplicates, formatting issues<br/>Removing duplicates & fixing formats · Sort and filter to inspect"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
-direction TB
+direction LR
     OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Load a raw dataset into Excel/Sheets, spot missing values, duplicates, and formatting<br/>issues by eye, and clean the obvious problems using sort and filter"]
 end
 
@@ -28,7 +28,7 @@ direction LR
 end
 
 subgraph future[" WHAT COMES NEXT "]
-direction TB
+direction LR
     U0["<b>Next Session</b><br/>Make Data Ready for Analysis<br/><i>Going one level deeper — consistent formats, data types, and validating that cleaning actually worked</i>"]
     U1["<b>Later in Module 1</b><br/>Formulas for Analysis · Pivot Tables and Quick Insights"]
     U2["<b>Upcoming Modules</b><br/>Module 2: SQL for Data Analysis · Module 3: Tableau Dashboards + Storytelling · Module 4: GenAI Workflows + Python<br/><i>Clean data is the prerequisite every one of these tools silently assumes you've already handled</i>"]
