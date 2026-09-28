@@ -1,21 +1,22 @@
-# Statistics: Spread, Variability and Outliers
+﻿# Statistics: Spread, Variability and Outliers
 > **Pre-Read - Academic Session 9** | Module 2: SQL for Data Analysis
 
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Statistics Spread, Variability and Outliers.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '12px', 'fontFamily': 'sans-serif' }, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false, 'nodeSpacing': 30, 'rankSpacing': 45, 'padding': 10}}}%%
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
 direction LR
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages - Analytics Workflow &amp; KPIs - GenAI for Analytics - Clean Up the Data - Make Data Ready for Analysis - Formulas for Analysis - Pivot Tables &amp; Quick Insights<br/>This is Session 8 of 41"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>Statistics: Spread, Variability and Outliers</b><br/>&nbsp;<br/><i>The shift:</i> from trusting a single average <i>to</i> <b>measuring how consistent the data behind it really is</b><br/>&nbsp;<br/>Range - Variance<br/>Standard Deviation - Outliers"]
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages · Analytics Workflow &amp; KPIs · GenAI for Analytics · Clean Up the Data · Make Data Ready for Analysis · Formulas for Analysis · Pivot Tables &amp; Quick Insights<br/>This is Session 8 of 41"]
+    CURSES["<b>CURRENT SESSION</b><br/><b>Statistics: Spread, Variability and Outliers</b><br/>&nbsp;<br/><i>The shift:</i> from trusting a single average <i>to</i> <b>measuring how consistent the data behind it really is</b><br/>&nbsp;<br/>Range · Variance<br/>Standard Deviation · Outliers"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
@@ -31,9 +32,9 @@ end
 
 subgraph future[" WHAT COMES NEXT "]
 direction LR
-    U0["<b>Next Session</b><br/>SQL Query Basics<br/><i>Your first SQL query - SELECT and WHERE on a real table</i>"]
-    U1["<b>Later in Module 2</b><br/>Sorting &amp; Filtering (ORDER BY) - Aggregation Essentials (SUM, COUNT, AVG) - Grouping for KPIs (GROUP BY)"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling - Module 4: GenAI Workflows + Basic Python<br/><i>Every stats idea from today resurfaces as a chart, a function, or a line of code</i>"]
+    U0["<b>Next Session</b><br/>SQL Query Basics<br/><i>Your first SQL query · SELECT and WHERE on a real table</i>"]
+    U1["<b>Later in Module 2</b><br/>Sorting &amp; Filtering (ORDER BY) · Aggregation Essentials (SUM, COUNT, AVG) · Grouping for KPIs (GROUP BY)"]
+    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling · Module 4: GenAI Workflows + Basic Python<br/><i>Every stats idea from today resurfaces as a chart, a function, or a line of code</i>"]
 end
 
 START ==>|" begin "| CURMOD
@@ -58,7 +59,18 @@ class CURSES curSessBox
 class OUT outBox
 class CVAL,RVAL valueBox
 class U0,U1,U2 futureBox
+
+
+linkStyle default stroke-width:2px
 ```
+
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-2/Statistics%20Spread,Variability%20and%20Outliers/mental-map%20-%20Statistics%20Spread,%20Variability%20and%20Outliers.png" target="_blank" download="mental-map - Statistics Spread, Variability and Outliers.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
 
 ---
 
@@ -149,7 +161,8 @@ So the vendor's daily sales typically sit about ±2.83 samosas away from the ave
 **⚠️ Common trap:** Assuming a "low" Standard Deviation is always good and a "high" one is always bad. It depends on the goal - a factory wants low SD on product weight (every unit should be identical), but an investor comparing two funds with the same average return might actually prefer the higher-SD one for its upside potential. SD measures consistency, not goodness - the business context decides which one is preferable.
 
 ```mermaid
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
     subgraph left_side["LOW STANDARD DEVIATION"]
         M1[Same average] --> M2[Values stay close to it]
         M2 --> M3[Predictable, easy to plan around]
@@ -158,6 +171,9 @@ flowchart TB
         D1[Same average] --> D2[Values swing far from it]
         D2 --> D3[Volatile, harder to plan around]
     end
+
+
+linkStyle default stroke-width:2px
 ```
 
 ---
@@ -203,6 +219,13 @@ The ₹850 fare (a genuine airport trip) pulls the "typical fare" figure well ab
 
 ---
 
-> ✅ **You're done!** You can now measure how consistent a dataset really is - not just what it averages to - and you know how to catch an outlier before it quietly distorts a business decision.
+>  **You're done!** You can now measure how consistent a dataset really is - not just what it averages to - and you know how to catch an outlier before it quietly distorts a business decision.
 >
 > Next up: **Sorting and Filtering in SQL** - picking SQL back up where Session 8 left off, adding `ORDER BY` and `LIMIT` to the `SELECT`/`WHERE` skills you already have.
+
+
+
+
+
+
+

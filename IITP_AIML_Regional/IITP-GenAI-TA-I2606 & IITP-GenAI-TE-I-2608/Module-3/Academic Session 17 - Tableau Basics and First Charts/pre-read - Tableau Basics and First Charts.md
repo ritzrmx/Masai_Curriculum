@@ -1,9 +1,10 @@
-# Tableau: Tableau Basics and First Charts
+﻿# Tableau: Tableau Basics and First Charts
 > Pre-Read — Academic Session 17 | Module 3: Tableau Dashboards + Storytelling
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map - Tableau Basics and First Charts.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
 %%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
@@ -60,6 +61,14 @@ class U0,U1,U2 futureBox
 
 linkStyle default stroke-width:2px
 ```
+
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-3/Academic%20Session%2017%20-%20Tableau%20Basics%20and%20First%20Charts/mental-map%20-%20Tableau%20Basics%20and%20First%20Charts.png" target="_blank" download="mental-map - Tableau Basics and First Charts.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
 
 ## What You'll Learn
 In this pre-read, you'll discover:
@@ -143,6 +152,7 @@ You'd see a line that dips on weekdays and spikes on weekends — a pattern invi
 **⚠️ Common trap**: Using a line chart for something that isn't naturally ordered — like City. Cities have no "before and after," so a line connecting Bengaluru → Chennai → Pune implies a trend that doesn't exist. Lines are for time (or any ordered sequence). Bars are for categories.
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
     subgraph left_side["BAR CHART"]
         M1[Category field] --> M2[Compares groups side by side]
@@ -152,6 +162,9 @@ flowchart LR
         D1[Date / ordered field] --> D2[Tracks change over sequence]
         D2 --> D3[Best for: daily, weekly, monthly trends]
     end
+
+
+linkStyle default stroke-width:2px
 ```
 
 ## Quick Reference — Which Chart, Which Shelf
@@ -177,3 +190,5 @@ flowchart LR
 
 > ✅ **You're done!** You can now open Tableau, load a real dataset, and turn plain rows into a bar or line chart that tells a story in one glance — the exact skill every dashboard in this module is built on.
 Next session, we step back into statistics for a moment — **Statistics: Probability and Uncertainty** — to understand just how confident we can be when we say "this customer is likely to buy."
+
+

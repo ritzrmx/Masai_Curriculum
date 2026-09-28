@@ -1,9 +1,10 @@
-# Tableau: Choosing the Right Chart
+﻿# Tableau: Choosing the Right Chart
 > Pre-Read — Academic Session 19 | Module 3: Tableau Dashboards + Storytelling
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map - Choosing the Right Chart.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
 %%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
@@ -61,6 +62,14 @@ class U0,U1,U2 futureBox
 linkStyle default stroke-width:2px
 ```
 
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-3/Academic%20Session%2019%20-%20Choosing%20the%20Right%20Chart/mental-map%20-%20Choosing%20the%20Right%20Chart.png" target="_blank" download="mental-map - Choosing the Right Chart.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
+
 ## What You'll Learn
 In this pre-read, you'll discover:
 - Five chart types beyond bar and line, and the specific job each one does
@@ -115,6 +124,7 @@ In this pre-read, you'll discover:
 **⚠️ Common trap**: Assuming there's always exactly one "correct" chart. Often two chart types are both valid — the real skill is picking the one that best matches what you're about to say next in your presentation.
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
     subgraph left_side["BAR CHART"]
         M1[City totals only] --> M2[Shows: Bengaluru is biggest]
@@ -124,6 +134,9 @@ flowchart LR
         D1[City + Category] --> D2[Shows: Bengaluru biggest, driven by Snacks]
         D2 --> D3[Reveals: Chennai's mix is almost all Groceries]
     end
+
+
+linkStyle default stroke-width:2px
 ```
 
 ## D. Making Charts Readable — Labels, Sorting, and Formatting
@@ -166,3 +179,5 @@ Three quick formatting habits that fix most readability problems:
 
 > ✅ **You're done!** You can now match a chart type to the actual question behind it, compare chart options on the same data, and format any chart so a reader understands it in seconds instead of minutes.
 Next session, we take these well-chosen, well-formatted charts and combine them for the first time into **Building a Dashboard** — a single connected view instead of scattered individual charts.
+
+

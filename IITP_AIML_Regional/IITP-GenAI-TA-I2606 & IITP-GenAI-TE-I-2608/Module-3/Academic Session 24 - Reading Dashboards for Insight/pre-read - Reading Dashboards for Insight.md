@@ -1,9 +1,10 @@
-# Tableau: Reading Dashboards for Insight
+﻿# Tableau: Reading Dashboards for Insight
 > Pre-Read — Academic Session 24 | Module 3: Tableau Dashboards + Storytelling
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map - Reading Dashboards for Insight.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
 %%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
@@ -61,6 +62,14 @@ class U0,U1,U2 futureBox
 linkStyle default stroke-width:2px
 ```
 
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-3/Academic%20Session%2024%20-%20Reading%20Dashboards%20for%20Insight/mental-map%20-%20Reading%20Dashboards%20for%20Insight.png" target="_blank" download="mental-map - Reading Dashboards for Insight.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
+
 ## What You'll Learn
 In this pre-read, you'll discover:
 - A simple three-step routine for reading any unfamiliar dashboard: orient, scan, question
@@ -109,9 +118,13 @@ In this pre-read, you'll discover:
 **⚠️ Common trap**: Stopping at description ("the number went up") and calling that an insight. A useful insight always answers "so what?" — what should someone do or believe differently because of this fact?
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
     A[Raw chart: numbers, bars, lines] --> B[Description: what the chart literally shows]
     B --> C[Insight: what it means and why it matters]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ## D. Common Misreadings to Watch For
@@ -149,3 +162,5 @@ flowchart LR
 
 > ✅ **You're done!** You can now walk into an unfamiliar dashboard, orient yourself before reading numbers, tell a real trend from noise, and convert a chart into a genuine, useful insight instead of a restated description.
 Next session, we take that same insight-spotting skill into **Insight Writing with GenAI**, using AI to help turn what you've noticed into a clear, well-written narrative someone else can act on.
+
+

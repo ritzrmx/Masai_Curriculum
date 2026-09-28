@@ -2,30 +2,30 @@
 > Academic Session 3 · Module 1: Analytics Foundations + GenAI + Spreadsheets
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '28px', 'fontFamily': 'sans-serif' }, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 100, 'rankSpacing': 140, 'wrappingWidth': 700, 'padding': 40}}}%%
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
-direction TB
+direction LR
     CURMOD["<b>CURRENT MODULE</b><br/><i>Module 1: Analytics Foundations + GenAI + Spreadsheets</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data and Averages (mean/median/mode/range) · Analytics Workflow, Metrics & KPIs<br/>This is Session 3 of 41"]
     CURSES["<b>CURRENT SESSION</b><br/><b>GenAI for Analytics: Prompt, Check, Improve</b><br/>&nbsp;<br/><i>The shift:</i> from <i>doing every workflow step by hand</i> to <b>using GenAI to speed up steps of the workflow — while personally validating everything it produces</b><br/>&nbsp;<br/>What GenAI is in analytics · Prompting patterns<br/>Structured outputs · Validating GenAI outputs"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
-direction TB
+direction LR
     OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Write a clear prompt for a simple analytics task, generate a structured table or<br/>list from GenAI, and catch an incorrect or low-quality GenAI output before trusting it"]
 end
 
 subgraph value[" WHY IT MATTERS "]
-direction TB
+direction LR
     CVAL["<b>Course Value</b><br/>This 'prompt → check → improve' loop reappears constantly — GenAI for SQL,<br/>GenAI insight writing, GenAI workflows, and Python + the OpenAI API later in the course"]
     RVAL["<b>Real-Life Value</b><br/>Using ChatGPT to summarize event feedback or draft a report —<br/>and knowing exactly how to catch it when it quietly makes up a number"]
 end
 
 subgraph future[" WHAT COMES NEXT "]
-direction TB
+direction LR
     U0["<b>Next Session</b><br/>Clean Up the Data<br/><i>Moving from Excel/Sheets basics into spotting and fixing messy real-world data</i>"]
     U1["<b>Later in Module 1</b><br/>Make Data Ready for Analysis · Formulas for Analysis<br/>Pivot Tables and Quick Insights"]
     U2["<b>Upcoming Modules</b><br/>Module 2: SQL for Data Analysis · Module 3: Tableau Dashboards + Storytelling · Module 4: GenAI Workflows + Python<br/><i>GenAI keeps reappearing as a helper across every tool — SQL query generation, insight writing, and full Python-API integration</i>"]

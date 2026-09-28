@@ -1,9 +1,10 @@
-# Tableau: Building a Dashboard
+﻿# Tableau: Building a Dashboard
 > Pre-Read — Academic Session 20 | Module 3: Tableau Dashboards + Storytelling
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map - Building a Dashboard.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
 %%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
@@ -61,6 +62,14 @@ class U0,U1,U2 futureBox
 linkStyle default stroke-width:2px
 ```
 
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-3/Academic%20Session%2020%20-%20Building%20a%20Dashboard/mental-map%20-%20Building%20a%20Dashboard.png" target="_blank" download="mental-map - Building a Dashboard.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
+
 ## What You'll Learn
 In this pre-read, you'll discover:
 - What a Tableau dashboard actually is, and how it's different from a single chart
@@ -114,11 +123,15 @@ This mirrors how a manager actually scans a page — trend first, then breakdown
 **⚠️ Common trap**: Cramming too many charts into one dashboard "because Tableau allows it." Past 4-6 charts, a dashboard usually needs a second page or tab instead — cramming makes every individual chart smaller and harder to read, defeating the purpose of a dashboard.
 
 ```mermaid
-flowchart TD
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
     A[Sheet 1: bar chart] --> D[Dashboard canvas]
     B[Sheet 2: line chart] --> D
     C[Sheet 3: bar chart] --> D
     D --> E[Arranged in a top-to-bottom, most-important-first layout]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ## D. Making Charts Talk to Each Other — Dashboard Actions (Introductory Look)
@@ -152,3 +165,5 @@ flowchart TD
 
 > ✅ **You're done!** You can now assemble multiple finished charts into one Tableau dashboard, arrange them in a layout that reads the way people naturally scan a page, and you know dashboard actions exist to connect charts together.
 Next session, we build on this same dashboard by adding **KPIs and Trends on One View** — the headline numbers that make a dashboard feel like a cockpit instead of just a gallery of charts.
+
+

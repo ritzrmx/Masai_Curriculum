@@ -1,11 +1,12 @@
-# Analytics: Analytics Workflow, Metrics & KPIs
+﻿# Analytics: Analytics Workflow, Metrics & KPIs
 > **Pre-Read — Academic Session 2** | Module 1: Analytics Foundations + GenAI + Spreadsheets
 ---
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Analytics Workflow, Metrics & KPIs.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '12px', 'fontFamily': 'sans-serif' }, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false, 'nodeSpacing': 30, 'rankSpacing': 45, 'padding': 10}}}%%
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
 
 START["<b>Course Start</b>"]
@@ -60,6 +61,14 @@ class U0,U1,U2 futureBox
 linkStyle default stroke-width:2px
 ```
 
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-1/1.2%20Analytics%20Workflow,%20Metrics%20%26%20KPIs/mental-map%20-%20Analytics%20Workflow,%20Metrics%20%26%20KPIs.png" target="_blank" download="mental-map - Analytics Workflow, Metrics & KPIs.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
+
 ## What You'll Learn
 In this pre-read, you'll discover:
 - The four-step **analytics workflow** every analyst quietly follows, whether they realize it or not
@@ -87,8 +96,12 @@ In this pre-read, you'll discover:
 ⚠️ **Common trap:** Jumping straight to Step 3 (analysis) without a clear Step 1 (problem). Without a sharp problem statement, you can analyze for hours and still not answer the question anyone actually cares about.
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
     A[Problem] --> B[Data] --> C[Analysis] --> D[Insight]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ---
@@ -128,6 +141,7 @@ Each of these sub-questions maps cleanly to a specific slice of data you can pul
 ⚠️ **Common trap:** Treating every metric as equally important. Tracking 30 metrics with no clear KPI usually means nobody can tell you clearly whether the business is winning or losing.
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
     subgraph left_side["METRIC"]
         M1[Any measurable number] --> M2[Tracked casually, many of them]
@@ -137,6 +151,9 @@ flowchart LR
         D1[A specific, chosen metric] --> D2[Tied directly to a business goal]
         D2 --> D3[Judges success or failure]
     end
+
+
+linkStyle default stroke-width:2px
 ```
 
 ---
@@ -195,3 +212,5 @@ Zappy Mart wants to know "should we open a new branch in Indore— Break this in
 ---
 > ✅ **You're done!** You can now walk through the problem → data → analysis → insight workflow, break a big vague problem into smaller questions, tell a metric apart from a KPI, and convert a business question into a trackable KPI.
 Next up: **GenAI for Analytics: Prompt, Check, Improve**, where you'll start using GenAI tools to speed up steps of this exact workflow — while learning to verify, not blindly trust, what they produce.
+
+

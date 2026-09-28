@@ -1,11 +1,12 @@
-# Statistics: Understanding Data and Averages
+﻿# Statistics: Understanding Data and Averages
 > **Pre-Read — Academic Session 1** | Module 1: Analytics Foundations + GenAI + Spreadsheets
 ---
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Statistics- Understanding Data and Averages.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '12px', 'fontFamily': 'sans-serif' }, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false, 'nodeSpacing': 30, 'rankSpacing': 45, 'padding': 10}}}%%
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
 
 START["<b>Course Start</b>"]
@@ -60,6 +61,14 @@ class U0,U1,U2 futureBox
 linkStyle default stroke-width:2px
 ```
 
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-1/1.1%20Statistics%20Understanding%20Data%20and%20Averages/mental-map%20-%20Statistics-%20Understanding%20Data%20and%20Averages.png" target="_blank" download="mental-map - Statistics- Understanding Data and Averages.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
+
 ## What You'll Learn
 In this pre-read, you'll discover:
 - The difference between **numbers you can do math on** and **numbers that are really just labels**
@@ -86,10 +95,14 @@ In this pre-read, you'll discover:
 ⚠️ **Common trap:** A field that *looks* numeric isn't always numerical. A "Store ID" like 1024 is really a label, not a quantity — averaging Store IDs would be meaningless. Always ask: *does adding or averaging this actually mean something?*
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
     D[Is this a number in my dataset?] --> Q{Does adding or averaging it make real-world sense?}
     Q -->|Yes| N[Numerical — sales, units, age, time]
     Q -->|No, it's really a label| C[Categorical — ID, city, category]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ---
@@ -138,10 +151,14 @@ If a manager reports "our average daily sales are ₹47k," every other branch lo
 ⚠️ **Common trap / highest-value insight:** When someone reports "the average is X," always ask: *is this the mean, and could an outlier be inflating or deflating it?* This single question prevents a huge share of misleading business reporting.
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
     A[Daily sales data] --> B[Painful: report the mean blindly]
     A --> C[Better: check for outliers first]
     C --> D[Report median if outliers are present]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ---
@@ -199,3 +216,5 @@ You're asked to compare two Zappy Mart branches to decide which one gets extra s
 ---
 > ✅ **You're done!** You can now tell numerical data from categorical data, calculate mean, median, and mode, spot when an outlier is distorting a business number, and use range for a quick consistency check.
 Next up: **Analytics Workflow, Metrics & KPIs**, where you'll use these same numbers as building blocks for a structured, step-by-step way to turn a business question into an insight.
+
+

@@ -1,21 +1,22 @@
-# SQL for Data Analysis: Joining Tables Together
+﻿# SQL for Data Analysis: Joining Tables Together
 > **Pre-Read - Academic Session 13** | Module 2: SQL for Data Analysis
 
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Joining Tables Together.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '12px', 'fontFamily': 'sans-serif' }, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false, 'nodeSpacing': 30, 'rankSpacing': 45, 'padding': 10}}}%%
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
 direction LR
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages - Analytics Workflow &amp; KPIs - GenAI for Analytics - Clean Up the Data - Make Data Ready for Analysis - Formulas - Pivot Tables - Spread &amp; Variability - SQL Query Basics - Sorting &amp; Filtering - Aggregation Essentials - Grouping for KPIs<br/>This is Session 13 of 41"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>Joining Tables Together</b><br/>&nbsp;<br/><i>The shift:</i> from one table answering everything <i>to</i> <b>combining two related tables into one richer answer</b><br/>&nbsp;<br/>Why data lives in 2 tables - INNER JOIN<br/>LEFT JOIN - JOIN + WHERE/GROUP BY"]
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages · Analytics Workflow &amp; KPIs · GenAI for Analytics · Clean Up the Data · Make Data Ready for Analysis · Formulas · Pivot Tables · Spread &amp; Variability · SQL Query Basics · Sorting &amp; Filtering · Aggregation Essentials · Grouping for KPIs<br/>This is Session 13 of 41"]
+    CURSES["<b>CURRENT SESSION</b><br/><b>Joining Tables Together</b><br/>&nbsp;<br/><i>The shift:</i> from one table answering everything <i>to</i> <b>combining two related tables into one richer answer</b><br/>&nbsp;<br/>Why data lives in 2 tables · INNER JOIN<br/>LEFT JOIN · JOIN + WHERE/GROUP BY"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
@@ -25,15 +26,15 @@ end
 
 subgraph value[" WHY IT MATTERS "]
 direction LR
-    CVAL["<b>Course Value</b><br/>Almost no real business question is answerable from a single<br/>table - JOIN is the single most-used clause in professional SQL"]
-    RVAL["<b>Real-Life Value</b><br/>'Revenue by loyalty tier' or 'customers who never ordered' need<br/>two tables talking to each other - this is exactly how"]
+    CVAL["<b>Course Value</b><br/>Almost no real business question is answerable from a single<br/>table · JOIN is the single most-used clause in professional SQL"]
+    RVAL["<b>Real-Life Value</b><br/>'Revenue by loyalty tier' or 'customers who never ordered' need<br/>two tables talking to each other · this is exactly how"]
 end
 
 subgraph future[" WHAT COMES NEXT "]
 direction LR
     U0["<b>Next Session</b><br/>Insights from Combined Data<br/><i>Turning a joined, grouped table into an actual business insight</i>"]
-    U1["<b>Later in Module 2</b><br/>Subqueries in Action - CTEs and GenAI for SQL"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling - Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's data-relationships/blending and pandas' .merge() are JOIN under a different name</i>"]
+    U1["<b>Later in Module 2</b><br/>Subqueries in Action · CTEs and GenAI for SQL"]
+    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling · Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's data-relationships/blending and pandas' .merge() are JOIN under a different name</i>"]
 end
 
 START ==>|" begin "| CURMOD
@@ -58,7 +59,18 @@ class CURSES curSessBox
 class OUT outBox
 class CVAL,RVAL valueBox
 class U0,U1,U2 futureBox
+
+
+linkStyle default stroke-width:2px
 ```
+
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-2/6.1%20(Joining%20Tables%20Together)/mental-map%20-%20Joining%20Tables%20Together.png" target="_blank" download="mental-map - Joining Tables Together.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
 
 ---
 
@@ -161,13 +173,17 @@ Now Karthik appears - with empty `item` and `price` - because `customers` is the
 **⚠️ Common trap:** Using `INNER JOIN` when the real business question needs `LEFT JOIN`, or vice versa. "Which customers have never ordered- is *only* answerable with `LEFT JOIN` - an `INNER JOIN` would silently exclude exactly the customers you're trying to find, because they have no match at all. Always ask: *"Do I need only the rows that matched - or every row from one side, matched or not-*
 
 ```mermaid
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
     subgraph left_side["INNER JOIN"]
         M1[Only rows with a match<br/>on BOTH sides] --> M2[Karthik excluded]
     end
     subgraph right_side["LEFT JOIN"]
         D1[Every row from the LEFT table,<br/>matched or not] --> D2[Karthik included, blank order data]
     end
+
+
+linkStyle default stroke-width:2px
 ```
 
 ---
@@ -227,6 +243,13 @@ Using the `customers` and `orders` tables from Section A:
 
 ---
 
-> ✅ **You're done!** You can now combine two related tables into one richer answer - pulling in customer details alongside their orders, and correctly choosing whether unmatched rows should be dropped or kept.
+>  **You're done!** You can now combine two related tables into one richer answer - pulling in customer details alongside their orders, and correctly choosing whether unmatched rows should be dropped or kept.
 >
 > Next up: **Insights from Combined Data** - where you turn a joined, grouped table like today's into an actual written business insight.
+
+
+
+
+
+
+

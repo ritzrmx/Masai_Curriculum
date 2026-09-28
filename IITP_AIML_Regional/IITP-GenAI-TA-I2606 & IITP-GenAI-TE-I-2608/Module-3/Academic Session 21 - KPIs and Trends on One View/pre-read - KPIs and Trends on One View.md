@@ -1,9 +1,10 @@
-# Tableau: KPIs and Trends on One View
+﻿# Tableau: KPIs and Trends on One View
 > Pre-Read — Academic Session 21 | Module 3: Tableau Dashboards + Storytelling
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map - KPIs and Trends on One View.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
 %%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
@@ -60,6 +61,14 @@ class U0,U1,U2 futureBox
 
 linkStyle default stroke-width:2px
 ```
+
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-3/Academic%20Session%2021%20-%20KPIs%20and%20Trends%20on%20One%20View/mental-map%20-%20KPIs%20and%20Trends%20on%20One%20View.png" target="_blank" download="mental-map - KPIs and Trends on One View.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
 
 ## What You'll Learn
 In this pre-read, you'll discover:
@@ -121,11 +130,15 @@ This reveals something the single company-wide KPI hides completely: Chennai is 
 **⚠️ Common trap**: Reporting only the company-wide total and assuming it represents every segment equally. A rising overall number can hide a struggling city or category — segment comparisons are how you catch that.
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
     A[Company-wide KPI: +8%] --> B{Break down by segment}
     B --> C[Bengaluru: +12% - strong]
     B --> D[Chennai: -3% - declining]
     B --> E[Overall number hides Chennai's real problem]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ## D. Using Dashboards to Support Analysis, Not Just Report Numbers
@@ -159,3 +172,5 @@ flowchart LR
 
 > ✅ **You're done!** You can now add a headline KPI with a clearly labelled trend, build a segment comparison that can reveal what a single total hides, and connect both into a dashboard that supports real, live analysis.
 Next session, we zoom out from individual KPIs to the whole page with **Dashboard Design Basics** — applying real design principles so every part of your dashboard, not just the KPI tiles, is instantly readable.
+
+

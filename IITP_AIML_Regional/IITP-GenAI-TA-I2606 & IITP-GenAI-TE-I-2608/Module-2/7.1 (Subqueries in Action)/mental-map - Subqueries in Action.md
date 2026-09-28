@@ -2,33 +2,33 @@
 > Academic Session 15 - Module 2: SQL for Data Analysis
 
 ```mermaid
-%%{init: {'flowchart': {'htmlLabels': true, 'nodeSpacing': 60, 'rankSpacing': 95, 'wrappingWidth': 620, 'padding': 18}}}%%
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
-direction TB
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages - Analytics Workflow &amp; KPIs - GenAI for Analytics - Clean Up the Data - Make Data Ready - Formulas - Pivot Tables - Spread &amp; Variability - SQL Basics - Sorting &amp; Filtering - Aggregation - Grouping for KPIs - Joining Tables - Insights from Combined Data<br/>This is Session 15 of 41"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>Subqueries in Action</b><br/>&nbsp;<br/><i>The shift:</i> from answering questions with one query <i>to</i> <b>answering questions that need a query's own answer as an input</b><br/>&nbsp;<br/>Scalar subqueries (WHERE) - IN/NOT IN<br/>Subqueries in FROM - Subqueries vs. JOIN"]
+direction LR
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages · Analytics Workflow &amp; KPIs · GenAI for Analytics · Clean Up the Data · Make Data Ready · Formulas · Pivot Tables · Spread &amp; Variability · SQL Basics · Sorting &amp; Filtering · Aggregation · Grouping for KPIs · Joining Tables · Insights from Combined Data<br/>This is Session 15 of 41"]
+    CURSES["<b>CURRENT SESSION</b><br/><b>Subqueries in Action</b><br/>&nbsp;<br/><i>The shift:</i> from answering questions with one query <i>to</i> <b>answering questions that need a query's own answer as an input</b><br/>&nbsp;<br/>Scalar subqueries (WHERE) · IN/NOT IN<br/>Subqueries in FROM · Subqueries vs. JOIN"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
-direction TB
-    OUT["<b>By the end, you can...</b><br/>&nbsp;<br/>Write a query that compares rows against a value only another<br/>query can calculate - like 'above average' or 'never ordered' -<br/>and use a subquery to aggregate safely before joining"]
+direction LR
+    OUT["<b>By the end, you can...</b><br/>&nbsp;<br/>Write a query that compares rows against a value only another<br/>query can calculate · like 'above average' or 'never ordered' -<br/>and use a subquery to aggregate safely before joining"]
 end
 
 subgraph value[" WHY IT MATTERS "]
-direction TB
-    CVAL["<b>Course Value</b><br/>Subqueries are the clean, safe fix for last session's join fan-out<br/>trap - aggregate first, in a subquery, THEN join"]
+direction LR
+    CVAL["<b>Course Value</b><br/>Subqueries are the clean, safe fix for last session's join fan-out<br/>trap · aggregate first, in a subquery, THEN join"]
     RVAL["<b>Real-Life Value</b><br/>'Which customers spend above average?' or 'who's never ordered?'<br/>are everyday questions no single flat query can answer alone"]
 end
 
 subgraph future[" WHAT COMES NEXT "]
-direction TB
+direction LR
     U0["<b>Next Session</b><br/>CTEs and GenAI for SQL<br/><i>A cleaner, more readable way to write multi-step queries</i>"]
     U1["<b>Later in Module 2</b><br/>Module wrap and transition into Module 3"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling - Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's calculated fields and pandas' multi-step chained operations mirror this exact 'answer feeding an answer' logic</i>"]
+    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling · Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's calculated fields and pandas' multi-step chained operations mirror this exact 'answer feeding an answer' logic</i>"]
 end
 
 START ==>|" begin "| CURMOD
@@ -53,4 +53,7 @@ class CURSES curSessBox
 class OUT outBox
 class CVAL,RVAL valueBox
 class U0,U1,U2 futureBox
+
+
+linkStyle default stroke-width:2px
 ```

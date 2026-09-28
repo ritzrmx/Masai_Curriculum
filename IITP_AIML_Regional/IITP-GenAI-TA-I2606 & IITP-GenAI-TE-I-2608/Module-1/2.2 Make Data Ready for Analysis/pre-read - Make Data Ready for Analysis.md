@@ -1,11 +1,12 @@
-# Spreadsheets: Make Data Ready for Analysis
+﻿# Spreadsheets: Make Data Ready for Analysis
 > **Pre-Read — Academic Session 5** | Module 1: Analytics Foundations + GenAI + Spreadsheets
 ---
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Make Data Ready for Analysis.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '12px', 'fontFamily': 'sans-serif' }, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false, 'nodeSpacing': 30, 'rankSpacing': 45, 'padding': 10}}}%%
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
 
 START["<b>Course Start</b>"]
@@ -59,6 +60,14 @@ class U0,U1,U2 futureBox
 
 linkStyle default stroke-width:2px
 ```
+
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-1/2.2%20Make%20Data%20Ready%20for%20Analysis/mental-map%20-%20Make%20Data%20Ready%20for%20Analysis.png" target="_blank" download="mental-map - Make Data Ready for Analysis.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
 
 ## What You'll Learn
 In this pre-read, you'll discover:
@@ -149,10 +158,14 @@ Use `TRIM()` to remove stray spaces, `PROPER()` for consistent capitalization, a
 ⚠️ **Common trap:** Skipping the checklist because the data was already cleaned in the previous session. Cleaning and validation are two different steps — cleaning removes visible dirt, validation proves the fix actually worked everywhere.
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
     A[Cleaned data] --> B[Painful: assume it's ready and start analyzing]
     A --> C[Better: run the validation checklist first]
     C --> D[Data genuinely ready for analysis]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ---
@@ -188,3 +201,5 @@ You're about to hand off a "ready" dataset to a teammate for formula-building ne
 ---
 > ✅ **You're done!** You can now structure a dataset into consistent columns and types, fix inconsistent text/number/date entries, validate that your cleaning actually worked, and run a final prep checklist before analysis begins.
 Next up: **Formulas for Analysis**, where you'll finally put this trustworthy dataset to work — using SUM, AVERAGE, and COUNT to calculate real business numbers with confidence.
+
+

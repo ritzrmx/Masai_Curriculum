@@ -1,11 +1,12 @@
-# GenAI for Analytics: Prompt, Check, Improve
+﻿# GenAI for Analytics: Prompt, Check, Improve
 > **Pre-Read — Academic Session 3** | Module 1: Analytics Foundations + GenAI + Spreadsheets
 ---
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: GenAI for Analytics- Prompt, Check, Improve.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '12px', 'fontFamily': 'sans-serif' }, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false, 'nodeSpacing': 30, 'rankSpacing': 45, 'padding': 10}}}%%
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
 
 START["<b>Course Start</b>"]
@@ -59,6 +60,14 @@ class U0,U1,U2 futureBox
 
 linkStyle default stroke-width:2px
 ```
+
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-1/1.3%20GenAI%20for%20Analytics%20Prompt,%20Check,%20Improve/mental-map%20-%20GenAI%20for%20Analytics-%20Prompt,%20Check,%20Improve.png" target="_blank" download="mental-map - GenAI for Analytics- Prompt, Check, Improve.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
 
 ## What You'll Learn
 In this pre-read, you'll discover:
@@ -155,10 +164,14 @@ Checking against the real mean (≈ ₹18,600) and the fact that six of seven da
 ⚠️ **Common trap / highest-value insight:** A confident, well-formatted answer is not the same as a correct one. Treat every GenAI output as a first draft from a fast but unsupervised intern — never as a final answer.
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
     A[Business question] --> B[Painful: copy-paste GenAI output as final answer]
     A --> C[Better: prompt, then validate against real data/logic]
     C --> D[Trustworthy, checked insight]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ---
@@ -194,3 +207,5 @@ You're preparing to use GenAI throughout the rest of this course — for SQL que
 ---
 > ✅ **You're done!** You can now explain what GenAI is useful for in an analytics workflow, write a clear prompt using instruction + context + output format, ask for structured outputs, and validate a GenAI response before trusting it.
 Next up: **Clean Up the Data**, where you'll load a real dataset into a spreadsheet and start spotting and fixing the kind of messy, real-world data issues that make even a well-checked GenAI summary go wrong if the underlying data was dirty to begin with.
+
+

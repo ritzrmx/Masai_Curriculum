@@ -1,21 +1,23 @@
-# SQL for Data Analysis: Aggregation Essentials
+﻿# SQL for Data Analysis: Aggregation Essentials
 > **Pre-Read - Academic Session 11** | Module 2: SQL for Data Analysis
 
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Aggregation Essentials.pdf**
+
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '12px', 'fontFamily': 'sans-serif' }, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false, 'nodeSpacing': 30, 'rankSpacing': 45, 'padding': 10}}}%%
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
 direction LR
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages - Analytics Workflow &amp; KPIs - GenAI for Analytics - Clean Up the Data - Make Data Ready for Analysis - Formulas for Analysis - Pivot Tables &amp; Quick Insights - Spread, Variability &amp; Outliers - SQL Query Basics - Sorting &amp; Filtering in SQL<br/>This is Session 11 of 41"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>Aggregation Essentials</b><br/>&nbsp;<br/><i>The shift:</i> from viewing individual rows <i>to</i> <b>collapsing many rows into one meaningful number</b><br/>&nbsp;<br/>COUNT - SUM - AVG<br/>MIN/MAX - Aggregates + WHERE"]
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages · Analytics Workflow &amp; KPIs · GenAI for Analytics · Clean Up the Data · Make Data Ready for Analysis · Formulas for Analysis · Pivot Tables &amp; Quick Insights · Spread, Variability &amp; Outliers · SQL Query Basics · Sorting &amp; Filtering in SQL<br/>This is Session 11 of 41"]
+    CURSES["<b>CURRENT SESSION</b><br/><b>Aggregation Essentials</b><br/>&nbsp;<br/><i>The shift:</i> from viewing individual rows <i>to</i> <b>collapsing many rows into one meaningful number</b><br/>&nbsp;<br/>COUNT · SUM · AVG<br/>MIN/MAX · Aggregates + WHERE"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
@@ -25,15 +27,15 @@ end
 
 subgraph value[" WHY IT MATTERS "]
 direction LR
-    CVAL["<b>Course Value</b><br/>Every KPI number on a dashboard - total revenue, average order<br/>value, order count - is built from exactly these five functions"]
-    RVAL["<b>Real-Life Value</b><br/>'What was our total revenue last month?' is the single most<br/>common question any analyst gets asked - this answers it in one line"]
+    CVAL["<b>Course Value</b><br/>Every KPI number on a dashboard · total revenue, average order<br/>value, order count · is built from exactly these five functions"]
+    RVAL["<b>Real-Life Value</b><br/>'What was our total revenue last month?' is the single most<br/>common question any analyst gets asked · this answers it in one line"]
 end
 
 subgraph future[" WHAT COMES NEXT "]
 direction LR
-    U0["<b>Next Session</b><br/>Grouping for KPIs<br/><i>GROUP BY - aggregate separately for each city, item, or customer</i>"]
-    U1["<b>Later in Module 2</b><br/>Joining Tables Together - Insights from Combined Data - Subqueries in Action"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling - Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's SUM()/AVG() aggregations and pandas' .sum()/.mean() are the exact same idea, different syntax</i>"]
+    U0["<b>Next Session</b><br/>Grouping for KPIs<br/><i>GROUP BY · aggregate separately for each city, item, or customer</i>"]
+    U1["<b>Later in Module 2</b><br/>Joining Tables Together · Insights from Combined Data · Subqueries in Action"]
+    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling · Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's SUM()/AVG() aggregations and pandas' .sum()/.mean() are the exact same idea, different syntax</i>"]
 end
 
 START ==>|" begin "| CURMOD
@@ -58,7 +60,18 @@ class CURSES curSessBox
 class OUT outBox
 class CVAL,RVAL valueBox
 class U0,U1,U2 futureBox
+
+
+linkStyle default stroke-width:2px
 ```
+
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-2/5.1%20(Aggregation%20Essentials)/mental-map%20-%20Aggregation%20Essentials.png" target="_blank" download="mental-map - Aggregation Essentials.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
 
 ---
 
@@ -138,10 +151,14 @@ FROM orders;
 **⚠️ Common trap:** Forgetting that `MIN`/`MAX` work on more than just numbers - they also work on text (alphabetical) and dates (chronological). `MIN(order_date)` returns the *earliest* date, not the smallest-looking number, which surprises students expecting only numeric behaviour.
 
 ```mermaid
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
     A[Raw price column: 120, 150, 120, 90] --> B[Painful: ORDER BY price ASC LIMIT 1]
     A --> C[Better: MIN price directly]
     C --> D[Same answer, one function, no sorting needed]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ---
@@ -196,6 +213,11 @@ Using the `orders` table from Sessions 9–10:
 
 ---
 
-> ✅ **You're done!** You can now collapse an entire table - or any filtered slice of it - into the handful of numbers that actually answer a business question: how many, how much, on average, and at the extremes.
+>  **You're done!** You can now collapse an entire table - or any filtered slice of it - into the handful of numbers that actually answer a business question: how many, how much, on average, and at the extremes.
 >
 > Next up: **Grouping for KPIs** - where you learn `GROUP BY` to run these same aggregates separately for every city, item, or customer, all in one query.
+
+
+
+
+
