@@ -4,36 +4,37 @@
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Insights from Combined Data.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '12px', 'fontFamily': 'sans-serif' }, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false, 'nodeSpacing': 30, 'rankSpacing': 45, 'padding': 10}}}%%
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
 direction LR
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages - Analytics Workflow &amp; KPIs - GenAI for Analytics - Clean Up the Data - Make Data Ready - Formulas - Pivot Tables - Spread &amp; Variability - SQL Basics - Sorting &amp; Filtering - Aggregation - Grouping for KPIs - Joining Tables Together<br/>This is Session 14 of 41"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>Insights from Combined Data</b><br/>&nbsp;<br/><i>The shift:</i> from correctly RUNNING a joined query <i>to</i> <b>correctly TRUSTING and explaining what it shows</b><br/>&nbsp;<br/>Numbers → insight - Join fan-out trap<br/>Fair comparisons (rates, not totals) - Writing the insight"]
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages · Analytics Workflow &amp; KPIs · GenAI for Analytics · Clean Up the Data · Make Data Ready · Formulas · Pivot Tables · Spread &amp; Variability · SQL Basics · Sorting &amp; Filtering · Aggregation · Grouping for KPIs · Joining Tables Together<br/>This is Session 14 of 41"]
+    CURSES["<b>CURRENT SESSION</b><br/><b>Insights from Combined Data</b><br/>&nbsp;<br/><i>The shift:</i> from correctly RUNNING a joined query to <b>correctly TRUSTING and explaining what it shows</b><br/>&nbsp;<br/>Numbers → insight · Join fan-out trap<br/>Fair comparisons (rates, not totals) · Writing the insight"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
 direction LR
-    OUT["<b>By the end, you can...</b><br/>&nbsp;<br/>Spot when a JOIN has silently duplicated and inflated your<br/>numbers, compare groups fairly using rates instead of raw totals,<br/>and write a joined-data insight that doesn't overreach into causation"]
+    OUT["<b>By the end, you can...</b><br/>&nbsp;<br/>Spot when a JOIN has silently duplicated and inflated your numbers, compare groups fairly using rates instead of raw totals, and write a joined-data insight that doesn't overreach into causation"]
 end
 
 subgraph value[" WHY IT MATTERS "]
 direction LR
-    CVAL["<b>Course Value</b><br/>This is the exact judgment a manager expects before trusting<br/>ANY number from a Tableau dashboard or Python analysis later in the course"]
-    RVAL["<b>Real-Life Value</b><br/>A wrong 'insight' built on inflated joined data can drive a real,<br/>costly business decision - catching it here is a genuinely valuable skill"]
+    CVAL["<b>Course Value</b><br/>This is the exact judgment a manager expects before trusting ANY number from a Tableau dashboard or Python analysis later in the course"]
+    RVAL["<b>Real-Life Value</b><br/>A wrong 'insight' built on inflated joined data can drive a real, costly business decision · catching it here is a genuinely valuable skill"]
 end
 
 subgraph future[" WHAT COMES NEXT "]
 direction LR
     U0["<b>Next Session</b><br/>Subqueries in Action<br/><i>Answering questions that need a query inside a query</i>"]
     U1["<b>Later in Module 2</b><br/>CTEs and GenAI for SQL"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling - Module 4: GenAI Workflows + Basic Python<br/><i>Reading a dashboard critically and writing insights with GenAI both build directly on today's judgment</i>"]
+    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling · Module 4: GenAI Workflows + Basic Python<br/><i>Reading a dashboard critically and writing insights with GenAI both build directly on today's judgment</i>"]
 end
 
 START ==>|" begin "| CURMOD
@@ -58,7 +59,17 @@ class CURSES curSessBox
 class OUT outBox
 class CVAL,RVAL valueBox
 class U0,U1,U2 futureBox
+
+linkStyle default stroke-width:2px
 ```
+
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-2/6.2%20(Insights%20from%20Combined%20Data)/mental-map%20-%20Insights%20from%20Combined%20Data.png" target="_blank" download="mental-map - Insights from Combined Data.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
 
 ---
 
@@ -86,7 +97,7 @@ In this pre-read, you'll discover:
 | Silver | 270 |
 
 - ❌ **Not an insight (just a fact):** *"Gold tier revenue is ₹210 and Silver tier revenue is ₹270."*
-- ✅ **An actual insight:** *"Silver-tier customers are currently generating more total revenue than Gold-tier customers, despite Gold being our 'premium' tier - this is worth investigating before we invest further in Gold-specific perks."*
+-  **An actual insight:** *"Silver-tier customers are currently generating more total revenue than Gold-tier customers, despite Gold being our 'premium' tier - this is worth investigating before we invest further in Gold-specific perks."*
 
 The second version does three things the first doesn't: it makes a comparison, flags something surprising, and suggests why it matters.
 
@@ -129,10 +140,14 @@ Ramesh's single order now appears **twice** - once per saved address. If you ran
 **⚠️ Common trap:** Aggregating immediately after a join without first checking whether the join could have duplicated rows on the "one" side. Before trusting any `SUM` or `COUNT` on joined data, check: *"Could any row on either side have multiple matches on the other side-* If yes, either aggregate **before** joining (recommended), or explicitly deduplicate afterward - never assume a joined row count still means what it meant before the join.
 
 ```mermaid
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
     A[1 order, price 120] --> B[Joined to 2 addresses]
     B --> C[2 duplicated rows, price 120 each]
     C --> D[SUM = 240 - wrong! Real spend is still 120]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ---
@@ -202,6 +217,13 @@ Using the `customers`, `orders`, and `customer_addresses` tables from this modul
 
 ---
 
-> ✅ **You're done!** You can now tell the difference between a number and an insight, catch a join that's silently duplicated your data, compare groups fairly using rates, and write a finding that doesn't overreach into causation.
+>  **You're done!** You can now tell the difference between a number and an insight, catch a join that's silently duplicated your data, compare groups fairly using rates, and write a finding that doesn't overreach into causation.
 >
 > Next up: **Subqueries in Action** - where you learn to answer questions that need a query built entirely from the result of another query.
+
+
+
+
+
+
+

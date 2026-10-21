@@ -1,21 +1,22 @@
-# SQL for Data Analysis: Sorting and Filtering in SQL
+﻿# SQL for Data Analysis: Sorting and Filtering in SQL
 > **Pre-Read - Academic Session 10** | Module 2: SQL for Data Analysis
 
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Sorting and Filtering in SQL.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '12px', 'fontFamily': 'sans-serif' }, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false, 'nodeSpacing': 30, 'rankSpacing': 45, 'padding': 10}}}%%
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
 direction LR
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages - Analytics Workflow &amp; KPIs - GenAI for Analytics - Clean Up the Data - Make Data Ready for Analysis - Formulas for Analysis - Pivot Tables &amp; Quick Insights - Spread, Variability &amp; Outliers - SQL Query Basics<br/>This is Session 10 of 41"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>Sorting and Filtering in SQL</b><br/>&nbsp;<br/><i>The shift:</i> from filtering to the right rows <i>to</i> <b>ranking them and pulling only the top or bottom results</b><br/>&nbsp;<br/>ORDER BY (ASC/DESC) - Multi-column sorting<br/>LIMIT - WHERE + ORDER BY + LIMIT together"]
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages · Analytics Workflow &amp; KPIs · GenAI for Analytics · Clean Up the Data · Make Data Ready for Analysis · Formulas for Analysis · Pivot Tables &amp; Quick Insights · Spread, Variability &amp; Outliers · SQL Query Basics<br/>This is Session 10 of 41"]
+    CURSES["<b>CURRENT SESSION</b><br/><b>Sorting and Filtering in SQL</b><br/>&nbsp;<br/><i>The shift:</i> from filtering to the right rows <i>to</i> <b>ranking them and pulling only the top or bottom results</b><br/>&nbsp;<br/>ORDER BY (ASC/DESC) · Multi-column sorting<br/>LIMIT · WHERE + ORDER BY + LIMIT together"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
@@ -26,14 +27,14 @@ end
 subgraph value[" WHY IT MATTERS "]
 direction LR
     CVAL["<b>Course Value</b><br/>ORDER BY and LIMIT feed directly into ranking and 'top customer'<br/>questions once GROUP BY and aggregation arrive next"]
-    RVAL["<b>Real-Life Value</b><br/>'Show me our top 5 customers' or 'find our slowest-selling item'<br/>are everyday manager requests - this is how you answer them instantly"]
+    RVAL["<b>Real-Life Value</b><br/>'Show me our top 5 customers' or 'find our slowest-selling item'<br/>are everyday manager requests · this is how you answer them instantly"]
 end
 
 subgraph future[" WHAT COMES NEXT "]
 direction LR
-    U0["<b>Next Session</b><br/>Aggregation Essentials<br/><i>SUM, COUNT, AVG - turning rows into totals</i>"]
-    U1["<b>Later in Module 2</b><br/>Grouping for KPIs (GROUP BY) - Joining Tables Together - Insights from Combined Data"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling - Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's sort-and-filter panel and pandas' .sort_values()/.head() mirror exactly what you learn today</i>"]
+    U0["<b>Next Session</b><br/>Aggregation Essentials<br/><i>SUM, COUNT, AVG · turning rows into totals</i>"]
+    U1["<b>Later in Module 2</b><br/>Grouping for KPIs (GROUP BY) · Joining Tables Together · Insights from Combined Data"]
+    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling · Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's sort-and-filter panel and pandas' .sort_values()/.head() mirror exactly what you learn today</i>"]
 end
 
 START ==>|" begin "| CURMOD
@@ -58,7 +59,18 @@ class CURSES curSessBox
 class OUT outBox
 class CVAL,RVAL valueBox
 class U0,U1,U2 futureBox
+
+
+linkStyle default stroke-width:2px
 ```
+
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-2/4.3%20(Sorting%20and%20Filtering%20in%20SQL)/mental-map%20-%20Sorting%20and%20Filtering%20in%20SQL.png" target="_blank" download="mental-map - Sorting and Filtering in SQL.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
 
 ---
 
@@ -150,10 +162,14 @@ This returns only the 3 highest-priced orders.
 **⚠️ Common trap:** Using `LIMIT` without `ORDER BY`. `LIMIT 3` on its own just returns *any* 3 rows the database happens to return first - there's no guarantee they're the highest, lowest, or anything meaningful. `LIMIT` only becomes a "top N" tool when it's paired with `ORDER BY` to define what "top" even means.
 
 ```mermaid
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
     A[Raw table, any order] --> B[Painful: LIMIT alone - 3 random-ish rows]
     A --> C[Better: ORDER BY + LIMIT - 3 meaningful rows]
     C --> D[A real 'top 3' answer]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ---
@@ -207,6 +223,13 @@ Using the `orders` table from Session 9 (SQL Query Basics):
 
 ---
 
-> ✅ **You're done!** You can now rank query results and pull exactly the top or bottom rows a business question is really asking for - not just filter to the right rows, but order and trim them into a headline answer.
+>  **You're done!** You can now rank query results and pull exactly the top or bottom rows a business question is really asking for - not just filter to the right rows, but order and trim them into a headline answer.
 >
 > Next up: **Aggregation Essentials** - where you learn `SUM`, `COUNT`, and `AVG` to turn many rows into a single meaningful total.
+
+
+
+
+
+
+

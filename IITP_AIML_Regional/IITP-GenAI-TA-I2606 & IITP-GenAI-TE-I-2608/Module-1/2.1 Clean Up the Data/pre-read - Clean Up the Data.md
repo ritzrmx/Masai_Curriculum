@@ -1,11 +1,12 @@
-# Spreadsheets: Clean Up the Data
+﻿# Spreadsheets: Clean Up the Data
 > **Pre-Read — Academic Session 4** | Module 1: Analytics Foundations + GenAI + Spreadsheets
 ---
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Clean Up the Data.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '12px', 'fontFamily': 'sans-serif' }, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false, 'nodeSpacing': 30, 'rankSpacing': 45, 'padding': 10}}}%%
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
 
 START["<b>Course Start</b>"]
@@ -59,6 +60,14 @@ class U0,U1,U2 futureBox
 
 linkStyle default stroke-width:2px
 ```
+
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-1/2.1%20Clean%20Up%20the%20Data/mental-map%20-%20Clean%20Up%20the%20Data.png" target="_blank" download="mental-map - Clean Up the Data.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
 
 ## What You'll Learn
 In this pre-read, you'll discover:
@@ -128,8 +137,12 @@ In this pre-read, you'll discover:
 ⚠️ **Common trap:** Removing duplicates using only one column (e.g., just `Store City`) — this deletes far too much real data, since many genuinely different transactions share a store city. Always pick the *combination* of columns that actually defines a true duplicate.
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
     A[Step 1] --> B[Step 2] --> C[Step 3] --> D[Step 4] --> E[Step 5]
+
+
+linkStyle default stroke-width:2px
 ```
 *(Load → Spot issues → Choose duplicate-defining columns → Remove duplicates → Standardize formats)*
 
@@ -179,3 +192,5 @@ You're about to hand a cleaned dataset to a teammate who will build formulas on 
 ---
 > ✅ **You're done!** You can now load a dataset into a spreadsheet, spot missing values, duplicates, and formatting issues, clean them using Remove Duplicates and standardization tools, and use sort/filter to inspect data quickly.
 Next up: **Make Data Ready for Analysis**, where you'll go one level deeper — structuring your now-clean data into consistent formats and data types, and validating that your cleaning actually worked before you start analyzing.
+
+

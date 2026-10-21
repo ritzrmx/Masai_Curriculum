@@ -1,9 +1,10 @@
-# Tableau: Dashboard Design Basics
+﻿# Tableau: Dashboard Design Basics
 > Pre-Read — Academic Session 22 | Module 3: Tableau Dashboards + Storytelling
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map - Dashboard Design Basics.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
 %%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
@@ -61,6 +62,14 @@ class U0,U1,U2 futureBox
 linkStyle default stroke-width:2px
 ```
 
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-3/Academic%20Session%2022%20-%20Dashboard%20Design%20Basics/mental-map%20-%20Dashboard%20Design%20Basics.png" target="_blank" download="mental-map - Dashboard Design Basics.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
+
 ## What You'll Learn
 In this pre-read, you'll discover:
 - Three core design principles — clarity, alignment, and whitespace — and what each one actually fixes
@@ -104,11 +113,15 @@ In this pre-read, you'll discover:
 **⚠️ Common trap**: Placing charts in the order they were built, rather than the order a reader needs them. Just because you built the category chart first doesn't mean it belongs at the top of the finished dashboard.
 
 ```mermaid
-flowchart TD
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
     A[Reader's eye enters top-left] --> B[Headline KPI + trend]
     B --> C[Segment comparison]
     C --> D[Supporting detail charts]
     D --> E[Reader reaches conclusion in a guided path, not randomly]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ## D. "Polished" Is Not the Same as "Decorated"
@@ -142,3 +155,5 @@ flowchart TD
 
 > ✅ **You're done!** You can now spot and remove clutter, organize a dashboard so a reader's eyes move in a natural, guided order, and tell the difference between a dashboard that's genuinely polished and one that's just decorated.
 Next session, we take this same clean, well-organized dashboard and push it one step further with **Dashboards That Support Decisions** — designing specifically so someone can act on what they see, not just look at it.
+
+

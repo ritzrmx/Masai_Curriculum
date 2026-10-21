@@ -1,11 +1,12 @@
-# Spreadsheets: Formulas for Analysis
+﻿# Spreadsheets: Formulas for Analysis
 > **Pre-Read — Academic Session 6** | Module 1: Analytics Foundations + GenAI + Spreadsheets
 ---
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Formulas for Analysis.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '12px', 'fontFamily': 'sans-serif' }, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false, 'nodeSpacing': 30, 'rankSpacing': 45, 'padding': 10}}}%%
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
 
 START["<b>Course Start</b>"]
@@ -59,6 +60,14 @@ class U0,U1,U2 futureBox
 
 linkStyle default stroke-width:2px
 ```
+
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-1/3.1%20Formulas%20for%20Analysis/mental-map%20-%20Formulas%20for%20Analysis.png" target="_blank" download="mental-map - Formulas for Analysis.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
 
 ## What You'll Learn
 In this pre-read, you'll discover:
@@ -163,3 +172,5 @@ You're asked to summarize "which branch is our best performer" for a manager. Li
 ---
 > ✅ **You're done!** You can now use SUM, AVERAGE, and COUNT confidently, apply formulas across many rows and columns efficiently, build new calculated columns, and combine formulas into simple descriptive analysis.
 Next up: **Pivot Tables and Quick Insights**, where you'll summarize and compare these same numbers across categories — like branch or product — without writing a single repeated formula.
+
+

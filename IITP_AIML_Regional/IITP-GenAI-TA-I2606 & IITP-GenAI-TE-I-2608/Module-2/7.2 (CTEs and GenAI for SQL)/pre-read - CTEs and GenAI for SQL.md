@@ -1,37 +1,38 @@
-# SQL for Data Analysis: CTEs and GenAI for SQL
+﻿# SQL for Data Analysis: CTEs and GenAI for SQL
 > **Pre-Read - Academic Session 16** | Module 2: SQL for Data Analysis
 
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: CTEs and GenAI for SQL.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '12px', 'fontFamily': 'sans-serif' }, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false, 'nodeSpacing': 30, 'rankSpacing': 45, 'padding': 10}}}%%
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
 direction LR
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages - Analytics Workflow &amp; KPIs - GenAI for Analytics - Clean Up the Data - Make Data Ready - Formulas - Pivot Tables - Spread &amp; Variability - SQL Basics - Sorting &amp; Filtering - Aggregation - Grouping for KPIs - Joining Tables - Insights from Combined Data - Subqueries in Action<br/>This is Session 16 of 41"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>CTEs and GenAI for SQL</b><br/>&nbsp;<br/><i>The shift:</i> from nested, hard-to-read subqueries <i>to</i> <b>clean, named, step-by-step queries - and safely using GenAI to help write them</b><br/>&nbsp;<br/>WITH clause (CTEs) - Chaining CTEs<br/>Prompt-Check-Improve for SQL - Verifying AI output"]
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages · Analytics Workflow &amp; KPIs · GenAI for Analytics · Clean Up the Data · Make Data Ready · Formulas · Pivot Tables · Spread &amp; Variability · SQL Basics · Sorting &amp; Filtering · Aggregation · Grouping for KPIs · Joining Tables · Insights from Combined Data · Subqueries in Action<br/>This is Session 16 of 41"]
+    CURSES["<b>CURRENT SESSION</b><br/><b>CTEs and GenAI for SQL</b><br/>&nbsp;<br/><i>The shift:</i> from nested, hard-to-read subqueries <i>to</i> <b>clean, named, step-by-step queries · and safely using GenAI to help write them</b><br/>&nbsp;<br/>WITH clause (CTEs) · Chaining CTEs<br/>Prompt-Check-Improve for SQL · Verifying AI output"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
 direction LR
-    OUT["<b>By the end, you can...</b><br/>&nbsp;<br/>Rewrite a subquery as a clean, readable CTE using WITH, chain<br/>multiple CTEs into a step-by-step query, and use GenAI to draft<br/>SQL safely - always verifying it against the real schema and data"]
+    OUT["<b>By the end, you can...</b><br/>&nbsp;<br/>Rewrite a subquery as a clean, readable CTE using WITH, chain<br/>multiple CTEs into a step-by-step query, and use GenAI to draft<br/>SQL safely · always verifying it against the real schema and data"]
 end
 
 subgraph value[" WHY IT MATTERS "]
 direction LR
-    CVAL["<b>Course Value</b><br/>This closes out Module 2 by tying every SQL skill so far into one<br/>readable, professional query style - and previews the GenAI<br/>workflows used throughout the rest of this course"]
-    RVAL["<b>Real-Life Value</b><br/>On the job, most analysts DO use GenAI to draft SQL - knowing<br/>exactly how to check its output is what makes that safe to do"]
+    CVAL["<b>Course Value</b><br/>This closes out Module 2 by tying every SQL skill so far into one<br/>readable, professional query style · and previews the GenAI<br/>workflows used throughout the rest of this course"]
+    RVAL["<b>Real-Life Value</b><br/>On the job, most analysts DO use GenAI to draft SQL · knowing<br/>exactly how to check its output is what makes that safe to do"]
 end
 
 subgraph future[" WHAT COMES NEXT "]
 direction LR
-    U0["<b>Next Session</b><br/><i>Module 3 begins - Tableau Dashboards + Storytelling</i>"]
+    U0["<b>Next Session</b><br/><i>Module 3 begins · Tableau Dashboards + Storytelling</i>"]
     U1["<b>Later in Module 3</b><br/>Building Interactive Dashboards + Storytelling"]
     U2["<b>Upcoming Modules</b><br/>Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's calculated fields and pandas' method-chaining both echo today's 'name each step clearly' habit</i>"]
 end
@@ -58,7 +59,18 @@ class CURSES curSessBox
 class OUT outBox
 class CVAL,RVAL valueBox
 class U0,U1,U2 futureBox
+
+
+linkStyle default stroke-width:2px
 ```
+
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-2/7.2%20(CTEs%20and%20GenAI%20for%20SQL)/mental-map%20-%20CTEs%20and%20GenAI%20for%20SQL.png" target="_blank" download="mental-map - CTEs and GenAI for SQL.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
 
 ---
 
@@ -153,9 +165,13 @@ Read top to bottom like a recipe: *"First calculate city_totals. Then, from that
 **⚠️ Common trap:** Forgetting the comma between chained CTE definitions, or trying to reference a *later* CTE from an *earlier* one (e.g., having `city_totals` reference `top_cities`, which is defined after it). CTEs can only look backward, at CTEs already defined above them - never forward.
 
 ```mermaid
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
     A[Nested subquery-in-FROM] --> B[Works, but hard to read<br/>as steps multiply]
     C[Chained CTEs, WITH...AS] --> D[Each step named clearly,<br/>reads top to bottom]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ---
@@ -236,6 +252,13 @@ Using the `customers`, `orders`, and `customer_addresses` tables from this modul
 
 ---
 
-> ✅ **You're done!** You can now write clean, readable, multi-step SQL using CTEs, and use GenAI to draft queries safely - always checking its output against your real schema and real data before trusting a single number.
+>  **You're done!** You can now write clean, readable, multi-step SQL using CTEs, and use GenAI to draft queries safely - always checking its output against your real schema and real data before trusting a single number.
 >
 > This wraps up **Module 2: SQL for Data Analysis.** Next up: **Module 3: Tableau Dashboards + Storytelling**.
+
+
+
+
+
+
+

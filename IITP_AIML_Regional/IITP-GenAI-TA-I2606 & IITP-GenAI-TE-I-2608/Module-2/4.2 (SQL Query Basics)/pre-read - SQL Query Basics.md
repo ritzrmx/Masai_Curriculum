@@ -1,21 +1,22 @@
-# SQL for Data Analysis: SQL Query Basics
+﻿# SQL for Data Analysis: SQL Query Basics
 > **Pre-Read - Academic Session 8** | Module 2: SQL for Data Analysis
 
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: SQL Query Basics.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '12px', 'fontFamily': 'sans-serif' }, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false, 'nodeSpacing': 30, 'rankSpacing': 45, 'padding': 10}}}%%
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
 direction LR
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages - Analytics Workflow &amp; KPIs - GenAI for Analytics - Clean Up the Data - Make Data Ready for Analysis - Formulas for Analysis - Pivot Tables &amp; Quick Insights - Spread, Variability &amp; Outliers<br/>This is Session 9 of 41"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>SQL Query Basics</b><br/>&nbsp;<br/><i>The shift:</i> from scrolling a spreadsheet <i>to</i> <b>querying a real database directly</b><br/>&nbsp;<br/>Tables: rows &amp; columns - SELECT<br/>WHERE - AND/OR operators"]
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages · Analytics Workflow &amp; KPIs · GenAI for Analytics · Clean Up the Data · Make Data Ready for Analysis · Formulas for Analysis · Pivot Tables &amp; Quick Insights · Spread, Variability &amp; Outliers<br/>This is Session 9 of 41"]
+    CURSES["<b>CURRENT SESSION</b><br/><b>SQL Query Basics</b><br/>&nbsp;<br/><i>The shift:</i> from scrolling a spreadsheet <i>to</i> <b>querying a real database directly</b><br/>&nbsp;<br/>Tables: rows &amp; columns · SELECT<br/>WHERE · AND/OR operators"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
@@ -31,9 +32,9 @@ end
 
 subgraph future[" WHAT COMES NEXT "]
 direction LR
-    U0["<b>Next Session</b><br/>Sorting and Filtering in SQL<br/><i>ORDER BY - let the database sort results for you</i>"]
-    U1["<b>Later in Module 2</b><br/>Aggregation Essentials (SUM, COUNT, AVG) - Grouping for KPIs (GROUP BY) - Joining Tables Together"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling - Module 4: GenAI Workflows + Basic Python<br/><i>Tableau connects straight to tables like this one; pandas mirrors SELECT/WHERE almost line for line</i>"]
+    U0["<b>Next Session</b><br/>Sorting and Filtering in SQL<br/><i>ORDER BY · let the database sort results for you</i>"]
+    U1["<b>Later in Module 2</b><br/>Aggregation Essentials (SUM, COUNT, AVG) · Grouping for KPIs (GROUP BY) · Joining Tables Together"]
+    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling · Module 4: GenAI Workflows + Basic Python<br/><i>Tableau connects straight to tables like this one; pandas mirrors SELECT/WHERE almost line for line</i>"]
 end
 
 START ==>|" begin "| CURMOD
@@ -58,7 +59,18 @@ class CURSES curSessBox
 class OUT outBox
 class CVAL,RVAL valueBox
 class U0,U1,U2 futureBox
+
+
+linkStyle default stroke-width:2px
 ```
+
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-2/4.2%20(SQL%20Query%20Basics)/mental-map%20-%20SQL%20Query%20Basics.png" target="_blank" download="mental-map - SQL Query Basics.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
 
 ---
 
@@ -174,15 +186,19 @@ WHERE item = 'Veg Thali' OR item = 'Mini Thali';
 **⚠️ Common trap:** Writing `WHERE item = 'Veg Thali' AND item = 'Mini Thali'` when the intent is "either of these two items." This returns **zero rows** - no single order can be both items at once. Ask: *"Can one row satisfy both conditions at the same time?"* If no, the correct operator is `OR`, not `AND`.
 
 ```mermaid
-flowchart TB
-    subgraph left_side["AND - narrows results"]
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
+    subgraph left_side["AND · narrows results"]
         M1[Bengaluru orders] --> M2[...AND price > 100]
         M2 --> M3[Fewer rows: both must be true]
     end
-    subgraph right_side["OR - widens results"]
+    subgraph right_side["OR · widens results"]
         D1[Veg Thali orders] --> D2[...OR Mini Thali]
         D2 --> D3[More rows: either can be true]
     end
+
+
+linkStyle default stroke-width:2px
 ```
 
 ---
@@ -215,6 +231,13 @@ Using the `orders` table shown in Section A:
 
 ---
 
-> ✅ **You're done!** You can now query a real data table directly - choosing exactly the columns you need and filtering to exactly the rows that matter, without ever scrolling through the data by eye.
+>  **You're done!** You can now query a real data table directly - choosing exactly the columns you need and filtering to exactly the rows that matter, without ever scrolling through the data by eye.
 >
 > Next up: **Statistics: Spread, Variability and Outliers** - a step back from SQL syntax to build statistical vocabulary you'll need soon for SQL's aggregate functions.
+
+
+
+
+
+
+

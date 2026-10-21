@@ -1,9 +1,10 @@
-# Tableau + GenAI: Insight Writing with GenAI
+﻿# Tableau + GenAI: Insight Writing with GenAI
 > Pre-Read — Academic Session 25 | Module 3: Tableau Dashboards + Storytelling
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map - Insight Writing with GenAI.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
 %%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
@@ -61,6 +62,14 @@ class U0,U1,U2 futureBox
 linkStyle default stroke-width:2px
 ```
 
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-3/Academic%20Session%2025%20-%20Insight%20Writing%20with%20GenAI/mental-map%20-%20Insight%20Writing%20with%20GenAI.png" target="_blank" download="mental-map - Insight Writing with GenAI.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
+
 ## What You'll Learn
 In this pre-read, you'll discover:
 - Why GenAI is a strong drafting partner for insight writing, but not a substitute for the reading skills from last session
@@ -117,11 +126,15 @@ This mirrors the trend → evidence → ask structure from Session 23, now finis
 **⚠️ Common trap**: Sending a chart with no text ("here's the dashboard, let me know what you think") or text with no chart ("Chennai is down 3%" with nothing to visually back it up). The strongest data stories always pair both — visual proof and plain-language meaning.
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
     A[Your reading: trend + insight] --> B[GenAI: draft into clear prose]
     B --> C[You: refine for clarity + tone]
     C --> D[Pair with the right chart]
     D --> E[Complete data story]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ## Quick Reference — Writing Insights with GenAI
@@ -147,3 +160,5 @@ flowchart LR
 
 > ✅ **You're done!** You can now prompt GenAI with your own confirmed reading to draft a genuine insight, refine that draft for clarity and the right audience's tone, and pair it with the right chart into a complete data story someone can act on.
 That completes Module 3. Next up is the **Module 3 Evaluation**, checking everything from your first Tableau chart through today's GenAI-assisted insight writing — after that, Module 4 begins with GenAI for Analytics Workflows and your first steps into Python.
+
+

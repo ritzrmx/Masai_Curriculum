@@ -1,21 +1,22 @@
-# SQL for Data Analysis: Grouping for KPIs
+﻿# SQL for Data Analysis: Grouping for KPIs
 > **Pre-Read - Academic Session 12** | Module 2: SQL for Data Analysis
 
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Grouping for KPIs.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '12px', 'fontFamily': 'sans-serif' }, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false, 'nodeSpacing': 30, 'rankSpacing': 45, 'padding': 10}}}%%
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
 direction LR
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages - Analytics Workflow &amp; KPIs - GenAI for Analytics - Clean Up the Data - Make Data Ready for Analysis - Formulas for Analysis - Pivot Tables &amp; Quick Insights - Spread, Variability &amp; Outliers - SQL Query Basics - Sorting &amp; Filtering - Aggregation Essentials<br/>This is Session 12 of 41"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>Grouping for KPIs</b><br/>&nbsp;<br/><i>The shift:</i> from one summary number for the whole table <i>to</i> <b>one summary number for EVERY city, item, or customer, at once</b><br/>&nbsp;<br/>GROUP BY - Aggregates per group<br/>HAVING - Full KPI query"]
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages · Analytics Workflow &amp; KPIs · GenAI for Analytics · Clean Up the Data · Make Data Ready for Analysis · Formulas for Analysis · Pivot Tables &amp; Quick Insights · Spread, Variability &amp; Outliers · SQL Query Basics · Sorting &amp; Filtering · Aggregation Essentials<br/>This is Session 12 of 41"]
+    CURSES["<b>CURRENT SESSION</b><br/><b>Grouping for KPIs</b><br/>&nbsp;<br/><i>The shift:</i> from one summary number for the whole table <i>to</i> <b>one summary number for EVERY city, item, or customer, at once</b><br/>&nbsp;<br/>GROUP BY · Aggregates per group<br/>HAVING · Full KPI query"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
@@ -26,14 +27,14 @@ end
 subgraph value[" WHY IT MATTERS "]
 direction LR
     CVAL["<b>Course Value</b><br/>This is the exact query shape behind every pivot-table-style<br/>dashboard view built in Module 3's Tableau sessions"]
-    RVAL["<b>Real-Life Value</b><br/>'Revenue by city' or 'top-selling item per branch' are the two<br/>most-requested manager reports - this is how you build them in one query"]
+    RVAL["<b>Real-Life Value</b><br/>'Revenue by city' or 'top-selling item per branch' are the two<br/>most-requested manager reports · this is how you build them in one query"]
 end
 
 subgraph future[" WHAT COMES NEXT "]
 direction LR
     U0["<b>Next Session</b><br/>Joining Tables Together<br/><i>Combine orders with a customers or riders table for richer answers</i>"]
-    U1["<b>Later in Module 2</b><br/>Insights from Combined Data - Subqueries in Action - CTEs and GenAI for SQL"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling - Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's 'dimension + measure' pill logic and pandas' .groupby() are GROUP BY in a different outfit</i>"]
+    U1["<b>Later in Module 2</b><br/>Insights from Combined Data · Subqueries in Action · CTEs and GenAI for SQL"]
+    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling · Module 4: GenAI Workflows + Basic Python<br/><i>Tableau's 'dimension + measure' pill logic and pandas' .groupby() are GROUP BY in a different outfit</i>"]
 end
 
 START ==>|" begin "| CURMOD
@@ -58,7 +59,18 @@ class CURSES curSessBox
 class OUT outBox
 class CVAL,RVAL valueBox
 class U0,U1,U2 futureBox
+
+
+linkStyle default stroke-width:2px
 ```
+
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-2/5.2%20(Grouping%20for%20KPIs)/mental-map%20-%20Grouping%20for%20KPIs.png" target="_blank" download="mental-map - Grouping for KPIs.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
 
 ---
 
@@ -152,15 +164,19 @@ Chennai (₹90) is dropped - it didn't clear the ₹100 threshold. This is the e
 **⚠️ Common trap:** Using `WHERE` and `HAVING` interchangeably, or in the wrong order. `WHERE` filters raw rows *before* grouping happens; `HAVING` filters groups *after* grouping happens, based on an aggregate result. If your condition mentions a raw column (like `city = 'Bengaluru'`), it belongs in `WHERE`. If it mentions an aggregate function (like `SUM(price) > 100`), it belongs in `HAVING`. Mixing them up is one of the most common SQL errors even experienced analysts make.
 
 ```mermaid
-flowchart TB
-    subgraph left_side["WHERE - filters raw rows"]
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
+    subgraph left_side["WHERE · filters raw rows"]
         M1[Full table] --> M2[Keep rows matching a raw condition]
         M2 --> M3[Runs BEFORE grouping]
     end
-    subgraph right_side["HAVING - filters groups"]
+    subgraph right_side["HAVING · filters groups"]
         D1[Grouped + aggregated table] --> D2[Keep groups matching an aggregate condition]
         D2 --> D3[Runs AFTER grouping]
     end
+
+
+linkStyle default stroke-width:2px
 ```
 
 ---
@@ -215,6 +231,13 @@ Using the fuller `orders` table from Sessions 9–11:
 
 ---
 
-> ✅ **You're done!** You can now build a real KPI table in one query - total revenue, order count, or average value, broken out by any category, filtered before AND after grouping, and ranked to the headline number a manager actually asked for.
+>  **You're done!** You can now build a real KPI table in one query - total revenue, order count, or average value, broken out by any category, filtered before AND after grouping, and ranked to the headline number a manager actually asked for.
 >
 > Next up: **Joining Tables Together** - where you learn to combine `orders` with a second table, like `customers`, to answer even richer questions.
+
+
+
+
+
+
+

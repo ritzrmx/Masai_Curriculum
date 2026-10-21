@@ -1,9 +1,10 @@
-# Tableau: Dashboards That Support Decisions
+﻿# Tableau: Dashboards That Support Decisions
 > Pre-Read — Academic Session 23 | Module 3: Tableau Dashboards + Storytelling
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map - Dashboards That Support Decisions.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
 %%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
@@ -61,6 +62,14 @@ class U0,U1,U2 futureBox
 linkStyle default stroke-width:2px
 ```
 
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-3/Academic%20Session%2023%20-%20Dashboards%20That%20Support%20Decisions/mental-map%20-%20Dashboards%20That%20Support%20Decisions.png" target="_blank" download="mental-map - Dashboards That Support Decisions.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
+
 ## What You'll Learn
 In this pre-read, you'll discover:
 - The difference between a dashboard that "displays data" and one that supports an actual decision
@@ -102,10 +111,14 @@ Each chart hands off to the next, building toward the same recommendation — ap
 **⚠️ Common trap**: Including a genuinely interesting but tangential chart (like customer satisfaction scores) that doesn't build toward the specific decision at hand. Interesting is not the same as relevant to this exact story.
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
     A[Trend: rising conversion] --> B[Evidence: strong ROI]
     B --> C[Ask: specific budget increase]
     C --> D[Reader reaches the intended conclusion]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ## D. Reviewing a Dashboard for Decision-Readiness
@@ -146,3 +159,5 @@ flowchart LR
 
 > ✅ **You're done!** You can now tell the difference between a dashboard that merely displays data and one that supports a real decision, highlight the one insight that matters most, and run a quick review to check if a dashboard is genuinely decision-ready.
 Next session, we switch roles — **Reading Dashboards for Insight** — practicing how to walk into someone else's dashboard and pull out the real story it's trying to tell.
+
+

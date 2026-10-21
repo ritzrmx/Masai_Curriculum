@@ -1,9 +1,10 @@
-# Statistics: Statistics: Probability and Uncertainty
+﻿# Statistics: Statistics: Probability and Uncertainty
 > Pre-Read — Academic Session 18 | Module 3: Tableau Dashboards + Storytelling
 ---
 
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map - Statistics Probability and Uncertainty.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
 %%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
@@ -61,6 +62,14 @@ class U0,U1,U2 futureBox
 linkStyle default stroke-width:2px
 ```
 
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-3/Academic%20Session%2018%20-%20Masterclass%20on%20Statistics%20Probability%20and%20Uncertainty/mental-map%20-%20Statistics%20Probability%20and%20Uncertainty.png" target="_blank" download="mental-map - Statistics Probability and Uncertainty.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
+
 ## What You'll Learn
 In this pre-read, you'll discover:
 - What probability actually means on a scale from 0 to 1 (or 0% to 100%)
@@ -113,12 +122,16 @@ That means for every 100 customers, roughly 6 are likely to go quiet next month 
 **⚠️ Common trap**: Confusing "conversion rate" and "click-through rate" — they measure different steps of the same journey. CTR asks "did they engage at all?" Conversion asks "did engagement turn into a sale?" A campaign can have a great CTR and a terrible conversion rate, or vice versa — you need both numbers to see the full picture.
 
 ```mermaid
-flowchart TD
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
     A[Promo shown 9,000 times] --> B{Clicked?}
     B -->|Yes - 450 times, CTR = 5%| C{Ordered?}
     B -->|No| E[No further action]
     C -->|Yes - 140 times, Conversion = 31%| D[Sale completed]
     C -->|No| F[Clicked but didn't buy]
+
+
+linkStyle default stroke-width:2px
 ```
 
 ## D. Probability Is Not Certainty — Talking to Stakeholders
@@ -154,3 +167,5 @@ flowchart TD
 
 > ✅ **You're done!** You can now calculate a real business probability from raw counts, and — just as importantly — explain to someone else why a high probability is still not a promise.
 Next session, we're back in Tableau for **Choosing the Right Chart**, learning how to pick the visual that actually fits the story your data is telling — including probabilities like the ones you just calculated.
+
+

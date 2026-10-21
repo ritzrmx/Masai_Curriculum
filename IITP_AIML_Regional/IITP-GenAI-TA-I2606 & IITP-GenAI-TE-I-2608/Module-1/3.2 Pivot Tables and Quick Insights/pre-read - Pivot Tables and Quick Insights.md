@@ -1,11 +1,12 @@
-# Spreadsheets: Pivot Tables and Quick Insights
+﻿# Spreadsheets: Pivot Tables and Quick Insights
 > **Pre-Read — Academic Session 7** | Module 1: Analytics Foundations + GenAI + Spreadsheets
 ---
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Pivot Tables and Quick Insights.pdf**
+
+<div style="overflow-x: scroll; max-width: 100%; display: block;">
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '12px', 'fontFamily': 'sans-serif' }, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false, 'nodeSpacing': 30, 'rankSpacing': 45, 'padding': 10}}}%%
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
 
 START["<b>Course Start</b>"]
@@ -59,6 +60,14 @@ class U0,U1,U2 futureBox
 
 linkStyle default stroke-width:2px
 ```
+
+</div>
+<br>
+<a href="https://raw.githubusercontent.com/ritzrmx/Masai_Curriculum/main/IITP_AIML_Regional/IITP-GenAI-TA-I2606%20%26%20IITP-GenAI-TE-I-2608/Module-1/3.2%20Pivot%20Tables%20and%20Quick%20Insights/mental-map%20-%20Pivot%20Tables%20and%20Quick%20Insights.png" target="_blank" download="mental-map - Pivot Tables and Quick Insights.png">
+  <button style="padding: 10px; background-color: #3182ce; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📥 Click to view the Mental Map
+  </button>
+</a>
 
 ## What You'll Learn
 In this pre-read, you'll discover:
@@ -128,6 +137,7 @@ Instantly visible: Jaipur leads, Indore lags — a comparison that would've take
 ⚠️ **Common trap:** Comparing totals across categories with very different sizes (e.g., a branch open 7 days vs. a newer branch open only 3 days) without accounting for that difference — a lower total might just mean fewer operating days, not weaker performance. Always check what's actually comparable.
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
 flowchart LR
     subgraph left_side["ONE NUMBER ALONE"]
         M1[Jaipur: ₹1,42,000] --> M2[No context]
@@ -137,6 +147,9 @@ flowchart LR
         D1[All 5 branches side by side] --> D2[Patterns visible instantly]
         D2 --> D3[Leader and laggard identified]
     end
+
+
+linkStyle default stroke-width:2px
 ```
 
 ---
@@ -185,3 +198,5 @@ You need to tell a manager which product category is underperforming across all 
 ---
 > ✅ **You're done!** You can now build a pivot table, summarize data by category using Sum/Average/Count, compare categories side by side, and turn a pivot table's numbers into an actual written insight. This completes Module 1 — every foundational analytics and spreadsheet skill is now in place.
 Next up: **Module 2: SQL for Data Analysis** begins with *Statistics: Spread, Variability and Outliers* — going deeper than Session 1's range into variance and standard deviation, right before you start querying databases directly.
+
+

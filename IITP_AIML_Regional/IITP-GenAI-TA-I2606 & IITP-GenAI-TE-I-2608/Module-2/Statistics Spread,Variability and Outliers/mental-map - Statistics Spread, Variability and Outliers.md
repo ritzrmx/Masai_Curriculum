@@ -2,33 +2,33 @@
 > Academic Session 8 - Module 2: SQL for Data Analysis
 
 ```mermaid
-%%{init: {'flowchart': {'htmlLabels': true, 'nodeSpacing': 60, 'rankSpacing': 95, 'wrappingWidth': 400, 'padding': 18}, 'themeVariables': {'fontSize': '24px'}}}%%
-flowchart TB
+%%{init: {'themeVariables': {'fontSize': '16px'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 120, 'wrappingWidth': 620, 'padding': 20}}}%%
+flowchart LR
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
-direction TB
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages - Analytics Workflow &amp; KPIs - GenAI for Analytics - Clean Up the Data - Make Data Ready for Analysis - Formulas for Analysis - Pivot Tables &amp; Quick Insights<br/>This is Session 8 of 41"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>Statistics: Spread, Variability and Outliers</b><br/>&nbsp;<br/><i>The shift:</i> from trusting a single average <i>to</i> <b>measuring how consistent the data behind it really is</b><br/>&nbsp;<br/>Range - Variance<br/>Standard Deviation - Outliers"]
+direction LR
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: SQL for Data Analysis</i><br/>&nbsp;<br/><b>Covered so far:</b> Understanding Data &amp; Averages · Analytics Workflow &amp; KPIs · GenAI for Analytics · Clean Up the Data · Make Data Ready for Analysis · Formulas for Analysis · Pivot Tables &amp; Quick Insights<br/>This is Session 8 of 41"]
+    CURSES["<b>CURRENT SESSION</b><br/><b>Statistics: Spread, Variability and Outliers</b><br/>&nbsp;<br/><i>The shift:</i> from trusting a single average <i>to</i> <b>measuring how consistent the data behind it really is</b><br/>&nbsp;<br/>Range · Variance<br/>Standard Deviation · Outliers"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
-direction TB
+direction LR
     OUT["<b>By the end, you can...</b><br/>&nbsp;<br/>Calculate Range, Variance and Standard Deviation by hand,<br/>and judge whether an outlier is quietly distorting an average<br/>before you trust it in a report"]
 end
 
 subgraph value[" WHY IT MATTERS "]
-direction TB
+direction LR
     CVAL["<b>Course Value</b><br/>These exact calculations reappear as SQL's STDDEV()/VARIANCE()<br/>in Session 11 (Aggregation Essentials), and again as pandas'<br/>.std()/.var() in Module 4"]
     RVAL["<b>Real-Life Value</b><br/>Two job offers, two vendors, two riders with the same average -<br/>spread tells you which one is actually the safer bet"]
 end
 
 subgraph future[" WHAT COMES NEXT "]
-direction TB
-    U0["<b>Next Session</b><br/>SQL Query Basics<br/><i>Your first SQL query - SELECT and WHERE on a real table</i>"]
-    U1["<b>Later in Module 2</b><br/>Sorting &amp; Filtering (ORDER BY) - Aggregation Essentials (SUM, COUNT, AVG) - Grouping for KPIs (GROUP BY)"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling - Module 4: GenAI Workflows + Basic Python<br/><i>Every stats idea from today resurfaces as a chart, a function, or a line of code</i>"]
+direction LR
+    U0["<b>Next Session</b><br/>SQL Query Basics<br/><i>Your first SQL query · SELECT and WHERE on a real table</i>"]
+    U1["<b>Later in Module 2</b><br/>Sorting &amp; Filtering (ORDER BY) · Aggregation Essentials (SUM, COUNT, AVG) · Grouping for KPIs (GROUP BY)"]
+    U2["<b>Upcoming Modules</b><br/>Module 3: Tableau Dashboards + Storytelling · Module 4: GenAI Workflows + Basic Python<br/><i>Every stats idea from today resurfaces as a chart, a function, or a line of code</i>"]
 end
 
 START ==>|" begin "| CURMOD
@@ -53,4 +53,7 @@ class CURSES curSessBox
 class OUT outBox
 class CVAL,RVAL valueBox
 class U0,U1,U2 futureBox
+
+
+linkStyle default stroke-width:2px
 ```
