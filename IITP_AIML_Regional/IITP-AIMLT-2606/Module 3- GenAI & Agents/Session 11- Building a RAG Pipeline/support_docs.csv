@@ -1,0 +1,7 @@
+doc_id,text
+1,"CloudNest Free plan includes 5GB of storage and file sharing with links valid for 7 days. Free plan users cannot invite team members or set custom link expiry."
+2,"CloudNest Pro plan costs $9/month and includes 500GB storage, unlimited link expiry settings, and version history going back 30 days. Pro supports up to 3 team seats."
+3,"To reset your CloudNest password, go to Settings > Security > Reset Password. A reset link is emailed within 5 minutes. Reset links expire after 1 hour for security reasons."
+4,"CloudNest supports two-factor authentication (2FA) via an authenticator app only; SMS-based 2FA is not currently supported. Enable 2FA under Settings > Security > Two-Factor Authentication."
+5,"If a file upload fails on CloudNest, the most common cause is exceeding the per-file size limit: 2GB on Free and Pro plans, 50GB on the Business plan. Check your plan's limit under Settings > Billing."
+6,"CloudNest does not currently support offline sync on Linux. Offline sync is available on Windows and macOS desktop apps only; Linux users must use the web app or CLI tool."

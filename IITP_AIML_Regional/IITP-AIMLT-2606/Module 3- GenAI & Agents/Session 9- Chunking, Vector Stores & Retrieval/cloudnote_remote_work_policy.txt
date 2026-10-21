@@ -1,0 +1,13 @@
+CloudNote Employee Handbook: Remote Work Policy
+
+Section 1 - Eligibility. All full-time employees who have completed their 90-day probationary period are eligible to apply for remote work. Part-time employees are eligible only if they work a minimum of 25 hours per week and have manager approval. Interns are not eligible for remote work under this policy, regardless of tenure.
+
+Section 2 - Approval Process. Employees must submit a remote work request through the HR portal at least two weeks before the desired start date. The direct manager reviews the request within five business days. If the manager approves, the request is forwarded to HR for a final compliance check, which typically takes two additional business days. Employees should not assume approval until they receive written confirmation from HR.
+
+Section 3 - Equipment and Expenses. CloudNote provides a one-time home office stipend of twenty thousand rupees for approved remote employees, covering items such as a desk, chair, or monitor. Internet reimbursement is capped at one thousand five hundred rupees per month and requires a submitted utility bill. Laptops remain company property and must be returned within ten business days of employment termination.
+
+Section 4 - Working Hours and Availability. Remote employees are expected to be available during core hours, 10 AM to 4 PM local time, for meetings and collaboration. Outside core hours, employees may adjust their schedule with manager agreement, provided total weekly hours meet contractual obligations. Employees working across time zones from their team must agree on an overlap window with their manager in writing.
+
+Section 5 - Performance Review for Remote Staff. Remote employees are evaluated using the same performance criteria as in-office staff. Managers are required to hold at least one video check-in per week with each remote direct report. Annual reviews additionally assess communication clarity and responsiveness, given the reduced in-person visibility of remote work.
+
+Section 6 - Revoking Remote Status. CloudNote reserves the right to revoke remote work privileges if an employee's performance declines, if role requirements change, or if business needs require more in-person collaboration. Employees will receive thirty days' written notice before a return-to-office transition, except in cases of serious policy violations, which may result in immediate revocation.
