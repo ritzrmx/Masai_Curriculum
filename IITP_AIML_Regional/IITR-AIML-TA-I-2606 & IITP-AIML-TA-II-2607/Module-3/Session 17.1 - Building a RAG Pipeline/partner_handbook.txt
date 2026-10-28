@@ -1,0 +1,67 @@
+SWIGGY DELIVERY PARTNER HANDBOOK (ILLUSTRATIVE - WRITTEN FOR TEACHING, NOT A REAL POLICY)
+
+## 1. Payouts
+
+1.1 Payout cycle. The payout week runs from Monday 00:00 to Sunday 23:59. Earnings for a week are credited the following Friday by 8 pm to the partner's registered bank account. If Friday is a bank holiday, the payout is credited on the next working day by 8 pm.
+
+1.2 What makes up a weekly payout. A weekly payout is the sum of: Rs 30 base pay for every delivered order; Rs 15 extra for every order delivered during peak hours; a Rs 400 weekly target bonus if the partner delivers 60 or more orders in the payout week; any rain bonus earned (see section 2.2); minus any deductions (see section 1.3).
+
+1.3 Deductions. Rs 100 is deducted for each cancellation that is reported by a customer and verified by the support team as the partner's fault. Cancellations caused by restaurant delays, app errors or safety concerns are never deducted. Every deduction appears in the app under Earnings > Weekly Statement with the order ID.
+
+1.4 Raising a payout dispute. If a partner believes the payout is wrong, they must raise a dispute within 7 days of the payout date through Help > Payout Dispute in the app. The partner should select the week, the order IDs concerned and the amount they believe is missing. Disputes are resolved within 5 working days, and any amount found due is added to the next Friday payout.
+
+1.5 Payout on hold. A payout can be put on hold while bank details are being verified (see section 3) or while a fraud review is open. The partner is informed in the app with the reason. Held payouts are released within 2 working days after verification completes.
+
+## 2. Incentives
+
+2.1 Peak hours. Peak hours are 12 pm to 3 pm and 7 pm to 11 pm, every day. Orders picked up during peak hours earn the Rs 15 peak bonus, even if delivery finishes after the peak window ends.
+
+2.2 Rain bonus. When the app shows an active rain alert for the partner's zone, every order delivered during the alert earns Rs 10 extra. Rain bonus appears in the weekly statement as a separate line. If a rain bonus is missing, the partner should raise a payout dispute within 7 days, mentioning the date of the rain alert.
+
+2.3 Weekly target bonus. The Rs 400 weekly target bonus is paid when the partner completes 60 or more delivered orders in one payout week. Cancelled orders do not count towards the target.
+
+2.4 Festival bonus. During major festivals such as Diwali, Dussehra and Eid, zone-specific festival bonuses may be announced in the app. Only bonuses announced in the app are valid; messages from other sources should be ignored.
+
+## 3. Bank Details
+
+3.1 Changing bank details. A partner can change their bank account through Profile > Bank Details. The new account is verified within 2 working days. During verification, payouts are held and then released to the new account.
+
+3.2 Wrong bank details. If a payout fails because of wrong bank details, the amount is not lost. It is held and re-sent within 2 working days after the partner updates the correct details.
+
+3.3 Never share OTPs. Swiggy staff will never ask for an OTP, UPI PIN or bank password. Partners must not share these with anyone, including people claiming to be from Swiggy.
+
+## 4. Safety and Insurance
+
+4.1 SOS button. The in-app SOS button connects the partner to the 24x7 safety team and shares live location. Partners should use SOS for any threat, harassment, accident or medical emergency during duty.
+
+4.2 Accident insurance. Partners are covered by accident insurance of up to Rs 2,00,000 while on an active order and for 30 minutes after completing an order. Hospitalisation expenses after an on-duty accident are covered up to Rs 50,000.
+
+4.3 Making an insurance claim. An accident must be reported within 48 hours through Help > Safety > Report Accident, with photos of the vehicle damage or injury and any hospital bills. The safety team calls the partner within 24 hours of the report.
+
+4.4 Threats and harassment. If a customer or restaurant staff member threatens or harasses a partner, the partner should move to a safe place, press SOS, and may cancel the order without any deduction. The incident is reviewed by the safety team.
+
+## 5. App Issues
+
+5.1 GPS problems. If the app shows the wrong location, the partner should turn location services off and on, check that high-accuracy mode is enabled, and restart the app. If the problem continues for more than 30 minutes, report it through Help > App Issue with a screenshot.
+
+5.2 App crashes. Partners should update to the latest app version from the Play Store or App Store. If the app still crashes, clear the app cache and report the issue with the phone model.
+
+5.3 Login and OTP issues. Login uses an OTP sent to the registered mobile number. If the OTP does not arrive within 2 minutes, request a new one. After 3 failed attempts, login is blocked for 30 minutes for security.
+
+5.4 Orders lost due to app issues. If a verified app outage caused missed orders or cancellations, deductions for that period are reversed automatically within 7 days.
+
+## 6. Ratings and Account Status
+
+6.1 Customer ratings. Each delivered order can receive a customer rating from 1 to 5. The partner's rating is the average of the last 100 rated orders.
+
+6.2 Low rating support. If a partner's rating stays below 4.0 for four consecutive weeks, they are invited to a free coaching session. Coaching is supportive, not a penalty.
+
+6.3 Deactivation and appeals. Accounts may be deactivated for verified fraud, repeated safety violations or sharing an account with another person. A partner can appeal a deactivation within 15 days through the email link sent with the deactivation notice. Appeals are reviewed within 10 working days.
+
+## 7. Support Channels
+
+7.1 In-app help. Most issues can be raised through the Help section of the app. Payout disputes, accident reports and app issues each have their own form.
+
+7.2 Response times. Safety issues are answered within minutes through SOS. Payout disputes are resolved within 5 working days. Other tickets are answered within 2 working days.
+
+7.3 Partner helpdesk bot. The helpdesk bot answers common questions using this handbook. If the bot cannot find an answer in the handbook, it connects the partner to a human support agent.
