@@ -2,36 +2,34 @@
 > **Pre-Read — Academic Session 20** | Module 2: Classical ML
 ---
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Linear Regression.pdf**
-
 ```mermaid
-%%{init: {'themeVariables': {'fontSize': '32px', 'fontFamily': 'sans-serif'}, 'flowchart': {'htmlLabels': true, 'nodeSpacing': 50, 'rankSpacing': 80, 'wrappingWidth': 400, 'padding': 20}}}%%
+%%{init: {'flowchart': {'htmlLabels': true, 'nodeSpacing': 50, 'rankSpacing': 80, 'padding': 20}}}%%
 flowchart TB
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
 direction TB
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: Classical ML</i><br/>&nbsp;<br/><b>Covered so far:</b> AI/ML Landscape through Spreadsheets (S1-16), ML Workflow &amp; Problem Framing (S17), Data Preparation for ML (S18), Master Class: Lines, Curves &amp; Errors (S19: line equation, residuals, derivative, gradient descent)<br/>This is Session 20 of 39"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>Linear Regression</b><br/>&nbsp;<br/><i>The shift:</i> from deriving the best-fit line by hand <i>to</i> <b>training and evaluating a real model with sklearn in one line</b><br/>&nbsp;<br/>LinearRegression · predict() · MAE/RMSE/R²<br/>Coefficient interpretation · Overfitting diagnosis"]
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: Classical ML</i><br/>&nbsp;<br/><b>Covered so far:</b> AI/ML Landscape through<br/>Spreadsheets (S1-16), ML Workflow &amp;<br/>Problem Framing (S17), Data Preparation for<br/>ML (S18), Master Class: Lines, Curves &amp;<br/>Errors (S19: line equation, residuals,<br/>derivative, gradient descent)<br/>This is Session 20 of 39"]
+    CURSES["<b>CURRENT SESSION</b><br/><b>Linear Regression</b><br/>&nbsp;<br/><i>The shift:</i> from deriving the best-fit line<br/>by hand <i>to</i> <b>training and evaluating a real<br/>model with sklearn in one line</b><br/>&nbsp;<br/>LinearRegression · predict() · MAE/RMSE/R²<br/>Coefficient interpretation · Overfitting<br/>diagnosis"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
 direction TB
-    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Train a LinearRegression model with sklearn, evaluate it<br/>with MAE, RMSE and R², interpret its coefficients in real<br/>business terms, and diagnose overfitting by comparing<br/>train vs test performance"]
+    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Train a LinearRegression model with sklearn,<br/>evaluate it<br/>with MAE, RMSE and R², interpret its<br/>coefficients in real<br/>business terms, and diagnose overfitting by<br/>comparing<br/>train vs test performance"]
 end
 
 subgraph value[" WHY IT MATTERS "]
 direction TB
-    CVAL["<b>Course Value</b><br/>Session 21 (Regularization) directly extends today's model<br/>to control overfitting when it appears; Session 22<br/>(Logistic Regression) reuses this same evaluate-and-<br/>interpret workflow for classification"]
-    RVAL["<b>Real-Life Value</b><br/>Any 'each extra km adds X minutes' or 'each rupee of ad<br/>spend adds Y sales' claim in a business report comes<br/>from reading regression coefficients exactly like today"]
+    CVAL["<b>Course Value</b><br/>Session 21 (Regularization) directly extends<br/>today's model<br/>to control overfitting when it appears;<br/>Session 22<br/>(Logistic Regression) reuses this same<br/>evaluate-and-<br/>interpret workflow for classification"]
+    RVAL["<b>Real-Life Value</b><br/>Any 'each extra km adds X minutes' or 'each<br/>rupee of ad<br/>spend adds Y sales' claim in a business<br/>report comes<br/>from reading regression coefficients exactly<br/>like today"]
 end
 
 subgraph future[" WHAT COMES NEXT "]
 direction TB
-    U0["<b>Next Session</b><br/>Regularization<br/><i>Ridge and Lasso rein in overfitting when a model fits<br/>training noise too closely</i>"]
-    U1["<b>Later in Module 2</b><br/>Logistic Regression · Classification Metrics · Master Class:<br/>Probability &amp; Counting · Decision Trees · Random Forests ·<br/>Model Validation · Clustering"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: GenAI &amp; Agents<br/><i>The same fit/predict/evaluate rhythm returns when judging<br/>LLM and RAG pipeline outputs</i>"]
+    U0["<b>Next Session</b><br/>Regularization<br/><i>Ridge and Lasso rein in overfitting when a<br/>model fits<br/>training noise too closely</i>"]
+    U1["<b>Later in Module 2</b><br/>Logistic Regression · Classification Metrics<br/>· Master Class:<br/>Probability &amp; Counting · Decision Trees<br/>· Random Forests ·<br/>Model Validation · Clustering"]
+    U2["<b>Upcoming Modules</b><br/>Module 3: GenAI &amp; Agents<br/><i>The same fit/predict/evaluate rhythm returns<br/>when judging<br/>LLM and RAG pipeline outputs</i>"]
 end
 
 START ==>|" begin "| CURMOD

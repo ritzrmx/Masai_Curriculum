@@ -2,36 +2,34 @@
 > **Pre-Read — Academic Session 22** | Module 2: Classical ML
 ---
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Logistic Regression.pdf**
-
 ```mermaid
-%%{init: {'themeVariables': {'fontSize': '32px', 'fontFamily': 'sans-serif'}, 'flowchart': {'htmlLabels': true, 'nodeSpacing': 50, 'rankSpacing': 80, 'wrappingWidth': 400, 'padding': 20}}}%%
+%%{init: {'flowchart': {'htmlLabels': true, 'nodeSpacing': 50, 'rankSpacing': 80, 'padding': 20}}}%%
 flowchart TB
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
 direction TB
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: Classical ML</i><br/>&nbsp;<br/><b>Covered so far:</b> AI/ML Landscape through Spreadsheets (S1-16), ML Workflow &amp; Problem Framing (S17: churn framed as classification), Data Preparation for ML (S18: pipeline), Master Class: Lines, Curves &amp; Errors (S19), Linear Regression (S20), Regularization (S21)<br/>This is Session 22 of 39"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>Logistic Regression</b><br/>&nbsp;<br/><i>The shift:</i> from predicting a number <i>to</i> <b>predicting the probability that something will happen at all</b><br/>&nbsp;<br/>LogisticRegression · predict_proba()<br/>Classification threshold · Binary vs multiclass"]
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: Classical ML</i><br/>&nbsp;<br/><b>Covered so far:</b> AI/ML Landscape through<br/>Spreadsheets (S1-16), ML Workflow &amp;<br/>Problem Framing (S17: churn framed as<br/>classification), Data Preparation for ML<br/>(S18: pipeline), Master Class: Lines, Curves<br/>&amp; Errors (S19), Linear Regression (S20),<br/>Regularization (S21)<br/>This is Session 22 of 39"]
+    CURSES["<b>CURRENT SESSION</b><br/><b>Logistic Regression</b><br/>&nbsp;<br/><i>The shift:</i> from predicting a number <i>to</i><br/><b>predicting the probability that something<br/>will happen at all</b><br/>&nbsp;<br/>LogisticRegression · predict_proba()<br/>Classification threshold · Binary vs<br/>multiclass"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
 direction TB
-    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Train a LogisticRegression model on the Session 18<br/>preprocessing pipeline, interpret predicted probabilities<br/>with predict_proba(), and adjust the classification<br/>threshold to control the precision-recall balance"]
+    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Train a LogisticRegression model on the<br/>Session 18<br/>preprocessing pipeline, interpret predicted<br/>probabilities<br/>with predict_proba(), and adjust the<br/>classification<br/>threshold to control the precision-recall<br/>balance"]
 end
 
 subgraph value[" WHY IT MATTERS "]
 direction TB
-    CVAL["<b>Course Value</b><br/>Session 23 (Classification Metrics) formally measures the<br/>threshold tradeoffs made here; Session 24's probability<br/>Master Class explains the math behind predict_proba() itself"]
-    RVAL["<b>Real-Life Value</b><br/>Any 'risk score' or 'likelihood to buy/leave/default' feature<br/>in a real dashboard is a predict_proba() output with a<br/>chosen threshold behind it - now you know how both work"]
+    CVAL["<b>Course Value</b><br/>Session 23 (Classification Metrics) formally<br/>measures the<br/>threshold tradeoffs made here; Session 24's<br/>probability<br/>Master Class explains the math behind<br/>predict_proba() itself"]
+    RVAL["<b>Real-Life Value</b><br/>Any 'risk score' or 'likelihood to<br/>buy/leave/default' feature<br/>in a real dashboard is a predict_proba()<br/>output with a<br/>chosen threshold behind it - now you know<br/>how both work"]
 end
 
 subgraph future[" WHAT COMES NEXT "]
 direction TB
-    U0["<b>Next Session</b><br/>Classification Metrics<br/><i>Confusion matrices, precision, recall and F1 formally judge<br/>the threshold tradeoffs made today</i>"]
-    U1["<b>Later in Module 2</b><br/>Master Class: Probability &amp; Counting · Decision Trees ·<br/>Random Forests · Model Validation · Clustering"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: GenAI &amp; Agents<br/><i>Threshold-and-probability thinking returns when deciding<br/>how confident a RAG answer needs to be before trusting it</i>"]
+    U0["<b>Next Session</b><br/>Classification Metrics<br/><i>Confusion matrices, precision, recall and F1<br/>formally judge<br/>the threshold tradeoffs made today</i>"]
+    U1["<b>Later in Module 2</b><br/>Master Class: Probability &amp; Counting ·<br/>Decision Trees ·<br/>Random Forests · Model Validation ·<br/>Clustering"]
+    U2["<b>Upcoming Modules</b><br/>Module 3: GenAI &amp; Agents<br/><i>Threshold-and-probability thinking returns<br/>when deciding<br/>how confident a RAG answer needs to be<br/>before trusting it</i>"]
 end
 
 START ==>|" begin "| CURMOD
