@@ -2,36 +2,34 @@
 > **Pre-Read — Academic Session 19 (Master Class)** | Module 2: Classical ML
 ---
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Master Class - Lines, Curves & Errors.pdf**
-
 ```mermaid
-%%{init: {'themeVariables': {'fontSize': '32px', 'fontFamily': 'sans-serif'}, 'flowchart': {'htmlLabels': true, 'nodeSpacing': 50, 'rankSpacing': 80, 'wrappingWidth': 400, 'padding': 20}}}%%
+%%{init: {'flowchart': {'htmlLabels': true, 'nodeSpacing': 50, 'rankSpacing': 80, 'padding': 20}}}%%
 flowchart TB
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
 direction TB
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: Classical ML</i><br/>&nbsp;<br/><b>Covered so far:</b> AI/ML Landscape through Spreadsheets (S1-16), ML Workflow &amp; Problem Framing (S17), Data Preparation for ML (S18: encoding, scaling, pipelines, leakage)<br/>This is Session 19 of 39"]
-    CURSES["<b>CURRENT SESSION — MASTER CLASS</b><br/><b>Lines, Curves &amp; Errors</b><br/>&nbsp;<br/><i>The shift:</i> from preparing data for a model <i>to</i> <b>understanding, mathematically, what a model does when it 'learns' a line from that data</b><br/>&nbsp;<br/>Line equation · Residuals · Derivative (geometric)<br/>Gradient descent"]
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: Classical ML</i><br/>&nbsp;<br/><b>Covered so far:</b> AI/ML Landscape through<br/>Spreadsheets (S1-16), ML Workflow &amp;<br/>Problem Framing (S17), Data Preparation for<br/>ML (S18: encoding, scaling, pipelines,<br/>leakage)<br/>This is Session 19 of 39"]
+    CURSES["<b>CURRENT SESSION — MASTER CLASS</b><br/><b>Lines, Curves &amp; Errors</b><br/>&nbsp;<br/><i>The shift:</i> from preparing data for a model<br/><i>to</i> <b>understanding, mathematically, what a<br/>model does when it 'learns' a line from that<br/>data</b><br/>&nbsp;<br/>Line equation · Residuals · Derivative<br/>(geometric)<br/>Gradient descent"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
 direction TB
-    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Explain, from first principles, why minimizing squared<br/>residuals finds the best-fit line, and how gradient descent<br/>finds that minimum by following the slope downhill"]
+    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Explain, from first principles, why<br/>minimizing squared<br/>residuals finds the best-fit line, and how<br/>gradient descent<br/>finds that minimum by following the slope<br/>downhill"]
 end
 
 subgraph value[" WHY IT MATTERS "]
 direction TB
-    CVAL["<b>Course Value</b><br/>Session 20 (Linear Regression) is literally sklearn<br/>automating everything derived by hand in this session"]
-    RVAL["<b>Real-Life Value</b><br/>Any 'best fit' claim in a dashboard or report is doing<br/>exactly this math underneath - now you can explain what<br/>it actually means instead of trusting it blindly"]
+    CVAL["<b>Course Value</b><br/>Session 20 (Linear Regression) is literally<br/>sklearn<br/>automating everything derived by hand in<br/>this session"]
+    RVAL["<b>Real-Life Value</b><br/>Any 'best fit' claim in a dashboard or<br/>report is doing<br/>exactly this math underneath - now you can<br/>explain what<br/>it actually means instead of trusting it<br/>blindly"]
 end
 
 subgraph future[" WHAT COMES NEXT "]
 direction TB
-    U0["<b>Next Session</b><br/>Linear Regression<br/><i>Trains a real sklearn model and evaluates it with MAE, RMSE, R²</i>"]
-    U1["<b>Later in Module 2</b><br/>Regularization · Logistic Regression · Classification Metrics ·<br/>Trees · Ensembles · Validation · Clustering"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: GenAI &amp; Agents<br/><i>Vectors &amp; dot products in Session 32's Master Class build<br/>directly on today's geometric intuition</i>"]
+    U0["<b>Next Session</b><br/>Linear Regression<br/><i>Trains a real sklearn model and evaluates it<br/>with MAE, RMSE, R²</i>"]
+    U1["<b>Later in Module 2</b><br/>Regularization · Logistic Regression ·<br/>Classification Metrics ·<br/>Trees · Ensembles · Validation · Clustering"]
+    U2["<b>Upcoming Modules</b><br/>Module 3: GenAI &amp; Agents<br/><i>Vectors &amp; dot products in Session 32's<br/>Master Class build<br/>directly on today's geometric intuition</i>"]
 end
 
 START ==>|" begin "| CURMOD
@@ -148,62 +146,6 @@ Picture the SSR value as a curve itself — imagine plotting SSR on the vertical
 **Worked example (conceptual):** Start with a random guess for slope and intercept — say both equal to zero. Compute the SSR for this terrible line (it will be large). Use the derivative to find which direction reduces SSR, nudge the slope and intercept slightly in that direction, and recompute. Repeat this hundreds of times. Each repetition is called an **epoch**, and the size of each step is called the **learning rate** — too large a step and the hiker might overshoot the valley floor and stumble past it; too small a step and it takes forever to get there.
 
 **This is, quite literally, what "learning" means in machine learning**: a model starts with a bad guess and repeatedly nudges its own parameters downhill until the error is as small as it can make it.
-
-```mermaid
-%%{init: {'themeVariables': {'fontSize': '32px', 'fontFamily': 'sans-serif'}, 'flowchart': {'htmlLabels': true, 'nodeSpacing': 50, 'rankSpacing': 80, 'wrappingWidth': 400, 'padding': 20}}}%%
-flowchart TB
-
-START["<b>Course Start</b>"]
-
-subgraph foundation[" WHERE WE ARE "]
-direction TB
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: Classical ML</i><br/>&nbsp;<br/><b>Covered so far:</b> AI/ML Landscape through Spreadsheets (S1-16), ML Workflow &amp; Problem Framing (S17), Data Preparation for ML (S18: encoding, scaling, pipelines, leakage)<br/>This is Session 19 of 39"]
-    CURSES["<b>CURRENT SESSION — MASTER CLASS</b><br/><b>Lines, Curves &amp; Errors</b><br/>&nbsp;<br/><i>The shift:</i> from preparing data for a model <i>to</i> <b>understanding, mathematically, what a model does when it 'learns' a line from that data</b><br/>&nbsp;<br/>Line equation · Residuals · Derivative (geometric)<br/>Gradient descent"]
-end
-
-subgraph outcome[" OUTCOME OF THIS SESSION "]
-direction TB
-    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Explain, from first principles, why minimizing squared<br/>residuals finds the best-fit line, and how gradient descent<br/>finds that minimum by following the slope downhill"]
-end
-
-subgraph value[" WHY IT MATTERS "]
-direction TB
-    CVAL["<b>Course Value</b><br/>Session 20 (Linear Regression) is literally sklearn<br/>automating everything derived by hand in this session"]
-    RVAL["<b>Real-Life Value</b><br/>Any 'best fit' claim in a dashboard or report is doing<br/>exactly this math underneath - now you can explain what<br/>it actually means instead of trusting it blindly"]
-end
-
-subgraph future[" WHAT COMES NEXT "]
-direction TB
-    U0["<b>Next Session</b><br/>Linear Regression<br/><i>Trains a real sklearn model and evaluates it with MAE, RMSE, R²</i>"]
-    U1["<b>Later in Module 2</b><br/>Regularization · Logistic Regression · Classification Metrics ·<br/>Trees · Ensembles · Validation · Clustering"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: GenAI &amp; Agents<br/><i>Vectors &amp; dot products in Session 32's Master Class build<br/>directly on today's geometric intuition</i>"]
-end
-
-START ==>|" begin "| CURMOD
-CURMOD ==>|" progress "| CURSES
-CURSES ==>|" you get "| OUT
-OUT ==>|" course "| CVAL
-OUT ==>|" real life "| RVAL
-CURSES ==>|" next up "| U0
-U0 -.->|" then "| U1
-U1 -.->|" ahead "| U2
-
-classDef startBox fill:#F7FAFC,stroke:#4A5568,stroke-width:2px,color:#1A202C
-classDef curModBox fill:#FFF8E6,stroke:#B7791F,stroke-width:2px,color:#1A202C
-classDef curSessBox fill:#E6FFFA,stroke:#0D9488,stroke-width:3px,color:#1A202C
-classDef outBox fill:#FEF2F2,stroke:#DC2626,stroke-width:3px,color:#1A202C
-classDef valueBox fill:#F3E8FF,stroke:#7C3AED,stroke-width:2px,color:#1A202C
-classDef futureBox fill:#ECFDF5,stroke:#047857,stroke-width:2px,color:#1A202C
-
-class START startBox
-class CURMOD curModBox
-class CURSES curSessBox
-class OUT outBox
-class CVAL,RVAL valueBox
-class U0,U1,U2 futureBox
-
-linkStyle default stroke-width:2px
-```
 
 **⚠️ Common trap:** Gradient descent doesn't guarantee finding the bottom in one attempt, and a learning rate that's too large can cause the process to bounce around wildly instead of settling down. We won't tune this by hand today — just understand the loop.
 

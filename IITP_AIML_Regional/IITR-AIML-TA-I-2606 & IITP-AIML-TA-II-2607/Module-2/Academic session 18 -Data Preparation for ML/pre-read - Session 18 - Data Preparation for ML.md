@@ -2,36 +2,34 @@
 > **Pre-Read — Academic Session 18** | Module 2: Classical ML
 ---
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Data Preparation for ML.pdf**
-
 ```mermaid
-%%{init: {'themeVariables': {'fontSize': '32px', 'fontFamily': 'sans-serif'}, 'flowchart': {'htmlLabels': true, 'nodeSpacing': 50, 'rankSpacing': 80, 'wrappingWidth': 400, 'padding': 20}}}%%
+%%{init: {'flowchart': {'htmlLabels': true, 'nodeSpacing': 50, 'rankSpacing': 80, 'padding': 20}}}%%
 flowchart TB
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
 direction TB
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: Classical ML</i><br/>&nbsp;<br/><b>Covered so far:</b> AI/ML Landscape through Spreadsheets (S1-16), ML Workflow &amp; Problem Framing (S17: problem types, supervised/unsupervised, train/test split, cross-validation, metric selection)<br/>This is Session 18 of 39"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>Data Preparation for ML</b><br/>&nbsp;<br/><i>The shift:</i> from deciding what kind of problem we're solving <i>to</i> <b>turning raw, messy columns into numbers a model can actually consume</b><br/>&nbsp;<br/>Encoding · Scaling · Pipeline · ColumnTransformer<br/>Data leakage prevention"]
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: Classical ML</i><br/>&nbsp;<br/><b>Covered so far:</b> AI/ML Landscape through<br/>Spreadsheets (S1-16), ML Workflow &amp;<br/>Problem Framing (S17: problem types,<br/>supervised/unsupervised, train/test split,<br/>cross-validation, metric selection)<br/>This is Session 18 of 39"]
+    CURSES["<b>CURRENT SESSION</b><br/><b>Data Preparation for ML</b><br/>&nbsp;<br/><i>The shift:</i> from deciding what kind of<br/>problem we're solving <i>to</i> <b>turning raw, messy<br/>columns into numbers a model can actually<br/>consume</b><br/>&nbsp;<br/>Encoding · Scaling · Pipeline ·<br/>ColumnTransformer<br/>Data leakage prevention"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
 direction TB
-    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Build an end-to-end preprocessing pipeline that correctly<br/>encodes categorical features and scales numeric ones,<br/>without leaking test-set information into training"]
+    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Build an end-to-end preprocessing pipeline<br/>that correctly<br/>encodes categorical features and scales<br/>numeric ones,<br/>without leaking test-set information into<br/>training"]
 end
 
 subgraph value[" WHY IT MATTERS "]
 direction TB
-    CVAL["<b>Course Value</b><br/>Every model from Session 20 onward plugs into the exact<br/>pipeline pattern built here - S20 finally attaches a real<br/>estimator to it"]
-    RVAL["<b>Real-Life Value</b><br/>Any real dataset - spreadsheets, exports, forms - mixes<br/>text categories and raw numbers; this is how you make<br/>that usable for any model, at Swiggy or anywhere else"]
+    CVAL["<b>Course Value</b><br/>Every model from Session 20 onward plugs<br/>into the exact<br/>pipeline pattern built here - S20 finally<br/>attaches a real<br/>estimator to it"]
+    RVAL["<b>Real-Life Value</b><br/>Any real dataset - spreadsheets, exports,<br/>forms - mixes<br/>text categories and raw numbers; this is how<br/>you make<br/>that usable for any model, at Swiggy or<br/>anywhere else"]
 end
 
 subgraph future[" WHAT COMES NEXT "]
 direction TB
-    U0["<b>Next Session</b><br/>Master Class: Lines, Curves &amp; Errors<br/><i>The math of what a model does when it 'learns'</i>"]
-    U1["<b>Later in Module 2</b><br/>Linear Regression · Regularization · Logistic Regression ·<br/>Classification Metrics · Trees · Ensembles · Validation ·<br/>Clustering"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: GenAI &amp; Agents<br/><i>Structured preprocessing discipline returns when preparing<br/>text for embeddings and retrieval</i>"]
+    U0["<b>Next Session</b><br/>Master Class: Lines, Curves &amp; Errors<br/><i>The math of what a model does when it<br/>'learns'</i>"]
+    U1["<b>Later in Module 2</b><br/>Linear Regression · Regularization ·<br/>Logistic Regression ·<br/>Classification Metrics · Trees · Ensembles ·<br/>Validation ·<br/>Clustering"]
+    U2["<b>Upcoming Modules</b><br/>Module 3: GenAI &amp; Agents<br/><i>Structured preprocessing discipline returns<br/>when preparing<br/>text for embeddings and retrieval</i>"]
 end
 
 START ==>|" begin "| CURMOD
@@ -101,62 +99,6 @@ In `sklearn`, this is `OneHotEncoder`.
 
 **⚠️ Common trap:** Students sometimes one-hot encode a column that's already numeric and meaningfully ordered (like a 1–5 star rating) — don't. One-hot encoding is for **categories with no inherent order**. An already-numeric, ordered column should usually stay as-is or be scaled (section C), not encoded.
 
-```mermaid
-%%{init: {'themeVariables': {'fontSize': '32px', 'fontFamily': 'sans-serif'}, 'flowchart': {'htmlLabels': true, 'nodeSpacing': 50, 'rankSpacing': 80, 'wrappingWidth': 400, 'padding': 20}}}%%
-flowchart TB
-
-START["<b>Course Start</b>"]
-
-subgraph foundation[" WHERE WE ARE "]
-direction TB
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: Classical ML</i><br/>&nbsp;<br/><b>Covered so far:</b> AI/ML Landscape through Spreadsheets (S1-16), ML Workflow &amp; Problem Framing (S17: problem types, supervised/unsupervised, train/test split, cross-validation, metric selection)<br/>This is Session 18 of 39"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>Data Preparation for ML</b><br/>&nbsp;<br/><i>The shift:</i> from deciding what kind of problem we're solving <i>to</i> <b>turning raw, messy columns into numbers a model can actually consume</b><br/>&nbsp;<br/>Encoding · Scaling · Pipeline · ColumnTransformer<br/>Data leakage prevention"]
-end
-
-subgraph outcome[" OUTCOME OF THIS SESSION "]
-direction TB
-    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Build an end-to-end preprocessing pipeline that correctly<br/>encodes categorical features and scales numeric ones,<br/>without leaking test-set information into training"]
-end
-
-subgraph value[" WHY IT MATTERS "]
-direction TB
-    CVAL["<b>Course Value</b><br/>Every model from Session 20 onward plugs into the exact<br/>pipeline pattern built here - S20 finally attaches a real<br/>estimator to it"]
-    RVAL["<b>Real-Life Value</b><br/>Any real dataset - spreadsheets, exports, forms - mixes<br/>text categories and raw numbers; this is how you make<br/>that usable for any model, at Swiggy or anywhere else"]
-end
-
-subgraph future[" WHAT COMES NEXT "]
-direction TB
-    U0["<b>Next Session</b><br/>Master Class: Lines, Curves &amp; Errors<br/><i>The math of what a model does when it 'learns'</i>"]
-    U1["<b>Later in Module 2</b><br/>Linear Regression · Regularization · Logistic Regression ·<br/>Classification Metrics · Trees · Ensembles · Validation ·<br/>Clustering"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: GenAI &amp; Agents<br/><i>Structured preprocessing discipline returns when preparing<br/>text for embeddings and retrieval</i>"]
-end
-
-START ==>|" begin "| CURMOD
-CURMOD ==>|" progress "| CURSES
-CURSES ==>|" you get "| OUT
-OUT ==>|" course "| CVAL
-OUT ==>|" real life "| RVAL
-CURSES ==>|" next up "| U0
-U0 -.->|" then "| U1
-U1 -.->|" ahead "| U2
-
-classDef startBox fill:#F7FAFC,stroke:#4A5568,stroke-width:2px,color:#1A202C
-classDef curModBox fill:#FFF8E6,stroke:#B7791F,stroke-width:2px,color:#1A202C
-classDef curSessBox fill:#E6FFFA,stroke:#0D9488,stroke-width:3px,color:#1A202C
-classDef outBox fill:#FEF2F2,stroke:#DC2626,stroke-width:3px,color:#1A202C
-classDef valueBox fill:#F3E8FF,stroke:#7C3AED,stroke-width:2px,color:#1A202C
-classDef futureBox fill:#ECFDF5,stroke:#047857,stroke-width:2px,color:#1A202C
-
-class START startBox
-class CURMOD curModBox
-class CURSES curSessBox
-class OUT outBox
-class CVAL,RVAL valueBox
-class U0,U1,U2 futureBox
-
-linkStyle default stroke-width:2px
-```
-
 ---
 
 ## C. Scaling Numeric Features
@@ -209,62 +151,6 @@ pipeline = Pipeline(steps=[
 **Worked example of the mistake:** If you fit `StandardScaler` on your *entire* dataset (train + test combined) before splitting, the scaler's mean and standard deviation are computed using test-set values too. Your "test" evaluation is no longer honest — it's been quietly contaminated.
 
 **The fix:** Always split first (Session 17's `train_test_split`), then `fit` your preprocessing steps *only* on the training data, and simply `transform` (never re-fit) the test data using what was learned from training alone. A `Pipeline` makes this easy to get right consistently, because `.fit()` and `.transform()` are called in the correct order automatically.
-
-```mermaid
-%%{init: {'themeVariables': {'fontSize': '32px', 'fontFamily': 'sans-serif'}, 'flowchart': {'htmlLabels': true, 'nodeSpacing': 50, 'rankSpacing': 80, 'wrappingWidth': 400, 'padding': 20}}}%%
-flowchart TB
-
-START["<b>Course Start</b>"]
-
-subgraph foundation[" WHERE WE ARE "]
-direction TB
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: Classical ML</i><br/>&nbsp;<br/><b>Covered so far:</b> AI/ML Landscape through Spreadsheets (S1-16), ML Workflow &amp; Problem Framing (S17: problem types, supervised/unsupervised, train/test split, cross-validation, metric selection)<br/>This is Session 18 of 39"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>Data Preparation for ML</b><br/>&nbsp;<br/><i>The shift:</i> from deciding what kind of problem we're solving <i>to</i> <b>turning raw, messy columns into numbers a model can actually consume</b><br/>&nbsp;<br/>Encoding · Scaling · Pipeline · ColumnTransformer<br/>Data leakage prevention"]
-end
-
-subgraph outcome[" OUTCOME OF THIS SESSION "]
-direction TB
-    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Build an end-to-end preprocessing pipeline that correctly<br/>encodes categorical features and scales numeric ones,<br/>without leaking test-set information into training"]
-end
-
-subgraph value[" WHY IT MATTERS "]
-direction TB
-    CVAL["<b>Course Value</b><br/>Every model from Session 20 onward plugs into the exact<br/>pipeline pattern built here - S20 finally attaches a real<br/>estimator to it"]
-    RVAL["<b>Real-Life Value</b><br/>Any real dataset - spreadsheets, exports, forms - mixes<br/>text categories and raw numbers; this is how you make<br/>that usable for any model, at Swiggy or anywhere else"]
-end
-
-subgraph future[" WHAT COMES NEXT "]
-direction TB
-    U0["<b>Next Session</b><br/>Master Class: Lines, Curves &amp; Errors<br/><i>The math of what a model does when it 'learns'</i>"]
-    U1["<b>Later in Module 2</b><br/>Linear Regression · Regularization · Logistic Regression ·<br/>Classification Metrics · Trees · Ensembles · Validation ·<br/>Clustering"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: GenAI &amp; Agents<br/><i>Structured preprocessing discipline returns when preparing<br/>text for embeddings and retrieval</i>"]
-end
-
-START ==>|" begin "| CURMOD
-CURMOD ==>|" progress "| CURSES
-CURSES ==>|" you get "| OUT
-OUT ==>|" course "| CVAL
-OUT ==>|" real life "| RVAL
-CURSES ==>|" next up "| U0
-U0 -.->|" then "| U1
-U1 -.->|" ahead "| U2
-
-classDef startBox fill:#F7FAFC,stroke:#4A5568,stroke-width:2px,color:#1A202C
-classDef curModBox fill:#FFF8E6,stroke:#B7791F,stroke-width:2px,color:#1A202C
-classDef curSessBox fill:#E6FFFA,stroke:#0D9488,stroke-width:3px,color:#1A202C
-classDef outBox fill:#FEF2F2,stroke:#DC2626,stroke-width:3px,color:#1A202C
-classDef valueBox fill:#F3E8FF,stroke:#7C3AED,stroke-width:2px,color:#1A202C
-classDef futureBox fill:#ECFDF5,stroke:#047857,stroke-width:2px,color:#1A202C
-
-class START startBox
-class CURMOD curModBox
-class CURSES curSessBox
-class OUT outBox
-class CVAL,RVAL valueBox
-class U0,U1,U2 futureBox
-
-linkStyle default stroke-width:2px
-```
 
 **⚠️ Common trap:** "Just scaling the whole dataset before splitting because it's simpler" is one of the single most common real-world ML mistakes — and it silently produces evaluation numbers that look better than they actually are.
 

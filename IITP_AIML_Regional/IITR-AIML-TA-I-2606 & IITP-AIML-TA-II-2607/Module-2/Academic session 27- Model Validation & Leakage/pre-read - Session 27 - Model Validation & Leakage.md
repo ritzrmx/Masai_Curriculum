@@ -2,36 +2,34 @@
 > **Pre-Read — Academic Session 27** | Module 2: Classical ML
 ---
 ## Mental Map
-> 📄 Also provided as a printable PDF in this folder: **mental-map: Model Validation & Leakage.pdf**
-
 ```mermaid
-%%{init: {'themeVariables': {'fontSize': '32px', 'fontFamily': 'sans-serif'}, 'flowchart': {'htmlLabels': true, 'nodeSpacing': 50, 'rankSpacing': 80, 'wrappingWidth': 400, 'padding': 20}}}%%
+%%{init: {'flowchart': {'htmlLabels': true, 'nodeSpacing': 50, 'rankSpacing': 80, 'padding': 20}}}%%
 flowchart TB
 
 START["<b>Course Start</b>"]
 
 subgraph foundation[" WHERE WE ARE "]
 direction TB
-    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: Classical ML</i><br/>&nbsp;<br/><b>Covered so far:</b> AI/ML Landscape through Spreadsheets (S1-16), ML Workflow through Master Class: Probability (S17-24), Decision Trees (S25), Random Forests &amp; Ensemble Methods (S26: feature_importances_, joblib)<br/>This is Session 27 of 39"]
-    CURSES["<b>CURRENT SESSION</b><br/><b>Model Validation &amp; Leakage</b><br/>&nbsp;<br/><i>The shift:</i> from hand-tuning alpha, max_depth and n_estimators by trial and error <i>to</i> <b>systematically searching for the best hyperparameters with proper, leakage-free validation</b><br/>&nbsp;<br/>K-fold · Stratified k-fold · GridSearchCV<br/>Data leakage detection"]
+    CURMOD["<b>CURRENT MODULE</b><br/><i>Module 2: Classical ML</i><br/>&nbsp;<br/><b>Covered so far:</b> AI/ML Landscape through<br/>Spreadsheets (S1-16), ML Workflow through<br/>Master Class: Probability (S17-24), Decision<br/>Trees (S25), Random Forests &amp; Ensemble<br/>Methods (S26: feature_importances_, joblib)<br/>This is Session 27 of 39"]
+    CURSES["<b>CURRENT SESSION</b><br/><b>Model Validation &amp; Leakage</b><br/>&nbsp;<br/><i>The shift:</i> from hand-tuning alpha, max_depth<br/>and n_estimators by trial and error <i>to</i><br/><b>systematically searching for the best<br/>hyperparameters with proper, leakage-free<br/>validation</b><br/>&nbsp;<br/>K-fold · Stratified k-fold · GridSearchCV<br/>Data leakage detection"]
 end
 
 subgraph outcome[" OUTCOME OF THIS SESSION "]
 direction TB
-    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Implement k-fold and stratified k-fold cross-validation for<br/>reliable estimates, tune hyperparameters systematically with<br/>GridSearchCV, and detect subtle data leakage scenarios<br/>beyond simple preprocessing order mistakes"]
+    OUT["<b>By the end, you can…</b><br/>&nbsp;<br/>Implement k-fold and stratified k-fold<br/>cross-validation for<br/>reliable estimates, tune hyperparameters<br/>systematically with<br/>GridSearchCV, and detect subtle data leakage<br/>scenarios<br/>beyond simple preprocessing order mistakes"]
 end
 
 subgraph value[" WHY IT MATTERS "]
 direction TB
-    CVAL["<b>Course Value</b><br/>This formalizes every hand-tuned hyperparameter since<br/>Session 21 (alpha, max_depth, n_estimators) into one<br/>systematic, repeatable search process"]
-    RVAL["<b>Real-Life Value</b><br/>Any production ML pipeline needs leakage-free validation<br/>before deployment - an inflated CV score from a leaked<br/>feature can cause a very expensive surprise in production"]
+    CVAL["<b>Course Value</b><br/>This formalizes every hand-tuned<br/>hyperparameter since<br/>Session 21 (alpha, max_depth, n_estimators)<br/>into one<br/>systematic, repeatable search process"]
+    RVAL["<b>Real-Life Value</b><br/>Any production ML pipeline needs<br/>leakage-free validation<br/>before deployment - an inflated CV score<br/>from a leaked<br/>feature can cause a very expensive surprise<br/>in production"]
 end
 
 subgraph future[" WHAT COMES NEXT "]
 direction TB
-    U0["<b>Next Session</b><br/>Clustering, Model Selection &amp; Explainability<br/><i>Shifts to unsupervised learning with KMeans, and compares<br/>multiple trained models using a structured metric table</i>"]
+    U0["<b>Next Session</b><br/>Clustering, Model Selection &amp;<br/>Explainability<br/><i>Shifts to unsupervised learning with KMeans,<br/>and compares<br/>multiple trained models using a structured<br/>metric table</i>"]
     U1["<b>Later in Module 2</b><br/>Module 2 End Evaluation"]
-    U2["<b>Upcoming Modules</b><br/>Module 3: GenAI &amp; Agents<br/><i>Systematic evaluation returns when comparing prompt<br/>variants and RAG pipeline configurations</i>"]
+    U2["<b>Upcoming Modules</b><br/>Module 3: GenAI &amp; Agents<br/><i>Systematic evaluation returns when comparing<br/>prompt<br/>variants and RAG pipeline configurations</i>"]
 end
 
 START ==>|" begin "| CURMOD
