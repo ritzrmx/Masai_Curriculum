@@ -1,5 +1,5 @@
 # Lecture Script: Machine Learning — Clustering, Model Selection & Explainability
-> **Instructor Reference** — Module 2: Classical ML | Academic Session 12.2 | Duration: 2 Hours | Instructor: Aswath Rao
+> **Instructor Reference** — Module 2: Classical ML | Academic Session 12.2 | Duration: 2 Hours
 
 ---
 
